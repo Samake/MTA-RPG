@@ -1,0 +1,74 @@
+<meta>
+	<!--
+		################################ INFO ################################
+		Authors:		Sam@ke
+		Co-Authors: 	sxb320, Jusonex, 50p, Ren712, Sozials
+	-->
+	
+	<!-- ################################ Header ################################ -->
+	
+	<info name="mta-rpg" description="mta-rpg" version="1.0" type="script" author="Sam@ke"/>
+	<min_mta_version client="1.5.4" server="1.5.4"/>
+	<oop>true</oop>
+	
+	<!-- ################################ Includes ################################ -->
+	
+	<include resource="shader_tex_names" />
+	
+	<!-- ################################ Scripts ################################ -->
+	
+	<!-- shared -->
+	<script src="shared/settings/Settings_Shared.lua" type="shared"/>
+	
+	<script src="shared/Classlib.lua" type="shared"/>
+	<script src="shared/Utilities.lua" type="shared"/>
+	<script src="shared/Singleton.lua" type="shared"/>
+	<script src="shared/Class.lua" type="shared"/>
+	
+	<!-- server -->
+	<script src="server/Core_S.lua" type="server"/>
+	
+	<script src="server/manager/PlayerManager_S.lua" type="server"/>
+	<script src="server/classes/Player_S.lua" type="server"/>
+	
+	<!-- client -->
+	<script src="client/settings/Bindings_C.lua" type="client"/>
+	<script src="client/settings/Textures_C.lua" type="client"/>
+	<script src="client/settings/ShaderBindings_C.lua" type="client"/>
+	
+	<script src="client/Core_C.lua" type="client"/>
+	
+	<script src="client/singletons/ClickSystem_C.lua" type="client"/>
+	<script src="client/singletons/Player_C.lua" type="client"/>
+	
+	<script src="client/manager/CameraManager_C.lua" type="client"/>
+	<script src="client/manager/ShaderManager_C.lua" type="client"/>
+	<script src="client/manager/XMLManager_C.lua" type="client"/>
+
+	<script src="client/classes/dxLib/dxWindow.lua" type="client"/>
+	<script src="client/classes/dxLib/dxLabel.lua" type="client"/>
+	<script src="client/classes/dxLib/dxSlider.lua" type="client"/>
+	<script src="client/classes/dxLib/dxButton.lua" type="client"/>
+	
+	<script src="client/classes/Camera_C.lua" type="client"/>
+	<script src="client/classes/ShaderNull_C.lua" type="client"/>
+	<script src="client/classes/ShaderColorWorld_C.lua" type="client"/>
+	<script src="client/classes/ShaderColorVehicles_C.lua" type="client"/>
+	<script src="client/classes/ShaderPlayers_C.lua" type="client"/>
+	
+	<!-- ################################ Resources ################################ -->
+	
+	<!-- shaders -->
+	<file src="res/shader/mta-helper.hlsl" type="client"/>
+	<file src="res/shader/shader_color_world.hlsl" type="client"/>
+	<file src="res/shader/shader_color_vehicle.hlsl" type="client"/>
+	<file src="res/shader/shader_null.hlsl" type="client"/>
+	<file src="res/shader/shader_texReplace.hlsl" type="client"/>
+	
+	<!-- textures -->
+	<file src="res/textures/skins/head/head_1.png" type="client"/>
+	<file src="res/textures/skins/torso/torso_1.png" type="client"/>
+	<file src="res/textures/skins/leg/leg_1.png" type="client"/>
+	<file src="res/textures/skins/feet/feet_1.png" type="client"/>
+
+</meta>
