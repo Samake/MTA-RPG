@@ -2,6 +2,7 @@
 #include "mta-helper.hlsl"
 
 float3 inColor = float3(1, 0, 0);
+float diffusor = 0.2;
 
 sampler TextureSampler = sampler_state
 {
@@ -36,7 +37,7 @@ VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
 	output.TexCoord = input.TexCoord;
 	
 	float3 worldNormal = MTACalcWorldNormal(input.Normal);
-    output.Diffuse = saturate(MTACalcGTACompleteDiffuse(worldNormal, input.Diffuse));
+    output.Diffuse = saturate(MTACalcGTACompleteDiffuse(worldNormal, input.Diffuse)) + diffusor * 2;
 	
     return output;
 }
@@ -46,8 +47,8 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {	
 	float4 textureColor = tex2D(TextureSampler, input.TexCoord);
 
-	//float4 finalColor = float4(inColor, textureColor.a) * input.Diffuse;
 	float4 finalColor = float4(inColor * 0.5, textureColor.a);
+	//float4 finalColor = float4((inColor * input.Diffuse) - diffusor / 2, textureColor.a);
 	
 	return finalColor;
 }

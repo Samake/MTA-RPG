@@ -48,7 +48,9 @@ VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
 
 float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {
-	float4 finalColor = tex2D(TextureSampler, input.TexCoords) * input.Diffuse;
+	float4 finalColor = tex2D(TextureSampler, input.TexCoords);
+	finalColor.rgb *= 0.5;
+	//float4 finalColor = tex2D(TextureSampler, input.TexCoords) * input.Diffuse;
 	
     return finalColor;
 }

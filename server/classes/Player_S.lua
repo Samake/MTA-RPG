@@ -43,8 +43,11 @@ function Player_S:init()
 	addEventHandler("SETPLAYERTARGET", root, self.m_SetTargetPosition)
 	
 	
-	if (self.player) then
-		--self.player:spawn(self.x, self.y, self.z + 5, self.rz, self.skinID, 0, self.dimension)
+	if (self.player) then -- only temp will be deleted later
+		self.playerPos = self.player:getPosition()
+		self.playerRot = self.player:getRotation()
+		
+		self.player:spawn(self.playerPos.x, self.playerPos.y, self.playerPos.z, self.playerRot.z, self.skinID, 0, self.dimension)
 	end
 end
 
