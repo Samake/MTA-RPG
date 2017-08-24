@@ -31,6 +31,7 @@ end
 
 function Core_S:initComponents()
 	PlayerManager_S:new()
+	NPCManager_S:new()
 end
 
 
@@ -40,6 +41,7 @@ function Core_S:update()
 		debug.sethook() 
 
 		PlayerManager_S:getSingleton():update()
+		NPCManager_S:getSingleton():update()
 		
 		debug.sethook(_, h1, h2, h3) 
 	end
@@ -66,6 +68,7 @@ function Core_S:clear()
 	end
 	
 	delete(PlayerManager_S:getSingleton())
+	delete(NPCManager_S:getSingleton())
 end
 
 

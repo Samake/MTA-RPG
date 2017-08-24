@@ -8,3 +8,5 @@ Bindings["CAMERAROTATE"] = "mouse2"
 
 Bindings["MOVETO"] = "left"
 Bindings["ACTION"] = "right"
+
+Bindings["SPAWNTESTNPC"] = "1"

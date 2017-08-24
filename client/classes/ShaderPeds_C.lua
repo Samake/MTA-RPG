@@ -1,6 +1,6 @@
-ShaderPlayers_C = inherit(Class)
+ShaderPeds_C = inherit(Class)
 
-function ShaderPlayers_C:constructor()
+function ShaderPeds_C:constructor()
 
 	self.headShaders = {}
 	self.torsoShaders = {}
@@ -10,17 +10,20 @@ function ShaderPlayers_C:constructor()
 	self:init()
 	
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("ShaderPlayers_C was loaded.")
+		sendMessage("ShaderPeds_C was loaded.")
 	end
 end
 
 
-function ShaderPlayers_C:init()
+function ShaderPeds_C:init()
 	self.m_ReceivePlayerSkins = bind(self.receivePlayerSkins, self)
 	addEvent("SENDPLAYERSKINS", true)
 	addEventHandler("SENDPLAYERSKINS", root, self.m_ReceivePlayerSkins)
 	
-	triggerServerEvent("REQUESTPLAYERSKINS", root)
+	self.m_ReceiveNPCSkins = bind(self.receiveNPCSkins, self)
+	addEvent("SENDNPCSKINS", true)
+	addEventHandler("SENDNPCSKINS", root, self.m_ReceiveNPCSkins)
+	
 	
 	for index, skin in pairs(Textures["Skins"]["Head"]) do
 		if (skin) then
@@ -77,21 +80,35 @@ function ShaderPlayers_C:init()
 			end
 		end
 	end
+	
+	triggerServerEvent("REQUESTPLAYERSKINS", root)
+	triggerServerEvent("REQUESTNPCSKINS", root)
 end
 
 
-function ShaderPlayers_C:receivePlayerSkins(playerSkins)
+function ShaderPeds_C:receivePlayerSkins(playerSkins)
 	if (playerSkins) then
 		for index, playerSkin in pairs(playerSkins) do
 			if (playerSkin) then
-				self:applyShaders(playerSkin)
+				self:applyPlayerShaders(playerSkin)
 			end
 		end
 	end
 end
 
 
-function ShaderPlayers_C:applyShaders(playerSkin)
+function ShaderPeds_C:receiveNPCSkins(npcSkins)
+	if (npcSkins) then
+		for index, npcSkin in pairs(npcSkins) do
+			if (npcSkin) then
+				self:applyNPCShaders(npcSkin)
+			end
+		end
+	end
+end
+
+
+function ShaderPeds_C:applyPlayerShaders(playerSkin)
 	if (playerSkin) then
 		if (self.headShaders[playerSkin.head]) then
 			self.headShaders[playerSkin.head]:applyToWorldTexture("cj_ped_head", playerSkin.player, false)
@@ -112,8 +129,30 @@ function ShaderPlayers_C:applyShaders(playerSkin)
 end
 
 
-function ShaderPlayers_C:clear()
+function ShaderPeds_C:applyNPCShaders(npcSkin)
+	if (npcSkin) then
+		if (self.headShaders[npcSkin.head]) then
+			self.headShaders[npcSkin.head]:applyToWorldTexture("cj_ped_head", npcSkin.model, false)
+		end
+		
+		if (self.torsoShaders[npcSkin.torso]) then
+			self.torsoShaders[npcSkin.torso]:applyToWorldTexture("cj_ped_torso", npcSkin.model, false)
+		end
+		
+		if (self.legShaders[npcSkin.leg]) then
+			self.legShaders[npcSkin.leg]:applyToWorldTexture("cj_ped_legs", npcSkin.model, false)
+		end
+		
+		if (self.feetShaders[npcSkin.feet]) then
+			self.feetShaders[npcSkin.feet]:applyToWorldTexture("cj_ped_feet", npcSkin.model, false)
+		end
+	end
+end
+
+
+function ShaderPeds_C:clear()
 	removeEventHandler("SENDPLAYERSKINS", root, self.m_ReceivePlayerSkins)
+	removeEventHandler("SENDNPCSKINS", root, self.m_ReceiveNPCSkins)
 	
 	for index, shader in pairs(self.headShaders) do
 		if (shader) then
@@ -153,10 +192,10 @@ function ShaderPlayers_C:clear()
 end
 
 
-function ShaderPlayers_C:destructor()
+function ShaderPeds_C:destructor()
 	self:clear()
 	
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("ShaderPlayers_C was deleted.")
+		sendMessage("ShaderPeds_C was deleted.")
 	end
 end

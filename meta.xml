@@ -13,7 +13,7 @@
 	
 	<!-- ################################ Includes ################################ -->
 	
-	<include resource="shader_tex_names" />
+	<!--<include resource="shader_tex_names" />-->
 	
 	<!-- ################################ Scripts ################################ -->
 	
@@ -29,7 +29,10 @@
 	<script src="server/Core_S.lua" type="server"/>
 	
 	<script src="server/manager/PlayerManager_S.lua" type="server"/>
+	<script src="server/manager/NPCManager_S.lua" type="server"/>
+	
 	<script src="server/classes/Player_S.lua" type="server"/>
+	<script src="server/classes/NPC_S.lua" type="server"/>
 	
 	<!-- client -->
 	<script src="client/settings/Bindings_C.lua" type="client"/>
@@ -55,7 +58,7 @@
 	<script src="client/classes/ShaderColorWorld_C.lua" type="client"/>
 	<script src="client/classes/ShaderColorVehicles_C.lua" type="client"/>
 	<script src="client/classes/ShaderWater_C.lua" type="client"/>
-	<script src="client/classes/ShaderPlayers_C.lua" type="client"/>
+	<script src="client/classes/ShaderPeds_C.lua" type="client"/>
 	
 	<!-- ################################ Resources ################################ -->
 	
@@ -71,7 +74,9 @@
 	<file src="res/textures/skins/head/head_1.png" type="client"/>
 	<file src="res/textures/skins/torso/torso_1.png" type="client"/>
 	<file src="res/textures/skins/leg/leg_1.png" type="client"/>
+	<file src="res/textures/skins/leg/leg_2.png" type="client"/>
 	<file src="res/textures/skins/feet/feet_1.png" type="client"/>
+	
 	<file src="res/textures/water/water_caustic_1.png" type="client"/>
 	<file src="res/textures/water/water_caustic_2.png" type="client"/>
 	<file src="res/textures/water/water_caustic_3.png" type="client"/>

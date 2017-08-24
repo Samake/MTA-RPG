@@ -11,7 +11,7 @@ function ShaderManager_C:constructor()
 	self.colorShadersWorld = {}
 	self.colorShadersVehicles = {}
 	self.waterShader = nil
-	self.playerShaders = nil
+	self.pedShaders = nil
 	
 	self:init()
 	
@@ -122,16 +122,16 @@ end
 
 
 function ShaderManager_C:loadPlayerShaders()
-	if (not self.playerShaders) then
-		self.playerShaders = ShaderPlayers_C:new()
+	if (not self.pedShaders) then
+		self.pedShaders = ShaderPeds_C:new()
 	end
 end
 
 
 function ShaderManager_C:deletePlayerShaders()
-	if (self.playerShaders) then
-		self.playerShaders:delete()
-		self.playerShaders = nil
+	if (self.pedShaders) then
+		self.pedShaders:delete()
+		self.pedShaders = nil
 	end
 end
 

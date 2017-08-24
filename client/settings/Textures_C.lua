@@ -9,6 +9,7 @@ Textures["Skins"]["Torso"][1] = {texture = nil, path = "res/textures/skins/torso
 
 Textures["Skins"]["Leg"] = {}
 Textures["Skins"]["Leg"][1] = {texture = nil, path = "res/textures/skins/leg/leg_1.png"}
+Textures["Skins"]["Leg"][2] = {texture = nil, path = "res/textures/skins/leg/leg_2.png"}
 
 Textures["Skins"]["Feet"] = {}
 Textures["Skins"]["Feet"][1] = {texture = nil, path = "res/textures/skins/feet/feet_1.png"}

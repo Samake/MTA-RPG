@@ -19,7 +19,19 @@ end
 
 
 function Player_C:init()
+	self.m_SpawnTestNPC = bind(self.spawnTestNPC, self)
+	bindKey(Bindings["SPAWNTESTNPC"], "down", self.m_SpawnTestNPC)
+end
 
+
+function Player_C:spawnTestNPC()
+	if (self.player) and (isElement(self.player)) then
+		self:updateCoords()
+		
+		local x, y, z = getAttachedPosition(self.x, self.y, self.z, self.rx, self.ry, self.rz, 15, 0, 1)
+		
+		triggerServerEvent("ADDTESTNPC", root, x, y, z)
+	end
 end
 
 
@@ -49,14 +61,14 @@ function Player_C:updateCoords()
 end
 
 
-function Player_C:clear()
-
-end
-
-
 function Player_C:getPlayerClass()
 	return self
 end	
+
+
+function Player_C:clear()
+	unbindKey(Bindings["SPAWNTESTNPC"], "down", self.m_SpawnTestNPC)
+end
 
 
 function Player_C:destructor()
