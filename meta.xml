@@ -45,9 +45,10 @@
 	<script src="client/singletons/MousePointer_C.lua" type="client"/>
 	<script src="client/singletons/Player_C.lua" type="client"/>
 	
+	<script src="client/manager/XMLManager_C.lua" type="client"/>
 	<script src="client/manager/CameraManager_C.lua" type="client"/>
 	<script src="client/manager/ShaderManager_C.lua" type="client"/>
-	<script src="client/manager/XMLManager_C.lua" type="client"/>
+	<script src="client/manager/GUIManager_C.lua" type="client"/>
 
 	<script src="client/classes/dxLib/dxWindow.lua" type="client"/>
 	<script src="client/classes/dxLib/dxLabel.lua" type="client"/>
@@ -96,4 +97,6 @@
 	<file src="res/textures/water/water_caustic_16.png" type="client"/>
 
 	<file src="res/textures/gui/crosshair.png" type="client"/>
+	
+	<file src="res/textures/effects/rain_pp.png" type="client"/>
 </meta>

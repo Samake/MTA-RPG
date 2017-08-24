@@ -3,7 +3,7 @@ Settings = {}
 Settings.resName = "MTA RPG"
 Settings.resVersion = "0.01"
 Settings.fpsLimit = 60
-Settings.serverUpdateInterval = 150
+Settings.serverUpdateInterval = 50
 
 Settings.debugEnabled = true
 Settings.advancedDebugMessages = false

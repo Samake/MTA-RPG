@@ -37,48 +37,32 @@ Textures["GUI"] = {}
 Textures["GUI"]["Cursor"] = {}
 Textures["GUI"]["Cursor"][1] = {texture = nil, path = "res/textures/gui/crosshair.png"}
 
+Textures["Effects"] = {}
+Textures["Effects"]["Rain"] = {}
+Textures["Effects"]["Rain"][1] = {texture = nil, path = "res/textures/effects/rain_pp.png"}
+
 
 function Textures.init()
-	loadSkinTextures()
+	loadTextures()
 end
 
 
 function Textures.cleanUp()
-	deleteSkinTextures()
+	deleteTextures()
 end
 
 
-function loadSkinTextures()
-	for _, section in pairs(Textures["Skins"]) do
-		if (section) then
-			for _, container in pairs(section) do
-				if (container) then
-					if (not container.texture) then
-						container.texture = dxCreateTexture(container.path)
-					end
-				end
-			end
-		end
-	end
-	
-	for _, section in pairs(Textures["World"]) do
-		if (section) then
-			for _, container in pairs(section) do
-				if (container) then
-					if (not container.texture) then
-						container.texture = dxCreateTexture(container.path)
-					end
-				end
-			end
-		end
-	end
-	
-	for _, section in pairs(Textures["GUI"]) do
-		if (section) then
-			for _, container in pairs(section) do
-				if (container) then
-					if (not container.texture) then
-						container.texture = dxCreateTexture(container.path)
+function loadTextures()
+	for _, category in pairs(Textures) do
+		if (category) and (type(category) == "table") then
+			for _, section in pairs(category) do
+				if (section) then
+					for _, container in pairs(section) do
+						if (container) then
+							if (not container.texture) then
+								container.texture = dxCreateTexture(container.path)
+							end
+						end
 					end
 				end
 			end
@@ -87,51 +71,29 @@ function loadSkinTextures()
 end
 
 
-function deleteSkinTextures()
-	for _, section in pairs(Textures["Skins"]) do
-		if (section) then
-			for _, container in pairs(section) do
-				if (container) then
-					if (container.texture) then
-						container.texture:destroy()
-						container.texture = nil
+function deleteTextures()
+	for _, category in pairs(Textures) do
+		if (category) and (type(category) == "table") then
+			for _, section in pairs(category) do
+				if (section) then
+					for _, container in pairs(section) do
+						if (container) then
+							if (container.texture) then
+								container.texture:destroy()
+								container.texture = nil
+							end
+							
+							container = nil
+						end
 					end
+					
+					section = nil
 				end
 			end
+			
+			category = nil
 		end
 	end
-	
-	Textures["Skins"] = {}
-	
-	for _, section in pairs(Textures["World"]) do
-		if (section) then
-			for _, container in pairs(section) do
-				if (container) then
-					if (container.texture) then
-						container.texture:destroy()
-						container.texture = nil
-					end
-				end
-			end
-		end
-	end
-	
-	Textures["World"] = {}
-	
-	for _, section in pairs(Textures["GUI"]) do
-		if (section) then
-			for _, container in pairs(section) do
-				if (container) then
-					if (container.texture) then
-						container.texture:destroy()
-						container.texture = nil
-					end
-				end
-			end
-		end
-	end
-	
-	Textures["GUI"] = {}
 end
 
 
