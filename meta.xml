@@ -13,7 +13,7 @@
 	
 	<!-- ################################ Includes ################################ -->
 	
-	<!--<include resource="shader_tex_names" />-->
+	<include resource="shader_tex_names" />
 	
 	<!-- ################################ Scripts ################################ -->
 	
@@ -54,6 +54,7 @@
 	<script src="client/classes/ShaderNull_C.lua" type="client"/>
 	<script src="client/classes/ShaderColorWorld_C.lua" type="client"/>
 	<script src="client/classes/ShaderColorVehicles_C.lua" type="client"/>
+	<script src="client/classes/ShaderWater_C.lua" type="client"/>
 	<script src="client/classes/ShaderPlayers_C.lua" type="client"/>
 	
 	<!-- ################################ Resources ################################ -->
@@ -62,6 +63,7 @@
 	<file src="res/shader/mta-helper.hlsl" type="client"/>
 	<file src="res/shader/shader_color_world.hlsl" type="client"/>
 	<file src="res/shader/shader_color_vehicle.hlsl" type="client"/>
+	<file src="res/shader/shader_water.hlsl" type="client"/>
 	<file src="res/shader/shader_null.hlsl" type="client"/>
 	<file src="res/shader/shader_texReplace.hlsl" type="client"/>
 	
@@ -70,5 +72,21 @@
 	<file src="res/textures/skins/torso/torso_1.png" type="client"/>
 	<file src="res/textures/skins/leg/leg_1.png" type="client"/>
 	<file src="res/textures/skins/feet/feet_1.png" type="client"/>
+	<file src="res/textures/water/water_caustic_1.png" type="client"/>
+	<file src="res/textures/water/water_caustic_2.png" type="client"/>
+	<file src="res/textures/water/water_caustic_3.png" type="client"/>
+	<file src="res/textures/water/water_caustic_4.png" type="client"/>
+	<file src="res/textures/water/water_caustic_5.png" type="client"/>
+	<file src="res/textures/water/water_caustic_6.png" type="client"/>
+	<file src="res/textures/water/water_caustic_7.png" type="client"/>
+	<file src="res/textures/water/water_caustic_8.png" type="client"/>
+	<file src="res/textures/water/water_caustic_9.png" type="client"/>
+	<file src="res/textures/water/water_caustic_10.png" type="client"/>
+	<file src="res/textures/water/water_caustic_11.png" type="client"/>
+	<file src="res/textures/water/water_caustic_12.png" type="client"/>
+	<file src="res/textures/water/water_caustic_13.png" type="client"/>
+	<file src="res/textures/water/water_caustic_14.png" type="client"/>
+	<file src="res/textures/water/water_caustic_15.png" type="client"/>
+	<file src="res/textures/water/water_caustic_16.png" type="client"/>
 
 </meta>

@@ -10,7 +10,7 @@ function ShaderManager_C:constructor()
 	self.nullShader = nil
 	self.colorShadersWorld = {}
 	self.colorShadersVehicles = {}
-	
+	self.waterShader = nil
 	self.playerShaders = nil
 	
 	self:init()
@@ -46,12 +46,14 @@ end
 
 function ShaderManager_C:enableShaders()
 	self:loadColorShaders()
+	self:loadWaterShader()
 	self:loadPlayerShaders()
 end
 
 
 function ShaderManager_C:deleteShaders()
 	self:deleteColorShaders()
+	self:deleteWaterShader()
 	self:deletePlayerShaders()
 end
 
@@ -104,6 +106,21 @@ function ShaderManager_C:deleteColorShaders()
 end
 
 
+function ShaderManager_C:loadWaterShader()
+	if (not self.waterShader) then
+		self.waterShader = ShaderWater_C:new("water")
+	end
+end
+
+
+function ShaderManager_C:deleteWaterShader()
+	if (self.waterShader) then
+		self.waterShader:delete()
+		self.waterShader = nil
+	end
+end
+
+
 function ShaderManager_C:loadPlayerShaders()
 	if (not self.playerShaders) then
 		self.playerShaders = ShaderPlayers_C:new()
@@ -125,6 +142,10 @@ function ShaderManager_C:update(deltaTime)
 		
 		if (self.screenSource) then
 			self.screenSource:update()
+		end
+		
+		if (self.waterShader) then
+			self.waterShader:update(deltaTime)
 		end
 	end
 end
