@@ -10,9 +10,6 @@ function ClickSystem_C:constructor()
 	self.worldX = 0
 	self.worldY = 0
 	self.worldZ = 0
-	self.camX = 0
-	self.camY = 0
-	self.camZ = 0
 	
 	self.alpha = 0
 	
@@ -40,7 +37,6 @@ function ClickSystem_C:update(deltaTime)
 	if (isCursorShowing()) then
 		self.x, self.y = getCursorPosition()
 		self.worldZ = 25
-		setCursorAlpha(100)
 	end
 	
 	if (self.alpha > 0) then

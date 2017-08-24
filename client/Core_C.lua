@@ -28,6 +28,7 @@ function Core_C:initComponents()
 	
 	Textures.init()
 	ClickSystem_C:new()
+	MousePointer_C:new()
 	Player_C:new()
 	CameraManager_C:new()
 	XMLManager_C:new()
@@ -48,6 +49,7 @@ function Core_C:update(deltaTime)
 	end
 	
 	ClickSystem_C:getSingleton():update(self.delta)
+	MousePointer_C:getSingleton():update(self.delta)
 	Player_C:getSingleton():update(self.delta)
 	CameraManager_C:getSingleton():update(self.delta)
 	ShaderManager_C:getSingleton():update(self.delta)
@@ -63,6 +65,7 @@ function Core_C:clear()
 	setPedTargetingMarkerEnabled(true)
 	
 	delete(ClickSystem_C:getSingleton())
+	delete(MousePointer_C:getSingleton())
 	delete(Player_C:getSingleton())
 	delete(CameraManager_C:getSingleton())
 	delete(ShaderManager_C:getSingleton())

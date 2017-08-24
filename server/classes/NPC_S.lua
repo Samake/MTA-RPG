@@ -20,7 +20,7 @@ function NPC_S:constructor(npcSettings)
 	
 	self.minDistance = 0
 	self.distance = 0
-	self.tolerance = 1.0
+	self.tolerance = 3.0
 	
 	self.headID = 1
 	self.torsoID = 1
@@ -28,6 +28,9 @@ function NPC_S:constructor(npcSettings)
 	self.feetID = 1
 	
 	self.state = "idle"
+	
+	self.actionRadius = 10
+	self.enemy = nil
 
 	self:init()
 	self:triggerShaderSettings()
@@ -41,9 +44,19 @@ end
 function NPC_S:init()
 	if (not self.model) then
 		self.model = createPed (self.skinID, self.x, self.y, self.z, self.rz, true)
+		self.actionCol = createColSphere (self.x, self.y, self.z, self.actionRadius)
 		
-		if (self.model) then
+		if (self.model) and (self.actionCol) then
+			self.m_OnColShapeHit = bind(self.onColShapeHit, self)
+			self.m_OnColShapeLeave = bind(self.onColShapeLeave, self)
+			
+			addEventHandler("onColShapeHit", self.actionCol, self.m_OnColShapeHit)
+			addEventHandler("onColShapeLeave", self.actionCol, self.m_OnColShapeLeave)
+			
 			self.model:setDimension(self.dimension)
+			self.actionCol:setDimension(self.dimension)
+			
+			self.actionCol:attach(self.model)
 		end
 	end
 end
@@ -67,8 +80,16 @@ function NPC_S:update()
 		self:updateCoords()
 		self:updatePosition()
 		
-		if (self.state == "run") then
+		if (self.targetX) and (self.targetY) and (self.targetZ) then
+			self.distance = getDistanceBetweenPoints2D(self.x, self.y, self.targetX, self.targetY)
+		end
+		
+		if (self.state == "runToEnemy") then
 			self:correctPosition()
+		elseif (self.state == "idle") then
+			if (self.enemy) then
+				self:updateEnemyValues()
+			end
 		end
 	end
 end
@@ -95,11 +116,27 @@ end
 
 function NPC_S:updatePosition()
 	if (self.targetX) and (self.targetY) and (self.targetZ) then
-		self.distance = getDistanceBetweenPoints2D(self.x, self.y, self.targetX, self.targetY)
-		
 		if (self.distance <= self.tolerance) then
 			self:jobIdle()
+		else
+			self:jobRunToEnemy()
 		end
+	end
+end
+
+
+function NPC_S:updateEnemyValues()
+	if (self.enemy) and (isElement(self.enemy)) then
+		local enemyPos = self.enemy:getPosition()
+		
+		if (enemyPos) then
+			self.targetX = enemyPos.x
+			self.targetY = enemyPos.y
+			self.targetZ = enemyPos.z
+		end
+		
+		local rotZ = findRotation(self.x, self.y, self.targetX, self.targetY)
+		self.model:setRotation(self.rx, self.ry, rotZ, "default", true)
 	end
 end
 
@@ -116,12 +153,15 @@ function NPC_S:correctPosition()
 end
 
 
-function NPC_S:setTargetPosition(x, y, z)
-	if (self.model) and (isElement(self.model)) then
-			if (self.model == client) and (x) and (y) and (z) then
-			self.targetX = x
-			self.targetY = y
-			self.targetZ = z
+function NPC_S:setTargetPosition()
+	if (self.enemy) and (isElement(self.enemy)) then
+	
+		local enemyPos = self.enemy:getPosition()
+		
+		if (enemyPos) then
+			self.targetX = enemyPos.x
+			self.targetY = enemyPos.y
+			self.targetZ = enemyPos.z
 			
 			local rotZ = findRotation(self.x, self.y, self.targetX, self.targetY)
 			self.model:setRotation(self.rx, self.ry, rotZ, "default", true)
@@ -129,7 +169,7 @@ function NPC_S:setTargetPosition(x, y, z)
 			self.distance = getDistanceBetweenPoints2D(self.x, self.y, self.targetX, self.targetY)
 			self.minDistance = getDistanceBetweenPoints2D(self.x, self.y, self.targetX, self.targetY)
 			
-			self:jobRun()
+			self:jobRunToEnemy()
 		end
 	end
 end
@@ -138,24 +178,50 @@ end
 function NPC_S:jobIdle()
 	if (self.model) and (isElement(self.model)) then
 		self.model:setAnimation()
-		self.targetX = nil
-		self.targetY = nil
-		self.targetZ = nil
 		self.state = "idle"
 	end
 end
 
 
-function NPC_S:jobRun()
+function NPC_S:jobRunToEnemy()
 	if (self.model) and (isElement(self.model)) then
 		self.model:setAnimation("ped", "run_player")
-		self.state = "run"
+		self.state = "runToEnemy"
+	end
+end
+
+
+function NPC_S:onColShapeHit(element, dimension)
+	if (isElement(element)) and (not self.enemy) then
+		if (element:getType() == "player") then
+			self.enemy = element
+			self:setTargetPosition()
+		end
+	end
+end	
+
+
+function NPC_S:onColShapeLeave(element, dimension)
+	if (isElement(element)) and (self.enemy) then
+		if (element:getType() == "player") then
+			if (self.enemy == element) then
+				self.enemy = nil
+			end
+		end
 	end
 end
 
 
 function NPC_S:clear()
 	self:jobIdle()
+	
+	if (self.actionCol) then
+		removeEventHandler("onColShapeHit", self.actionCol, self.m_OnColShapeHit)
+		removeEventHandler("onColShapeLeave", self.actionCol, self.m_OnColShapeLeave)
+			
+		self.actionCol:destroy()
+		self.actionCol = nil
+	end
 	
 	if (self.model) then
 		self.model:destroy()

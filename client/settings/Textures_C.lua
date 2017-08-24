@@ -33,6 +33,10 @@ Textures["World"]["Water"][14] = {texture = nil, path = "res/textures/water/wate
 Textures["World"]["Water"][15] = {texture = nil, path = "res/textures/water/water_caustic_15.png"}
 Textures["World"]["Water"][16] = {texture = nil, path = "res/textures/water/water_caustic_16.png"}
 
+Textures["GUI"] = {}
+Textures["GUI"]["Cursor"] = {}
+Textures["GUI"]["Cursor"][1] = {texture = nil, path = "res/textures/gui/crosshair.png"}
+
 
 function Textures.init()
 	loadSkinTextures()
@@ -58,6 +62,18 @@ function loadSkinTextures()
 	end
 	
 	for _, section in pairs(Textures["World"]) do
+		if (section) then
+			for _, container in pairs(section) do
+				if (container) then
+					if (not container.texture) then
+						container.texture = dxCreateTexture(container.path)
+					end
+				end
+			end
+		end
+	end
+	
+	for _, section in pairs(Textures["GUI"]) do
 		if (section) then
 			for _, container in pairs(section) do
 				if (container) then
@@ -101,6 +117,21 @@ function deleteSkinTextures()
 	end
 	
 	Textures["World"] = {}
+	
+	for _, section in pairs(Textures["GUI"]) do
+		if (section) then
+			for _, container in pairs(section) do
+				if (container) then
+					if (container.texture) then
+						container.texture:destroy()
+						container.texture = nil
+					end
+				end
+			end
+		end
+	end
+	
+	Textures["GUI"] = {}
 end
 
 

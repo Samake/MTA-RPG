@@ -42,6 +42,7 @@
 	<script src="client/Core_C.lua" type="client"/>
 	
 	<script src="client/singletons/ClickSystem_C.lua" type="client"/>
+	<script src="client/singletons/MousePointer_C.lua" type="client"/>
 	<script src="client/singletons/Player_C.lua" type="client"/>
 	
 	<script src="client/manager/CameraManager_C.lua" type="client"/>
@@ -94,4 +95,5 @@
 	<file src="res/textures/water/water_caustic_15.png" type="client"/>
 	<file src="res/textures/water/water_caustic_16.png" type="client"/>
 
+	<file src="res/textures/gui/crosshair.png" type="client"/>
 </meta>
