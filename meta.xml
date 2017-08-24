@@ -30,6 +30,7 @@
 	
 	<script src="server/manager/PlayerManager_S.lua" type="server"/>
 	<script src="server/manager/NPCManager_S.lua" type="server"/>
+	<script src="server/manager/WeatherManager_S.lua" type="server"/>
 	
 	<script src="server/classes/Player_S.lua" type="server"/>
 	<script src="server/classes/NPC_S.lua" type="server"/>
@@ -49,6 +50,8 @@
 	<script src="client/manager/CameraManager_C.lua" type="client"/>
 	<script src="client/manager/ShaderManager_C.lua" type="client"/>
 	<script src="client/manager/GUIManager_C.lua" type="client"/>
+	<script src="client/manager/WeatherManager_C.lua" type="client"/>
+	<script src="client/manager/RainManager_C.lua" type="client"/>
 
 	<script src="client/classes/dxLib/dxWindow.lua" type="client"/>
 	<script src="client/classes/dxLib/dxLabel.lua" type="client"/>

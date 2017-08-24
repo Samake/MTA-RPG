@@ -2,8 +2,7 @@ GUIManager_C = inherit(Singleton)
 
 function GUIManager_C:constructor()
 
-	self.camera = nil
-	
+
 	self:init()
 	
 	if (Settings.showManagerDebugInfo == true) then

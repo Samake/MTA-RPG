@@ -35,6 +35,7 @@ function Core_C:initComponents()
 	CameraManager_C:new()
 	ShaderManager_C:new()
 	Player_C:new()
+	WeatherManager_C:new()
 end
 
 
@@ -56,6 +57,7 @@ function Core_C:update(deltaTime)
 	CameraManager_C:getSingleton():update(self.delta)
 	ShaderManager_C:getSingleton():update(self.delta)
 	Player_C:getSingleton():update(self.delta)
+	WeatherManager_C:getSingleton():update(self.delta)
 end
 
 
@@ -75,6 +77,7 @@ function Core_C:clear()
 	delete(ShaderManager_C:getSingleton())
 	delete(Player_C:getSingleton())
 	delete(XMLManager_C:getSingleton())
+	delete(WeatherManager_C:getSingleton())
 end
 
 

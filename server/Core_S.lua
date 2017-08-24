@@ -32,6 +32,7 @@ end
 function Core_S:initComponents()
 	PlayerManager_S:new()
 	NPCManager_S:new()
+	WeatherManager_S:new()
 end
 
 
@@ -42,6 +43,7 @@ function Core_S:update()
 
 		PlayerManager_S:getSingleton():update()
 		NPCManager_S:getSingleton():update()
+		WeatherManager_S:getSingleton():update()
 		
 		debug.sethook(_, h1, h2, h3) 
 	end
@@ -69,6 +71,7 @@ function Core_S:clear()
 	
 	delete(PlayerManager_S:getSingleton())
 	delete(NPCManager_S:getSingleton())
+	delete(WeatherManager_S:getSingleton())
 end
 
 
