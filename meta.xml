@@ -64,6 +64,7 @@
 	<script src="client/classes/ShaderColorVehicles_C.lua" type="client"/>
 	<script src="client/classes/ShaderWater_C.lua" type="client"/>
 	<script src="client/classes/ShaderPeds_C.lua" type="client"/>
+	<script src="client/classes/RainTexture_C.lua" type="client"/>
 	
 	<!-- ################################ Resources ################################ -->
 	

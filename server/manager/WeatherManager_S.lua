@@ -35,7 +35,6 @@ function WeatherManager_S:unsubscribeClient()
 	if (client) then
 		if (self.clientList[tostring(client)]) then
 			self.clientList[tostring(client)] = nil
-			table.remove(self.clientList, client)
 		end
 	end
 end
