@@ -14,9 +14,11 @@ function MousePointer_C:constructor()
 	self.rotation = 0
 	self.postGUI = true
 	
-	self.defaultColor = tocolor(220, 220, 220, 180)
-	self.friendColor = tocolor(15, 220, 15, 180)
-	self.enemyColor = tocolor(220, 15, 15, 180)
+	self.alpha = 180
+	
+	self.defaultColor = tocolor(220, 220, 220, self.alpha)
+	self.friendColor = tocolor(15, 220, 15, self.alpha)
+	self.enemyColor = tocolor(220, 15, 15, self.alpha)
 	self.color = self.defaultColor
 	
 	self.camX = 0
@@ -40,14 +42,20 @@ end
 
 function MousePointer_C:update(deltaTime)
 	if (isCursorShowing()) then
-		self:updatePositions()
-		self:updateHitDetails()
-		self:updateColors()
-		
-		if (Textures["GUI"]["Cursor"][1]) then
-			if (Textures["GUI"]["Cursor"][1].texture) then
-				dxDrawImage(self.x - self.size / 2, self.y - self.size / 2, self.size, self.size, Textures["GUI"]["Cursor"][1].texture, self.rotation, 0, 0, self.color, self.postGUI)
+		if (GUIManager_C:getSingleton():isCursorOnGUIElement() == false) then
+			setCursorAlpha(0)
+			
+			self:updatePositions()
+			self:updateHitDetails()
+			self:updateColors()
+			
+			if (Textures["GUI"]["Cursor"][1]) then
+				if (Textures["GUI"]["Cursor"][1].texture) then
+					dxDrawImage(self.x - self.size / 2, self.y - self.size / 2, self.size, self.size, Textures["GUI"]["Cursor"][1].texture, self.rotation, 0, 0, self.color, self.postGUI)
+				end
 			end
+		else
+			setCursorAlpha(self.alpha)
 		end
 	end
 end

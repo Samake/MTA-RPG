@@ -40,6 +40,8 @@ Textures["GUI"]["Cursor"][1] = {texture = nil, path = "res/textures/gui/crosshai
 Textures["Effects"] = {}
 Textures["Effects"]["Rain"] = {}
 Textures["Effects"]["Rain"][1] = {texture = nil, path = "res/textures/effects/rain_pp.png"}
+Textures["Effects"]["Shader"] = {}
+Textures["Effects"]["Shader"][1] = {texture = nil, path = "res/textures/effects/paperNormalMap.png"}
 
 
 function Textures.init()

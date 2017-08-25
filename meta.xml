@@ -59,6 +59,7 @@
 	<script src="client/classes/dxLib/dxLabel.lua" type="client"/>
 	<script src="client/classes/dxLib/dxSlider.lua" type="client"/>
 	<script src="client/classes/dxLib/dxButton.lua" type="client"/>
+	<script src="client/classes/dxLib/dxQuickSlots.lua" type="client"/>
 	
 	<script src="client/classes/Camera_C.lua" type="client"/>
 	<script src="client/classes/ShaderNull_C.lua" type="client"/>
@@ -67,6 +68,7 @@
 	<script src="client/classes/ShaderWater_C.lua" type="client"/>
 	<script src="client/classes/ShaderPeds_C.lua" type="client"/>
 	<script src="client/classes/RainTexture_C.lua" type="client"/>
+	<script src="client/classes/GUIQuickSlots_C.lua" type="client"/>
 	
 	<!-- ################################ Resources ################################ -->
 	
@@ -105,4 +107,5 @@
 	<file src="res/textures/gui/crosshair.png" type="client"/>
 	
 	<file src="res/textures/effects/rain_pp.png" type="client"/>
+	<file src="res/textures/effects/paperNormalMap.png" type="client"/>
 </meta>

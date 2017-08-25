@@ -53,23 +53,25 @@ end
 
 
 function ClickSystem_C:onClientClick(button, state, absoluteX, absoluteY, worldX, worldY, worldZ, clickedElement)
-	if (button == Bindings["MOVETO"]) and (state == "down") then
-		if (self.player) and (isElement(self.player)) then
-			self.playerPos = self.player:getPosition()
-	
-			self.worldX = worldX
-			self.worldY = worldY
-			self.worldZ = worldZ
-			
-			if (self.worldX) and (self.worldY) and (self.worldZ) then
-				if (isLineOfSightClear(self.worldX, self.worldY, self.worldZ + 0.5, self.playerPos.x, self.playerPos.y, self.playerPos.z, true, true, false, true, false, true)) then
-					self.markerColor = self.markerColorOK
-					triggerServerEvent("SETPLAYERTARGET", root, self.worldX, self.worldY, self.worldZ)
-				else
-					self.markerColor = self.markerColorFailed
-				end
+	if (GUIManager_C:getSingleton():isCursorOnGUIElement() == false) then
+		if (button == Bindings["MOVETO"]) and (state == "down") then
+			if (self.player) and (isElement(self.player)) then
+				self.playerPos = self.player:getPosition()
+		
+				self.worldX = worldX
+				self.worldY = worldY
+				self.worldZ = worldZ
 				
-				self:createPositionMarker()
+				if (self.worldX) and (self.worldY) and (self.worldZ) then
+					if (isLineOfSightClear(self.worldX, self.worldY, self.worldZ + 0.5, self.playerPos.x, self.playerPos.y, self.playerPos.z, true, true, false, true, false, true)) then
+						self.markerColor = self.markerColorOK
+						triggerServerEvent("SETPLAYERTARGET", root, self.worldX, self.worldY, self.worldZ)
+					else
+						self.markerColor = self.markerColorFailed
+					end
+					
+					self:createPositionMarker()
+				end
 			end
 		end
 	end

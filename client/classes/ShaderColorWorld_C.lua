@@ -22,7 +22,14 @@ function ShaderColorWorld_C:init()
 			for index, texture in pairs(self.textures) do
 				if (texture) then
 					self.shader:applyToWorldTexture(texture)
-					self.shader:setValue("inColor", self.color)
+				end
+			end
+			
+			self.shader:setValue("inColor", self.color)
+			
+			if (Textures["Effects"]["Shader"][1]) then
+				if (Textures["Effects"]["Shader"][1].texture) then
+					self.shader:setValue("normalTexture", Textures["Effects"]["Shader"][1].texture)
 				end
 			end
 			
