@@ -26,6 +26,8 @@
 	<script src="shared/Class.lua" type="shared"/>
 	
 	<!-- server -->
+	<script src="server/settings/WeatherTable_S.lua" type="server"/>
+	
 	<script src="server/Core_S.lua" type="server"/>
 	
 	<script src="server/manager/PlayerManager_S.lua" type="server"/>

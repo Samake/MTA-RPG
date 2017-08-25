@@ -8,7 +8,7 @@ function RainManager_C:constructor()
 	self.maxParticles = 64
 	self.currentMaxParticles = 0
 	
-	self.rainLevel = 0.4
+	self.rainLevel = 0
 	self.alpha = 0
 	
 	self:init()
@@ -45,6 +45,8 @@ end
 
 function RainManager_C:update(deltaTime)
 	if (self.renderTarget) then
+		self.rainLevel = WeatherManager_C:getSingleton():getRainLevel()
+		
 		self.alpha = 16 + (32 * self.rainLevel)
 		self.currentMaxParticles = math.floor(self.maxParticles * self.rainLevel)
 		
