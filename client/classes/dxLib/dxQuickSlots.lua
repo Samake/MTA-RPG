@@ -48,6 +48,9 @@ end
 
 
 function dxQuickSlots:init()
+	self.m_onClientClick = bind(self.onClientClick, self)
+	addEventHandler("onClientClick", root, self.m_onClientClick)
+	
 	for i = 1, self.slotCount, 1 do
 		if (not self.slots[i]) then
 			self.slots[i] = {}
@@ -190,6 +193,26 @@ function dxQuickSlots:isCursorInside()
 	end
 
 	return false
+end
+
+
+function dxQuickSlots:onClientClick(button, state)
+	if (button == Bindings["ACTION"]) and (state == "down") then
+		if (self:isCursorInside() == true) then
+			for index, slot in ipairs(self.slots) do
+				if (slot) then
+					if (self.mouseX > slot.x) and (self.mouseX < slot.x + slot.width) then
+						if (self.mouseY > slot.y) and (self.mouseY < slot.y + slot.height) then
+							if (slot.slotFunction) then
+								slot.slotFunction()
+								break
+							end
+						end
+					end
+				end
+			end
+		end
+	end
 end
 
 
@@ -423,7 +446,7 @@ end
 
 
 function dxQuickSlots:clear()
-
+	removeEventHandler("onClientClick", root, self.m_onClientClick)
 end
 
 
