@@ -10,6 +10,10 @@ function Player_C:constructor()
 	self.ry = 0
 	self.rz = 0
 	
+	self.maxSlots = 10
+	
+	self.equippedSlots = {}
+	
 	self:init()
 	
 	if (Settings.showManagerDebugInfo == true) then
@@ -21,6 +25,14 @@ end
 function Player_C:init()
 	self.m_SpawnTestNPC = bind(self.spawnTestNPC, self)
 	bindKey(Bindings["SPAWNTESTNPC"], "down", self.m_SpawnTestNPC)
+	
+	for i = 1, self.maxSlots do
+		if (not self.equippedSlots[i]) then
+			--self.equippedSlots[i] = Attacks["Default"]["Punch"]
+		end
+	end
+	
+	self.equippedSlots[1] = Attacks["Default"]["Punch"]
 end
 
 
@@ -63,8 +75,12 @@ end
 
 function Player_C:getPlayerClass()
 	return self
-end	
+end
 
+
+function Player_C:getPlayerSlots()
+	return self.equippedSlots
+end	
 
 function Player_C:clear()
 	unbindKey(Bindings["SPAWNTESTNPC"], "down", self.m_SpawnTestNPC)

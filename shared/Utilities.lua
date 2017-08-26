@@ -58,6 +58,19 @@ function math.unlerpclamped(from, pos, to)
 end
 
 ----------------------------------------------------------------
+-- String helper functions
+----------------------------------------------------------------
+
+-- ############# string.split ############## -- 
+function string.split(s, delimiter)
+    result = {};
+    for match in (s..delimiter):gmatch("(.-)"..delimiter) do
+        table.insert(result, match);
+    end
+    return result;
+end
+
+----------------------------------------------------------------
 -- Misc helper functions
 ----------------------------------------------------------------
 -- ############# isElementInRange ############## -- 

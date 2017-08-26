@@ -45,7 +45,18 @@ end
 
 
 function dxQuickSlots:init()
-
+	for i = 1, self.slotCount, 1 do
+		if (not self.slots[i]) then
+			self.slots[i] = {}
+			self.slots[i].width = self.width / self.slotCount
+			self.slots[i].height = self.height
+			self.slots[i].x = self.x + (self.slots[i].width * (i - 1))
+			self.slots[i].y = self.y
+			self.slots[i].slotFunction = nil
+			self.slots[i].icon = nil
+			self.slots[i].key = i
+		end
+	end
 end
 
 
@@ -59,6 +70,11 @@ function dxQuickSlots:update(deltaTime)
 	-- draw borders
 	for index, slot in ipairs(self.slots) do
 		if (slot) then
+			-- draw icon
+			if (slot.icon) then
+				 dxDrawImage(slot.x + self.borderOffset, slot.y + self.borderOffset, slot.width - self.borderOffset * 2, slot.height - self.borderOffset * 2, slot.icon, 0, 0, 0, tocolor(self.fontColor.r, self.fontColor.g, self.fontColor.b, self.alpha), self.postGUI)
+			end
+			
 			dxDrawLine(slot.x + self.borderOffset, slot.y + self.borderOffset, slot.x + slot.width - self.borderOffset, slot.y + self.borderOffset, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
 			dxDrawLine(slot.x + slot.width - self.borderOffset, slot.y + self.borderOffset, slot.x + slot.width - self.borderOffset, slot.y + slot.height - self.borderOffset, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
 			dxDrawLine(slot.x + slot.width - self.borderOffset, slot.y + slot.height - self.borderOffset, slot.x + self.borderOffset, slot.y + slot.height - self.borderOffset, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
@@ -116,15 +132,11 @@ end
 
 function dxQuickSlots:calcSlotValues()
 	for i = 1, self.slotCount, 1 do
-		if (not self.slots[i]) then
-			self.slots[i] = {}
+		if (self.slots[i]) then
 			self.slots[i].width = self.width / self.slotCount
 			self.slots[i].height = self.height
 			self.slots[i].x = self.x + (self.slots[i].width * (i - 1))
 			self.slots[i].y = self.y
-			self.slots[i].slotFunction = nil
-			self.slots[i].icon = nil
-			self.slots[i].key = i
 		end
 	end
 end
@@ -193,8 +205,8 @@ end
 
 function dxQuickSlots:setSlotFunction(slot, slotFunction)
 	if (slot) and (slotFunction) then
-		if (self.slots[i]) then
-			self.slots[i].slotFunction = slotFunction
+		if (self.slots[tonumber(slot)]) then
+			self.slots[tonumber(slot)].slotFunction = slotFunction
 		end
 	end
 end
@@ -202,9 +214,32 @@ end
 
 function dxQuickSlots:getSlotFunction(slot)
 	if (slot) then
-		if (self.slots[i]) then
-			if (self.slots[i].slotFunction) then
-				return self.slots[i].slotFunction
+		if (self.slots[tonumber(slot)]) then
+			if (self.slots[tonumber(slot)].slotFunction) then
+				return self.slots[tonumber(slot)].slotFunction
+			end
+		end
+	end
+	
+	return nil
+end
+
+
+function dxQuickSlots:setSlotIcon(slot, icon)
+	if (slot) and (icon) then
+		if (self.slots[tonumber(slot)]) then
+			outputChatBox(2)
+			self.slots[tonumber(slot)].icon = icon
+		end
+	end
+end
+
+
+function dxQuickSlots:getSlotIcon(slot)
+	if (slot) then
+		if (self.slots[tonumber(slot)]) then
+			if (self.slots[tonumber(slot)].icon) then
+				return self.slots[tonumber(slot)].icon
 			end
 		end
 	end

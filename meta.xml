@@ -19,6 +19,7 @@
 	
 	<!-- shared -->
 	<script src="shared/settings/Settings_Shared.lua" type="shared"/>
+	<script src="shared/settings/Attacks_Shared.lua" type="shared"/>
 	
 	<script src="shared/Classlib.lua" type="shared"/>
 	<script src="shared/Utilities.lua" type="shared"/>
@@ -108,4 +109,6 @@
 	
 	<file src="res/textures/effects/rain_pp.png" type="client"/>
 	<file src="res/textures/effects/paperNormalMap.png" type="client"/>
+	
+	<file src="res/textures/icons/attacks/attackPunchIcon.png" type="client"/>
 </meta>

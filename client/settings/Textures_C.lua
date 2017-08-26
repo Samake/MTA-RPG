@@ -43,6 +43,10 @@ Textures["Effects"]["Rain"][1] = {texture = nil, path = "res/textures/effects/ra
 Textures["Effects"]["Shader"] = {}
 Textures["Effects"]["Shader"][1] = {texture = nil, path = "res/textures/effects/paperNormalMap.png"}
 
+Textures["Icons"] = {}
+Textures["Icons"]["Attacks"] = {}
+Textures["Icons"]["Attacks"][1] = {texture = nil, path = "res/textures/icons/attacks/attackPunchIcon.png"}
+
 
 function Textures.init()
 	loadTextures()
