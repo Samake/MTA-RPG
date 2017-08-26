@@ -29,6 +29,10 @@ function AttackPunch_S:doSlotAction(slot)
 	if (client) and (isElement(client)) and (slot) then
 		if (self.slot == slot) and (client == self.player) then
 			outputChatBox(self.player:getName() .. " attacks with " .. self.name .. " on slot " .. self.slot .. "!")
+			
+			if (self.player) and (isElement(self.player))then
+				self.player:setAnimation("fight_b", "fightb_1", -1, false, false, true, false, 250)
+			end
 		end
 	end
 end
