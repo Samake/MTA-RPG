@@ -313,7 +313,6 @@ end
 function dxQuickSlots:setSlotIcon(slot, icon)
 	if (slot) and (icon) then
 		if (self.slots[tonumber(slot)]) then
-			outputChatBox(2)
 			self.slots[tonumber(slot)].icon = icon
 		end
 	end

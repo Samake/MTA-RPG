@@ -27,7 +27,12 @@ function Player_S:constructor(playerSettings)
 	self.legID = 1
 	self.feetID = 1
 	
+	self.playerTable = {}
+	self.equippedSlots = {}
+	
 	self.state = "idle"
+	
+	self.isClientConnected = false
 
 	self:init()
 	
@@ -42,13 +47,25 @@ function Player_S:init()
 	addEvent("SETPLAYERTARGET", true)
 	addEventHandler("SETPLAYERTARGET", root, self.m_SetTargetPosition)
 	
+	self.m_ConnectPlayer = bind(self.connectPlayer, self)
+	addEvent("CONNECTPLAYER", true)
+	addEventHandler("CONNECTPLAYER", root, self.m_ConnectPlayer)
 	
-	if (self.player) then -- only temp will be deleted later
+	
+	 -- only temp will be deleted later
+	if (self.player) then
 		self.playerPos = self.player:getPosition()
 		self.playerRot = self.player:getRotation()
 		
 		self.player:spawn(self.playerPos.x, self.playerPos.y, self.playerPos.z, self.playerRot.z, self.skinID, 0, self.dimension)
 	end
+	
+	 -- only temp will be deleted later
+	self.equippedSlots[1] = Attacks["Default"]["Punch1"]
+	self.equippedSlots[2] = Attacks["Default"]["Punch2"]
+	self.equippedSlots[3] = Attacks["Default"]["Punch3"]
+	self.equippedSlots[4] = Attacks["Default"]["Punch4"]
+	self.equippedSlots[5] = Attacks["Default"]["Punch5"]
 end
 
 
@@ -59,6 +76,26 @@ function Player_S:update()
 		
 		if (self.state == "run") then
 			self:correctPosition()
+		end
+		
+		self:syncPlayerData()
+	end
+end
+
+
+function Player_S:syncPlayerData()
+	if (self.isClientConnected == true) then
+		self.playerTable.equippedSlots = self.equippedSlots
+
+		triggerClientEvent(self.player, "SYNCPLAYERDATA", self.player, self.playerTable)
+	end
+end
+
+
+function Player_S:connectPlayer()
+	if (client) and (isElement(client)) then
+		if (client == self.player) then
+			self.isClientConnected = true
 		end
 	end
 end
@@ -146,6 +183,7 @@ end
 
 function Player_S:clear()
 	removeEventHandler("SETPLAYERTARGET", root, self.m_SetTargetPosition)
+	removeEventHandler("CONNECTPLAYER", root, self.m_ConnectPlayer)
 	
 	self:jobIdle()
 end

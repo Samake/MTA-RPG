@@ -21,7 +21,7 @@ function Camera_C:constructor()
 	
 	self.minHeight = Settings.minZoom / 2
 	self.maxHeight = Settings.maxZoom
-	self.currentHeight = Settings.defaultZoom / 2
+	self.currentHeight = Settings.defaultZoom
 	
 	self.angle = 90
 	self.roll = 0
@@ -85,13 +85,13 @@ end
 
 function Camera_C:scrollIn()
 	if (self.currentDistance > self.minDistance) then
-		self.currentDistance = self.currentDistance - self.scrollSpeed
+		self.currentDistance = self.currentDistance - self.scrollSpeed / 2
 	else
 		self.currentDistance = self.minDistance
 	end
 	
 	if (self.currentHeight > self.minHeight) then
-		self.currentHeight = self.currentHeight - self.scrollSpeed
+		self.currentHeight = self.currentHeight - self.scrollSpeed / 2
 	else
 		self.currentHeight = self.minHeight
 	end

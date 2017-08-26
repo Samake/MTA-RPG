@@ -12,6 +12,7 @@ function Player_C:constructor()
 	
 	self.maxSlots = 10
 	
+	self.oldEquippedSlots = {}
 	self.equippedSlots = {}
 	
 	self:init()
@@ -26,17 +27,11 @@ function Player_C:init()
 	self.m_SpawnTestNPC = bind(self.spawnTestNPC, self)
 	bindKey(Bindings["SPAWNTESTNPC"], "down", self.m_SpawnTestNPC)
 	
-	for i = 1, self.maxSlots do
-		if (not self.equippedSlots[i]) then
-			--self.equippedSlots[i] = Attacks["Default"]["Punch"]
-		end
-	end
+	self.m_GetServerData = bind(self.getServerData, self)
+	addEvent("SYNCPLAYERDATA", true)
+	addEventHandler("SYNCPLAYERDATA", root, self.m_GetServerData)
 	
-	self.equippedSlots[1] = Attacks["Default"]["Punch1"]
-	self.equippedSlots[2] = Attacks["Default"]["Punch2"]
-	self.equippedSlots[3] = Attacks["Default"]["Punch2"]
-	self.equippedSlots[4] = Attacks["Default"]["Punch2"]
-	self.equippedSlots[5] = Attacks["Default"]["Punch2"]
+	triggerServerEvent("CONNECTPLAYER", root)
 end
 
 
@@ -54,6 +49,7 @@ end
 function Player_C:update(deltaTime)
 	if (self.player) and (isElement(self.player)) then
 		self:updateCoords()
+		self:checkChanges()
 	end
 end
 
@@ -82,12 +78,42 @@ function Player_C:getPlayerClass()
 end
 
 
+function Player_C:getServerData(playerTable)
+	if (playerTable) then
+		if (playerTable.equippedSlots) then
+			self.oldEquippedSlots = self.equippedSlots
+			self.equippedSlots = playerTable.equippedSlots
+		end
+	end
+end
+
+
+function Player_C:checkChanges()
+	self:checkSlotChanges()
+end
+
+
+function Player_C:checkSlotChanges()
+	for index, slot in pairs(self.oldEquippedSlots) do
+		if (slot) then
+			if (self.equippedSlots[index]) then
+				if (self.equippedSlots[index] ~= slot) then
+					triggerEvent("UPDATEQUICKSLOTS", root)
+					break
+				end
+			end
+		end
+	end
+end
+
+
 function Player_C:getPlayerSlots()
 	return self.equippedSlots
 end	
 
 function Player_C:clear()
 	unbindKey(Bindings["SPAWNTESTNPC"], "down", self.m_SpawnTestNPC)
+	removeEventHandler("SYNCPLAYERDATA", root, self.m_GetServerData)
 end
 
 

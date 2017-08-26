@@ -26,6 +26,10 @@ function GUIQuickSlots_C:init()
 	self.m_ActionSlot9 = bind(self.actionSlot9, self)
 	self.m_ActionSlot10 = bind(self.actionSlot10, self)
 	
+	self.m_UpdateSlots = bind(self.updateSlots, self)
+	addEvent("UPDATEQUICKSLOTS", true)
+	addEventHandler("UPDATEQUICKSLOTS", root, self.m_UpdateSlots)
+	
 	-- load quickslots
 	if (not self.guiSlots) then
 		self.guiSlots = dxQuickSlots:new(0.2, 0.89, 0.6, 0.1)
@@ -57,31 +61,6 @@ function GUIQuickSlots_C:init()
 		bindKey(Bindings["SLOT8"], "down", self.m_ActionSlot8)
 		bindKey(Bindings["SLOT9"], "down", self.m_ActionSlot9)
 		bindKey(Bindings["SLOT10"], "down", self.m_ActionSlot10)
-		
-		-- load icons
-		self.playerSlots = Player_C:getSingleton():getPlayerSlots()
-		
-		if (self.playerSlots) then
-			for index, slot in pairs(self.playerSlots) do
-				if (slot) then
-					if (self.guiSlots) then
-						self.guiSlots:setSlotDelay(index, slot.delay)
-						
-						local iconValues = string.split(slot.icon, "|")
-						
-						if (iconValues) then
-							if (iconValues[1]) and (iconValues[2]) and (iconValues[2]) then
-								if (Textures[iconValues[1]][iconValues[2]][tonumber(iconValues[3])]) then
-									if (Textures[iconValues[1]][iconValues[2]][tonumber(iconValues[3])].texture) then
-										self.guiSlots:setSlotIcon(index, Textures[iconValues[1]][iconValues[2]][tonumber(iconValues[3])].texture)
-									end
-								end
-							end
-						end
-					end
-				end
-			end
-		end
 	end
 end
 
@@ -91,10 +70,32 @@ function GUIQuickSlots_C:update(deltaTime)
 		self.guiSlots:update()
 		
 		GUIManager_C:getSingleton():setCursorOnGUIElement(self.guiSlots:isCursorInside())
-		
+	end
+end
+
+
+function GUIQuickSlots_C:updateSlots()
+	-- load slot values
+	self.playerSlots = Player_C:getSingleton():getPlayerSlots()
+	
+	if (self.playerSlots) then
 		for index, slot in pairs(self.playerSlots) do
 			if (slot) then
-			
+				if (self.guiSlots) then
+					self.guiSlots:setSlotDelay(index, slot.delay)
+					
+					local iconValues = string.split(slot.icon, "|")
+					
+					if (iconValues) then
+						if (iconValues[1]) and (iconValues[2]) and (iconValues[2]) then
+							if (Textures[iconValues[1]][iconValues[2]][tonumber(iconValues[3])]) then
+								if (Textures[iconValues[1]][iconValues[2]][tonumber(iconValues[3])].texture) then
+									self.guiSlots:setSlotIcon(index, Textures[iconValues[1]][iconValues[2]][tonumber(iconValues[3])].texture)
+								end
+							end
+						end
+					end
+				end
 			end
 		end
 	end
@@ -202,6 +203,8 @@ function GUIQuickSlots_C:clear()
 	unbindKey(Bindings["SLOT8"], "down", self.m_ActionSlot8)
 	unbindKey(Bindings["SLOT9"], "down", self.m_ActionSlot9)
 	unbindKey(Bindings["SLOT10"], "down", self.m_ActionSlot10)
+	
+	removeEventHandler("UPDATEQUICKSLOTS", root, self.m_UpdateSlots)
 		
 	if (self.guiSlots) then
 		self.guiSlots:delete()

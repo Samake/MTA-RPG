@@ -13,7 +13,7 @@ Settings.showClassDebugInfo = false
 
 Settings.minZoom = 1.5
 Settings.maxZoom = 25
-Settings.defaultZoom = 5
+Settings.defaultZoom = 6
 Settings.zoomSpeed = 0.5
 Settings.fov = 110
 Settings.rotateSpeed = 7.5
