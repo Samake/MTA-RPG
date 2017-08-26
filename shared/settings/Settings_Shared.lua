@@ -16,7 +16,7 @@ Settings.maxZoom = 25
 Settings.defaultZoom = 5
 Settings.zoomSpeed = 0.5
 Settings.fov = 110
-Settings.rotateSpeed = 5.0
+Settings.rotateSpeed = 7.5
 
 Settings.shadersEnabled = true
 Settings.shaderWorldDrawDistance = 500

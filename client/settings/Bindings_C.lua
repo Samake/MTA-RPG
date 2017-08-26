@@ -4,7 +4,7 @@ Bindings["DEBUG"] = "L"
 
 Bindings["CAMERASCROLLIN"] = "mouse_wheel_up"
 Bindings["CAMERASCROLLOUT"] = "mouse_wheel_down"
-Bindings["CAMERAROTATE"] = "mouse2"
+Bindings["CAMERAROTATE"] = "mouse1"
 
 Bindings["ACTION"] = "left"
 Bindings["MOVETO"] = "right"
