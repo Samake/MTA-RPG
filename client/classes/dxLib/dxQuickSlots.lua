@@ -19,6 +19,7 @@ function dxQuickSlots:constructor(x, y, w, h, parent, relative)
 	self.color = {r = 0, g = 0, b = 0}
 	self.borderColor = {r = 90, g = 220, b = 90}
 	self.fontColor = {r = 255, g = 255, b = 255}
+	self.disabledColor = {r = 180, g = 180, b = 180}
 	
 	self.borderOffset = 2
 	self.borderSize = 2
@@ -33,6 +34,8 @@ function dxQuickSlots:constructor(x, y, w, h, parent, relative)
 	
 	self.mouseX = 0
 	self.mouseY = 0
+	
+	self.currentTick = 0
 	
 	self.slots = {}
 	
@@ -54,34 +57,71 @@ function dxQuickSlots:init()
 			self.slots[i].y = self.y
 			self.slots[i].slotFunction = nil
 			self.slots[i].icon = nil
-			self.slots[i].key = i
+			self.slots[i].isActive = true
+			self.slots[i].delay = 0
+			self.slots[i].startTick = 0
+			self.slots[i].value = 0
+			
+			local key = i
+			if (key > 9) then key = 0 end
+			
+			self.slots[i].key = key
 		end
 	end
 end
 
 
 function dxQuickSlots:update(deltaTime)
+	self.currentTick = getTickCount()
+	
 	self:calcValues()
 	self:calcSlotValues()
 	
 	-- draw bg
 	dxDrawRectangle(self.x, self.y, self.width, self.height, tocolor(self.color.r, self.color.g, self.color.b, self.alpha), self.postGUI, self.subPixelPositioning)
 	
-	-- draw borders
+	-- draw slot content
 	for index, slot in ipairs(self.slots) do
 		if (slot) then
 			-- draw icon
-			if (slot.icon) then
-				 dxDrawImage(slot.x + self.borderOffset, slot.y + self.borderOffset, slot.width - self.borderOffset * 2, slot.height - self.borderOffset * 2, slot.icon, 0, 0, 0, tocolor(self.fontColor.r, self.fontColor.g, self.fontColor.b, self.alpha), self.postGUI)
+			if (slot.isActive == true) then
+				-- draw icon
+				if (slot.icon) then
+					dxDrawImage(slot.x + self.borderOffset, slot.y + self.borderOffset, slot.width - self.borderOffset * 2, slot.height - self.borderOffset * 2, slot.icon, 0, 0, 0, tocolor(self.fontColor.r, self.fontColor.g, self.fontColor.b, self.alpha), self.postGUI)
+				end
+				
+				-- draw borders
+				dxDrawLine(slot.x + self.borderOffset, slot.y + self.borderOffset, slot.x + slot.width - self.borderOffset, slot.y + self.borderOffset, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
+				dxDrawLine(slot.x + slot.width - self.borderOffset, slot.y + self.borderOffset, slot.x + slot.width - self.borderOffset, slot.y + slot.height - self.borderOffset, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
+				dxDrawLine(slot.x + slot.width - self.borderOffset, slot.y + slot.height - self.borderOffset, slot.x + self.borderOffset, slot.y + slot.height - self.borderOffset, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
+				dxDrawLine(slot.x + self.borderOffset, slot.y + slot.height - self.borderOffset, slot.x + self.borderOffset, slot.y + self.borderOffset, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
+				
+				-- draw key
+				dxDrawText(slot.key, slot.x + self.borderOffset * 2, slot.y + self.borderOffset * 2, slot.x + slot.width - self.borderOffset * 4, slot.y + slot.height - self.borderOffset * 4, tocolor(self.fontColor.r, self.fontColor.g, self.fontColor.b, self.alpha), self.scale, "default-bold", "right", "top", false, false, self.postGUI, true, self.subPixelPositioning)
+			else
+				-- draw icon
+				if (slot.icon) then
+					dxDrawImage(slot.x + self.borderOffset, slot.y + self.borderOffset, slot.width - self.borderOffset * 2, slot.height - self.borderOffset * 2, slot.icon, 0, 0, 0, tocolor(self.disabledColor.r, self.disabledColor.g, self.disabledColor.b, self.alpha), self.postGUI)
+				end
+				
+				local value = (1 / slot.value) * ((slot.startTick + slot.delay) - self.currentTick)
+				
+				dxDrawRectangle(slot.x + self.borderOffset, (slot.y + self.borderOffset + slot.height) - (slot.height * value), slot.width - self.borderOffset * 2, (slot.height - self.borderOffset * 2) * value, tocolor(self.color.r, self.color.g, self.color.b, self.alpha), self.postGUI, self.subPixelPositioning)
+				
+				-- draw borders
+				dxDrawLine(slot.x + self.borderOffset, slot.y + self.borderOffset, slot.x + slot.width - self.borderOffset, slot.y + self.borderOffset, tocolor(self.disabledColor.r, self.disabledColor.g, self.disabledColor.b, self.alpha), self.borderSize, self.postGUI)
+				dxDrawLine(slot.x + slot.width - self.borderOffset, slot.y + self.borderOffset, slot.x + slot.width - self.borderOffset, slot.y + slot.height - self.borderOffset, tocolor(self.disabledColor.r, self.disabledColor.g, self.disabledColor.b, self.alpha), self.borderSize, self.postGUI)
+				dxDrawLine(slot.x + slot.width - self.borderOffset, slot.y + slot.height - self.borderOffset, slot.x + self.borderOffset, slot.y + slot.height - self.borderOffset, tocolor(self.disabledColor.r, self.disabledColor.g, self.disabledColor.b, self.alpha), self.borderSize, self.postGUI)
+				dxDrawLine(slot.x + self.borderOffset, slot.y + slot.height - self.borderOffset, slot.x + self.borderOffset, slot.y + self.borderOffset, tocolor(self.disabledColor.r, self.disabledColor.g, self.disabledColor.b, self.alpha), self.borderSize, self.postGUI)
+				
+				-- draw key
+				dxDrawText(slot.key, slot.x + self.borderOffset * 2, slot.y + self.borderOffset * 2, slot.x + slot.width - self.borderOffset * 4, slot.y + slot.height - self.borderOffset * 4, tocolor(self.disabledColor.r, self.disabledColor.g, self.disabledColor.b, self.alpha), self.scale, "default-bold", "right", "top", false, false, self.postGUI, true, self.subPixelPositioning)
+				
+				-- wait for delay
+				if (self.currentTick > slot.startTick + slot.delay) then
+					slot.isActive = true
+				end
 			end
-			
-			dxDrawLine(slot.x + self.borderOffset, slot.y + self.borderOffset, slot.x + slot.width - self.borderOffset, slot.y + self.borderOffset, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
-			dxDrawLine(slot.x + slot.width - self.borderOffset, slot.y + self.borderOffset, slot.x + slot.width - self.borderOffset, slot.y + slot.height - self.borderOffset, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
-			dxDrawLine(slot.x + slot.width - self.borderOffset, slot.y + slot.height - self.borderOffset, slot.x + self.borderOffset, slot.y + slot.height - self.borderOffset, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
-			dxDrawLine(slot.x + self.borderOffset, slot.y + slot.height - self.borderOffset, slot.x + self.borderOffset, slot.y + self.borderOffset, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
-			
-			-- draw key
-			dxDrawText(index, slot.x + self.borderOffset * 2, slot.y + self.borderOffset * 2, slot.x + slot.width - self.borderOffset * 4, slot.y + slot.height - self.borderOffset * 4, tocolor(self.fontColor.r, self.fontColor.g, self.fontColor.b, self.alpha), self.scale, "default-bold", "right", "top", false, false, self.postGUI, true, self.subPixelPositioning)
 		end
 	end
 
@@ -225,6 +265,28 @@ function dxQuickSlots:getSlotFunction(slot)
 end
 
 
+function dxQuickSlots:setSlotDelay(slot, delay)
+	if (slot) and (delay) then
+		if (self.slots[tonumber(slot)]) then
+			self.slots[tonumber(slot)].delay = delay
+		end
+	end
+end
+
+
+function dxQuickSlots:getSlotDelay(slot)
+	if (slot) then
+		if (self.slots[tonumber(slot)]) then
+			if (self.slots[tonumber(slot)].delay) then
+				return self.slots[tonumber(slot)].delay
+			end
+		end
+	end
+	
+	return 0
+end
+
+
 function dxQuickSlots:setSlotIcon(slot, icon)
 	if (slot) and (icon) then
 		if (self.slots[tonumber(slot)]) then
@@ -245,6 +307,34 @@ function dxQuickSlots:getSlotIcon(slot)
 	end
 	
 	return nil
+end
+
+
+function dxQuickSlots:setSlotActive(slot, bool)
+	if (slot) then
+		if (self.slots[tonumber(slot)]) then
+			self.slots[tonumber(slot)].isActive = bool
+			
+			if (bool == false) then
+				self.slots[tonumber(slot)].startTick = getTickCount()
+				
+				self.slots[tonumber(slot)].value = (self.slots[tonumber(slot)].startTick + self.slots[tonumber(slot)].delay) - self.currentTick
+			end
+		end
+	end
+end
+
+
+function dxQuickSlots:isSlotActive(slot)
+	if (slot) then
+		if (self.slots[tonumber(slot)]) then
+			if (self.slots[tonumber(slot)].isActive) then
+				return self.slots[tonumber(slot)].isActive
+			end
+		end
+	end
+	
+	return false
 end
 
 

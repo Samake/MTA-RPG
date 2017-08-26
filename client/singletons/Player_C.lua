@@ -33,6 +33,7 @@ function Player_C:init()
 	end
 	
 	self.equippedSlots[1] = Attacks["Default"]["Punch"]
+	self.equippedSlots[2] = Attacks["Default"]["Punch2"]
 end
 
 
