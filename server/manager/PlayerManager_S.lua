@@ -1,18 +1,19 @@
 PlayerManager_S = inherit(Singleton)
 
 function PlayerManager_S:constructor()
-	if (Settings.showManagerDebugInfo == true) then
-		sendMessage("PlayerManager_S was loaded.")
-	end
 	
 	self.playerClasses = {}
 	self.playerSkins = {}
 	
-	self:initManager()
+	self:init()
+	
+	if (Settings.showManagerDebugInfo == true) then
+		sendMessage("PlayerManager_S was loaded.")
+	end
 end
 
 
-function PlayerManager_S:initManager()
+function PlayerManager_S:init()
 	self.m_RequestPlayerSkin = bind(self.requestPlayerSkin, self)
 	addEvent("REQUESTPLAYERSKINS", true)
 	addEventHandler("REQUESTPLAYERSKINS", root, self.m_RequestPlayerSkin)

@@ -18,8 +18,8 @@
 	<!-- ################################ Scripts ################################ -->
 	
 	<!-- shared -->
+	
 	<script src="shared/settings/Settings_Shared.lua" type="shared"/>
-	<script src="shared/settings/Attacks_Shared.lua" type="shared"/>
 	
 	<script src="shared/Classlib.lua" type="shared"/>
 	<script src="shared/Utilities.lua" type="shared"/>
@@ -34,14 +34,20 @@
 	<script src="server/manager/PlayerManager_S.lua" type="server"/>
 	<script src="server/manager/NPCManager_S.lua" type="server"/>
 	<script src="server/manager/WeatherManager_S.lua" type="server"/>
+	<script src="server/manager/AttackManager_S.lua" type="server"/>
 	
 	<script src="server/classes/Player_S.lua" type="server"/>
 	<script src="server/classes/NPC_S.lua" type="server"/>
+	<script src="server/classes/Attack_S.lua" type="server"/>
+	<script src="server/classes/AttackPunch_S.lua" type="server"/>
+	
+	<script src="server/settings/AttackSettings_S.lua" type="server"/>
 	
 	<!-- client -->
 	<script src="client/settings/Bindings_C.lua" type="client"/>
 	<script src="client/settings/Textures_C.lua" type="client"/>
 	<script src="client/settings/ShaderBindings_C.lua" type="client"/>
+	<script src="client/settings/AttackSettings_C.lua" type="client"/>
 	
 	<script src="client/Core_C.lua" type="client"/>
 	

@@ -1,18 +1,19 @@
 NPCManager_S = inherit(Singleton)
 
 function NPCManager_S:constructor()
-	if (Settings.showManagerDebugInfo == true) then
-		sendMessage("NPCManager_S was loaded.")
-	end
-	
+
 	self.npcClasses = {}
 	self.npcSkins = {}
 	
-	self:initManager()
+	self:init()
+	
+	if (Settings.showManagerDebugInfo == true) then
+		sendMessage("NPCManager_S was loaded.")
+	end
 end
 
 
-function NPCManager_S:initManager()
+function NPCManager_S:init()
 	self.m_RequestNPCSkins = bind(self.requestNPCSkins, self)
 	addEvent("REQUESTNPCSKINS", true)
 	addEventHandler("REQUESTNPCSKINS", root, self.m_RequestNPCSkins)

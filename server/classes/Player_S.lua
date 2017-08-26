@@ -37,7 +37,7 @@ function Player_S:constructor(playerSettings)
 	self:init()
 	
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("Player_S " .. self.id .. " was loaded.")
+		sendMessage("Player_S " .. self.player:getName() .. " was loaded.")
 	end
 end
 
@@ -58,14 +58,19 @@ function Player_S:init()
 		self.playerRot = self.player:getRotation()
 		
 		self.player:spawn(self.playerPos.x, self.playerPos.y, self.playerPos.z, self.playerRot.z, self.skinID, 0, self.dimension)
+		
+		self.equippedSlots[1] = Attacks["Default"]["Punch1"]
+		self.equippedSlots[2] = Attacks["Default"]["Punch2"]
+		self.equippedSlots[3] = Attacks["Default"]["Punch3"]
+		self.equippedSlots[4] = Attacks["Default"]["Punch4"]
+		self.equippedSlots[5] = Attacks["Default"]["Punch5"]
+		
+		AttackManager_S:getSingleton():setPlayerAttacks(self.player, self.equippedSlots)
+		
+		for index, test in pairs(self.equippedSlots[1]) do
+			outputChatBox(tostring(index) .. ": " .. tostring(test))
+		end
 	end
-	
-	 -- only temp will be deleted later
-	self.equippedSlots[1] = Attacks["Default"]["Punch1"]
-	self.equippedSlots[2] = Attacks["Default"]["Punch2"]
-	self.equippedSlots[3] = Attacks["Default"]["Punch3"]
-	self.equippedSlots[4] = Attacks["Default"]["Punch4"]
-	self.equippedSlots[5] = Attacks["Default"]["Punch5"]
 end
 
 
@@ -182,6 +187,8 @@ end
 
 
 function Player_S:clear()
+	AttackManager_S:getSingleton():deletePlayerAttacks(self.player)
+	
 	removeEventHandler("SETPLAYERTARGET", root, self.m_SetTargetPosition)
 	removeEventHandler("CONNECTPLAYER", root, self.m_ConnectPlayer)
 	
@@ -193,6 +200,6 @@ function Player_S:destructor()
 	self:clear()
 
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("Player_S " .. self.id .. " was deleted.")
+		sendMessage("Player_S " .. self.player:getName() .. " was deleted.")
 	end
 end
