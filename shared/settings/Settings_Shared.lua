@@ -9,7 +9,7 @@ Settings.debugEnabled = true
 Settings.advancedDebugMessages = false
 Settings.showCoreDebugInfo = true
 Settings.showManagerDebugInfo = true
-Settings.showClassDebugInfo = true
+Settings.showClassDebugInfo = false
 
 Settings.minZoom = 1.5
 Settings.maxZoom = 25

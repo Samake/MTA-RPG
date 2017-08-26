@@ -34,16 +34,20 @@ function AttackManager_S:setPlayerAttacks(player, attacks)
 			self.playerAttackClasses[tostring(player)] = {}
 			
 			for index, slotContent in pairs(attacks) do
-				if (not self.playerAttackClasses[tostring(player)][index]) and (slotContent.class) then
-					self.playerAttackClasses[tostring(player)][index] = slotContent.class:new(player, slotContent)
+				if (slotContent) then
+					if (not self.playerAttackClasses[tostring(player)][index]) and (slotContent.class) then
+						self.playerAttackClasses[tostring(player)][index] = slotContent.class:new(player, index, slotContent)
+					end
 				end
 			end
 		else
 			self:deletePlayerAttacks(player)
 			
 			for index, slotContent in pairs(attacks) do
-				if (not self.playerAttackClasses[tostring(player)][index]) and (slotContent.class) then
-					self.playerAttackClasses[tostring(player)][index] = slotContent.class:new(player, slotContent)
+				if (slotContent) then
+					if (not self.playerAttackClasses[tostring(player)][index]) and (slotContent.class) then
+						self.playerAttackClasses[tostring(player)][index] = slotContent.class:new(player, index, slotContent)
+					end
 				end
 			end
 		end

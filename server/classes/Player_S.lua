@@ -66,10 +66,6 @@ function Player_S:init()
 		self.equippedSlots[5] = Attacks["Default"]["Punch5"]
 		
 		AttackManager_S:getSingleton():setPlayerAttacks(self.player, self.equippedSlots)
-		
-		for index, test in pairs(self.equippedSlots[1]) do
-			outputChatBox(tostring(index) .. ": " .. tostring(test))
-		end
 	end
 end
 

@@ -104,8 +104,7 @@ end
 
 function GUIQuickSlots_C:actionSlot1()
 	if (self.guiSlots:isSlotActive(1) == true) then
-		outputChatBox("Quickslot 1")
-		
+		triggerServerEvent("DOSLOTACTION", root, 1)
 		self.guiSlots:setSlotActive(1, false)
 	end
 end
@@ -113,8 +112,7 @@ end
 
 function GUIQuickSlots_C:actionSlot2()
 	if (self.guiSlots:isSlotActive(2) == true) then
-		outputChatBox("Quickslot 2")
-		
+		triggerServerEvent("DOSLOTACTION", root, 2)
 		self.guiSlots:setSlotActive(2, false)
 	end
 end
@@ -122,8 +120,7 @@ end
 
 function GUIQuickSlots_C:actionSlot3()
 	if (self.guiSlots:isSlotActive(3) == true) then
-		outputChatBox("Quickslot 3")
-		
+		triggerServerEvent("DOSLOTACTION", root, 3)
 		self.guiSlots:setSlotActive(3, false)
 	end
 end
@@ -131,8 +128,7 @@ end
 
 function GUIQuickSlots_C:actionSlot4()
 	if (self.guiSlots:isSlotActive(4) == true) then
-		outputChatBox("Quickslot 4")
-		
+		triggerServerEvent("DOSLOTACTION", root, 4)	
 		self.guiSlots:setSlotActive(4, false)
 	end
 end
@@ -140,8 +136,7 @@ end
 
 function GUIQuickSlots_C:actionSlot5()
 	if (self.guiSlots:isSlotActive(5) == true) then
-		outputChatBox("Quickslot 5")
-		
+		triggerServerEvent("DOSLOTACTION", root, 5)	
 		self.guiSlots:setSlotActive(5, false)
 	end
 end
@@ -149,8 +144,7 @@ end
 
 function GUIQuickSlots_C:actionSlot6()
 	if (self.guiSlots:isSlotActive(6) == true) then
-		outputChatBox("Quickslot 6")
-		
+		triggerServerEvent("DOSLOTACTION", root, 6)	
 		self.guiSlots:setSlotActive(6, false)
 	end
 end
@@ -158,8 +152,7 @@ end
 
 function GUIQuickSlots_C:actionSlot7()
 	if (self.guiSlots:isSlotActive(7) == true) then
-		outputChatBox("Quickslot 7")
-		
+		triggerServerEvent("DOSLOTACTION", root, 7)
 		self.guiSlots:setSlotActive(7, false)
 	end
 end
@@ -167,8 +160,7 @@ end
 
 function GUIQuickSlots_C:actionSlot8()
 	if (self.guiSlots:isSlotActive(8) == true) then
-		outputChatBox("Quickslot 8")
-		
+		triggerServerEvent("DOSLOTACTION", root, 8)
 		self.guiSlots:setSlotActive(8, false)
 	end
 end
@@ -176,8 +168,7 @@ end
 
 function GUIQuickSlots_C:actionSlot9()
 	if (self.guiSlots:isSlotActive(9) == true) then
-		outputChatBox("Quickslot 9")
-		
+		triggerServerEvent("DOSLOTACTION", root, 9)
 		self.guiSlots:setSlotActive(9, false)
 	end
 end
@@ -185,8 +176,7 @@ end
 
 function GUIQuickSlots_C:actionSlot10()
 	if (self.guiSlots:isSlotActive(10) == true) then
-		outputChatBox("Quickslot 10")
-		
+		triggerServerEvent("DOSLOTACTION", root, 10)
 		self.guiSlots:setSlotActive(10, false)
 	end
 end
