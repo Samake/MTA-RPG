@@ -16,15 +16,25 @@ function dxQuickSlots:constructor(x, y, w, h, parent, relative)
 	self.width = 0
 	self.height = 0
 	
+	self.color = {r = 0, g = 0, b = 0}
+	self.borderColor = {r = 90, g = 220, b = 90}
+	self.fontColor = {r = 255, g = 255, b = 255}
+	
+	self.borderOffset = 2
+	self.borderSize = 2
 	self.alpha = 255
+	
+	self.scale = 1
 	
 	self.postGUI = false
 	self.subPixelPositioning = true
 	
-	self.slots = 10
+	self.slotCount = 10
 	
 	self.mouseX = 0
 	self.mouseY = 0
+	
+	self.slots = {}
 	
 	self:init()
 	
@@ -41,8 +51,24 @@ end
 
 function dxQuickSlots:update(deltaTime)
 	self:calcValues()
+	self:calcSlotValues()
 	
-	dxDrawRectangle(self.x, self.y, self.width, self.height, tocolor(15, 15, 15, 200), self.postGUI, self.subPixelPositioning)
+	-- draw bg
+	dxDrawRectangle(self.x, self.y, self.width, self.height, tocolor(self.color.r, self.color.g, self.color.b, self.alpha), self.postGUI, self.subPixelPositioning)
+	
+	-- draw borders
+	for index, slot in ipairs(self.slots) do
+		if (slot) then
+			dxDrawLine(slot.x + self.borderOffset, slot.y + self.borderOffset, slot.x + slot.width - self.borderOffset, slot.y + self.borderOffset, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
+			dxDrawLine(slot.x + slot.width - self.borderOffset, slot.y + self.borderOffset, slot.x + slot.width - self.borderOffset, slot.y + slot.height - self.borderOffset, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
+			dxDrawLine(slot.x + slot.width - self.borderOffset, slot.y + slot.height - self.borderOffset, slot.x + self.borderOffset, slot.y + slot.height - self.borderOffset, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
+			dxDrawLine(slot.x + self.borderOffset, slot.y + slot.height - self.borderOffset, slot.x + self.borderOffset, slot.y + self.borderOffset, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
+			
+			-- draw key
+			dxDrawText(index, slot.x + self.borderOffset * 2, slot.y + self.borderOffset * 2, slot.x + slot.width - self.borderOffset * 4, slot.y + slot.height - self.borderOffset * 4, tocolor(self.fontColor.r, self.fontColor.g, self.fontColor.b, self.alpha), self.scale, "default-bold", "right", "top", false, false, self.postGUI, true, self.subPixelPositioning)
+		end
+	end
+
 	
 	if (isCursorShowing() == true) then
 		local mx, my = getCursorPosition()
@@ -83,6 +109,22 @@ function dxQuickSlots:calcValues()
 			self.y = self.defaultY
 			self.width = self.defaultWidth
 			self.height = self.defaultHeight
+		end
+	end
+end
+
+
+function dxQuickSlots:calcSlotValues()
+	for i = 1, self.slotCount, 1 do
+		if (not self.slots[i]) then
+			self.slots[i] = {}
+			self.slots[i].width = self.width / self.slotCount
+			self.slots[i].height = self.height
+			self.slots[i].x = self.x + (self.slots[i].width * (i - 1))
+			self.slots[i].y = self.y
+			self.slots[i].slotFunction = nil
+			self.slots[i].icon = nil
+			self.slots[i].key = i
 		end
 	end
 end
@@ -137,15 +179,101 @@ function dxQuickSlots:getParent()
 end
 
 
-function dxQuickSlots:setSlots(slots)
-	if (slots) then
-		self.slots = slots
+function dxQuickSlots:setSlotCount(slotCount)
+	if (slotCount) then
+		self.slotCount = slotCount
 	end
 end
 
 
-function dxQuickSlots:getSlots()
-	return self.slots
+function dxQuickSlots:getSlotCount()
+	return self.slotCount
+end
+
+
+function dxQuickSlots:setSlotFunction(slot, slotFunction)
+	if (slot) and (slotFunction) then
+		if (self.slots[i]) then
+			self.slots[i].slotFunction = slotFunction
+		end
+	end
+end
+
+
+function dxQuickSlots:getSlotFunction(slot)
+	if (slot) then
+		if (self.slots[i]) then
+			if (self.slots[i].slotFunction) then
+				return self.slots[i].slotFunction
+			end
+		end
+	end
+	
+	return nil
+end
+
+
+function dxQuickSlots:setBackgroundColor(r, g, b)
+	if (r) and (g) and (b) then
+		self.color.r = r
+		self.color.g = g
+		self.color.b = b
+	end
+end
+
+
+function dxQuickSlots:getBackgroundColor()
+	return self.color
+end
+
+
+function dxQuickSlots:setBorderColor(r, g, b)
+	if (r) and (g) and (b) then
+		self.borderColor.r = r
+		self.borderColor.g = g
+		self.borderColor.b = b
+	end
+end
+
+
+function dxQuickSlots:getBorderColor()
+	return self.borderColor
+end
+
+
+function dxQuickSlots:setBorderSize(size)
+	if (size) then
+		self.borderSize = size
+	end
+end
+
+
+function dxQuickSlots:getBorderSize()
+	return self.borderSize
+end
+
+
+function dxQuickSlots:setAlpha(alpha)
+	if (alpha) then
+		self.alpha = alpha
+	end
+end
+
+
+function dxQuickSlots:getAlpha()
+	return self.alpha
+end
+
+
+function dxQuickSlots:setScale(scale)
+	if (scale) then
+		self.scale = scale
+	end
+end
+
+
+function dxQuickSlots:getScale()
+	return self.scale
 end
 
 
