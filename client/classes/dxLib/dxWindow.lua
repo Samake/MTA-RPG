@@ -26,6 +26,9 @@ function dxWindow:constructor(x, y, w, h, parent, relative)
 	self.postGUI = false
 	self.subPixelPositioning = true
 	
+	self.mouseX = 0
+	self.mouseY = 0
+	
 	self:init()
 	
 	if (Settings.showClassDebugInfo == true) then
@@ -81,7 +84,20 @@ function dxWindow:calcValues()
 			self.width = self.defaultWidth
 			self.height = self.defaultHeight
 		end
+		
+		self.mouseX, self.mouseY = ClickSystem_C:getSingleton():getPosition()
 	end
+end
+
+
+function dxWindow:isCursorInside()
+	if (self.mouseX > self.x) and (self.mouseX < self.x + self.width) then
+		if (self.mouseY > self.y) and (self.mouseY < self.y + self.height) then
+			return true
+		end
+	end
+
+	return false
 end
 
 

@@ -71,16 +71,10 @@ function dxSlider:update(deltaTime)
 	-- draw slider
 	dxDrawRectangle(self.x, self.y  + (self.height / 2), self.width, self.height / 2, tocolor(self.barBGColor.r, self.barBGColor.g, self.barBGColor.b, self.alpha), self.postGUI, self.subPixelPositioning)
 	dxDrawRectangle(self.x, self.y  + (self.height / 2), self.barLength, self.height / 2, tocolor(self.barColor.r, self.barColor.g, self.barColor.b, self.alpha), self.postGUI, self.subPixelPositioning)
-
-	if (isCursorShowing() == true) then
-		local mx, my = getCursorPosition()
-		
-		self.mouseX, self.mouseY = mx * self.screenWidth, my * self.screenHeight 
-		
-		if (self:isCursorInside() == true) then
-			if (getKeyState("mouse1") == true) then
-				self:setValue((1.0 / self.width) * (self.mouseX - self.x))
-			end
+	
+	if (self:isCursorInside() == true) then
+		if (getKeyState("mouse1") == true) then
+			self:setValue((1.0 / self.width) * (self.mouseX - self.x))
 		end
 	end
 end
@@ -114,6 +108,8 @@ function dxSlider:calcValues()
 			self.width = self.defaultWidth
 			self.height = self.defaultHeight
 		end
+		
+		self.mouseX, self.mouseY = ClickSystem_C:getSingleton():getPosition()
 	end
 end
 

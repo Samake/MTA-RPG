@@ -80,6 +80,8 @@ function dxText:calcValues()
 			self.width = self.defaultWidth
 			self.height = self.defaultHeight
 		end
+		
+		self.mouseX, self.mouseY = ClickSystem_C:getSingleton():getPosition()
 	end
 end
 

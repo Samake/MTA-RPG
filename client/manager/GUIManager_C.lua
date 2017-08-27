@@ -23,7 +23,7 @@ end
 function GUIManager_C:update(deltaTime)
 	if (self.showGUI == true) then
 	
-		--self.isCursorOnAnyGUI = false
+		self.isCursorOnAnyGUI = false
 		
 		if (self.guiIngame) then
 			self.guiIngame:update()

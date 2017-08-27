@@ -47,52 +47,46 @@ end
 
 
 function GUIStatBars_C:update(deltaTime)
-	if (self.xpBar) then
-		self.xpBar:update()
-		
-		if (self.playerClass) then
+	if (self.playerClass) then
+		if (self.xpBar) then
+			self.xpBar:update()
+			
 			local value = ((1 / self.playerClass:getMaxXP()) * self.playerClass:getCurrentXP()) or 0
 			self.xpBar:setValue(value)
 			self.xpBar:setText(self.playerClass:getCurrentXP() .. " / " .. self.playerClass:getMaxXP())
+			
+			if (self.xpBar:isCursorInside() == true) then
+				GUIManager_C:getSingleton():setCursorOnGUIElement(true)
+			end
 		end
 		
-		if (self.xpBar:isCursorInside() == true) then
-			GUIManager_C:getSingleton():setCursorOnGUIElement(true)
-		end
-	end
-	
-	if (self.lifeBar) then
-		self.lifeBar:update()
-		
-		if (self.playerClass) then
+		if (self.lifeBar) then
+			self.lifeBar:update()
+			
 			local value = ((1 / self.playerClass:getMaxLife()) * self.playerClass:getCurrentLife()) or 0
 			self.lifeBar:setValue(value)
 			self.lifeBar:setText(self.playerClass:getCurrentLife() .. " / " .. self.playerClass:getMaxLife())
+
+			if (self.lifeBar:isCursorInside() == true) then
+				GUIManager_C:getSingleton():setCursorOnGUIElement(true)
+			end
 		end
 		
-		if (self.lifeBar:isCursorInside() == true) then
-			GUIManager_C:getSingleton():setCursorOnGUIElement(true)
-		end
-	end
-	
-	if (self.manaBar) then
-		self.manaBar:update()
-		
-		if (self.playerClass) then
+		if (self.manaBar) then
+			self.manaBar:update()
+			
 			local value = ((1 / self.playerClass:getMaxMana()) * self.playerClass:getCurrentMana()) or 0
 			self.manaBar:setValue(value)
 			self.manaBar:setText(self.playerClass:getCurrentMana() .. " / " .. self.playerClass:getMaxMana())
+			
+			if (self.manaBar:isCursorInside() == true) then
+				GUIManager_C:getSingleton():setCursorOnGUIElement(true)
+			end
 		end
 		
-		if (self.manaBar:isCursorInside() == true) then
-			GUIManager_C:getSingleton():setCursorOnGUIElement(true)
-		end
-	end
-	
-	if (self.levelText) then
-		self.levelText:update()
-		
-		if (self.playerClass) then
+		if (self.levelText) then
+			self.levelText:update()
+
 			self.levelText:setText("#FFFFFFLvl. #FFDD77" .. self.playerClass:getLevel())
 		end
 	end

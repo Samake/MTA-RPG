@@ -64,7 +64,6 @@
 	<script src="client/manager/RainManager_C.lua" type="client"/>
 
 	<script src="client/classes/dxLib/dxWindow.lua" type="client"/>
-	<script src="client/classes/dxLib/dxLabel.lua" type="client"/>
 	<script src="client/classes/dxLib/dxSlider.lua" type="client"/>
 	<script src="client/classes/dxLib/dxButton.lua" type="client"/>
 	<script src="client/classes/dxLib/dxQuickSlots.lua" type="client"/>
