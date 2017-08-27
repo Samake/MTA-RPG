@@ -59,7 +59,7 @@ end
 
 
 function PlayerManager_S:getPlayerClass(player)
-	if (isElement(player)) then
+	if (player) and (isElement(player)) then
 		if (self.playerClasses[tostring(player)]) then
 			return self.playerClasses[tostring(player)]
 		end

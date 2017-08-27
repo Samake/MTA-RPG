@@ -27,8 +27,8 @@ function Player_S:constructor(playerSettings)
 	self.legID = 1
 	self.feetID = 1
 	
-	self.maxLife = 10000
-	self.currentLife = 5500
+	self.maxLife = 1000
+	self.currentLife = 1000
 	self.maxMana = 100
 	self.currentMana = 100
 	
@@ -37,8 +37,11 @@ function Player_S:constructor(playerSettings)
 	
 	self.rank = "Beginner"
 	self.level = 1
-	self.currentXP = 124500
-	self.maxXP = 360000
+	self.currentXP = 0
+	self.maxXP = 1000
+	
+	self.critChance = 15
+	self.levelCaps = LevelCaps[1]
 	
 	self.playerTable = {}
 	self.equippedSlots = {}
@@ -130,6 +133,15 @@ function Player_S:updatePlayerStats()
 		delay = 800
 	end
 	
+	if (LevelCaps[self.level + 1]) then
+		self.levelCaps = LevelCaps[self.level + 1]
+	end
+	
+	self.maxXP = self.levelCaps.xp
+	self.maxLife = 1000 * self.levelCaps.modifier
+	self.maxMana = 100 * self.levelCaps.modifier
+	
+	
 	if (self.currentTick > self.healTick + delay) then
 		self.lifeRegeneration = (self.maxLife / 400) * Settings.selfHealFactor
 		self.manaRegeneration = (self.maxMana / 400) * Settings.selfHealFactor
@@ -146,10 +158,18 @@ function Player_S:updatePlayerStats()
 		
 		if (self.currentLife < self.maxLife) then
 			self:changeLife(lifeValue)
+			
+			if (self.isSitting == true) then
+				Text3DManager_S:sendText(self.player, "+" .. lifeValue .. " Life" , self.x, self.y, self.z + 2, 220, 90, 90)
+			end
 		end
 		
 		if (self.currentMana < self.maxMana) then
 			self:changeMana(manaValue)
+			
+			if (self.isSitting == true) then
+				Text3DManager_S:sendText(self.player, "+" .. manaValue .. " Mana" , self.x, self.y, self.z + 2, 90, 90, 220)
+			end
 		end
 		
 		self.healTick = getTickCount()
@@ -343,6 +363,14 @@ function Player_S:changeMana(value)
 end
 
 
+function Player_S:levelUp()
+	self.level = self.level + 1
+	self.currentXP = math.abs(self.currentXP - self.maxXP)
+	
+	Text3DManager_S:sendText(self.player, "Level up!", self.x, self.y, self.z + 2.0, 220, 90, 150)
+end
+
+
 function Player_S:setMana(value)
 	if (value) then
 		self.currentMana =  value
@@ -360,6 +388,61 @@ end
 
 function Player_S:getMana()
 	return self.currentMana
+end
+
+
+function Player_S:changeXP(value)
+	if (value) then
+		self.currentXP = self.currentXP + value
+		
+		if (self.currentXP > self.maxXP) then
+			self:levelUp()
+		end
+		
+		if (self.currentXP < 0) then
+			self.currentXP = 0
+		end
+	end
+end
+
+
+function Player_S:setXP(value)
+	if (value) then
+		self.currentXP =  value
+		
+		if (self.currentXP > self.maxXP) then
+			self.currentXP = self.maxXP
+		end
+		
+		if (self.currentXP < 0) then
+			self.currentXP = 0
+		end
+	end
+end
+
+
+function Player_S:getXP()
+	return self.currentXP
+end
+
+
+function Player_S:setCritChance(value)
+	if (value) then
+		self.critChance =  value
+		
+		if (self.critChance > 100) then
+			self.critChance = 100
+		end
+		
+		if (self.critChance < 0) then
+			self.critChance = 0
+		end
+	end
+end
+
+
+function Player_S:getCritChance()
+	return self.critChance
 end
 
 

@@ -37,16 +37,24 @@ end
 function NPCManager_S:addNPC(x, y, z)
 	if (x) and (y) and (z) then
 		local npcSettings = {}
-		npcSettings.id = self:getFreeID()
+		npcSettings.skinID = 0
 		npcSettings.x = x
 		npcSettings.y = y
 		npcSettings.z = z
 		npcSettings.rx = 0
 		npcSettings.ry = 0
 		npcSettings.rz = math.random(0, 360)
-
-		if (not self.npcClasses[npcSettings.id]) then
-			self.npcClasses[npcSettings.id] = NPC_S:new(npcSettings)
+		npcSettings.model = createPed(npcSettings.skinID, npcSettings.x, npcSettings.y, npcSettings.z, npcSettings.rz, true)
+		npcSettings.level = math.random(1, 3)
+		npcSettings.life = 1000
+		npcSettings.name = "Enemy"
+		
+		if (npcSettings.model) then
+			npcSettings.id = tostring(npcSettings.model)
+			
+			if (not self.npcClasses[npcSettings.id]) then
+				self.npcClasses[npcSettings.id] = NPC_S:new(npcSettings)
+			end
 		end
 	end
 end
@@ -62,36 +70,38 @@ function NPCManager_S:deleteNPC(id)
 end
 
 
-function NPCManager_S:getFreeID()
-	for index, npcClass in pairs(self.npcClasses) do
-		if (not npcClass) then
-			return index
-		end
-	end
-	
-	return #self.npcClasses + 1
-end
-
-
 function NPCManager_S:requestNPCSkins()
 	if (isElement(client)) then
 		self.npcSkins = {}
 		
 		for index, npcClass in pairs(self.npcClasses) do
 			if (npcClass) then
-				if (not self.npcSkins[tostring(npcClass.id)]) then
-					self.npcSkins[tostring(npcClass.id)] = {}
-					self.npcSkins[tostring(npcClass.id)].model = npcClass.model
-					self.npcSkins[tostring(npcClass.id)].head = npcClass.headID
-					self.npcSkins[tostring(npcClass.id)].torso = npcClass.torsoID
-					self.npcSkins[tostring(npcClass.id)].leg = npcClass.legID
-					self.npcSkins[tostring(npcClass.id)].feet = npcClass.feetID
+				if (not self.npcSkins[npcClass.id]) then
+					self.npcSkins[npcClass.id] = {}
+					self.npcSkins[npcClass.id].model = npcClass.model
+					self.npcSkins[npcClass.id].head = npcClass.headID
+					self.npcSkins[npcClass.id].torso = npcClass.torsoID
+					self.npcSkins[npcClass.id].leg = npcClass.legID
+					self.npcSkins[npcClass.id].feet = npcClass.feetID
 				end
 			end
 		end
 		
 		triggerClientEvent("SENDNPCSKINS", root, self.npcSkins)
 	end
+end
+
+
+function NPCManager_S:getNPCClass(npc)
+	if (npc) and (isElement(npc)) then
+		if (self.npcClasses) then
+			if (self.npcClasses[tostring(npc)]) then
+				return self.npcClasses[tostring(npc)]
+			end
+		end
+	end
+	
+	return nil
 end
 
 

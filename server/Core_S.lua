@@ -34,6 +34,7 @@ function Core_S:initComponents()
 	NPCManager_S:new()
 	WeatherManager_S:new()
 	AttackManager_S:new()
+	Text3DManager_S:new()
 end
 
 
@@ -75,6 +76,7 @@ function Core_S:clear()
 	delete(NPCManager_S:getSingleton())
 	delete(WeatherManager_S:getSingleton())
 	delete(AttackManager_S:getSingleton())
+	delete(Text3DManager_S:getSingleton())
 end
 
 

@@ -14,6 +14,10 @@ end
 
 
 function GUIManager_C:init()
+	if (not self.guiWorld) then
+		self.guiWorld = GUIWorld_C:new()
+	end
+	
 	if (not self.guiIngame) then
 		self.guiIngame = GUIIngame_C:new()
 	end
@@ -24,6 +28,10 @@ function GUIManager_C:update(deltaTime)
 	if (self.showGUI == true) then
 	
 		self.isCursorOnAnyGUI = false
+		
+		if (self.guiWorld) then
+			self.guiWorld:update()
+		end
 		
 		if (self.guiIngame) then
 			self.guiIngame:update()
@@ -56,6 +64,11 @@ function GUIManager_C:clear()
 	if (self.guiIngame) then
 		self.guiIngame:delete()
 		self.guiIngame = nil
+	end
+	
+	if (self.guiWorld) then
+		self.guiWorld:delete()
+		self.guiWorld = nil
 	end
 end
 

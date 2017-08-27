@@ -19,6 +19,9 @@ function AttackPunch_S:constructor(player, slot, slotContent)
 	self.startTick = 0
 	self.currentTick = 0
 	
+	self.damageDelay = 250
+	self.isReady = true
+	
 	self:init()
 	
 	if (Settings.showClassDebugInfo == true) then
@@ -40,6 +43,7 @@ function AttackPunch_S:doSlotAction(slot)
 
 			if (self.player) and (isElement(self.player))then
 				self.playerClass = PlayerManager_S:getSingleton():getPlayerClass(self.player)
+				local npcClass = NPCManager_S:getSingleton():getNPCClass(enemy)
 				
 				if (self.playerClass) then
 						if (self.costs < self.playerClass:getMana()) then
@@ -47,6 +51,7 @@ function AttackPunch_S:doSlotAction(slot)
 						
 						self.playerPos = self.player:getPosition()
 						self.playerRot = self.player:getRotation()
+						self.critChance = self.playerClass:getCritChance()
 					
 						if (self.playerPos) and (self.playerRot) then
 							self.player:setAnimation("fight_b", "fightb_1", -1, false, false, true, false, 250)
@@ -61,6 +66,33 @@ function AttackPunch_S:doSlotAction(slot)
 							
 							self.playerClass:changeMana(-self.costs)
 							
+							if (self.actionCol) then
+								for index, enemy in pairs(self.actionCol:getElementsWithin("ped")) do
+									if (enemy) and (isElement(enemy)) then
+										local npcClass = NPCManager_S:getSingleton():getNPCClass(enemy)
+										
+										if (npcClass) and (npcClass:isPedAlive() == true) then
+											if (not npcClass:getAttacker()) then
+												npcClass:setAttacker(self.playerClass)
+											end
+											
+											local critModifier = math.random(1, 100)
+											local damage = self.damage
+											local enemyPos = enemy:getPosition()
+											
+											if (critModifier <= self.critChance) then
+												damage = self.damage * 3
+												Text3DManager_S:sendText(self.player, damage .. " Critical!", enemyPos.x, enemyPos.y, enemyPos.z + 1.5, 220, 200, 90)
+											else
+												Text3DManager_S:sendText(self.player, damage, enemyPos.x, enemyPos.y, enemyPos.z + 1.5, 220, 220, 220)
+											end
+
+											npcClass:changeLife(-damage)
+										end
+									end
+								end
+							end
+							
 							self.startTick = getTickCount()
 						end
 					end
@@ -73,16 +105,8 @@ end
 
 function AttackPunch_S:update()
 	self.currentTick = getTickCount()
-	
-	if (self.actionCol) then
-		for index, enemy in pairs(self.actionCol:getElementsWithin("ped")) do
-			if (enemy) then
-				enemy:kill()
-			end
-		end
-	end
-	
-	if (self.currentTick > self.startTick + 250) then
+
+	if (self.currentTick > self.startTick + self.damageDelay) then
 		self:deleteCol()
 	end
 end

@@ -10,8 +10,15 @@ function NPC_S:constructor(npcSettings)
 	self.rx = npcSettings.rx
 	self.ry = npcSettings.ry
 	self.rz = npcSettings.rz
+	self.model = npcSettings.model
 	
-	self.skinID = 0
+	self.level = npcSettings.level
+	self.maxLife = npcSettings.life
+	self.currentLife = npcSettings.life
+	
+	self.name = npcSettings.name
+	
+	self.skinID = npcSettings.skinID
 	self.dimension = 0
 	
 	self.targetX = nil
@@ -36,6 +43,11 @@ function NPC_S:constructor(npcSettings)
 	
 	self.deadCount = 0
 	self.currentCount = 0
+	
+	self.attackerClass = nil
+	self.attacker = nil
+	
+	self.xpReward = 100
 
 	self:init()
 	self:triggerShaderSettings()
@@ -47,26 +59,27 @@ end
 
 
 function NPC_S:init()
-	if (not self.model) then
-		self.model = createPed (self.skinID, self.x, self.y, self.z, self.rz, true)
-		self.actionCol = createColSphere (self.x, self.y, self.z, self.actionRadius)
+	self.actionCol = createColSphere (self.x, self.y, self.z, self.actionRadius)
+	
+	if (self.model) and (self.actionCol) then
+		self.m_OnColShapeHit = bind(self.onColShapeHit, self)
+		self.m_OnColShapeLeave = bind(self.onColShapeLeave, self)
 		
-		if (self.model) and (self.actionCol) then
-			self.m_OnColShapeHit = bind(self.onColShapeHit, self)
-			self.m_OnColShapeLeave = bind(self.onColShapeLeave, self)
-			
-			addEventHandler("onColShapeHit", self.actionCol, self.m_OnColShapeHit)
-			addEventHandler("onColShapeLeave", self.actionCol, self.m_OnColShapeLeave)
-			
-			self.model:setDimension(self.dimension)
-			self.actionCol:setDimension(self.dimension)
-			
-			self.actionCol:attach(self.model)
-			
-			self.m_OnPedWasted = bind(self.onPedWasted, self)
-			addEvent("onPedWasted", true)
-			addEventHandler("onPedWasted", self.model, self.m_OnPedWasted)
-		end
+		addEventHandler("onColShapeHit", self.actionCol, self.m_OnColShapeHit)
+		addEventHandler("onColShapeLeave", self.actionCol, self.m_OnColShapeLeave)
+		
+		self.model:setDimension(self.dimension)
+		self.actionCol:setDimension(self.dimension)
+		
+		self.actionCol:attach(self.model)
+		
+		self.m_OnPedWasted = bind(self.onPedWasted, self)
+		addEvent("onPedWasted", true)
+		addEventHandler("onPedWasted", self.model, self.m_OnPedWasted)
+		
+		self.xpReward = self.xpReward * self.level
+		self.maxLife = self.maxLife * self.level 
+		self.currentLife = self.maxLife
 	end
 end
 
@@ -89,6 +102,7 @@ function NPC_S:update()
 		if (self.isAlive == true) then
 			self:updateCoords()
 			self:updatePosition()
+			self:updateElemenData()
 			
 			if (self.targetX) and (self.targetY) and (self.targetZ) then
 				self.distance = getDistanceBetweenPoints2D(self.x, self.y, self.targetX, self.targetY)
@@ -100,6 +114,10 @@ function NPC_S:update()
 				if (self.enemy) then
 					self:updateEnemyValues()
 				end
+			end
+			
+			if (self.currentLife <= 0) then
+				self.model:kill()
 			end
 		else
 			self.currentCount = getTickCount()
@@ -128,6 +146,15 @@ function NPC_S:updateCoords()
 		self.ry = self.modelRot.y
 		self.rz = self.modelRot.z
 	end
+end
+
+
+function NPC_S:updateElemenData()
+	self.model:setData("NPC:LEVEL", self.level, true)
+	self.model:setData("NPC:NAME", self.name, true)
+	
+	local lifeValue = (1 / self.maxLife) * self.currentLife
+	self.model:setData("NPC:LIFEVALUE", lifeValue, true)
 end
 
 
@@ -233,7 +260,68 @@ function NPC_S:onPedWasted()
 	if (self.isAlive == true) then
 		self.isAlive = false
 		self.deadCount = getTickCount()
+		
+		if (self.attackerClass) then	
+			self.attackerClass:changeXP(self.xpReward)
+			Text3DManager_S:sendText(self.attackerClass.player, "+" .. self.xpReward .. " XP" , self.x, self.y, self.z + 0.5, 90, 220, 90)
+		end
 	end
+end
+
+
+function NPC_S:changeLife(value)
+	if (value) then
+		self.currentLife = self.currentLife + value
+		
+		if (self.currentLife > self.maxLife) then
+			self.currentLife = self.maxLife
+		end
+		
+		if (self.currentLife < 0) then
+			self.currentLife = 0
+		end
+	end
+end
+
+
+function NPC_S:setLife(value)
+	if (value) then
+		self.currentLife = value
+		
+		if (self.currentLife > self.maxLife) then
+			self.currentLife = self.maxLife
+		end
+		
+		if (self.currentLife < 0) then
+			self.currentLife = 0
+		end
+	end
+end
+
+
+function NPC_S:getLife()
+	return self.currentLife
+end
+
+
+function NPC_S:setAttacker(class)
+	if (class) then
+		self.attackerClass = class
+		
+		if (self.attackerClass) then
+			self.attacker = self.attackerClass.player
+		end
+	end
+end
+
+
+function NPC_S:getAttacker()
+	return self.attacker
+end
+
+
+function NPC_S:isPedAlive()
+	return self.isAlive
 end
 
 
