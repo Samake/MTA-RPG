@@ -8,6 +8,7 @@ Bindings["CAMERAROTATE"] = "mouse1"
 
 Bindings["ACTION"] = "left"
 Bindings["MOVETO"] = "right"
+Bindings["SIT"] = "X"
 
 Bindings["SLOT1"] = "1"
 Bindings["SLOT2"] = "2"

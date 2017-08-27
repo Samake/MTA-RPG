@@ -41,6 +41,9 @@ function Player_C:init()
 	addEvent("SYNCPLAYERDATA", true)
 	addEventHandler("SYNCPLAYERDATA", root, self.m_GetServerData)
 	
+	self.m_PlayerSit = bind(self.playerSit, self)
+	bindKey(Bindings["SIT"], "down", self.m_PlayerSit)
+	
 	triggerServerEvent("CONNECTPLAYER", root)
 end
 
@@ -80,6 +83,11 @@ function Player_C:updateCoords()
 		self.ry = self.playerRot.y
 		self.rz = self.playerRot.z
 	end
+end
+
+
+function Player_C:playerSit()
+	triggerServerEvent("PLAYERSITDOWN", root)
 end
 
 
@@ -196,6 +204,7 @@ end
 
 function Player_C:clear()
 	unbindKey(Bindings["SPAWNTESTNPC"], "down", self.m_SpawnTestNPC)
+	unbindKey(Bindings["SIT"], "down", self.m_PlayerSit)
 	removeEventHandler("SYNCPLAYERDATA", root, self.m_GetServerData)
 end
 
