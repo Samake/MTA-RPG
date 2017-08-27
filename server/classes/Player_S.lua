@@ -27,6 +27,16 @@ function Player_S:constructor(playerSettings)
 	self.legID = 1
 	self.feetID = 1
 	
+	self.maxLife = 1000
+	self.currentLife = 1000
+	self.maxMana = 100
+	self.currentMana = 100
+	
+	self.rank = "Beginner"
+	self.level = 1
+	self.currentXP = 0
+	self.maxXP = 0
+	
 	self.playerTable = {}
 	self.equippedSlots = {}
 	
@@ -87,6 +97,14 @@ end
 function Player_S:syncPlayerData()
 	if (self.isClientConnected == true) then
 		self.playerTable.equippedSlots = self.equippedSlots
+		self.playerTable.rank = self.rank
+		self.playerTable.level = self.level
+		self.playerTable.currentXP = self.currentXP
+		self.playerTable.maxXP = self.maxXP
+		self.playerTable.maxLife = self.maxLife
+		self.playerTable.currentLife = self.currentLife
+		self.playerTable.maxMana = self.maxMana
+		self.playerTable.currentMana = self.currentMana
 
 		triggerClientEvent(self.player, "SYNCPLAYERDATA", self.player, self.playerTable)
 	end

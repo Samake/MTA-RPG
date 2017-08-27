@@ -12,6 +12,16 @@ function Player_C:constructor()
 	
 	self.maxSlots = 10
 	
+	self.maxLife = 0
+	self.currentLife = 0
+	self.maxMana = 0
+	self.currentMana = 0
+	
+	self.rank = "Beginner"
+	self.level = 1
+	self.currentXP = 0
+	self.maxXP = 0
+	
 	self.oldEquippedSlots = {}
 	self.equippedSlots = {}
 	
@@ -84,6 +94,38 @@ function Player_C:getServerData(playerTable)
 			self.oldEquippedSlots = self.equippedSlots
 			self.equippedSlots = playerTable.equippedSlots
 		end
+		
+		if (playerTable.rank) then
+			self.rank = playerTable.rank
+		end
+		
+		if (playerTable.level) then
+			self.level = playerTable.level
+		end
+		
+		if (playerTable.currentXP) then
+			self.currentXP = playerTable.currentXP
+		end
+		
+		if (playerTable.maxXP) then
+			self.maxXP = playerTable.maxXP
+		end
+		
+		if (playerTable.maxLife) then
+			self.maxLife = playerTable.maxLife
+		end
+		
+		if (playerTable.currentLife) then
+			self.currentLife = playerTable.currentLife
+		end
+		
+		if (playerTable.maxMana) then
+			self.maxMana = playerTable.maxMana
+		end
+		
+		if (playerTable.currentMana) then
+			self.currentMana = playerTable.currentMana
+		end
 	end
 end
 
@@ -107,9 +149,68 @@ function Player_C:checkSlotChanges()
 end
 
 
+function Player_C:getMaxLife()
+	return self.maxLife
+end
+
+
+function Player_C:getCurrentLife()
+	return self.currentLife
+end
+
+
+function Player_C:getMaxMana()
+	return self.maxMana
+end
+
+
+function Player_C:getCurrentMana()
+	return self.currentMana
+end
+
+function Player_C:getCurrentXP()
+	return self.currentXP
+end
+
+
+function Player_C:getMaxXP()
+	return self.maxXP
+end
+
+function Player_C:getCurrentXP()
+	return self.currentXP
+end
+
+
+function Player_C:getMaxXP()
+	return self.maxXP
+end
+
+
 function Player_C:getPlayerSlots()
 	return self.equippedSlots
+end
+
+
+function Player_C:getRank()
+	return self.rank
 end	
+
+
+function Player_C:getLevel()
+	return self.level
+end	
+
+
+function Player_C:getCurrentXP()
+	return self.currentXP
+end
+
+
+function Player_C:getMaxXP()
+	return self.maxXP
+end
+
 
 function Player_C:clear()
 	unbindKey(Bindings["SPAWNTESTNPC"], "down", self.m_SpawnTestNPC)

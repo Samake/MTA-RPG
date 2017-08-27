@@ -28,6 +28,7 @@
 	
 	<!-- server -->
 	<script src="server/settings/WeatherTable_S.lua" type="server"/>
+	<script src="server/settings/LevelCaps_S.lua" type="server"/>
 	
 	<script src="server/Core_S.lua" type="server"/>
 	

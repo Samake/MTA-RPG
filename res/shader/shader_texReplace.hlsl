@@ -3,14 +3,15 @@
 
 texture skinTexture;
 
+sampler MainSampler = sampler_state
+{
+    Texture = <gTexture0>;
+};
+
+
 sampler TextureSampler = sampler_state
 {
     Texture = <skinTexture>;
-	MinFilter = Linear;
-    MagFilter = Linear;
-    MipFilter = Linear;
-    AddressU = WRAP;
-    AddressV = WRAP;
 };
 
 
@@ -48,11 +49,13 @@ VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
 
 float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {
+	float4 mainColor = tex2D(MainSampler, input.TexCoords);
 	float4 finalColor = tex2D(TextureSampler, input.TexCoords);
 	finalColor.rgb *= 0.5;
+	
 	//float4 finalColor = tex2D(TextureSampler, input.TexCoords) * input.Diffuse;
 	
-    return finalColor;
+    return float4(finalColor.rgb, mainColor.a);
 }
  
 technique TexReplace
