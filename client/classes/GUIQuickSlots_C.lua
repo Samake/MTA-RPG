@@ -2,8 +2,6 @@ GUIQuickSlots_C = inherit(Class)
 
 function GUIQuickSlots_C:constructor(id)
 
-	self.screenWidth, self.screenHeight = guiGetScreenSize()
-	
 	self.playerSlots = nil
 	
 	self:init()
@@ -32,7 +30,7 @@ function GUIQuickSlots_C:init()
 	
 	-- load quickslots
 	if (not self.guiSlots) then
-		self.guiSlots = dxQuickSlots:new(0.2, 0.89, 0.6, 0.1)
+		self.guiSlots = dxQuickSlots:new(0.2, 0.89, 0.6, 0.1, nil, true)
 		self.guiSlots:setPostGUI(true)
 		self.guiSlots:setAlpha(180)
 	end
@@ -69,7 +67,9 @@ function GUIQuickSlots_C:update(deltaTime)
 	if (self.guiSlots) then
 		self.guiSlots:update()
 		
-		GUIManager_C:getSingleton():setCursorOnGUIElement(self.guiSlots:isCursorInside())
+		if (self.guiSlots:isCursorInside() == true) then
+			GUIManager_C:getSingleton():setCursorOnGUIElement(true)
+		end
 	end
 end
 

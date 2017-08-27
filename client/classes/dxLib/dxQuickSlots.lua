@@ -127,17 +127,6 @@ function dxQuickSlots:update(deltaTime)
 			end
 		end
 	end
-
-	
-	if (isCursorShowing() == true) then
-		local mx, my = getCursorPosition()
-		
-		self.mouseX, self.mouseY = mx * self.screenWidth, my * self.screenHeight
-		
-		if (self:isCursorInside() == true) then
-		
-		end
-	end
 end
 
 

@@ -1,7 +1,7 @@
 Settings = {}
 
 Settings.resName = "MTA RPG"
-Settings.resVersion = "0.02"
+Settings.resVersion = "0.03"
 Settings.fpsLimit = 60
 Settings.serverUpdateInterval = 50
 

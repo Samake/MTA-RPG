@@ -27,15 +27,15 @@ function Player_S:constructor(playerSettings)
 	self.legID = 1
 	self.feetID = 1
 	
-	self.maxLife = 1000
-	self.currentLife = 1000
+	self.maxLife = 10000
+	self.currentLife = 9000
 	self.maxMana = 100
-	self.currentMana = 100
+	self.currentMana = 75
 	
 	self.rank = "Beginner"
 	self.level = 1
-	self.currentXP = 0
-	self.maxXP = 0
+	self.currentXP = 124500
+	self.maxXP = 360000
 	
 	self.playerTable = {}
 	self.equippedSlots = {}

@@ -14,16 +14,19 @@ end
 
 
 function GUIManager_C:init()
-	if (not self.quickSlots) then
-		self.quickSlots = GUIQuickSlots_C:new()
+	if (not self.guiIngame) then
+		self.guiIngame = GUIIngame_C:new()
 	end
 end
 
 
 function GUIManager_C:update(deltaTime)
 	if (self.showGUI == true) then
-		if (self.quickSlots) then
-			self.quickSlots:update()
+	
+		--self.isCursorOnAnyGUI = false
+		
+		if (self.guiIngame) then
+			self.guiIngame:update()
 		end
 	end
 end
@@ -50,9 +53,9 @@ end
 
 
 function GUIManager_C:clear()
-	if (self.quickSlots) then
-		self.quickSlots:delete()
-		self.quickSlots = nil
+	if (self.guiIngame) then
+		self.guiIngame:delete()
+		self.guiIngame = nil
 	end
 end
 

@@ -152,6 +152,18 @@ function dxButton:isCursorInside()
 end
 
 
+function dxButton:setText(text)
+	if (text) then
+		self.text = text
+	end
+end
+
+
+function dxButton:getText()
+	return self.text
+end
+
+
 function dxButton:setPosition(x, y)
 	if (x) and (y) then
 		self.defaultX = x

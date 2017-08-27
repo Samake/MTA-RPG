@@ -49,7 +49,7 @@ function Player_C:spawnTestNPC()
 	if (self.player) and (isElement(self.player)) then
 		self:updateCoords()
 		
-		local x, y, z = getAttachedPosition(self.x, self.y, self.z, self.rx, self.ry, self.rz, 15, 0, 1)
+		local x, y, z = getAttachedPosition(self.x, self.y, self.z, self.rx, self.ry, self.rz, 15, 0, 0.3)
 		
 		triggerServerEvent("ADDTESTNPC", root, x, y, z)
 	end
@@ -168,24 +168,6 @@ function Player_C:getCurrentMana()
 	return self.currentMana
 end
 
-function Player_C:getCurrentXP()
-	return self.currentXP
-end
-
-
-function Player_C:getMaxXP()
-	return self.maxXP
-end
-
-function Player_C:getCurrentXP()
-	return self.currentXP
-end
-
-
-function Player_C:getMaxXP()
-	return self.maxXP
-end
-
 
 function Player_C:getPlayerSlots()
 	return self.equippedSlots
@@ -199,7 +181,7 @@ end
 
 function Player_C:getLevel()
 	return self.level
-end	
+end
 
 
 function Player_C:getCurrentXP()
