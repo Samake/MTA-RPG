@@ -31,6 +31,11 @@ function NPC_S:constructor(npcSettings)
 	
 	self.actionRadius = 10
 	self.enemy = nil
+	
+	self.isAlive = true
+	
+	self.deadCount = 0
+	self.currentCount = 0
 
 	self:init()
 	self:triggerShaderSettings()
@@ -57,6 +62,10 @@ function NPC_S:init()
 			self.actionCol:setDimension(self.dimension)
 			
 			self.actionCol:attach(self.model)
+			
+			self.m_OnPedWasted = bind(self.onPedWasted, self)
+			addEvent("onPedWasted", true)
+			addEventHandler("onPedWasted", self.model, self.m_OnPedWasted)
 		end
 	end
 end
@@ -77,18 +86,26 @@ end
 
 function NPC_S:update()
 	if (self.model) and (isElement(self.model)) then
-		self:updateCoords()
-		self:updatePosition()
-		
-		if (self.targetX) and (self.targetY) and (self.targetZ) then
-			self.distance = getDistanceBetweenPoints2D(self.x, self.y, self.targetX, self.targetY)
-		end
-		
-		if (self.state == "runToEnemy") then
-			self:correctPosition()
-		elseif (self.state == "idle") then
-			if (self.enemy) then
-				self:updateEnemyValues()
+		if (self.isAlive == true) then
+			self:updateCoords()
+			self:updatePosition()
+			
+			if (self.targetX) and (self.targetY) and (self.targetZ) then
+				self.distance = getDistanceBetweenPoints2D(self.x, self.y, self.targetX, self.targetY)
+			end
+			
+			if (self.state == "runToEnemy") then
+				self:correctPosition()
+			elseif (self.state == "idle") then
+				if (self.enemy) then
+					self:updateEnemyValues()
+				end
+			end
+		else
+			self.currentCount = getTickCount()
+
+			if (self.currentCount > self.deadCount + Settings.deadBodyRemoveTime) then
+				NPCManager_S:getSingleton():deleteNPC(self.id)
 			end
 		end
 	end
@@ -212,6 +229,14 @@ function NPC_S:onColShapeLeave(element, dimension)
 end
 
 
+function NPC_S:onPedWasted()
+	if (self.isAlive == true) then
+		self.isAlive = false
+		self.deadCount = getTickCount()
+	end
+end
+
+
 function NPC_S:clear()
 	self:jobIdle()
 	
@@ -224,6 +249,7 @@ function NPC_S:clear()
 	end
 	
 	if (self.model) then
+		removeEventHandler("onPedWasted", self.model, self.m_OnPedWasted)
 		self.model:destroy()
 		self.model = nil
 	end	

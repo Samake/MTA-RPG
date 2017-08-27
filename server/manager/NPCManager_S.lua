@@ -37,7 +37,7 @@ end
 function NPCManager_S:addNPC(x, y, z)
 	if (x) and (y) and (z) then
 		local npcSettings = {}
-		npcSettings.id = "NPC_" .. self:getFreeID()
+		npcSettings.id = self:getFreeID()
 		npcSettings.x = x
 		npcSettings.y = y
 		npcSettings.z = z
@@ -45,16 +45,19 @@ function NPCManager_S:addNPC(x, y, z)
 		npcSettings.ry = 0
 		npcSettings.rz = math.random(0, 360)
 
-		if (not self.npcClasses[self:getFreeID()]) then
-			self.npcClasses[self:getFreeID()] = NPC_S:new(npcSettings)
+		if (not self.npcClasses[npcSettings.id]) then
+			self.npcClasses[npcSettings.id] = NPC_S:new(npcSettings)
 		end
 	end
 end
 
 
-function NPCManager_S:deleteNPC(player)
-	if (isElement(player)) then
-	
+function NPCManager_S:deleteNPC(id)
+	if (id) then
+		if (self.npcClasses[id]) then
+			self.npcClasses[id]:delete()
+			self.npcClasses[id] = nil
+		end
 	end
 end
 

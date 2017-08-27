@@ -107,7 +107,8 @@ ShaderBindings["lightred"].textures = {"sw_container2", "sjmlahus23", "redresdoo
 
 ShaderBindings["red"] = {}
 ShaderBindings["red"].color = {r = 255, g = 0, b = 0}
-ShaderBindings["red"].textures = {"redmetal", "sw_trailerred", "sw_awningsx4", "firehydrant_yell", "santaco6za", "santaco6", "genroof01_128", "downtsign1_la", "las69str2", "ws_goldengate5", "des_tepesign"}
+ShaderBindings["red"].textures = {	"redmetal", "sw_trailerred", "sw_awningsx4", "firehydrant_yell", "santaco6za", "santaco6", "genroof01_128", "downtsign1_la", "las69str2", "ws_goldengate5", 
+									"des_tepesign", "bloodpool_64"}
 
 ShaderBindings["darkred"] = {}
 ShaderBindings["darkred"].color = {r = 100, g = 25, b = 25}

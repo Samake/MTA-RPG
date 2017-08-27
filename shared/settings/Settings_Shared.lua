@@ -18,6 +18,8 @@ Settings.zoomSpeed = 0.5
 Settings.fov = 110
 Settings.rotateSpeed = 7.5
 
+Settings.deadBodyRemoveTime = 10000
+
 Settings.shadersEnabled = true
 Settings.shaderWorldDrawDistance = 500
 
