@@ -3,9 +3,11 @@ Textures = {}
 Textures["Skins"] = {}
 Textures["Skins"]["Head"] = {}
 Textures["Skins"]["Head"][1] = {texture = nil, path = "res/textures/skins/head/head_1.png"}
+Textures["Skins"]["Head"][2] = {texture = nil, path = "res/textures/skins/head/head_2.png"}
 
 Textures["Skins"]["Torso"] = {}
 Textures["Skins"]["Torso"][1] = {texture = nil, path = "res/textures/skins/torso/torso_1.png"}
+Textures["Skins"]["Torso"][2] = {texture = nil, path = "res/textures/skins/torso/torso_2.png"}
 
 Textures["Skins"]["Leg"] = {}
 Textures["Skins"]["Leg"][1] = {texture = nil, path = "res/textures/skins/leg/leg_1.png"}
@@ -46,7 +48,7 @@ Textures["Effects"]["Shader"][1] = {texture = nil, path = "res/textures/effects/
 Textures["Icons"] = {}
 Textures["Icons"]["Attacks"] = {}
 Textures["Icons"]["Attacks"][1] = {texture = nil, path = "res/textures/icons/attacks/attackPunchIcon.png"}
-
+Textures["Icons"]["Attacks"][2] = {texture = nil, path = "res/textures/icons/attacks/attackKickIcon.png"}
 
 function Textures.init()
 	loadTextures()

@@ -1,11 +1,11 @@
 Attacks = {}
 
 Attacks["Default"] = {}
-Attacks["Default"]["Punch1"] = {name = "Punch 1", icon = "Icons|Attacks|1", damage = 50, costs = 1, class = AttackPunch_S, delay = 100}
-Attacks["Default"]["Punch2"] = {name = "Punch 2", icon = "Icons|Attacks|1", damage = 200, costs = 2, class = AttackPunch_S, delay = 3000}
-Attacks["Default"]["Punch3"] = {name = "Punch 3", icon = "Icons|Attacks|1", damage = 300, costs = 5, class = AttackPunch_S, delay = 4000}
-Attacks["Default"]["Punch4"] = {name = "Punch 4", icon = "Icons|Attacks|1", damage = 500, costs = 8, class = AttackPunch_S, delay = 6000}
-Attacks["Default"]["Punch5"] = {name = "Punch 5", icon = "Icons|Attacks|1", damage = 750, costs = 10, class = AttackPunch_S, delay = 9000}
+Attacks["Default"]["Punch"] = {name = "Punch", icon = "Icons|Attacks|1", damage = 150, costs = 1, class = AttackPunch_S, delay = 500, radius = 1.5}
+Attacks["Default"]["Kick"] = {name = "Kick", icon = "Icons|Attacks|2", damage = 800, costs = 4, class = AttackKick_S, delay = 5000, radius = 3.5}
+Attacks["Default"]["Punch3"] = {name = "Punch 3", icon = "Icons|Attacks|1", damage = 500, costs = 4, class = AttackPunch_S, delay = 4000, radius = 1.5}
+Attacks["Default"]["Punch4"] = {name = "Punch 4", icon = "Icons|Attacks|1", damage = 700, costs = 6, class = AttackPunch_S, delay = 6000, radius = 1.5}
+Attacks["Default"]["Punch5"] = {name = "Punch 5", icon = "Icons|Attacks|1", damage = 850, costs = 7, class = AttackPunch_S, delay = 8000, radius = 1.5}
 
 
 addEvent("GETATTACKSETTINGS", true)

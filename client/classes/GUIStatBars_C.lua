@@ -14,7 +14,7 @@ function GUIStatBars_C:init()
 	self.playerClass = Player_C:getSingleton()
 	
 	if (not self.xpBar) then
-		self.xpBar = dxProgessBar:new(0.2, 0.865, 0.6, 0.02, nil, true)
+		self.xpBar = dxProgessBar:new(0.25, 0.895, 0.5, 0.02, nil, true)
 		self.xpBar:setPostGUI(true)
 		self.xpBar:setColor(90, 220, 90)
 		self.xpBar:setAlpha(Settings.guiAlpha)
@@ -22,7 +22,7 @@ function GUIStatBars_C:init()
 	end
 	
 	if (not self.lifeBar) then
-		self.lifeBar = dxProgessBar:new(0.2, 0.84, 0.27, 0.02, nil, true)
+		self.lifeBar = dxProgessBar:new(0.25, 0.87, 0.22, 0.02, nil, true)
 		self.lifeBar:setPostGUI(true)
 		self.lifeBar:setColor(220, 90, 90)
 		self.lifeBar:setAlpha(Settings.guiAlpha)
@@ -30,7 +30,7 @@ function GUIStatBars_C:init()
 	end
 	
 	if (not self.manaBar) then
-		self.manaBar = dxProgessBar:new(0.53, 0.84, 0.27, 0.02, nil, true)
+		self.manaBar = dxProgessBar:new(0.53, 0.87, 0.22, 0.02, nil, true)
 		self.manaBar:setPostGUI(true)
 		self.manaBar:setColor(90, 90, 220)
 		self.manaBar:setAlpha(Settings.guiAlpha)
@@ -38,7 +38,7 @@ function GUIStatBars_C:init()
 	end
 	
 	if (not self.levelText) then
-		self.levelText = dxText:new("", 0.47, 0.84, 0.06, 0.02, nil, true)
+		self.levelText = dxText:new("", 0.47, 0.87, 0.06, 0.02, nil, true)
 		self.levelText:setPostGUI(true)
 		self.levelText:setAlpha(Settings.guiAlpha)
 		self.levelText:setScale(1.2)

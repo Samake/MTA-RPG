@@ -64,8 +64,8 @@ function WorldText3D_C:draw3DTexts()
 			local cx, cy, cz = getCameraMatrix()
 			local distance = getDistanceBetweenPoints3D(cx, cy, cz, textSlot.x, textSlot.y, textSlot.z)
 			
-			textSlot.offset = textSlot.offset + 1.25
-			textSlot.a = textSlot.a - 0.005
+			textSlot.offset = textSlot.offset + 0.5
+			textSlot.a = textSlot.a - 0.01
 			
 			if (textSlot.a <= 0) then
 				textSlot.a = 0

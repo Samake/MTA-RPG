@@ -1,6 +1,6 @@
-AttackPunch_S = inherit(Attack_S)
+AttackKick_S = inherit(Attack_S)
 
-function AttackPunch_S:constructor(player, slot, slotContent)
+function AttackKick_S:constructor(player, slot, slotContent)
 	
 	self.player = player
 	self.slot = slot
@@ -25,19 +25,19 @@ function AttackPunch_S:constructor(player, slot, slotContent)
 	self:init()
 	
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("AttackPunch_S for player " .. self.player:getName() .. " was loaded on slot " .. self.slot .. ".")
+		sendMessage("AttackKick_S for player " .. self.player:getName() .. " was loaded on slot " .. self.slot .. ".")
 	end
 end
 
 
-function AttackPunch_S:init()
+function AttackKick_S:init()
 	self.m_DoSlotAction = bind(self.doSlotAction, self)
 	addEvent("DOSLOTACTION", true)
 	addEventHandler("DOSLOTACTION", root, self.m_DoSlotAction)
 end
 
 
-function AttackPunch_S:doSlotAction(slot)
+function AttackKick_S:doSlotAction(slot)
 	if (client) and (isElement(client)) and (slot) then
 		if (self.slot == slot) and (client == self.player) then
 
@@ -53,7 +53,7 @@ function AttackPunch_S:doSlotAction(slot)
 						self.levelModifier = self.playerClass:getLevelModifier()
 					
 						if (self.playerPos) and (self.playerRot) then
-							self.player:setAnimation(Animations["Player"]["Punch"].block, Animations["Player"]["Punch"].anim, -1, false, false, true, false, 250)
+							self.player:setAnimation(Animations["Player"]["Kick"].block, Animations["Player"]["Kick"].anim, -1, false, false, true, false, 250)
 							
 							local x, y, z = getAttachedPosition(self.playerPos.x, self.playerPos.y, self.playerPos.z, self.playerRot.x, self.playerRot.y, self.playerRot.z, 0.8, 0, 0.2)
 							
@@ -102,7 +102,7 @@ function AttackPunch_S:doSlotAction(slot)
 end
 
 
-function AttackPunch_S:update()
+function AttackKick_S:update()
 	self.currentTick = getTickCount()
 
 	if (self.currentTick > self.startTick + self.damageDelay) then
@@ -111,7 +111,7 @@ function AttackPunch_S:update()
 end
 
 
-function AttackPunch_S:deleteCol()
+function AttackKick_S:deleteCol()
 	if (self.actionCol) then
 		self.actionCol:destroy()
 		self.actionCol = nil
@@ -119,17 +119,17 @@ function AttackPunch_S:deleteCol()
 end
 
 
-function AttackPunch_S:clear()
+function AttackKick_S:clear()
 	removeEventHandler("DOSLOTACTION", root, self.m_DoSlotAction)
 	
 	self:deleteCol()	
 end
 
 
-function AttackPunch_S:destructor()
+function AttackKick_S:destructor()
 	self:clear()
 
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("AttackPunch_S for player " .. self.player:getName() .. " was deleted on slot " .. self.slot .. ".")
+		sendMessage("AttackKick_S for player " .. self.player:getName() .. " was deleted on slot " .. self.slot .. ".")
 	end
 end

@@ -42,6 +42,7 @@ function Player_S:constructor(playerSettings)
 	
 	self.critChance = 15
 	self.levelCaps = LevelCaps[1]
+	self.levelModifier = self.levelCaps.modifier
 	
 	self.playerTable = {}
 	self.equippedSlots = {}
@@ -82,8 +83,8 @@ function Player_S:init()
 		
 		self.player:spawn(self.playerPos.x, self.playerPos.y, self.playerPos.z, self.playerRot.z, self.skinID, 0, self.dimension)
 		
-		self.equippedSlots[1] = Attacks["Default"]["Punch1"]
-		self.equippedSlots[2] = Attacks["Default"]["Punch2"]
+		self.equippedSlots[1] = Attacks["Default"]["Punch"]
+		self.equippedSlots[2] = Attacks["Default"]["Kick"]
 		self.equippedSlots[3] = Attacks["Default"]["Punch3"]
 		self.equippedSlots[4] = Attacks["Default"]["Punch4"]
 		self.equippedSlots[5] = Attacks["Default"]["Punch5"]
@@ -288,7 +289,7 @@ end
 
 function Player_S:jobRun()
 	if (self.player) and (isElement(self.player)) then
-		self.player:setAnimation("ped", "run_player", -1, true, true, false, false)
+		self.player:setAnimation(Animations["Player"]["Run"].block, Animations["Player"]["Run"].anim, -1, true, true, true, false, 250)
 		self.state = "run"
 	end
 end
@@ -296,7 +297,7 @@ end
 
 function Player_S:jobStartSit()
 	if (self.player) and (isElement(self.player)) then
-		self.player:setAnimation("sunbathe", "parksit_m_in", false, false, false, true, 250)
+		self.player:setAnimation(Animations["Player"]["SitDown"].block, Animations["Player"]["SitDown"].anim, -1, false, false, true, true, 250)
 		self.state = "sit"
 		self.targetX = nil
 		self.targetY = nil
@@ -307,7 +308,7 @@ end
 
 function Player_S:jobStopSit()
 	if (self.player) and (isElement(self.player)) then
-		self.player:setAnimation("sunbathe", "parksit_m_out", false, false, false, false, 250)
+		self.player:setAnimation(Animations["Player"]["StandUp"].block, Animations["Player"]["StandUp"].anim, -1, false, false, true, false, 250)
 		self.state = "idle"
 	end
 end
@@ -367,7 +368,7 @@ function Player_S:levelUp()
 	self.level = self.level + 1
 	self.currentXP = math.abs(self.currentXP - self.maxXP)
 	
-	Text3DManager_S:sendText(self.player, "Level up!", self.x, self.y, self.z + 2.0, 220, 120, 180, 3)
+	Text3DManager_S:sendText(self.player, "Level up!", self.x, self.y, self.z + 1.0, 220, 120, 180, 3)
 end
 
 
@@ -439,6 +440,12 @@ function Player_S:setCritChance(value)
 		end
 	end
 end
+
+
+function Player_S:getLevelModifier()
+	return self.levelModifier
+end
+
 
 
 function Player_S:getCritChance()

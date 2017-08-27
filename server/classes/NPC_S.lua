@@ -29,8 +29,8 @@ function NPC_S:constructor(npcSettings)
 	self.distance = 0
 	self.tolerance = 3.0
 	
-	self.headID = 1
-	self.torsoID = 1
+	self.headID = 2
+	self.torsoID = 2
 	self.legID = 2
 	self.feetID = 1
 	
@@ -229,7 +229,7 @@ end
 
 function NPC_S:jobRunToEnemy()
 	if (self.model) and (isElement(self.model)) then
-		self.model:setAnimation("ped", "run_player")
+		self.model:setAnimation(Animations["NPC"]["Run"].block, Animations["NPC"]["Run"].anim, -1, true, true, true, false, 250)
 		self.state = "runToEnemy"
 	end
 end

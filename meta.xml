@@ -29,6 +29,7 @@
 	<!-- server -->
 	<script src="server/settings/WeatherTable_S.lua" type="server"/>
 	<script src="server/settings/LevelCaps_S.lua" type="server"/>
+	<script src="server/settings/AnimationsList_S.lua" type="server"/>
 	
 	<script src="server/Core_S.lua" type="server"/>
 	
@@ -42,6 +43,7 @@
 	<script src="server/classes/NPC_S.lua" type="server"/>
 	<script src="server/classes/Attack_S.lua" type="server"/>
 	<script src="server/classes/AttackPunch_S.lua" type="server"/>
+	<script src="server/classes/AttackKick_S.lua" type="server"/>
 	
 	<script src="server/settings/AttackSettings_S.lua" type="server"/>
 	
@@ -97,7 +99,9 @@
 	
 	<!-- textures -->
 	<file src="res/textures/skins/head/head_1.png" type="client" cache="false"/>
+	<file src="res/textures/skins/head/head_2.png" type="client" cache="false"/>
 	<file src="res/textures/skins/torso/torso_1.png" type="client" cache="false"/>
+	<file src="res/textures/skins/torso/torso_2.png" type="client" cache="false"/>
 	<file src="res/textures/skins/leg/leg_1.png" type="client" cache="false"/>
 	<file src="res/textures/skins/leg/leg_2.png" type="client" cache="false"/>
 	<file src="res/textures/skins/feet/feet_1.png" type="client" cache="false"/>
@@ -125,4 +129,5 @@
 	<file src="res/textures/effects/paperNormalMap.png" type="client" cache="false"/>
 	
 	<file src="res/textures/icons/attacks/attackPunchIcon.png" type="client" cache="false"/>
+	<file src="res/textures/icons/attacks/attackKickIcon.png" type="client" cache="false"/>
 </meta>
