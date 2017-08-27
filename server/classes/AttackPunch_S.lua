@@ -82,9 +82,9 @@ function AttackPunch_S:doSlotAction(slot)
 											
 											if (critModifier <= self.critChance) then
 												damage = self.damage * 3
-												Text3DManager_S:sendText(self.player, damage .. " Critical!", enemyPos.x, enemyPos.y, enemyPos.z + 1.5, 220, 200, 90)
+												Text3DManager_S:sendText(self.player, damage .. " Critical!", enemyPos.x, enemyPos.y, enemyPos.z + 1.5, 220, 200, 90, 1.5)
 											else
-												Text3DManager_S:sendText(self.player, damage, enemyPos.x, enemyPos.y, enemyPos.z + 1.5, 220, 220, 220)
+												Text3DManager_S:sendText(self.player, damage, enemyPos.x, enemyPos.y, enemyPos.z + 1.5, 220, 220, 220, 0.5)
 											end
 
 											npcClass:changeLife(-damage)

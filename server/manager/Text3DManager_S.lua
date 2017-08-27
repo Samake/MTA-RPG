@@ -15,7 +15,7 @@ function Text3DManager_S:init()
 end
 
 
-function Text3DManager_S:sendText(player, text, x, y, z, r, g, b)
+function Text3DManager_S:sendText(player, text, x, y, z, r, g, b, size)
 	if (text) and (x) and (y) and (z) then
 		local textProperties = {}
 		textProperties.text = text
@@ -25,6 +25,7 @@ function Text3DManager_S:sendText(player, text, x, y, z, r, g, b)
 		textProperties.r = r or 255
 		textProperties.g = g or 255
 		textProperties.b = b or 255
+		textProperties.size = size or 1
 		
 		if (not player) then player = root end
 		triggerClientEvent(player, "DRAW3DTEXT", player, textProperties)

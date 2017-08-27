@@ -8,8 +8,8 @@ function NameTags_C:constructor()
 	self.maxNameTagDistance = 150
 	self.minNameTagScale = 0.3
 	self.maxNameTagScale = 8.0
-	self.minNameTagAlpha = 35
-	self.maxNameTagAlpha = 255
+	self.minNameTagAlpha = 32
+	self.maxNameTagAlpha = Settings.guiAlpha
 	
 	self.nameTagWidth = self.screenWidth * 0.075
 	self.nameTagHeight = self.nameTagWidth * 0.2

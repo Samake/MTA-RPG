@@ -1,7 +1,7 @@
 Settings = {}
 
 Settings.resName = "MTA RPG"
-Settings.resVersion = "0.03"
+Settings.resVersion = "0.03b"
 Settings.fpsLimit = 60
 Settings.serverUpdateInterval = 50
 
@@ -10,6 +10,8 @@ Settings.advancedDebugMessages = false
 Settings.showCoreDebugInfo = true
 Settings.showManagerDebugInfo = true
 Settings.showClassDebugInfo = false
+
+Settings.guiAlpha = 180
 
 Settings.minZoom = 1.5
 Settings.maxZoom = 25

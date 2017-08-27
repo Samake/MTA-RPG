@@ -160,7 +160,7 @@ function Player_S:updatePlayerStats()
 			self:changeLife(lifeValue)
 			
 			if (self.isSitting == true) then
-				Text3DManager_S:sendText(self.player, "+" .. lifeValue .. " Life" , self.x, self.y, self.z + 2, 220, 90, 90)
+				Text3DManager_S:sendText(self.player, "+" .. lifeValue .. " Life" , self.x, self.y, self.z + 0.5, 220, 90, 90, 0.4)
 			end
 		end
 		
@@ -168,7 +168,7 @@ function Player_S:updatePlayerStats()
 			self:changeMana(manaValue)
 			
 			if (self.isSitting == true) then
-				Text3DManager_S:sendText(self.player, "+" .. manaValue .. " Mana" , self.x, self.y, self.z + 2, 90, 90, 220)
+				Text3DManager_S:sendText(self.player, "+" .. manaValue .. " Mana" , self.x, self.y, self.z + 0.5, 90, 90, 220, 0.4)
 			end
 		end
 		
@@ -367,7 +367,7 @@ function Player_S:levelUp()
 	self.level = self.level + 1
 	self.currentXP = math.abs(self.currentXP - self.maxXP)
 	
-	Text3DManager_S:sendText(self.player, "Level up!", self.x, self.y, self.z + 2.0, 220, 90, 150)
+	Text3DManager_S:sendText(self.player, "Level up!", self.x, self.y, self.z + 2.0, 220, 120, 180, 3)
 end
 
 
@@ -395,7 +395,7 @@ function Player_S:changeXP(value)
 	if (value) then
 		self.currentXP = self.currentXP + value
 		
-		if (self.currentXP > self.maxXP) then
+		if (math.floor(self.currentXP + 0.5) >= self.maxXP) then
 			self:levelUp()
 		end
 		

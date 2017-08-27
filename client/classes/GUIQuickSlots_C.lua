@@ -32,7 +32,7 @@ function GUIQuickSlots_C:init()
 	if (not self.guiSlots) then
 		self.guiSlots = dxQuickSlots:new(0.2, 0.89, 0.6, 0.1, nil, true)
 		self.guiSlots:setPostGUI(true)
-		self.guiSlots:setAlpha(180)
+		self.guiSlots:setAlpha(Settings.guiAlpha)
 	end
 	
 	-- load functions

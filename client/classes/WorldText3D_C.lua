@@ -8,8 +8,8 @@ function WorldText3D_C:constructor()
 	self.maxTextDistance = 75
 	self.minTextScale = 0.5
 	self.maxTextScale = 5.0
-	self.minTextAlpha = 128
-	self.maxTextAlpha = 255
+	self.minTextAlpha = 32
+	self.maxTextAlpha = Settings.guiAlpha
 	
 	self.postGUI = true
 	self.subPixelPositioning = true
@@ -45,6 +45,7 @@ function WorldText3D_C:addText(textProperties)
 			self.textElements[id].r = textProperties.r
 			self.textElements[id].g = textProperties.g
 			self.textElements[id].b = textProperties.b
+			self.textElements[id].size = textProperties.size
 			self.textElements[id].a = 1
 			self.textElements[id].offset = 0
 		end
@@ -73,7 +74,7 @@ function WorldText3D_C:draw3DTexts()
 					
 			if (distance <= self.maxTextDistance) then
 				local ntx, nty = getScreenFromWorldPosition(textSlot.x, textSlot.y, textSlot.z)
-				local scale = self:getTextScale(distance)
+				local scale = self:getTextScale(distance) * textSlot.size
 				local alpha = self:getTextAlpha(distance)
 				local shadowOffset = 1.5 * scale
 				local textColor = tocolor(textSlot.r, textSlot.g, textSlot.b, alpha * textSlot.a)

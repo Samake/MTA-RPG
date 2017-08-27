@@ -17,7 +17,7 @@ function GUIStatBars_C:init()
 		self.xpBar = dxProgessBar:new(0.2, 0.865, 0.6, 0.02, nil, true)
 		self.xpBar:setPostGUI(true)
 		self.xpBar:setColor(90, 220, 90)
-		self.xpBar:setAlpha(180)
+		self.xpBar:setAlpha(Settings.guiAlpha)
 		self.xpBar:setScale(0.9)
 	end
 	
@@ -25,7 +25,7 @@ function GUIStatBars_C:init()
 		self.lifeBar = dxProgessBar:new(0.2, 0.84, 0.27, 0.02, nil, true)
 		self.lifeBar:setPostGUI(true)
 		self.lifeBar:setColor(220, 90, 90)
-		self.lifeBar:setAlpha(180)
+		self.lifeBar:setAlpha(Settings.guiAlpha)
 		self.lifeBar:setScale(0.9)
 	end
 	
@@ -33,14 +33,14 @@ function GUIStatBars_C:init()
 		self.manaBar = dxProgessBar:new(0.53, 0.84, 0.27, 0.02, nil, true)
 		self.manaBar:setPostGUI(true)
 		self.manaBar:setColor(90, 90, 220)
-		self.manaBar:setAlpha(180)
+		self.manaBar:setAlpha(Settings.guiAlpha)
 		self.manaBar:setScale(0.9)
 	end
 	
 	if (not self.levelText) then
 		self.levelText = dxText:new("", 0.47, 0.84, 0.06, 0.02, nil, true)
 		self.levelText:setPostGUI(true)
-		self.levelText:setAlpha(180)
+		self.levelText:setAlpha(Settings.guiAlpha)
 		self.levelText:setScale(1.2)
 	end
 end

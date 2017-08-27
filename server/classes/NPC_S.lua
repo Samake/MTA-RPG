@@ -263,7 +263,7 @@ function NPC_S:onPedWasted()
 		
 		if (self.attackerClass) then	
 			self.attackerClass:changeXP(self.xpReward)
-			Text3DManager_S:sendText(self.attackerClass.player, "+" .. self.xpReward .. " XP" , self.x, self.y, self.z + 0.5, 90, 220, 90)
+			Text3DManager_S:sendText(self.attackerClass.player, "+" .. self.xpReward .. " XP" , self.x, self.y, self.z + 0.5, 90, 220, 90, 1.5)
 		end
 	end
 end
