@@ -19,6 +19,7 @@ Settings.fov = 110
 Settings.rotateSpeed = 7.5
 
 Settings.deadBodyRemoveTime = 10000
+Settings.selfHealFactor = 1.0
 
 Settings.shadersEnabled = true
 Settings.shaderWorldDrawDistance = 500

@@ -28,9 +28,9 @@ function Player_S:constructor(playerSettings)
 	self.feetID = 1
 	
 	self.maxLife = 10000
-	self.currentLife = 2000
+	self.currentLife = 5500
 	self.maxMana = 100
-	self.currentMana = 25
+	self.currentMana = 100
 	
 	self.lifeRegeneration = 0
 	self.manaRegeneration = 0
@@ -125,14 +125,14 @@ function Player_S:updatePlayerStats()
 	local delay
 	
 	if (self.isSitting == true) then
-		delay = 500
+		delay = 400
 	else
-		delay = 1000
+		delay = 800
 	end
 	
 	if (self.currentTick > self.healTick + delay) then
-		self.lifeRegeneration = self.maxLife / 500
-		self.manaRegeneration = self.maxMana / 500
+		self.lifeRegeneration = (self.maxLife / 400) * Settings.selfHealFactor
+		self.manaRegeneration = (self.maxMana / 400) * Settings.selfHealFactor
 		
 		local lifeValue, manaValue
 		
@@ -308,6 +308,26 @@ function Player_S:changeLife(value)
 end
 
 
+function Player_S:setLife(value)
+	if (value) then
+		self.currentLife = value
+		
+		if (self.currentLife > self.maxLife) then
+			self.currentLife = self.maxLife
+		end
+		
+		if (self.currentLife < 0) then
+			self.currentLife = 0
+		end
+	end
+end
+
+
+function Player_S:getLife()
+	return self.currentLife
+end
+
+
 function Player_S:changeMana(value)
 	if (value) then
 		self.currentMana = self.currentMana + value
@@ -320,6 +340,26 @@ function Player_S:changeMana(value)
 			self.currentMana = 0
 		end
 	end
+end
+
+
+function Player_S:setMana(value)
+	if (value) then
+		self.currentMana =  value
+		
+		if (self.currentMana > self.maxMana) then
+			self.currentMana = self.maxMana
+		end
+		
+		if (self.currentMana < 0) then
+			self.currentMana = 0
+		end
+	end
+end
+
+
+function Player_S:getMana()
+	return self.currentMana
 end
 
 

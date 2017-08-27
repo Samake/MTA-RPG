@@ -39,23 +39,31 @@ function AttackPunch_S:doSlotAction(slot)
 		if (self.slot == slot) and (client == self.player) then
 
 			if (self.player) and (isElement(self.player))then
-				outputChatBox(self.player:getName() .. " attacks with " .. self.name .. " on slot " .. self.slot .. "!")
+				self.playerClass = PlayerManager_S:getSingleton():getPlayerClass(self.player)
 				
-				self.playerPos = self.player:getPosition()
-				self.playerRot = self.player:getRotation()
-			
-				if (self.playerPos) and (self.playerRot) then
-					self.player:setAnimation("fight_b", "fightb_1", -1, false, false, true, false, 250)
+				if (self.playerClass) then
+						if (self.costs < self.playerClass:getMana()) then
+						outputChatBox(self.player:getName() .. " used " .. self.name .. " at slot " .. self.slot .. "!")
+						
+						self.playerPos = self.player:getPosition()
+						self.playerRot = self.player:getRotation()
 					
-					local x, y, z = getAttachedPosition(self.playerPos.x, self.playerPos.y, self.playerPos.z, self.playerRot.x, self.playerRot.y, self.playerRot.z, 0.8, 0, 0.2)
-					
-					if (not self.actionCol) then
-						self.actionCol = createColSphere(x, y, z, self.actionRadius)
-					else
-						self.actionCol:setPosition(x, y, z)
+						if (self.playerPos) and (self.playerRot) then
+							self.player:setAnimation("fight_b", "fightb_1", -1, false, false, true, false, 250)
+							
+							local x, y, z = getAttachedPosition(self.playerPos.x, self.playerPos.y, self.playerPos.z, self.playerRot.x, self.playerRot.y, self.playerRot.z, 0.8, 0, 0.2)
+							
+							if (not self.actionCol) then
+								self.actionCol = createColSphere(x, y, z, self.actionRadius)
+							else
+								self.actionCol:setPosition(x, y, z)
+							end
+							
+							self.playerClass:changeMana(-self.costs)
+							
+							self.startTick = getTickCount()
+						end
 					end
-					
-					self.startTick = getTickCount()
 				end
 			end
 		end

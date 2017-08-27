@@ -50,8 +50,22 @@ end
 
 function PlayerManager_S:deletePlayer(player)
 	if (isElement(player)) then
-	
+		if (self.playerClasses[tostring(player)]) then
+			self.playerClasses[tostring(player)]:delete()
+			self.playerClasses[tostring(player)] = nil
+		end
 	end
+end
+
+
+function PlayerManager_S:getPlayerClass(player)
+	if (isElement(player)) then
+		if (self.playerClasses[tostring(player)]) then
+			return self.playerClasses[tostring(player)]
+		end
+	end
+	
+	return nil
 end
 
 

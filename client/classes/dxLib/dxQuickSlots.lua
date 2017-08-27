@@ -323,15 +323,17 @@ function dxQuickSlots:getSlotIcon(slot)
 end
 
 
-function dxQuickSlots:setSlotActive(slot, bool)
+function dxQuickSlots:setSlotActive(slot, bool, freeze)
 	if (slot) then
 		if (self.slots[tonumber(slot)]) then
 			self.slots[tonumber(slot)].isActive = bool
 			
 			if (bool == false) then
-				self.slots[tonumber(slot)].startTick = getTickCount()
-				
-				self.slots[tonumber(slot)].value = (self.slots[tonumber(slot)].startTick + self.slots[tonumber(slot)].delay) - self.currentTick
+				if (freeze == false) then
+					self.slots[tonumber(slot)].startTick = getTickCount()
+					
+					self.slots[tonumber(slot)].value = (self.slots[tonumber(slot)].startTick + self.slots[tonumber(slot)].delay) - self.currentTick
+				end
 			end
 		end
 	end

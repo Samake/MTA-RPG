@@ -66,6 +66,7 @@ end
 function GUIQuickSlots_C:update(deltaTime)
 	if (self.guiSlots) then
 		self.guiSlots:update()
+		self:updateSlotUsability()
 		
 		if (self.guiSlots:isCursorInside() == true) then
 			GUIManager_C:getSingleton():setCursorOnGUIElement(true)
@@ -102,10 +103,33 @@ function GUIQuickSlots_C:updateSlots()
 end
 
 
+function GUIQuickSlots_C:updateSlotUsability()
+	self.mana = Player_C:getSingleton():getCurrentMana()
+	
+	if (self.mana) then
+		if (self.playerSlots) then
+			for index, slot in pairs(self.playerSlots) do
+				if (slot) then
+					if (slot.costs > self.mana) then
+						if (self.guiSlots:isSlotActive(index) == true) then
+							self.guiSlots:setSlotActive(index, false, true)
+						end
+					else
+						if (self.guiSlots:isSlotActive(index) == false) then
+							self.guiSlots:setSlotActive(index, false)
+						end
+					end
+				end
+			end
+		end
+	end
+end
+
+
 function GUIQuickSlots_C:actionSlot1()
 	if (self.guiSlots:isSlotActive(1) == true) then
 		triggerServerEvent("DOSLOTACTION", root, 1)
-		self.guiSlots:setSlotActive(1, false)
+		self.guiSlots:setSlotActive(1, false, false)
 	end
 end
 
@@ -113,7 +137,7 @@ end
 function GUIQuickSlots_C:actionSlot2()
 	if (self.guiSlots:isSlotActive(2) == true) then
 		triggerServerEvent("DOSLOTACTION", root, 2)
-		self.guiSlots:setSlotActive(2, false)
+		self.guiSlots:setSlotActive(2, false, false)
 	end
 end
 
@@ -121,7 +145,7 @@ end
 function GUIQuickSlots_C:actionSlot3()
 	if (self.guiSlots:isSlotActive(3) == true) then
 		triggerServerEvent("DOSLOTACTION", root, 3)
-		self.guiSlots:setSlotActive(3, false)
+		self.guiSlots:setSlotActive(3, false, false)
 	end
 end
 
@@ -129,7 +153,7 @@ end
 function GUIQuickSlots_C:actionSlot4()
 	if (self.guiSlots:isSlotActive(4) == true) then
 		triggerServerEvent("DOSLOTACTION", root, 4)	
-		self.guiSlots:setSlotActive(4, false)
+		self.guiSlots:setSlotActive(4, false, false)
 	end
 end
 
@@ -137,7 +161,7 @@ end
 function GUIQuickSlots_C:actionSlot5()
 	if (self.guiSlots:isSlotActive(5) == true) then
 		triggerServerEvent("DOSLOTACTION", root, 5)	
-		self.guiSlots:setSlotActive(5, false)
+		self.guiSlots:setSlotActive(5, false, false)
 	end
 end
 
@@ -145,7 +169,7 @@ end
 function GUIQuickSlots_C:actionSlot6()
 	if (self.guiSlots:isSlotActive(6) == true) then
 		triggerServerEvent("DOSLOTACTION", root, 6)	
-		self.guiSlots:setSlotActive(6, false)
+		self.guiSlots:setSlotActive(6, false, false)
 	end
 end
 
@@ -153,7 +177,7 @@ end
 function GUIQuickSlots_C:actionSlot7()
 	if (self.guiSlots:isSlotActive(7) == true) then
 		triggerServerEvent("DOSLOTACTION", root, 7)
-		self.guiSlots:setSlotActive(7, false)
+		self.guiSlots:setSlotActive(7, false, false)
 	end
 end
 
@@ -161,7 +185,7 @@ end
 function GUIQuickSlots_C:actionSlot8()
 	if (self.guiSlots:isSlotActive(8) == true) then
 		triggerServerEvent("DOSLOTACTION", root, 8)
-		self.guiSlots:setSlotActive(8, false)
+		self.guiSlots:setSlotActive(8, false, false)
 	end
 end
 
@@ -169,7 +193,7 @@ end
 function GUIQuickSlots_C:actionSlot9()
 	if (self.guiSlots:isSlotActive(9) == true) then
 		triggerServerEvent("DOSLOTACTION", root, 9)
-		self.guiSlots:setSlotActive(9, false)
+		self.guiSlots:setSlotActive(9, false, false)
 	end
 end
 
@@ -177,7 +201,7 @@ end
 function GUIQuickSlots_C:actionSlot10()
 	if (self.guiSlots:isSlotActive(10) == true) then
 		triggerServerEvent("DOSLOTACTION", root, 10)
-		self.guiSlots:setSlotActive(10, false)
+		self.guiSlots:setSlotActive(10, false, false)
 	end
 end
 

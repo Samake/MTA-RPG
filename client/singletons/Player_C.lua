@@ -205,6 +205,7 @@ end
 function Player_C:clear()
 	unbindKey(Bindings["SPAWNTESTNPC"], "down", self.m_SpawnTestNPC)
 	unbindKey(Bindings["SIT"], "down", self.m_PlayerSit)
+	
 	removeEventHandler("SYNCPLAYERDATA", root, self.m_GetServerData)
 end
 
