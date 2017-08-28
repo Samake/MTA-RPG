@@ -38,6 +38,9 @@
 	<script src="server/manager/WeatherManager_S.lua" type="server"/>
 	<script src="server/manager/AttackManager_S.lua" type="server"/>
 	<script src="server/manager/Text3DManager_S.lua" type="server"/>
+	<script src="server/manager/EventManager_S.lua" type="server"/>
+	<script src="server/manager/RewardManager_S.lua" type="server"/>
+	<script src="server/manager/LootManager_S.lua" type="server"/>
 	
 	<script src="server/classes/Player_S.lua" type="server"/>
 	<script src="server/classes/NPC_S.lua" type="server"/>

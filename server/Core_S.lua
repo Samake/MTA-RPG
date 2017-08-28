@@ -35,6 +35,9 @@ function Core_S:initComponents()
 	WeatherManager_S:new()
 	AttackManager_S:new()
 	Text3DManager_S:new()
+	EventManager_S:new()
+	RewardManager_S:new()
+	LootManager_S:new()
 end
 
 
@@ -47,6 +50,8 @@ function Core_S:update()
 		NPCManager_S:getSingleton():update()
 		WeatherManager_S:getSingleton():update()
 		AttackManager_S:getSingleton():update()
+		EventManager_S:getSingleton():update()
+		LootManager_S:getSingleton():update()
 		
 		debug.sethook(_, h1, h2, h3) 
 	end
@@ -77,6 +82,9 @@ function Core_S:clear()
 	delete(WeatherManager_S:getSingleton())
 	delete(AttackManager_S:getSingleton())
 	delete(Text3DManager_S:getSingleton())
+	delete(EventManager_S:getSingleton())
+	delete(RewardManager_S:getSingleton())
+	delete(LootManager_S:getSingleton())
 end
 
 

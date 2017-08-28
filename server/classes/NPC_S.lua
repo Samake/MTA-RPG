@@ -261,9 +261,8 @@ function NPC_S:onPedWasted()
 		self.isAlive = false
 		self.deadCount = getTickCount()
 		
-		if (self.attackerClass) then	
-			self.attackerClass:changeXP(self.xpReward)
-			Text3DManager_S:sendText(self.attackerClass.player, "+" .. self.xpReward .. " XP" , self.x, self.y, self.z + 0.5, 90, 220, 90, 1.5)
+		if (self.attackerClass) then
+			RewardManager_S:giveXPReward(self.attackerClass, self.xpReward, self.x, self.y, self.z)
 		end
 	end
 end
