@@ -1,7 +1,7 @@
 Core_S = inherit(Singleton)
 
 function Core_S:constructor()
-	sendMessage("SERVER || ***** " .. Settings.resName .. " was started! " .. Settings.resVersion .. " *****")
+	sendMessage("SERVER || ***** " .. Settings.resName .. " v" .. Settings.resVersion .. " was started! *****")
 
 	if (Settings.showCoreDebugInfo == true) then
 		sendMessage("Core_S was loaded.")
@@ -95,7 +95,7 @@ function Core_S:destructor()
 		removeEventHandler("onDebugMessage", root, self.m_OnDebugMessage)
 	end
 	
-	sendMessage("SERVER || ***** " .. Settings.resName .. " was stopped! " .. Settings.resVersion .. " *****")
+	sendMessage("SERVER || ***** " .. Settings.resName .. " v" .. Settings.resVersion .. " was stopped! *****")
 	
 	if (Settings.showCoreDebugInfo == true) then
 		sendMessage("Core_S was deleted.")

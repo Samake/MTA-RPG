@@ -13,7 +13,11 @@ function EventManager_S:constructor()
 	self.currentTickTick = 0
 	
 	self.currentEvent = nil
-	self.eventDelay = math.random(360000, 2160000)
+	
+	self.minDelay = Settings.eventMinDelay
+	self.maxDelay = Settings.eventMaxDelay
+	
+	self.eventDelay = math.random(0, self.maxDelay)
 	
 	self:init()
 	
@@ -50,20 +54,16 @@ function EventManager_S:update()
 			self.currentEvent = self.events[randomEvent]
 		else
 			self.startTick = getTickCount()
-			self.eventDelay = math.random(360000, 2160000)
+			self.eventDelay = math.random(self.minDelay, self.maxDelay)
 		end
 	end
 end
 
 
 function EventManager_S:startEventByCommand(player, command, eventID, duration)
-	outputChatBox("1")
 	if (player) and (command) and (eventID) then
-		outputChatBox("2")
 		if (isObjectInACLGroup("user." .. player:getAccount():getName(), aclGetGroup("Admin"))) then
-			outputChatBox("3")
 			if (self.events[tonumber(eventID)]) then
-				outputChatBox("4")
 				self.currentEvent = self.events[tonumber(eventID)]
 				self:startEvent(self.currentEvent, tonumber(duration))
 			end
@@ -96,9 +96,9 @@ function EventManager_S:startEvent(eventName, duration)
 		self.startTick = getTickCount()
 		
 		if (duration) then
-			self.eventDelay = math.random(360000, 2160000)
+			self.eventDelay = math.random(self.minDelay, self.maxDelay)
 		else
-			self.eventDelay = 360000 * duration
+			self.eventDelay = self.minDelay * duration
 		end
 	end
 end

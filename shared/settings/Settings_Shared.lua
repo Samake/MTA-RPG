@@ -1,18 +1,24 @@
 Settings = {}
 
-Settings.resName = "MTA RPG"
-Settings.resVersion = "0.03c"
+-- [[ *** Resource Settings *** ]]
+Settings.resName = "MTA RPG Gamemode"
+Settings.resVersion = "0.0.4b"
+
+-- [[ *** Server Settings *** ]]
 Settings.fpsLimit = 60
 Settings.serverUpdateInterval = 50
 
-Settings.debugEnabled = true
+-- [[ *** Debug Settings *** ]]
+Settings.debugEnabled = false
 Settings.advancedDebugMessages = false
-Settings.showCoreDebugInfo = true
-Settings.showManagerDebugInfo = true
+Settings.showCoreDebugInfo = false
+Settings.showManagerDebugInfo = false
 Settings.showClassDebugInfo = false
 
+-- [[ *** GUI Settings *** ]]
 Settings.guiAlpha = 180
 
+-- [[ *** Camera Settings *** ]]
 Settings.minZoom = 1.5
 Settings.maxZoom = 25
 Settings.defaultZoom = 6
@@ -20,10 +26,14 @@ Settings.zoomSpeed = 0.5
 Settings.fov = 110
 Settings.rotateSpeed = 7.5
 
+-- [[ *** World Settings *** ]]
 Settings.deadBodyRemoveTime = 10000
+Settings.eventMinDelay = 360000
+Settings.eventMaxDelay = 2160000
+
+-- [[ *** System Settings *** ]]
 Settings.selfHealFactor = 1.0
 
+-- [[ *** Shader Settings *** ]]
 Settings.shadersEnabled = true
 Settings.shaderWorldDrawDistance = 500
-
-Settings.guiAlpha = 190
