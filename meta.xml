@@ -60,6 +60,7 @@
 	
 	<script src="client/singletons/ClickSystem_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/MousePointer_C.lua" type="client" cache="false"/>
+	<script src="client/singletons/Marker3D_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/Player_C.lua" type="client" cache="false"/>
 	
 	<script src="client/manager/XMLManager_C.lua" type="client" cache="false"/>
@@ -99,6 +100,7 @@
 	<file src="res/shader/shader_water.hlsl" type="client" cache="false"/>
 	<file src="res/shader/shader_null.hlsl" type="client" cache="false"/>
 	<file src="res/shader/shader_texReplace.hlsl" type="client" cache="false"/>
+	<file src="res/shader/shader_projected_texture.hlsl" type="client" cache="false"/>
 	
 	<!-- textures -->
 	<file src="res/textures/skins/head/head_1.png" type="client" cache="false"/>
@@ -127,6 +129,7 @@
 	<file src="res/textures/water/water_caustic_16.png" type="client" cache="false"/>
 
 	<file src="res/textures/gui/crosshair.png" type="client" cache="false"/>
+	<file src="res/textures/gui/marker3D.png" type="client" cache="false"/>
 	
 	<file src="res/textures/effects/rain_pp.png" type="client" cache="false"/>
 	<file src="res/textures/effects/paperNormalMap.png" type="client" cache="false"/>

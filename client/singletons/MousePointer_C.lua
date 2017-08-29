@@ -14,7 +14,7 @@ function MousePointer_C:constructor()
 	self.rotation = 0
 	self.postGUI = true
 	
-	self.alpha = 180
+	self.alpha = Settings.guiAlpha
 	
 	self.defaultColor = tocolor(220, 220, 220, self.alpha)
 	self.friendColor = tocolor(15, 220, 15, self.alpha)
@@ -26,6 +26,7 @@ function MousePointer_C:constructor()
 	self.camZ = 0
 	
 	self.hitElement = nil
+	self.texture = nil
 	
 	self:init()
 	
@@ -37,6 +38,7 @@ end
 
 function MousePointer_C:init()
 	setCursorAlpha(0)
+	showCursor(true, true)
 end
 
 
@@ -47,12 +49,12 @@ function MousePointer_C:update(deltaTime)
 			
 			self:updatePositions()
 			self:updateHitDetails()
-			self:updateColors()
+			self:updateTexturesAndColors()
 			
-			if (Textures["GUI"]["Cursor"][1]) then
-				if (Textures["GUI"]["Cursor"][1].texture) then
-					dxDrawImage(self.x - self.size / 2, self.y - self.size / 2, self.size, self.size, Textures["GUI"]["Cursor"][1].texture, self.rotation, 0, 0, self.color, self.postGUI)
-				end
+			if (self.texture) then
+				dxDrawImage(self.x - self.size / 2, self.y - self.size / 2, self.size, self.size, self.texture, self.rotation, 0, 0, self.color, self.postGUI)
+			else
+				setCursorAlpha(self.alpha)
 			end
 		else
 			setCursorAlpha(self.alpha)
@@ -87,21 +89,28 @@ function MousePointer_C:updateHitDetails()
 end
 
 
-function MousePointer_C:updateColors()
-	if (self.hitElement) and (isElement(self.hitElement)) then
-		if (self.hitElement:getType() == "ped") then
-			self.color = self.enemyColor
-		elseif (self.hitElement:getType() == "player") then
-			self.color = self.friendColor
+function MousePointer_C:updateTexturesAndColors()
+		if (self.hitElement) and (isElement(self.hitElement)) then
+			if (self.hitElement:getType() == "ped") then
+				self.color = self.enemyColor
+				self.texture = Textures["GUI"]["Cursor"][1].texture
+			elseif (self.hitElement:getType() == "player") then
+				self.color = self.friendColor
+				self.texture = Textures["GUI"]["Cursor"][1].texture
+			else
+				self.texture = nil
+				self.color = self.defaultColor
+			end
+		else
+			self.texture = nil
+			self.color = self.defaultColor
 		end
-	else
-		self.color = self.defaultColor
-	end
 end
 
 
 function MousePointer_C:clear()
 	setCursorAlpha(255)
+	showCursor(false, false)
 end
 
 

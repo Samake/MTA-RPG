@@ -64,8 +64,14 @@ function EventManager_S:startEventByCommand(player, command, eventID, duration)
 	if (player) and (command) and (eventID) then
 		if (isObjectInACLGroup("user." .. player:getAccount():getName(), aclGetGroup("Admin"))) then
 			if (self.events[tonumber(eventID)]) then
-				self.currentEvent = self.events[tonumber(eventID)]
-				self:startEvent(self.currentEvent, tonumber(duration))
+				if (not self.currentEvent) then
+					self.currentEvent = self.events[tonumber(eventID)]
+					self:startEvent(self.currentEvent, tonumber(duration))
+				else
+					self:stopEvent(self.currentEvent)
+					self.currentEvent = self.events[tonumber(eventID)]
+					self:startEvent(self.currentEvent, tonumber(duration))
+				end
 			end
 		end
 	end

@@ -38,6 +38,7 @@ Textures["World"]["Water"][16] = {texture = nil, path = "res/textures/water/wate
 Textures["GUI"] = {}
 Textures["GUI"]["Cursor"] = {}
 Textures["GUI"]["Cursor"][1] = {texture = nil, path = "res/textures/gui/crosshair.png"}
+Textures["GUI"]["Cursor"][2] = {texture = nil, path = "res/textures/gui/marker3D.png"}
 
 Textures["Effects"] = {}
 Textures["Effects"]["Rain"] = {}
