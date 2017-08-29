@@ -17,8 +17,9 @@ function MousePointer_C:constructor()
 	self.alpha = Settings.guiAlpha
 	
 	self.defaultColor = tocolor(220, 220, 220, self.alpha)
-	self.friendColor = tocolor(15, 220, 15, self.alpha)
-	self.enemyColor = tocolor(220, 15, 15, self.alpha)
+	self.friendColor = tocolor(90, 220, 90, self.alpha)
+	self.enemyColor = tocolor(220, 90, 90, self.alpha)
+	self.actionColor = tocolor(220, 220, 90, self.alpha)
 	self.color = self.defaultColor
 	
 	self.camX = 0
@@ -97,6 +98,9 @@ function MousePointer_C:updateTexturesAndColors()
 			elseif (self.hitElement:getType() == "player") then
 				self.color = self.friendColor
 				self.texture = Textures["GUI"]["Cursor"][1].texture
+			elseif (self.hitElement:getType() == "object") then
+				self.color = self.actionColor
+				self.texture = Textures["GUI"]["Cursor"][3].texture
 			else
 				self.texture = nil
 				self.color = self.defaultColor

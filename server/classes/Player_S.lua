@@ -40,6 +40,8 @@ function Player_S:constructor(playerSettings)
 	self.currentXP = 0
 	self.maxXP = 1000
 	
+	self.money = 0
+	
 	self.critChance = 15
 	self.levelCaps = LevelCaps[1]
 	self.levelModifier = self.levelCaps.modifier
@@ -314,6 +316,11 @@ function Player_S:jobStopSit()
 end
 
 
+function Player_S:getPlayer()
+	return self.player
+end
+
+
 function Player_S:changeLife(value)
 	if (value) then
 		self.currentLife = self.currentLife + value
@@ -427,6 +434,25 @@ function Player_S:getXP()
 end
 
 
+function Player_S:changeMoney(value)
+	if (value) then
+		self.money = self.money + value
+	end
+end
+
+
+function Player_S:setMoney(value)
+	if (value) then
+		self.money = value
+	end
+end
+
+
+function Player_S:getMoney()
+	return self.money
+end
+
+
 function Player_S:setCritChance(value)
 	if (value) then
 		self.critChance =  value
@@ -446,6 +472,10 @@ function Player_S:getLevelModifier()
 	return self.levelModifier
 end
 
+
+function Player_S:getLevel()
+	return self.level
+end
 
 
 function Player_S:getCritChance()

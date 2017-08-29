@@ -48,6 +48,7 @@ function NPC_S:constructor(npcSettings)
 	self.attacker = nil
 	
 	self.xpReward = 100
+	self.moneyReward = 1
 
 	self:init()
 	self:triggerShaderSettings()
@@ -263,6 +264,7 @@ function NPC_S:onPedWasted()
 		
 		if (self.attackerClass) then
 			RewardManager_S:giveXPReward(self.attackerClass, self.xpReward, self.x, self.y, self.z)
+			RewardManager_S:giveLootReward(self.attackerClass, self.moneyReward, self.level, self.x, self.y, self.z)
 		end
 	end
 end

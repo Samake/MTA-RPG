@@ -15,9 +15,9 @@ function Marker3D_C:constructor()
 	self.ColorG = 255
 	self.colorB = 255
 	
-	self.alpha = Settings.guiAlpha
-	
-	self.scale = 2
+	self.alpha = 0
+	self.scale = 0
+	self.maxScale = 2
 
 	self:init()
 	
@@ -45,17 +45,36 @@ end
 
 
 function Marker3D_C:update(deltaTime)
-	if (self.shader) and (self.colorR) and (self.colorG) and (self.colorB) and (self.alpha) and (Textures["GUI"]["Cursor"][2].texture) and (self.scale) then
-		
-		self.rz = (self.rz + 0.05)%360
-		
-		self.shader:setValue("textureIn", Textures["GUI"]["Cursor"][2].texture)
-		self.shader:setValue("colorIn", {self.colorR / 255, self.colorG / 255, self.colorB / 255})
-		self.shader:setValue("alpha", self.alpha / 255)
-		self.shader:setValue("scale", self.scale)
-		self.shader:setValue("texturePosition", {self.x, self.y, self.z})
-		self.shader:setValue("textureRotation", {self.rx, self.ry, self.rz})
+	if (self.alpha > 0) then
+		if (self.shader) and (self.colorR) and (self.colorG) and (self.colorB) and (self.alpha) and (Textures["GUI"]["Cursor"][2].texture) and (self.scale) then
+			
+			self.rz = (self.rz + 0.05)%360
+			
+			self.scale = self.scale + 0.1
+			
+			if (self.scale >= self.maxScale) then
+				self.scale = self.maxScale
+			end
+			
+			self.alpha = self.alpha - 2.5
+			
+			if (self.alpha <= 0) then
+				self.alpha = 0
+			end
+			
+			self.shader:setValue("textureIn", Textures["GUI"]["Cursor"][2].texture)
+			self.shader:setValue("colorIn", {self.colorR / 255, self.colorG / 255, self.colorB / 255})
+			self.shader:setValue("alpha", self.alpha / 255)
+			self.shader:setValue("scale", self.scale)
+			self.shader:setValue("texturePosition", {self.x, self.y, self.z})
+			self.shader:setValue("textureRotation", {self.rx, self.ry, self.rz})
+		end
 	end
+end
+
+function Marker3D_C:reset()
+	self.alpha = Settings.guiAlpha
+	self.scale = 0
 end
 
 
@@ -64,6 +83,8 @@ function Marker3D_C:setPosition(x, y, z)
 		self.x = x
 		self.y = y
 		self.z = z
+		
+		self:reset()
 	end
 end
 

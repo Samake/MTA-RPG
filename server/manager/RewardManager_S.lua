@@ -29,6 +29,19 @@ function RewardManager_S:giveXPReward(attackerClass, xp, x, y, z)
 end
 
 
+function RewardManager_S:giveLootReward(attackerClass, money, level, x, y, z)
+	if (attackerClass) and (money) and (level) and (x) and (y) and (z) then
+		local moneyReward = money * level * attackerClass:getLevel()
+		
+		if (EventManager_S:getSingleton():isDoubleMoneyEvent() == true) then
+			moneyReward = moneyReward * 2
+		end
+		
+		LootManager_S:getSingleton():addLoot(attackerClass.player, moneyReward, x, y, z)
+	end
+end
+
+
 function RewardManager_S:clear()
 
 end

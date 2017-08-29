@@ -2,7 +2,7 @@ Settings = {}
 
 -- [[ *** Resource Settings *** ]]
 Settings.resName = "MTA RPG Gamemode"
-Settings.resVersion = "0.0.4b"
+Settings.resVersion = "0.0.5"
 
 -- [[ *** Server Settings *** ]]
 Settings.fpsLimit = 60
@@ -33,6 +33,8 @@ Settings.eventMaxDelay = 2160000
 
 -- [[ *** System Settings *** ]]
 Settings.selfHealFactor = 1.0
+Settings.lootDelay = 300000
+Settings.lootLockDelay = 150000
 
 -- [[ *** Shader Settings *** ]]
 Settings.shadersEnabled = true

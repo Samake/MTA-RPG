@@ -67,7 +67,7 @@ ShaderBindings["darkgrey2"].textures = {"tar_1line256hv", "roadnew4_256", "dt_ro
 
 ShaderBindings["lightgreen"] = {}
 ShaderBindings["lightgreen"].color = {r = 15, g = 220, b = 15}
-ShaderBindings["lightgreen"].textures = {"cj_sprunk_dirty", "greenbot2_lae2"}
+ShaderBindings["lightgreen"].textures = {"cj_sprunk_dirty", "greenbot2_lae2", "money_128"}
 
 ShaderBindings["green"] = {}
 ShaderBindings["green"].color = {r = 0, g = 128, b = 0}
@@ -108,12 +108,12 @@ ShaderBindings["lightred"].textures = {"sw_container2", "sjmlahus23", "redresdoo
 ShaderBindings["red"] = {}
 ShaderBindings["red"].color = {r = 255, g = 0, b = 0}
 ShaderBindings["red"].textures = {	"redmetal", "sw_trailerred", "sw_awningsx4", "firehydrant_yell", "santaco6za", "santaco6", "genroof01_128", "downtsign1_la", "las69str2", "ws_goldengate5", 
-									"des_tepesign", "bloodpool_64"}
+									"des_tepesign"}
 
 ShaderBindings["darkred"] = {}
 ShaderBindings["darkred"].color = {r = 100, g = 25, b = 25}
 ShaderBindings["darkred"].textures = {	"des_radiomast", "des_bytower1", "sw_corrug", "genroof02_128", "sw_wallbrick_07", "comptroof4", "shingles6", "brick", "brickred2", "ahoodfence2", "sanpedton1",
-										"examroof1_lae", "rustyboltpanel", "laspowrec2", "lasjmliq1", "sjmlahus29", "laskyscraper5", "lastripx2", "lastripx2a", "brickred", "des_brick1"}
+										"examroof1_lae", "rustyboltpanel", "laspowrec2", "lasjmliq1", "sjmlahus29", "laskyscraper5", "lastripx2", "lastripx2a", "brickred", "des_brick1", "bloodpool_64"}
 
 ShaderBindings["lightblue"] = {}
 ShaderBindings["lightblue"].color = {r = 155, g = 155, b = 220}

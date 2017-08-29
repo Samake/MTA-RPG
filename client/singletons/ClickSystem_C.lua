@@ -53,6 +53,12 @@ function ClickSystem_C:onClientClick(button, state, absoluteX, absoluteY, worldX
 					Marker3D_C:getSingleton():setPosition(self.worldX, self.worldY, self.worldZ)
 				end
 			end
+		elseif (button == Bindings["ACTION"]) and (state == "down") then
+			if (clickedElement) then
+				if (clickedElement:getData("ISLOOT") == "true") then
+					triggerServerEvent("PICKUPLOOT", root, clickedElement)
+				end
+			end
 		end
 	end
 end
