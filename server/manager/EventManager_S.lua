@@ -66,11 +66,13 @@ function EventManager_S:startEventByCommand(player, command, eventID, duration)
 			if (self.events[tonumber(eventID)]) then
 				if (not self.currentEvent) then
 					self.currentEvent = self.events[tonumber(eventID)]
-					self:startEvent(self.currentEvent, tonumber(duration))
+					self:startEvent(self.currentEvent, tonumber(duration), 1)
+					NotificationManager_S:getSingleton():sendAllNotification("#44EE44Event #EEEEEE" .. self.currentEvent .. "#44EE44 was started by #EEEEEE" .. removeHEXColorCode(player:getName()) .. "#44EE44!")
 				else
 					self:stopEvent(self.currentEvent)
 					self.currentEvent = self.events[tonumber(eventID)]
-					self:startEvent(self.currentEvent, tonumber(duration))
+					self:startEvent(self.currentEvent, tonumber(duration), 1)
+					NotificationManager_S:getSingleton():sendAllNotification("#44EE44Event #EEEEEE" .. self.currentEvent .. "#44EE44 was started by #EEEEEE" .. removeHEXColorCode(player:getName()) .. "#44EE44!")
 				end
 			end
 		end
@@ -82,21 +84,27 @@ function EventManager_S:stopEventByCommand(player, command, eventID)
 	if (player) and (command) and (tonumber(eventID)) then
 		if (isObjectInACLGroup("user." .. player:getAccount():getName(), aclGetGroup("Admin"))) then
 			if (self.events[tonumber(eventID)]) then
-				self:stopEvent(self.currentEvent)
+				self:stopEvent(self.currentEvent, 1)
+				NotificationManager_S:getSingleton():sendAllNotification("#EE4444Event #EEEEEE" .. self.currentEvent .. "#EE4444 was stopped by #EEEEEE" .. removeHEXColorCode(player:getName()) .. "#EE4444!")
 			end
 		end
 	end
 end
 
 
-function EventManager_S:startEvent(eventName, duration)
+function EventManager_S:startEvent(eventName, duration, flag)
 	if (eventName) then
 		if (eventName == "DoubleXP") then
 			self.doubleXPEvent = true
-			sendMessage("SERVER || Double XP event was started!")
+			
+			if (not flag) then
+				NotificationManager_S:getSingleton():sendAllNotification("#44EE44Event #EEEEEE" .. eventName .. "#44EE44 was started!")
+			end
 		elseif (eventName == "DoubleMoney") then
 			self.doubleMoneyEvent = true
-			sendMessage("SERVER || Double Money event was started!")
+			if (not flag) then
+				NotificationManager_S:getSingleton():sendAllNotification("#44EE44Event #EEEEEE" .. eventName .. "#44EE44 event was started!")
+			end
 		end
 		
 		self.startTick = getTickCount()
@@ -115,12 +123,12 @@ function EventManager_S:stopEvent(eventName)
 		if (eventName == "DoubleXP") then
 			if (self.doubleXPEvent == true) then
 				self.doubleXPEvent = false
-				sendMessage("SERVER || Double XP event was stopped!")
+				NotificationManager_S:getSingleton():sendAllNotification("#EE4444Event #EEEEEE" .. eventName .. "#EE4444 was stopped!")
 			end
 		elseif (eventName == "DoubleMoney") then
 			if (self.doubleMoneyEvent == true) then
 				self.doubleMoneyEvent = false
-				sendMessage("SERVER || Double Money event was stopped!")
+				NotificationManager_S:getSingleton():sendAllNotification("#EE4444Event #EEEEEE" .. eventName .. "#EE4444 was stopped!")
 			end
 		end
 		

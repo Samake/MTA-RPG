@@ -41,6 +41,7 @@
 	<script src="server/manager/EventManager_S.lua" type="server"/>
 	<script src="server/manager/RewardManager_S.lua" type="server"/>
 	<script src="server/manager/LootManager_S.lua" type="server"/>
+	<script src="server/manager/NotificationManager_S.lua" type="server"/>
 	
 	<script src="server/classes/Player_S.lua" type="server"/>
 	<script src="server/classes/NPC_S.lua" type="server"/>
@@ -71,6 +72,7 @@
 	<script src="client/manager/GUIManager_C.lua" type="client" cache="false"/>
 	<script src="client/manager/WeatherManager_C.lua" type="client" cache="false"/>
 	<script src="client/manager/RainManager_C.lua" type="client" cache="false"/>
+	<script src="client/manager/NotificationManager_C.lua" type="client" cache="false"/>
 
 	<script src="client/classes/dxLib/dxWindow.lua" type="client" cache="false"/>
 	<script src="client/classes/dxLib/dxSlider.lua" type="client" cache="false"/>
@@ -92,6 +94,7 @@
 	<script src="client/classes/GUIStatBars_C.lua" type="client" cache="false"/>
 	<script src="client/classes/NameTags_C.lua" type="client" cache="false"/>
 	<script src="client/classes/WorldText3D_C.lua" type="client" cache="false"/>
+	<script src="client/classes/Notification_C.lua" type="client" cache="false"/>
 	
 	<!-- ################################ Resources ################################ -->
 	

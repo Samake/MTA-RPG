@@ -37,6 +37,7 @@ function Core_C:initComponents()
 	Marker3D_C:new()
 	Player_C:new()
 	WeatherManager_C:new()
+	NotificationManager_C:new()
 end
 
 
@@ -60,6 +61,7 @@ function Core_C:update(deltaTime)
 	Marker3D_C:getSingleton():update(self.delta)
 	Player_C:getSingleton():update(self.delta)
 	WeatherManager_C:getSingleton():update(self.delta)
+	NotificationManager_C:getSingleton():update(self.delta)
 end
 
 
@@ -81,6 +83,7 @@ function Core_C:clear()
 	delete(Player_C:getSingleton())
 	delete(XMLManager_C:getSingleton())
 	delete(WeatherManager_C:getSingleton())
+	delete(NotificationManager_C:getSingleton())
 end
 
 

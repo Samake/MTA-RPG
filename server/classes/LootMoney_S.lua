@@ -75,10 +75,8 @@ function LootMoney_S:pickup(element)
 				if (self.owner == client) then
 					if (self.playerClass) then
 						self.playerClass:changeMoney(self.money)
-						
-						-- send notification later
-						Text3DManager_S:sendText(self.owner, "+" .. self.money .. " $" , self.x, self.y, self.z + 0.5, 220, 220, 90, 1.5)
-						
+
+						NotificationManager_S:getSingleton():sendPlayerNotification(self.owner, "#EEEEEEYou got #EEDD44" .. self.money .. " $")
 						LootManager_S:getSingleton():deleteLoot(self.id)
 					end
 				end
@@ -88,10 +86,8 @@ function LootMoney_S:pickup(element)
 				
 				if (self.playerClass) then
 					self.playerClass:changeMoney(self.money)
-					
-					-- send notification later
-					Text3DManager_S:sendText(self.owner, "+" .. self.money .. " $" , self.x, self.y, self.z + 0.5, 220, 220, 90, 1.5)
-					
+
+					NotificationManager_S:getSingleton():sendPlayerNotification(self.owner, "#EEEEEEYou got #EEDD44" .. self.money .. " $")
 					LootManager_S:getSingleton():deleteLoot(self.id)
 				end
 			end

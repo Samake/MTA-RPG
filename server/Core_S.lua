@@ -38,6 +38,7 @@ function Core_S:initComponents()
 	EventManager_S:new()
 	RewardManager_S:new()
 	LootManager_S:new()
+	NotificationManager_S:new()
 end
 
 
@@ -85,6 +86,7 @@ function Core_S:clear()
 	delete(EventManager_S:getSingleton())
 	delete(RewardManager_S:getSingleton())
 	delete(LootManager_S:getSingleton())
+	delete(NotificationManager_S:getSingleton())
 end
 
 
