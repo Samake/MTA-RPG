@@ -9,7 +9,7 @@ function MousePointer_C:constructor()
 	self.worldX = 0
 	self.worldY = 0
 	self.worldZ = 0
-	self.size = self.screenHeight * 0.035
+	self.size = self.screenHeight * 0.04
 	
 	self.rotation = 0
 	self.postGUI = true
@@ -25,6 +25,8 @@ function MousePointer_C:constructor()
 	self.camX = 0
 	self.camY = 0
 	self.camZ = 0
+	
+	self.shadowOffset = 1
 	
 	self.hitElement = nil
 	self.texture = nil
@@ -53,6 +55,7 @@ function MousePointer_C:update(deltaTime)
 			self:updateTexturesAndColors()
 			
 			if (self.texture) then
+				dxDrawImage((self.x - self.size / 2) + self.shadowOffset, (self.y - self.size / 2) + self.shadowOffset, self.size, self.size, self.texture, self.rotation, 0, 0, tocolor(0, 0, 0, self.alpha), self.postGUI)
 				dxDrawImage(self.x - self.size / 2, self.y - self.size / 2, self.size, self.size, self.texture, self.rotation, 0, 0, self.color, self.postGUI)
 			else
 				setCursorAlpha(self.alpha)

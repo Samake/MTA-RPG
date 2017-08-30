@@ -40,6 +40,12 @@ function Marker3D_C:init()
 				self.shader:removeFromWorldTexture(texture)
 			end
 		end
+		
+		for index, texture in pairs(ShaderBindings["null"]) do
+			if (texture) then
+				self.shader:removeFromWorldTexture(texture)
+			end
+		end
 	end
 end
 

@@ -3,7 +3,7 @@ ShaderBindings = {}
 ShaderBindings["null"] = {	"txgrass*", "crackedgroundb", "sw_skids_a", "roucghstonebrtb", "ganggraf04_la", "sanpedpawn2", "black256", "comptsign7_lae", "ganggraf01_la",
 							"ruffroadlas", "ganggraf03_la"}
 							
-ShaderBindings["excludes"] = {"coronastar*", "custom_roadsign_text", "lamp_shad_64", "mp_torenoshada", "shad_car", "shad_bike"}
+ShaderBindings["excludes"] = {"coronastar*", "custom_roadsign_text", "lamp_shad_64", "mp_torenoshada", "shad_car", "shad_bike", "shad_ped", "shad_exp"}
 
 ShaderBindings["white"] = {}
 ShaderBindings["white"].color = {r = 255, g = 255, b = 255}
