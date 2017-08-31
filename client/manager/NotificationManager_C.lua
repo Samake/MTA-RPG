@@ -76,6 +76,8 @@ function NotificationManager_C:addNotification(text)
 		if (not self.notificationClasses[notificationSettings.id]) then
 			self.notificationClasses[notificationSettings.id] = Notification_C:new(notificationSettings)
 		end
+		
+		playSoundFrontEnd(41)
 	end
 end
 

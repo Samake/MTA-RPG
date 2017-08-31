@@ -11,6 +11,9 @@ function ClickSystem_C:constructor()
 	self.worldY = 0
 	self.worldZ = 0
 	
+	self.isLooting = false
+	self.isAdditionalControl = false
+	
 	self:init()
 	
 	if (Settings.showManagerDebugInfo == true) then
@@ -28,6 +31,13 @@ end
 function ClickSystem_C:update(deltaTime)
 	if (isCursorShowing()) then
 		self.x, self.y = getCursorPosition()
+		
+		if (getKeyState(Bindings["ADDITIONAL"]) == true) then
+			self.isAdditionalControl = true
+		else
+			self.isAdditionalControl = false
+			self.isLooting = false
+		end
 	end
 end
 
@@ -54,9 +64,16 @@ function ClickSystem_C:onClientClick(button, state, absoluteX, absoluteY, worldX
 				end
 			end
 		elseif (button == Bindings["ACTION"]) and (state == "down") then
-			if (clickedElement) then
-				if (clickedElement:getData("ISLOOT") == "true") then
-					triggerServerEvent("PICKUPLOOT", root, clickedElement)
+			if (self.isAdditionalControl == true) then
+				if (self.isLooting == false) then
+					triggerServerEvent("GETALLLOOTFORPLAYER", root)
+					self.isLooting = true
+				end
+			else
+				if (clickedElement) then
+					if (clickedElement:getData("ISLOOT") == "true") then
+						triggerServerEvent("PICKUPLOOT", root, clickedElement)
+					end
 				end
 			end
 		end

@@ -119,6 +119,16 @@ function LootMoney_S:deleteLootObject()
 end
 
 
+function LootMoney_S:getObject()
+	return self.pickUp
+end
+
+
+function LootMoney_S:getPosition()
+	return {x = self.x, y = self.y, z = self.z}
+end
+
+
 function LootMoney_S:clear()
 	removeEventHandler("PICKUPLOOT", root, self.m_Pickup)
 	

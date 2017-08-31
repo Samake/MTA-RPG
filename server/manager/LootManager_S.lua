@@ -4,6 +4,8 @@ function LootManager_S:constructor()
 
 	self.lootClasses = {}
 	
+	self.maxLootDistance = Settings.maxLootDistance
+	
 	self:init()
 	
 	if (Settings.showManagerDebugInfo == true) then
@@ -13,7 +15,10 @@ end
 
 
 function LootManager_S:init()
-
+	self.m_GetAllLootForPlayer = bind(self.getAllLootForPlayer, self)
+	addEvent("GETALLLOOTFORPLAYER", true)
+	addEventHandler("GETALLLOOTFORPLAYER", root, self.m_GetAllLootForPlayer)
+	
 end
 
 
@@ -30,6 +35,25 @@ function LootManager_S:addLoot(playerClass, money, x, y, z)
 		
 		if (not self.lootClasses[lootSettings.id]) then
 			--create normal loot here then
+		end
+	end
+end
+
+
+function LootManager_S:getAllLootForPlayer()
+	if (client) and (isElement(client)) then
+		for index, lootClass in pairs(self.lootClasses) do
+			if (lootClass) then
+				local lootPos = lootClass:getPosition()
+				local playerPos = client:getPosition()
+				
+				if (lootPos) and (playerPos) then
+
+					if (getDistanceBetweenPoints2D(lootPos.x, lootPos.y, playerPos.x, playerPos.y) <= self.maxLootDistance) then
+						lootClass:pickup(lootClass:getObject())
+					end
+				end
+			end
 		end
 	end
 end
@@ -85,6 +109,8 @@ end
 
 
 function LootManager_S:clear()
+	removeEventHandler("GETALLLOOTFORPLAYER", root, self.m_GetAllLootForPlayer)
+	
 	for index, lootClass in pairs(self.lootClasses) do
 		if (lootClass) then
 			lootClass:delete()

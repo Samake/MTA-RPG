@@ -30,6 +30,7 @@ Settings.rotateSpeed = 7.5
 Settings.deadBodyRemoveTime = 10000
 Settings.eventMinDelay = 360000
 Settings.eventMaxDelay = 2160000
+Settings.maxLootDistance = 15
 
 -- [[ *** System Settings *** ]]
 Settings.selfHealFactor = 1.0

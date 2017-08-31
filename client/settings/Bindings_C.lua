@@ -6,6 +6,7 @@ Bindings["CAMERASCROLLIN"] = "mouse_wheel_up"
 Bindings["CAMERASCROLLOUT"] = "mouse_wheel_down"
 Bindings["CAMERAROTATE"] = "mouse1"
 
+Bindings["ADDITIONAL"] = "lshift"
 Bindings["ACTION"] = "left"
 Bindings["MOVETO"] = "right"
 Bindings["SIT"] = "X"

@@ -46,8 +46,6 @@ function Notification_C:init()
 	if (not self.animations) then
 		self.animations = GUIAnimations_C:new(350, "InBack", false)
 	end
-	
-	playSoundFrontEnd(41)
 end
 
 
