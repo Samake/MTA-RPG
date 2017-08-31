@@ -38,6 +38,7 @@ function Core_C:initComponents()
 	Player_C:new()
 	WeatherManager_C:new()
 	NotificationManager_C:new()
+	SoundManager_C:new()
 end
 
 
@@ -74,7 +75,6 @@ function Core_C:clear()
 	setPedTargetingMarkerEnabled(true)
 	
 	delete(ClickSystem_C:getSingleton())
-	delete(Player_C:getSingleton())
 	delete(CameraManager_C:getSingleton())
 	delete(ShaderManager_C:getSingleton())
 	delete(GUIManager_C:getSingleton())
@@ -84,6 +84,7 @@ function Core_C:clear()
 	delete(XMLManager_C:getSingleton())
 	delete(WeatherManager_C:getSingleton())
 	delete(NotificationManager_C:getSingleton())
+	delete(SoundManager_C:getSingleton())
 end
 
 

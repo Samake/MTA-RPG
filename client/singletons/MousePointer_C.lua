@@ -10,6 +10,7 @@ function MousePointer_C:constructor()
 	self.worldY = 0
 	self.worldZ = 0
 	self.size = self.screenHeight * 0.04
+	self.currentSize = 0
 	
 	self.rotation = 0
 	self.postGUI = true
@@ -55,8 +56,8 @@ function MousePointer_C:update(deltaTime)
 			self:updateTexturesAndColors()
 			
 			if (self.texture) then
-				dxDrawImage((self.x - self.size / 2) + self.shadowOffset, (self.y - self.size / 2) + self.shadowOffset, self.size, self.size, self.texture, self.rotation, 0, 0, tocolor(0, 0, 0, self.alpha), self.postGUI)
-				dxDrawImage(self.x - self.size / 2, self.y - self.size / 2, self.size, self.size, self.texture, self.rotation, 0, 0, self.color, self.postGUI)
+				dxDrawImage((self.x - self.currentSize / 2) + self.shadowOffset, (self.y - self.currentSize / 2) + self.shadowOffset, self.currentSize, self.currentSize, self.texture, self.rotation, 0, 0, tocolor(0, 0, 0, self.alpha), self.postGUI)
+				dxDrawImage(self.x - self.currentSize / 2, self.y - self.currentSize / 2, self.currentSize, self.currentSize, self.texture, self.rotation, 0, 0, self.color, self.postGUI)
 			else
 				setCursorAlpha(self.alpha)
 			end
@@ -98,12 +99,15 @@ function MousePointer_C:updateTexturesAndColors()
 			if (self.hitElement:getType() == "ped") then
 				self.color = self.enemyColor
 				self.texture = Textures["GUI"]["Cursor"][1].texture
+				self.currentSize = self.size
 			elseif (self.hitElement:getType() == "player") then
 				self.color = self.friendColor
 				self.texture = Textures["GUI"]["Cursor"][1].texture
+				self.currentSize = self.size
 			elseif (self.hitElement:getType() == "object") then
 				self.color = self.actionColor
 				self.texture = Textures["GUI"]["Cursor"][3].texture
+				self.currentSize = self.size * 2
 			else
 				self.texture = nil
 				self.color = self.defaultColor

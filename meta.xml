@@ -13,7 +13,7 @@
 	
 	<!-- ################################ Includes ################################ -->
 	
-	<include resource="shader_tex_names"/>
+	<!--<include resource="shader_tex_names"/>-->
 	
 	<!-- ################################ Scripts ################################ -->
 	
@@ -30,6 +30,7 @@
 	<script src="server/settings/WeatherTable_S.lua" type="server"/>
 	<script src="server/settings/LevelCaps_S.lua" type="server"/>
 	<script src="server/settings/AnimationsList_S.lua" type="server"/>
+	<script src="server/settings/SoundTable_S.lua" type="server"/>
 	
 	<script src="server/Core_S.lua" type="server"/>
 	
@@ -42,6 +43,7 @@
 	<script src="server/manager/RewardManager_S.lua" type="server"/>
 	<script src="server/manager/LootManager_S.lua" type="server"/>
 	<script src="server/manager/NotificationManager_S.lua" type="server"/>
+	<script src="server/manager/SoundManager_S.lua" type="server"/>
 	
 	<script src="server/classes/Player_S.lua" type="server"/>
 	<script src="server/classes/NPC_S.lua" type="server"/>
@@ -73,6 +75,7 @@
 	<script src="client/manager/WeatherManager_C.lua" type="client" cache="false"/>
 	<script src="client/manager/RainManager_C.lua" type="client" cache="false"/>
 	<script src="client/manager/NotificationManager_C.lua" type="client" cache="false"/>
+	<script src="client/manager/SoundManager_C.lua" type="client" cache="false"/>
 
 	<script src="client/classes/dxLib/dxWindow.lua" type="client" cache="false"/>
 	<script src="client/classes/dxLib/dxSlider.lua" type="client" cache="false"/>
@@ -81,6 +84,7 @@
 	<script src="client/classes/dxLib/dxProgessBar.lua" type="client" cache="false"/>
 	<script src="client/classes/dxLib/dxText.lua" type="client" cache="false"/>
 	
+	<script src="client/classes/GUIAnimations_C.lua" type="client" cache="false"/>
 	<script src="client/classes/Camera_C.lua" type="client" cache="false"/>
 	<script src="client/classes/ShaderNull_C.lua" type="client" cache="false"/>
 	<script src="client/classes/ShaderColorWorld_C.lua" type="client" cache="false"/>
@@ -142,4 +146,6 @@
 	
 	<file src="res/textures/icons/attacks/attackPunchIcon.png" type="client" cache="false"/>
 	<file src="res/textures/icons/attacks/attackKickIcon.png" type="client" cache="false"/>
+	
+	<file src="res/sounds/ambient/ambient_01.mp3" type="client" cache="false"/>
 </meta>
