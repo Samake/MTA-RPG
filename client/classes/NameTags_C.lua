@@ -5,14 +5,14 @@ function NameTags_C:constructor()
 	self.screenWidth, self.screenHeight = guiGetScreenSize()
 	self.player = getLocalPlayer()
 	
-	self.maxNameTagDistance = 150
-	self.minNameTagScale = 0.3
-	self.maxNameTagScale = 8.0
-	self.minNameTagAlpha = 32
-	self.maxNameTagAlpha = Settings.guiAlpha
+	self.maxDistance = 150
+	self.minScale = 0.3
+	self.maxScale = 8.0
+	self.minAlpha = 32
+	self.maxAlpha = Settings.guiAlpha
 	
-	self.nameTagWidth = self.screenWidth * 0.075
-	self.nameTagHeight = self.nameTagWidth * 0.2
+	self.width = self.screenWidth * 0.075
+	self.height = self.width * 0.2
 	
 	self.postGUI = true
 	self.subPixelPositioning = true
@@ -44,10 +44,10 @@ function NameTags_C:update(delta)
 				local pedPos = ped:getPosition()
 				local distance = getDistanceBetweenPoints3D(cx, cy, cz, pedPos.x, pedPos.y, pedPos.z)
 				
-				if (distance <= self.maxNameTagDistance) then
+				if (distance <= self.maxDistance) then
 					local ntx, nty = getScreenFromWorldPosition(pedPos.x, pedPos.y, pedPos.z + 1.5)
-					local scale = self:getNameTagScale(distance)
-					local alpha = self:getNameTagAlpha(distance)
+					local scale = self:getScale(distance)
+					local alpha = self:getAlpha(distance)
 					local shadowOffset = 1 * scale
 
 					if (ntx) and (nty) and (isLineOfSightClear(cx, cy, cz, pedPos.x, pedPos.y, pedPos.z + 1, true, true, false)) then
@@ -55,8 +55,8 @@ function NameTags_C:update(delta)
 							alpha = alpha * 0.4
 						end
 						
-						local width = self.nameTagWidth * scale
-						local height = (self.nameTagHeight / 4) * scale
+						local width = self.width * scale
+						local height = (self.height / 4) * scale
 
 						-- // name // --
 						local x = ntx
@@ -78,26 +78,26 @@ function NameTags_C:update(delta)
 end
 
 
-function NameTags_C:getNameTagScale(distanceValue)
-    local scaleVar = (self.maxNameTagDistance * self.minNameTagScale) / (distanceValue * self.maxNameTagScale)
+function NameTags_C:getScale(distanceValue)
+    local scaleVar = (self.maxDistance * self.minScale) / (distanceValue * self.maxScale)
     
-    if (scaleVar <= self.minNameTagScale) then
-        scaleVar = self.minNameTagScale
-    elseif (scaleVar >= self.maxNameTagScale) then
-        scaleVar = self.maxNameTagScale 
+    if (scaleVar <= self.minScale) then
+        scaleVar = self.minScale
+    elseif (scaleVar >= self.maxScale) then
+        scaleVar = self.maxScale 
     end
 	
     return scaleVar
 end
 
 
-function NameTags_C:getNameTagAlpha(distanceValue)
-	local alphaVar = self.maxNameTagAlpha - ((self.maxNameTagAlpha / self.maxNameTagDistance) * distanceValue)
+function NameTags_C:getAlpha(distanceValue)
+	local alphaVar = self.maxAlpha - ((self.maxAlpha / self.maxDistance) * distanceValue)
     
-    if (alphaVar <= self.minNameTagAlpha) then
-        alphaVar = self.minNameTagAlpha
-    elseif (alphaVar >= self.maxNameTagAlpha) then
-        alphaVar = self.maxNameTagAlpha 
+    if (alphaVar <= self.minAlpha) then
+        alphaVar = self.minAlpha
+    elseif (alphaVar >= self.maxAlpha) then
+        alphaVar = self.maxAlpha 
     end
 
     return alphaVar

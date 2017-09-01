@@ -49,6 +49,7 @@
 	
 	<script src="server/classes/Player_S.lua" type="server"/>
 	<script src="server/classes/NPC_S.lua" type="server"/>
+	<script src="server/classes/Light_S.lua" type="server"/>
 	<script src="server/classes/Attack_S.lua" type="server"/>
 	<script src="server/classes/AttackPunch_S.lua" type="server"/>
 	<script src="server/classes/AttackKick_S.lua" type="server"/>
@@ -79,6 +80,7 @@
 	<script src="client/manager/RainManager_C.lua" type="client" cache="false"/>
 	<script src="client/manager/NotificationManager_C.lua" type="client" cache="false"/>
 	<script src="client/manager/SoundManager_C.lua" type="client" cache="false"/>
+	<script src="client/manager/LightManager_C.lua" type="client" cache="false"/>
 
 	<script src="client/classes/dxLib/dxWindow.lua" type="client" cache="false"/>
 	<script src="client/classes/dxLib/dxSlider.lua" type="client" cache="false"/>
@@ -102,6 +104,7 @@
 	<script src="client/classes/NameTags_C.lua" type="client" cache="false"/>
 	<script src="client/classes/WorldText3D_C.lua" type="client" cache="false"/>
 	<script src="client/classes/Notification_C.lua" type="client" cache="false"/>
+	<script src="client/classes/Light_C.lua" type="client" cache="false"/>
 	
 	<!-- ################################ Resources ################################ -->
 	
@@ -149,6 +152,9 @@
 	
 	<file src="res/textures/icons/attacks/attackPunchIcon.png" type="client" cache="false"/>
 	<file src="res/textures/icons/attacks/attackKickIcon.png" type="client" cache="false"/>
+	
+	<file src="res/textures/icons/debug/emitterIcon.png" type="client" cache="false"/>
+	<file src="res/textures/icons/debug/lightBulb.png" type="client" cache="false"/>
 	
 	<file src="res/sounds/ambient/ambient_01.mp3" type="client" cache="false"/>
 </meta>

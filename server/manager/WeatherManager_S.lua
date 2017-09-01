@@ -77,7 +77,6 @@ function WeatherManager_S:sendToSubscribers()
 			triggerClientEvent(client, "CLIENTWEATHERDATA", client, self.weatherTable)
 		end
 	end
-
 end
 
 
