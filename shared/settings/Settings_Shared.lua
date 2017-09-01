@@ -9,7 +9,7 @@ Settings.fpsLimit = 60
 Settings.serverUpdateInterval = 50
 
 -- [[ *** Debug Settings *** ]]
-Settings.debugEnabled = false
+Settings.debugEnabled = true
 Settings.advancedDebugMessages = false
 Settings.showCoreDebugInfo = false
 Settings.showManagerDebugInfo = false

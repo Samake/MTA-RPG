@@ -30,6 +30,7 @@ end
 
 
 function Core_S:initComponents()
+	TriggerManager_S:new()
 	PlayerManager_S:new()
 	NPCManager_S:new()
 	WeatherManager_S:new()
@@ -40,6 +41,7 @@ function Core_S:initComponents()
 	LootManager_S:new()
 	NotificationManager_S:new()
 	SoundManager_S:new()
+	LightManager_S:new()
 end
 
 
@@ -54,6 +56,7 @@ function Core_S:update()
 		AttackManager_S:getSingleton():update()
 		EventManager_S:getSingleton():update()
 		LootManager_S:getSingleton():update()
+		LightManager_S:getSingleton():update()
 		
 		debug.sethook(_, h1, h2, h3) 
 	end
@@ -89,6 +92,8 @@ function Core_S:clear()
 	delete(LootManager_S:getSingleton())
 	delete(NotificationManager_S:getSingleton())
 	delete(SoundManager_S:getSingleton())
+	delete(LightManager_S:getSingleton())
+	delete(TriggerManager_S:getSingleton())
 end
 
 

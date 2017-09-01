@@ -1,7 +1,6 @@
 WeatherManager_S = inherit(Singleton)
 
 function WeatherManager_S:constructor()
-	self.clientList = {}
 	
 	self.hour = 0
 	self.minute = 0
@@ -22,29 +21,14 @@ end
 
 function WeatherManager_S:init()
 	self.m_SubscribeClient = bind(self.subscribeClient, self)
-	addEvent("SUBSCRIBEWEATHER", true)
-	addEventHandler("SUBSCRIBEWEATHER", root, self.m_SubscribeClient)
-	
-	self.m_UnsubscribeClient = bind(self.unsubscribeClient, self)
-	addEvent("UNSUBSCRIBEWEATHER", true)
-	addEventHandler("UNSUBSCRIBEWEATHER", root, self.m_UnsubscribeClient)
+	addEvent("SUBSCRIBECLIENT", true)
+	addEventHandler("SUBSCRIBECLIENT", root, self.m_SubscribeClient)
 end
 
 
 function WeatherManager_S:subscribeClient()
 	if (client) then
-		if (not self.clientList[tostring(client)]) then
-			self.clientList[tostring(client)] = client
-		end
-	end
-end
-
-
-function WeatherManager_S:unsubscribeClient()
-	if (client) then
-		if (self.clientList[tostring(client)]) then
-			self.clientList[tostring(client)] = nil
-		end
+		self:sendToSubscribers()
 	end
 end
 
@@ -88,7 +72,7 @@ end
 function WeatherManager_S:sendToSubscribers()
 	self.weatherTable.rainLevel = self.rainLevel
 	
-	for index, client in pairs(self.clientList) do
+	for index, client in pairs(TriggerManager_S:getSingleton():getClients()) do
 		if (client) then
 			triggerClientEvent(client, "CLIENTWEATHERDATA", client, self.weatherTable)
 		end
@@ -98,8 +82,7 @@ end
 
 
 function WeatherManager_S:clear()
-	removeEventHandler("SUBSCRIBEWEATHER", root, self.m_SubscribeClient)
-	removeEventHandler("UNSUBSCRIBEWEATHER", root, self.m_UnsubscribeClient)
+	removeEventHandler("SUBSCRIBECLIENT", root, self.m_SubscribeClient)
 end
 
 

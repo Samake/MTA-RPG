@@ -48,6 +48,8 @@ function ShaderManager_C:enableShaders()
 	self:loadColorShaders()
 	self:loadWaterShader()
 	self:loadPlayerShaders()
+	
+	NotificationManager_C:getSingleton():addNotification("#EEEEEE Shaders #44EE44 enabled #EEEEEE!")
 end
 
 
@@ -55,6 +57,8 @@ function ShaderManager_C:deleteShaders()
 	self:deleteColorShaders()
 	self:deleteWaterShader()
 	self:deletePlayerShaders()
+	
+	NotificationManager_C:getSingleton():addNotification("#EEEEEE Shaders #EE4444 disabled #EEEEEE!")
 end
 
 

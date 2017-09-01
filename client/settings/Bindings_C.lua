@@ -23,3 +23,4 @@ Bindings["SLOT9"] = "9"
 Bindings["SLOT10"] = "0"
 
 Bindings["SPAWNTESTNPC"] = "F2"
+Bindings["SPAWNTESTLIGHT"] = "F3"

@@ -34,6 +34,7 @@
 	
 	<script src="server/Core_S.lua" type="server"/>
 	
+	<script src="server/manager/TriggerManager_S.lua" type="server"/>
 	<script src="server/manager/PlayerManager_S.lua" type="server"/>
 	<script src="server/manager/NPCManager_S.lua" type="server"/>
 	<script src="server/manager/WeatherManager_S.lua" type="server"/>
@@ -44,6 +45,7 @@
 	<script src="server/manager/LootManager_S.lua" type="server"/>
 	<script src="server/manager/NotificationManager_S.lua" type="server"/>
 	<script src="server/manager/SoundManager_S.lua" type="server"/>
+	<script src="server/manager/LightManager_S.lua" type="server"/>
 	
 	<script src="server/classes/Player_S.lua" type="server"/>
 	<script src="server/classes/NPC_S.lua" type="server"/>
@@ -67,6 +69,7 @@
 	<script src="client/singletons/MousePointer_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/Marker3D_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/Player_C.lua" type="client" cache="false"/>
+	<script src="client/singletons/Debug_C.lua" type="client" cache="false"/>
 	
 	<script src="client/manager/XMLManager_C.lua" type="client" cache="false"/>
 	<script src="client/manager/CameraManager_C.lua" type="client" cache="false"/>

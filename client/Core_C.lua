@@ -9,6 +9,8 @@ function Core_C:constructor()
 
 	self:initClient()
 	self:initComponents()
+	
+	triggerServerEvent("SUBSCRIBECLIENT", root)
 end
 
 
@@ -39,11 +41,21 @@ function Core_C:initComponents()
 	WeatherManager_C:new()
 	NotificationManager_C:new()
 	SoundManager_C:new()
+	
+	if (Settings.debugEnabled == true) then
+		Debug_C:new()
+	end
 end
 
 
 function Core_C:toggleDebug()
 	Settings.debugEnabled = not Settings.debugEnabled
+	
+	if (Settings.debugEnabled == true) then
+		Debug_C:new()
+	elseif (Settings.debugEnabled == false) then
+		delete(Debug_C:getSingleton())
+	end
 end
 
 
@@ -63,10 +75,16 @@ function Core_C:update(deltaTime)
 	Player_C:getSingleton():update(self.delta)
 	WeatherManager_C:getSingleton():update(self.delta)
 	NotificationManager_C:getSingleton():update(self.delta)
+	
+	if (Settings.debugEnabled == true) then
+		Debug_C:getSingleton():update(self.delta)
+	end
 end
 
 
 function Core_C:clear()
+	triggerServerEvent("UNSUBSCRIBECLIENT", root)
+	
 	removeEventHandler("onClientPreRender", root, self.m_Update)
 	unbindKey(Bindings["DEBUG"], "down", self.m_ToggleDebug)
 	
@@ -85,6 +103,10 @@ function Core_C:clear()
 	delete(WeatherManager_C:getSingleton())
 	delete(NotificationManager_C:getSingleton())
 	delete(SoundManager_C:getSingleton())
+	
+	if (Settings.debugEnabled == true) then
+		delete(Debug_C:getSingleton())
+	end
 end
 
 

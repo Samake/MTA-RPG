@@ -22,8 +22,6 @@ function SoundManager_C:init()
 	self.m_Play3DSound = bind(self.play3DSound, self)
 	addEvent("PLAY3DSOUND", true)
 	addEventHandler("PLAY3DSOUND", root, self.m_Play3DSound)
-	
-	triggerServerEvent("SUBSCRIBESOUND", root)
 end
 
 
@@ -81,8 +79,6 @@ function SoundManager_C:clear()
 			sound:stop()
 		end
 	end
-	
-	triggerServerEvent("UNSUBSCRIBESOUND", root)
 end
 
 

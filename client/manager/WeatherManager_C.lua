@@ -20,8 +20,6 @@ function WeatherManager_C:init()
 	addEventHandler("CLIENTWEATHERDATA", root, self.m_ReceiveWeatherData)
 
 	RainManager_C:new()
-	
-	triggerServerEvent("SUBSCRIBEWEATHER", root)
 end
 
 
@@ -52,8 +50,6 @@ end
 
 
 function WeatherManager_C:clear()
-	triggerServerEvent("UNSUBSCRIBEWEATHER", root)
-	
 	removeEventHandler("CLIENTWEATHERDATA", root, self.m_ReceiveWeatherData)
 	
 	delete(RainManager_C:getSingleton())

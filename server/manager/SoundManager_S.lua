@@ -2,8 +2,6 @@ SoundManager_S = inherit(Singleton)
 
 function SoundManager_S:constructor()
 	
-	self.clientList = {}
-	
 	self:init()
 	
 	if (Settings.showManagerDebugInfo == true) then
@@ -14,62 +12,55 @@ end
 
 function SoundManager_S:init()
 	self.m_SubscribeClient = bind(self.subscribeClient, self)
-	addEvent("SUBSCRIBESOUND", true)
-	addEventHandler("SUBSCRIBESOUND", root, self.m_SubscribeClient)
-	
-	self.m_UnsubscribeClient = bind(self.unsubscribeClient, self)
-	addEvent("UNSUBSCRIBESOUND", true)
-	addEventHandler("UNSUBSCRIBESOUND", root, self.m_UnsubscribeClient)
+	addEvent("SUBSCRIBECLIENT", true)
+	addEventHandler("SUBSCRIBECLIENT", root, self.m_SubscribeClient)
 	
 	if (not self.ambientSound) then
 		self.ambientSound = Sounds["Ambient"][math.random(1, #Sounds["Ambient"])]
 	end
+
 end
 
 
 function SoundManager_S:subscribeClient()
 	if (client) then
-		if (not self.clientList[tostring(client)]) then
-			self.clientList[tostring(client)] = client
-			
-			if (self.ambientSound) then
-				self:playSound(self.ambientSound.sound, true, self.ambientSound.volume, client)
-			end
-		end
-	end
-end
-
-
-function SoundManager_S:unsubscribeClient()
-	if (client) then
-		if (self.clientList[tostring(client)]) then
-			self.clientList[tostring(client)] = nil
-		end
+		triggerClientEvent(client, "PLAYSOUND", client, self.ambientSound.sound, true, self.ambientSound.volume)
 	end
 end
 
 
 function SoundManager_S:playSound(sound, looped, volume, player)
 	if (sound) then
-		if (not player) then player = root end
-		
-		triggerClientEvent(player, "PLAYSOUND", player, sound, looped, volume)
+		if (not player) then
+			triggerClientEvent(player, "PLAYSOUND", player, sound, looped, volume)
+		else
+			for index, client in pairs(TriggerManager_S:getSingleton():getClients()) do
+				if (client) then
+					triggerClientEvent(client, "PLAYSOUND", client, sound, looped, volume)
+				end
+			end
+		end
 	end
 end
 
 
-function SoundManager_S:playSound3D(sound, x, y, z, looped, volume)
+function SoundManager_S:playSound3D(sound, x, y, z, looped, volume, player)
 	if (sound) (x) and (y) and (z) then
-		if (not player) then player = root end
-		
-		triggerClientEvent(player, "PLAYSOUND", player, sound, x, y, z, looped, volume)
+		if (not player) then
+			triggerClientEvent(player, "PLAYSOUND", player, sound, x, y, z, looped, volume)
+		else
+			for index, client in pairs(TriggerManager_S:getSingleton():getClients()) do
+				if (client) then
+					triggerClientEvent(client, "PLAYSOUND", client, sound, x, y, z, looped, volume)
+				end
+			end
+		end
 	end
 end
 
 
 function SoundManager_S:clear()
-	removeEventHandler("SUBSCRIBESOUND", root, self.m_SubscribeClient)
-	removeEventHandler("UNSUBSCRIBESOUND", root, self.m_UnsubscribeClient)
+
 end
 
 
