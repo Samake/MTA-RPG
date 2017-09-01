@@ -1,5 +1,5 @@
 //
-// mta-helper.fx
+// mta-helper.hlsl
 //
 // File version: 0.0.5
 // Date updated: 2014-09-03

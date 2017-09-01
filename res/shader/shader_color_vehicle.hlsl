@@ -1,12 +1,16 @@
 #define GENERATE_NORMALS
 #include "mta-helper.hlsl"
+#include "light-helper.hlsl"
 
+int maxLights = 14;
+float2 distFade = float2(0, 1);
 float3 inColor = float3(1, 0, 0);
 
 sampler TextureSampler = sampler_state
 {
     Texture = (gTexture0);
 };
+
 
 struct VertexShaderInput
 {
@@ -22,8 +26,10 @@ struct VertexShaderOutput
 	float4 Position : POSITION0;
 	float4 Diffuse : COLOR0;
 	float2 TexCoord : TEXCOORD0;
+	float3 WorldPosition : TEXCOORD1;
+	float3 WorldNormal : TEXCOORD2;
+	float DistFade : TEXCOORD3;
 };
-
 
 
 VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
@@ -33,10 +39,14 @@ VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
     MTAFixUpNormal(input.Normal);
 
     output.Position = MTACalcScreenPosition(input.Position);
+	output.WorldPosition = MTACalcWorldPosition(input.Position);
 	output.TexCoord = input.TexCoord;
 	
-	float3 worldNormal = MTACalcWorldNormal(input.Normal);
-    output.Diffuse = saturate(MTACalcGTAVehicleDiffuse(worldNormal, input.Diffuse));
+	output.WorldNormal = MTACalcWorldNormal(input.Normal);
+    output.Diffuse = saturate(MTACalcGTAVehicleDiffuse(output.WorldNormal, input.Diffuse));
+	
+	float DistanceFromCamera = distance(gCameraPosition, output.WorldPosition);
+	output.DistFade = MTAUnlerp(distFade[0], distFade[1], DistanceFromCamera);
 	
     return output;
 }
@@ -44,17 +54,21 @@ VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
 
 float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {	
+
 	float4 textureColor = tex2D(TextureSampler, input.TexCoord);
 
-	float4 finalColor = float4(inColor * 0.5, textureColor.a) * input.Diffuse;
+	float4 dynamicLightsColor = getLights(input.WorldNormal, input.WorldPosition, maxLights);
+	float4 finalLightColor = input.Diffuse + (dynamicLightsColor * saturate(input.DistFade));
+
+	float4 finalColor = float4((inColor * finalLightColor.rgb * textureColor.a) * 0.5, textureColor.a);
 	
 	return finalColor;
 }
 
 
-technique ColorVehicle
+technique VehicleColorShader
 {
-    pass Pass0
+	pass Pass0
     {
         AlphaBlendEnable = true;
         VertexShader = compile vs_3_0 VertexShaderFunction();

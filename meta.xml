@@ -110,6 +110,7 @@
 	
 	<!-- shaders -->
 	<file src="res/shader/mta-helper.hlsl" type="client" cache="false"/>
+	<file src="res/shader/light-helper.hlsl" type="client" cache="false"/>
 	<file src="res/shader/shader_color_world.hlsl" type="client" cache="false"/>
 	<file src="res/shader/shader_color_vehicle.hlsl" type="client" cache="false"/>
 	<file src="res/shader/shader_water.hlsl" type="client" cache="false"/>

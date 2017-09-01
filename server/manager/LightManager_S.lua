@@ -42,8 +42,8 @@ end
 function LightManager_S:addLight(lightProperties)
 	if (lightProperties) then
 		lightProperties.id = self:getFreeID()
-		lightProperties.radius = math.random(15, 128)
-		lightProperties.color = {r = math.random(64, 255), g = math.random(64, 255), b = math.random(64, 255)}
+		lightProperties.radius = 15
+		lightProperties.color = {r = math.random(90, 220), g = math.random(90, 220), b = math.random(90, 220)}
 		
 		if (not self.lightClasses[lightProperties.id]) then
 			self.lightClasses[lightProperties.id] = Light_S:new(lightProperties)

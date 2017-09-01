@@ -45,6 +45,25 @@ function ShaderColorVehicles_C:init()
 end
 
 
+function ShaderColorVehicles_C:update()
+	if (self.shader) then
+		for index, light in pairs(LightManager_C:getSingleton():getLights()) do
+			if (light) then
+				local lightEnableStr = "pointLight" .. index .. "Enable"
+				local lightDiffuseStr = "pointLight" .. index .. "Diffuse"
+				local lightAttenuationStr = "pointLight" .. index .. "Attenuation"				
+				local lightPositionStr = "pointLight" .. index .. "Position"
+				
+				self.shader:setValue(lightEnableStr, true)
+				self.shader:setValue(lightPositionStr, {light.x, light.y, light.z})
+				self.shader:setValue(lightDiffuseStr, {(light.color.r) / 255, (light.color.g) / 255, (light.color.b) / 255, 1.0})
+				self.shader:setValue(lightAttenuationStr, light.radius)
+			end
+		end
+	end
+end
+
+
 function ShaderColorVehicles_C:clear()
 	if (self.shader) then
 		self.shader:destroy()
