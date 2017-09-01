@@ -3,6 +3,7 @@ LightManager_C = inherit(Singleton)
 function LightManager_C:constructor()
 	
 	self.lightClasses = {}
+	self.activeLights = {}
 	
 	self:init()
 	
@@ -48,6 +49,19 @@ function LightManager_C:update()
 			lightClass:update()
 		end
 	end
+	
+	self:streamLights()
+end
+
+
+function LightManager_C:streamLights()
+	-- TODO
+	self.activeLights = self.lightClasses
+end
+
+
+function LightManager_C:getLights()
+	return self.activeLights
 end
 
 

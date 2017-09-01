@@ -29,6 +29,8 @@ function LightManager_S:subscribeClient()
 			if (lightClass) then
 				local lightProperties = {}
 				lightProperties.id = lightClass.id
+				lightProperties.radius = lightClass.radius
+				lightProperties.color = lightClass.color
 	
 				triggerClientEvent(client, "ADDLIGHTCLIENT", client, lightProperties)
 			end
@@ -40,6 +42,8 @@ end
 function LightManager_S:addLight(lightProperties)
 	if (lightProperties) then
 		lightProperties.id = self:getFreeID()
+		lightProperties.radius = math.random(15, 128)
+		lightProperties.color = {r = math.random(64, 255), g = math.random(64, 255), b = math.random(64, 255)}
 		
 		if (not self.lightClasses[lightProperties.id]) then
 			self.lightClasses[lightProperties.id] = Light_S:new(lightProperties)

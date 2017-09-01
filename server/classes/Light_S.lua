@@ -6,6 +6,8 @@ function Light_S:constructor(lightProperties)
 	self.x = lightProperties.x
 	self.y = lightProperties.y
 	self.z = lightProperties.z
+	self.radius = lightProperties.radius
+	self.color = lightProperties.color
 	
 	self:init()
 	

@@ -148,6 +148,12 @@ function ShaderManager_C:update(deltaTime)
 			self.screenSource:update()
 		end
 		
+		for index, shaderClass in pairs(self.colorShadersWorld) do
+			if (shaderClass) then
+				shaderClass:update(deltaTime)
+			end
+		end
+		
 		if (self.waterShader) then
 			self.waterShader:update(deltaTime)
 		end
