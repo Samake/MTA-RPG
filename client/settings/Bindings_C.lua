@@ -10,6 +10,7 @@ Bindings["ADDITIONAL"] = "lshift"
 Bindings["ACTION"] = "left"
 Bindings["MOVETO"] = "right"
 Bindings["SIT"] = "X"
+Bindings["INVENTORY"] = "I"
 
 Bindings["SLOT1"] = "1"
 Bindings["SLOT2"] = "2"

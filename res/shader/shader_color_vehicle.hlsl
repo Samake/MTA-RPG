@@ -58,7 +58,7 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 	float4 textureColor = tex2D(TextureSampler, input.TexCoord);
 
 	float4 dynamicLightsColor = getLights(input.WorldNormal, input.WorldPosition, maxLights);
-	float4 finalLightColor = input.Diffuse + (dynamicLightsColor * saturate(input.DistFade));
+	float4 finalLightColor = input.Diffuse + (dynamicLightsColor * saturate(input.DistFade) * input.Diffuse);
 
 	float4 finalColor = float4((inColor * finalLightColor.rgb * textureColor.a) * 0.5, textureColor.a);
 	

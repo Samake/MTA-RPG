@@ -41,6 +41,15 @@ function Player_C:init()
 	self.m_PlayerSit = bind(self.playerSit, self)
 	bindKey(Bindings["SIT"], "down", self.m_PlayerSit)
 	
+	self.m_ShowInventory = bind(self.showInventory, self)
+	bindKey(Bindings["INVENTORY"], "down", self.m_ShowInventory)
+	
+	if (self.player) then
+		if (not self.inventory) then
+			self.inventory = Inventory_C:new(self.player)
+		end
+	end
+	
 	triggerServerEvent("CONNECTPLAYER", root)
 end
 
@@ -74,6 +83,12 @@ end
 
 function Player_C:playerSit()
 	triggerServerEvent("PLAYERSITDOWN", root)
+end
+
+
+function Player_C:showInventory()
+	GUIManager_C:getSingleton():showGUI(not GUIManager_C:getSingleton():isShowGUI())
+	GUIManager_C:getSingleton():showInventory(not GUIManager_C:getSingleton():isShowInventory())
 end
 
 
@@ -188,8 +203,19 @@ function Player_C:getMaxXP()
 end
 
 
+function Player_C:getInventory()
+	return self.inventory
+end
+
+
 function Player_C:clear()
 	unbindKey(Bindings["SIT"], "down", self.m_PlayerSit)
+	unbindKey(Bindings["INVENTORY"], "down", self.m_ShowInventory)
+	
+	if (self.inventory) then
+		self.inventory:delete()
+		self.inventory = nil
+	end
 	
 	removeEventHandler("SYNCPLAYERDATA", root, self.m_GetServerData)
 end

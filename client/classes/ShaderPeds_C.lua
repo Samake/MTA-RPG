@@ -158,47 +158,39 @@ function ShaderPeds_C:update()
 			local lightAttenuationStr = "pointLight" .. index .. "Attenuation"				
 			local lightPositionStr = "pointLight" .. index .. "Position"
 			
-			if (self.headShaders) then
-				for index, headShader in pairs(self.headShaders) do
-					if (headShader) and (isElement(headShader)) then
-						headShader:setValue(lightEnableStr, true)
-						headShader:setValue(lightPositionStr, {light.x, light.y, light.z})
-						headShader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
-						headShader:setValue(lightAttenuationStr, light.radius)
-					end
-				end
-			end
-				
-			if (self.torsoShaders) then
-				for index, torsoShader in pairs(self.torsoShaders) do
-					if (torsoShader) and (isElement(torsoShader)) then
-						torsoShader:setValue(lightEnableStr, true)
-						torsoShader:setValue(lightPositionStr, {light.x, light.y, light.z})
-						torsoShader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
-						torsoShader:setValue(lightAttenuationStr, light.radius)
-					end
+			for index, headShader in pairs(self.headShaders) do
+				if (headShader) and (isElement(headShader)) then
+					headShader:setValue(lightEnableStr, true)
+					headShader:setValue(lightPositionStr, {light.x, light.y, light.z})
+					headShader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
+					headShader:setValue(lightAttenuationStr, light.radius)
 				end
 			end
 			
-			if (self.headShaders) then
-				for index, legShader in pairs(self.legShaders) do
-					if (legShader) and (isElement(legShader)) then
-						legShader:setValue(lightEnableStr, true)
-						legShader:setValue(lightPositionStr, {light.x, light.y, light.z})
-						legShader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
-						legShader:setValue(lightAttenuationStr, light.radius)
-					end
+			for index, torsoShader in pairs(self.torsoShaders) do
+				if (torsoShader) and (isElement(torsoShader)) then
+					torsoShader:setValue(lightEnableStr, true)
+					torsoShader:setValue(lightPositionStr, {light.x, light.y, light.z})
+					torsoShader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
+					torsoShader:setValue(lightAttenuationStr, light.radius)
 				end
 			end
-			
-			if (self.headShaders) then
-				for index, feetShader in pairs(self.feetShaders) do
-					if (feetShader) and (isElement(feetShader)) then
-						feetShader:setValue(lightEnableStr, true)
-						feetShader:setValue(lightPositionStr, {light.x, light.y, light.z})
-						feetShader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
-						feetShader:setValue(lightAttenuationStr, light.radius)
-					end
+
+			for index, legShader in pairs(self.legShaders) do
+				if (legShader) and (isElement(legShader)) then
+					legShader:setValue(lightEnableStr, true)
+					legShader:setValue(lightPositionStr, {light.x, light.y, light.z})
+					legShader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
+					legShader:setValue(lightAttenuationStr, light.radius)
+				end
+			end
+
+			for index, feetShader in pairs(self.feetShaders) do
+				if (feetShader) and (isElement(feetShader)) then
+					feetShader:setValue(lightEnableStr, true)
+					feetShader:setValue(lightPositionStr, {light.x, light.y, light.z})
+					feetShader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
+					feetShader:setValue(lightAttenuationStr, light.radius)
 				end
 			end
 		end

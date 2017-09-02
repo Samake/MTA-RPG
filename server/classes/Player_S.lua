@@ -83,6 +83,10 @@ function Player_S:init()
 		self.playerPos = self.player:getPosition()
 		self.playerRot = self.player:getRotation()
 		
+		if (not self.inventory) then
+			self.inventory = Inventory_S:new(self.player)
+		end
+		
 		self.player:spawn(self.playerPos.x, self.playerPos.y, self.playerPos.z, self.playerRot.z, self.skinID, 0, self.dimension)
 		
 		self.equippedSlots[1] = Attacks["Default"]["Punch"]
@@ -489,6 +493,11 @@ function Player_S:clear()
 	removeEventHandler("SETPLAYERTARGET", root, self.m_SetTargetPosition)
 	removeEventHandler("CONNECTPLAYER", root, self.m_ConnectPlayer)
 	removeEventHandler("PLAYERSITDOWN", root, self.m_TogglePlayerSit)
+	
+	if (self.inventory) then
+		self.inventory:delete()
+		self.inventory = nil
+	end
 	
 	self:jobIdle()
 end

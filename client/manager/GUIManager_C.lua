@@ -2,7 +2,8 @@ GUIManager_C = inherit(Singleton)
 
 function GUIManager_C:constructor()
 
-	self.showGUI = true
+	self.isGUIShown = true
+	self.isInventoryShown = false
 	self.isCursorOnAnyGUI = false
 
 	self:init()
@@ -21,32 +22,51 @@ function GUIManager_C:init()
 	if (not self.guiIngame) then
 		self.guiIngame = GUIIngame_C:new()
 	end
+	
+	if (not self.guiInventory) then
+		self.guiInventory = GUIInventory_C:new()
+	end
 end
 
 
 function GUIManager_C:update(deltaTime)
-	if (self.showGUI == true) then
+	self.isCursorOnAnyGUI = false
 	
-		self.isCursorOnAnyGUI = false
-		
+	if (self.isGUIShown == true) then
 		if (self.guiWorld) then
-			self.guiWorld:update()
+			self.guiWorld:update(deltaTime)
 		end
 		
 		if (self.guiIngame) then
-			self.guiIngame:update()
+			self.guiIngame:update(deltaTime)
+		end
+	elseif (self.isInventoryShown == true) then
+		if (self.guiInventory) then
+			self.guiInventory:update(deltaTime)
 		end
 	end
 end
 
 
 function GUIManager_C:showGUI(bool)
-	self.showGUI = bool
+	self.isGUIShown = bool
+	--self:showInventory(not self.isGUIShown)
 end
 
 
-function GUIManager_C:isGUIShown()
-	return self.showGUI
+function GUIManager_C:isShowGUI()
+	return self.isGUIShown
+end
+
+
+function GUIManager_C:showInventory(bool)
+	self.isInventoryShown = bool
+	--self:showGUI(not self.isInventoryShown)
+end
+
+
+function GUIManager_C:isShowInventory()
+	return self.isInventoryShown
 end
 
 
@@ -69,6 +89,11 @@ function GUIManager_C:clear()
 	if (self.guiWorld) then
 		self.guiWorld:delete()
 		self.guiWorld = nil
+	end
+	
+	if (self.guiInventory) then
+		self.guiInventory:delete()
+		self.guiInventory = nil
 	end
 end
 

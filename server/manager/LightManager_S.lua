@@ -44,8 +44,8 @@ end
 function LightManager_S:addLight(lightProperties)
 	if (lightProperties) then
 		lightProperties.id = self:getFreeID()
-		lightProperties.radius = 25
-		lightProperties.color = {r = math.random(128, 255), g = math.random(128, 255), b = math.random(128, 255)}
+		lightProperties.radius = 35
+		lightProperties.color = {r = math.random(25, 180), g = math.random(25, 180), b = math.random(25, 180)}
 		
 		-- for test only
 		local randomVar = math.random(1, 10)
