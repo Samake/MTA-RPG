@@ -56,7 +56,7 @@ function ShaderColorWorld_C:update()
 				
 				self.shader:setValue(lightEnableStr, true)
 				self.shader:setValue(lightPositionStr, {light.x, light.y, light.z})
-				self.shader:setValue(lightDiffuseStr, {(light.color.r) / 255, (light.color.g) / 255, (light.color.b) / 255, 1.0})
+				self.shader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
 				self.shader:setValue(lightAttenuationStr, light.radius)
 			end
 		end

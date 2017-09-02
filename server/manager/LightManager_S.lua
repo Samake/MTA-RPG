@@ -31,6 +31,8 @@ function LightManager_S:subscribeClient()
 				lightProperties.id = lightClass.id
 				lightProperties.radius = lightClass.radius
 				lightProperties.color = lightClass.color
+				lightProperties.isFlickering = lightClass.isFlickering
+				lightProperties.isPulsating = lightClass.isPulsating
 	
 				triggerClientEvent(client, "ADDLIGHTCLIENT", client, lightProperties)
 			end
@@ -44,6 +46,21 @@ function LightManager_S:addLight(lightProperties)
 		lightProperties.id = self:getFreeID()
 		lightProperties.radius = 15
 		lightProperties.color = {r = math.random(90, 220), g = math.random(90, 220), b = math.random(90, 220)}
+		
+		-- for test only
+		local randomVar = math.random(1, 10)
+		
+		if (randomVar > 8) then
+			lightProperties.isFlickering = true
+		else
+			lightProperties.isFlickering = false
+			
+			if (randomVar < 2) then
+				lightProperties.isPulsating = true
+			else
+				lightProperties.isPulsating = false
+			end
+		end
 		
 		if (not self.lightClasses[lightProperties.id]) then
 			self.lightClasses[lightProperties.id] = Light_S:new(lightProperties)

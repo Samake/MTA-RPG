@@ -81,6 +81,9 @@ function Debug_C:drawLights()
 				local cx, cy, cz = getCameraMatrix()
 				local lightPos = light:getPosition()
 				local distance = getDistanceBetweenPoints3D(cx, cy, cz, lightPos.x, lightPos.y, lightPos.z)
+				local colorR = light:getData("LIGHTCOLORR") or 255
+				local colorG = light:getData("LIGHTCOLORG") or 255
+				local colorB = light:getData("LIGHTCOLORB") or 255		
 				
 				if (distance <= self.maxDistance) then
 					local ntx, nty = getScreenFromWorldPosition(lightPos.x, lightPos.y, lightPos.z + 1.5)
@@ -101,7 +104,7 @@ function Debug_C:drawLights()
 						local y = nty + height
 						
 						dxDrawImage((x - width / 2) + self.shadowOffset, (y - height / 2) + self.shadowOffset, width, height, Textures["Icons"]["Debug"][2].texture, 0, 0, 0, tocolor(0, 0, 0, alpha), self.postGUI)
-						dxDrawImage((x - width / 2), (y - height / 2), width, height, Textures["Icons"]["Debug"][2].texture, 0, 0, 0, tocolor(255, 255, 255, alpha), self.postGUI)
+						dxDrawImage((x - width / 2), (y - height / 2), width, height, Textures["Icons"]["Debug"][2].texture, 0, 0, 0, tocolor(colorR, colorG, colorB, alpha), self.postGUI)
 					end
 				end
 			end
