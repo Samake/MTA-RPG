@@ -28,7 +28,7 @@ function ShaderPeds_C:init()
 	for index, skin in pairs(Textures["Skins"]["Head"]) do
 		if (skin) then
 			if (not self.headShaders[index]) and (skin.texture) then
-				self.headShaders[index] = dxCreateShader("res/shader/shader_texReplace.hlsl", 0, Settings.shaderWorldDrawDistance, false, "ped")
+				self.headShaders[index] = dxCreateShader("res/shader/shader_color_peds.hlsl", 0, Settings.shaderWorldDrawDistance, false, "ped")
 				
 				if (self.headShaders[index]) then
 					self.headShaders[index]:setValue("skinTexture", skin.texture)
@@ -42,7 +42,7 @@ function ShaderPeds_C:init()
 	for index, skin in pairs(Textures["Skins"]["Torso"]) do
 		if (skin) then
 			if (not self.torsoShaders[index]) and (skin.texture) then
-				self.torsoShaders[index] = dxCreateShader("res/shader/shader_texReplace.hlsl", 0, Settings.shaderWorldDrawDistance, false, "ped")
+				self.torsoShaders[index] = dxCreateShader("res/shader/shader_color_peds.hlsl", 0, Settings.shaderWorldDrawDistance, false, "ped")
 				
 				if (self.torsoShaders[index]) then
 					self.torsoShaders[index]:setValue("skinTexture", skin.texture)
@@ -56,7 +56,7 @@ function ShaderPeds_C:init()
 	for index, skin in pairs(Textures["Skins"]["Leg"]) do
 		if (skin) then
 			if (not self.legShaders[index]) and (skin.texture) then
-				self.legShaders[index] = dxCreateShader("res/shader/shader_texReplace.hlsl", 0, Settings.shaderWorldDrawDistance, false, "ped")
+				self.legShaders[index] = dxCreateShader("res/shader/shader_color_peds.hlsl", 0, Settings.shaderWorldDrawDistance, false, "ped")
 				
 				if (self.legShaders[index]) then
 					self.legShaders[index]:setValue("skinTexture", skin.texture)
@@ -70,7 +70,7 @@ function ShaderPeds_C:init()
 	for index, skin in pairs(Textures["Skins"]["Feet"]) do
 		if (skin) then
 			if (not self.feetShaders[index]) and (skin.texture) then
-				self.feetShaders[index] = dxCreateShader("res/shader/shader_texReplace.hlsl", 0, Settings.shaderWorldDrawDistance, false, "ped")
+				self.feetShaders[index] = dxCreateShader("res/shader/shader_color_peds.hlsl", 0, Settings.shaderWorldDrawDistance, false, "ped")
 				
 				if (self.feetShaders[index]) then
 					self.feetShaders[index]:setValue("skinTexture", skin.texture)
@@ -145,6 +145,62 @@ function ShaderPeds_C:applyNPCShaders(npcSkin)
 		
 		if (self.feetShaders[npcSkin.feet]) then
 			self.feetShaders[npcSkin.feet]:applyToWorldTexture("cj_ped_feet", npcSkin.model, false)
+		end
+	end
+end
+
+
+function ShaderPeds_C:update()
+	for index, light in pairs(LightManager_C:getSingleton():getLights()) do
+		if (light) then
+			local lightEnableStr = "pointLight" .. index .. "Enable"
+			local lightDiffuseStr = "pointLight" .. index .. "Diffuse"
+			local lightAttenuationStr = "pointLight" .. index .. "Attenuation"				
+			local lightPositionStr = "pointLight" .. index .. "Position"
+			
+			if (self.headShaders) then
+				for index, headShader in pairs(self.headShaders) do
+					if (headShader) and (isElement(headShader)) then
+						headShader:setValue(lightEnableStr, true)
+						headShader:setValue(lightPositionStr, {light.x, light.y, light.z})
+						headShader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
+						headShader:setValue(lightAttenuationStr, light.radius)
+					end
+				end
+			end
+				
+			if (self.torsoShaders) then
+				for index, torsoShader in pairs(self.torsoShaders) do
+					if (torsoShader) and (isElement(torsoShader)) then
+						torsoShader:setValue(lightEnableStr, true)
+						torsoShader:setValue(lightPositionStr, {light.x, light.y, light.z})
+						torsoShader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
+						torsoShader:setValue(lightAttenuationStr, light.radius)
+					end
+				end
+			end
+			
+			if (self.headShaders) then
+				for index, legShader in pairs(self.legShaders) do
+					if (legShader) and (isElement(legShader)) then
+						legShader:setValue(lightEnableStr, true)
+						legShader:setValue(lightPositionStr, {light.x, light.y, light.z})
+						legShader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
+						legShader:setValue(lightAttenuationStr, light.radius)
+					end
+				end
+			end
+			
+			if (self.headShaders) then
+				for index, feetShader in pairs(self.feetShaders) do
+					if (feetShader) and (isElement(feetShader)) then
+						feetShader:setValue(lightEnableStr, true)
+						feetShader:setValue(lightPositionStr, {light.x, light.y, light.z})
+						feetShader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
+						feetShader:setValue(lightAttenuationStr, light.radius)
+					end
+				end
+			end
 		end
 	end
 end

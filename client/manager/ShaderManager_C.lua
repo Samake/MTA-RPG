@@ -160,6 +160,10 @@ function ShaderManager_C:update(deltaTime)
 			end
 		end
 		
+		if (self.pedShaders) then
+			self.pedShaders:update()
+		end
+		
 		if (self.waterShader) then
 			self.waterShader:update(deltaTime)
 		end
