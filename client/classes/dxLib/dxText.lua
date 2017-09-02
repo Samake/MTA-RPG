@@ -22,8 +22,11 @@ function dxText:constructor(text, x, y, w, h, parent, relative)
 	self.shadowOffset = 1
 
 	self.alpha = 255
-	
+
 	self.scale = 1.0
+	self.alignX = "center"
+	self.alignY = "center"
+	self.font = "default-bold"
 	
 	self.postGUI = false
 	self.subPixelPositioning = true
@@ -40,15 +43,15 @@ end
 
 
 function dxText:init()
-
+	self:calcValues()
 end
 
 
 function dxText:update(deltaTime)
 	self:calcValues()
 
-	dxDrawText(removeHEXColorCode(self.text), self.x + self.shadowOffset, self.y + self.shadowOffset, self.x + self.width + self.shadowOffset, self.y + self.height + self.shadowOffset, tocolor(self.shadowColor.r, self.shadowColor.g, self.shadowColor.b, self.alpha), self.scale, "default-bold", "center", "center", false, false, self.postGUI, false, self.subPixelPositioning)	
-	dxDrawText(self.text, self.x, self.y, self.x + self.width, self.y + self.height, tocolor(self.fontColor.r, self.fontColor.g, self.fontColor.b, self.alpha), self.scale, "default-bold", "center", "center", false, false, self.postGUI, true, self.subPixelPositioning)	
+	dxDrawText(removeHEXColorCode(self.text), self.x + self.shadowOffset, self.y + self.shadowOffset, self.x + self.width + self.shadowOffset, self.y + self.height + self.shadowOffset, tocolor(self.shadowColor.r, self.shadowColor.g, self.shadowColor.b, self.alpha), self.scale, self.font, self.alignX, self.alignY, false, false, self.postGUI, false, self.subPixelPositioning)	
+	dxDrawText(self.text, self.x, self.y, self.x + self.width, self.y + self.height, tocolor(self.fontColor.r, self.fontColor.g, self.fontColor.b, self.alpha), self.scale, self.font, self.alignX, self.alignY, false, false, self.postGUI, true, self.subPixelPositioning)	
 end
 
 
@@ -80,9 +83,9 @@ function dxText:calcValues()
 			self.width = self.defaultWidth
 			self.height = self.defaultHeight
 		end
-		
-		self.mouseX, self.mouseY = ClickSystem_C:getSingleton():getPosition()
 	end
+	
+	self.mouseX, self.mouseY = ClickSystem_C:getSingleton():getPosition()
 end
 
 
@@ -208,6 +211,42 @@ end
 
 function dxText:getScale()
 	return self.scale
+end
+
+
+function dxText:setAlignX(alignX)
+	if (alignX) then
+		self.alignX = alignX
+	end
+end
+
+
+function dxText:getAlignX()
+	return self.alignX
+end
+
+
+function dxText:setAlignY(alignY)
+	if (alignY) then
+		self.alignY = alignY
+	end
+end
+
+
+function dxText:getAlignY()
+	return self.alignY
+end
+
+
+function dxText:setFont(font)
+	if (font) then
+		self.font = font
+	end
+end
+
+
+function dxText:getFont()
+	return self.font
 end
 
 

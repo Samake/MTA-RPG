@@ -1,8 +1,8 @@
-dxWindow = inherit(Class)
+GUICharacterSlots_C = inherit(Class)
 
-function dxWindow:constructor(x, y, w, h, parent, relative)
+function GUICharacterSlots_C:constructor(x, y, w, h, parent, relative)
 	
-	self.screenWidth, self.screenHeight = guiGetScreenSize()
+	self.slots = {}
 	
 	self.defaultX = x or 0
 	self.defaultY = y or 0
@@ -11,52 +11,64 @@ function dxWindow:constructor(x, y, w, h, parent, relative)
 	self.parent = parent or nil
 	self.isRelative = relative or true
 	
-	self.x = 0
-	self.y = 0
-	self.width = 0
-	self.height = 0
+	self.x = self.defaultX
+	self.y = self.defaultY
+	self.width = self.defaultWidth
+	self.height = self.defaultHeight
 	
-	self.color = {r = 0, g = 0, b = 0}
-	self.borderColor = {r = 0, g = 0, b = 0}
+	self.color = {r = 15, g = 15, b = 15}
+	self.borderColor = {r = 45, g = 45, b = 45}
 	
 	self.borderSize = 2
 	
 	self.alpha = 255
 	
-	self.postGUI = false
-	self.subPixelPositioning = true
-	
 	self.mouseX = 0
 	self.mouseY = 0
+	
+	self.postGUI = true
+	self.subPixelPositioning = true
 	
 	self:init()
 	
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("dxWindow was loaded.")
+		sendMessage("GUICharacterSlots_C was loaded.")
 	end
 end
 
 
-function dxWindow:init()
+function GUICharacterSlots_C:init()
 	self:calcValues()
+	
 end
 
 
-function dxWindow:update(deltaTime)
+
+function GUICharacterSlots_C:update(deltaTime)
 	self:calcValues()
+	self:drawBackground()
 	
+	for index, slot in ipairs(self.slots) do
+		if (slot) then
+			slot:update(deltaTime)
+		end
+	end
+end
+
+
+function GUICharacterSlots_C:drawBackground()
 	-- draw bg
 	dxDrawRectangle(self.x, self.y, self.width, self.height, tocolor(self.color.r, self.color.g, self.color.b, self.alpha), self.postGUI, self.subPixelPositioning)
 	
 	-- draw border
-	dxDrawLine (self.x, self.y, self.x + self.width, self.y, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
-	dxDrawLine (self.x + self.width, self.y, self.x + self.width, self.y + self.height, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
-	dxDrawLine (self.x + self.width, self.y + self.height, self.x, self.y + self.height, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
-	dxDrawLine (self.x, self.y + self.height, self.x, self.y, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
+	dxDrawLine(self.x, self.y, self.x + self.width, self.y, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
+	dxDrawLine(self.x + self.width, self.y, self.x + self.width, self.y + self.height, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
+	dxDrawLine(self.x + self.width, self.y + self.height, self.x, self.y + self.height, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
+	dxDrawLine(self.x, self.y + self.height, self.x, self.y, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
 end
 
 
-function dxWindow:calcValues()
+function GUICharacterSlots_C:calcValues()
 	if (self.parent) then
 		if (self.isRelative == true) then
 			self.x = self.parent.x + self.parent.width * self.defaultX
@@ -90,7 +102,7 @@ function dxWindow:calcValues()
 end
 
 
-function dxWindow:isCursorInside()
+function GUICharacterSlots_C:isCursorInside()
 	if (self.mouseX > self.x) and (self.mouseX < self.x + self.width) then
 		if (self.mouseY > self.y) and (self.mouseY < self.y + self.height) then
 			return true
@@ -101,7 +113,7 @@ function dxWindow:isCursorInside()
 end
 
 
-function dxWindow:setPosition(x, y)
+function GUICharacterSlots_C:setPosition(x, y)
 	if (x) and (y) then
 		self.defaultX = x
 		self.defaultY = y
@@ -109,12 +121,12 @@ function dxWindow:setPosition(x, y)
 end
 
 
-function dxWindow:getPosition()
+function GUICharacterSlots_C:getPosition()
 	return self.defaultX, self.defaultY
 end
 
 
-function dxWindow:setSize(w, h)
+function GUICharacterSlots_C:setSize(w, h)
 	if (w) and (h) then
 		self.defaultWidth = w
 		self.defaultHeight = h
@@ -122,24 +134,24 @@ function dxWindow:setSize(w, h)
 end
 
 
-function dxWindow:getSize()
+function GUICharacterSlots_C:getSize()
 	return self.defaultWidth, self.defaultHeight
 end
 
 
-function dxWindow:setParent(parent)
+function GUICharacterSlots_C:setParent(parent)
 	if (parent) then
 		self.parent = parent
 	end
 end
 
 
-function dxWindow:getParent()
+function GUICharacterSlots_C:getParent()
 	return self.parent
 end
 
 
-function dxWindow:setBackgroundColor(r, g, b)
+function GUICharacterSlots_C:setBackgroundColor(r, g, b)
 	if (r) and (g) and (b) then
 		self.color.r = r
 		self.color.g = g
@@ -148,12 +160,12 @@ function dxWindow:setBackgroundColor(r, g, b)
 end
 
 
-function dxWindow:getBackgroundColor()
+function GUICharacterSlots_C:getBackgroundColor()
 	return self.color
 end
 
 
-function dxWindow:setBorderColor(r, g, b)
+function GUICharacterSlots_C:setBorderColor(r, g, b)
 	if (r) and (g) and (b) then
 		self.borderColor.r = r
 		self.borderColor.g = g
@@ -162,64 +174,69 @@ function dxWindow:setBorderColor(r, g, b)
 end
 
 
-function dxWindow:getBorderColor()
+function GUICharacterSlots_C:getBorderColor()
 	return self.borderColor
 end
 
 
-function dxWindow:setBorderSize(size)
+function GUICharacterSlots_C:setBorderSize(size)
 	if (size) then
 		self.borderSize = size
 	end
 end
 
 
-function dxWindow:getBorderSize()
+function GUICharacterSlots_C:getBorderSize()
 	return self.borderSize
 end
 
 
-function dxWindow:setAlpha(alpha)
+function GUICharacterSlots_C:setAlpha(alpha)
 	if (alpha) then
 		self.alpha = alpha
 	end
 end
 
 
-function dxWindow:getAlpha()
+function GUICharacterSlots_C:getAlpha()
 	return self.alpha
 end
 
 
-function dxWindow:setPostGUI(postGUI)
+function GUICharacterSlots_C:setPostGUI(postGUI)
 	self.postGUI = postGUI
 end
 
 
-function dxWindow:getPostGUI()
+function GUICharacterSlots_C:getPostGUI()
 	return self.postGUI
 end
 
 
-function dxWindow:setSubPixelPositioning(subPixelPositioning)
+function GUICharacterSlots_C:setSubPixelPositioning(subPixelPositioning)
 	self.subPixelPositioning = subPixelPositioning
 end
 
 
-function dxWindow:getSubPixelPositioning()
+function GUICharacterSlots_C:getSubPixelPositioning()
 	return self.subPixelPositioning
 end
 
 
-function dxWindow:clear()
-
+function GUICharacterSlots_C:clear()
+	for index, slot in pairs(self.slots) do
+		if (slot) then
+			slot:delete()
+			slot = nil
+		end
+	end
 end
 
 
-function dxWindow:destructor()
+function GUICharacterSlots_C:destructor()
 	self:clear()
-	
+
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("dxWindow was deleted.")
+		sendMessage("GUICharacterSlots_C was deleted.")
 	end
 end

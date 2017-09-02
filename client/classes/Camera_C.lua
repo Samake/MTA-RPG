@@ -58,20 +58,14 @@ function Camera_C:update(deltaTime)
 		self.playerRot = self.player:getRotation()
 		
 		if (self.playerPos) and (self.playerRot) then
-		
-			if (getKeyState(Bindings["CAMERASCROLLIN"]) == true) then
-				self:scrollIn()
-			end
 			
-			if (getKeyState(Bindings["CAMERASCROLLOUT"]) == true) then
-				self:scrollOut()
-			end
-			
-			if (getKeyState(Bindings["CAMERAROTATE"]) == true) then
-				self:rotate()
-			else
-				self.lastMouseX = nil
-				self.lastMouseY = nil
+			if (GUIManager_C:getSingleton():isCursorOnGUIElement() == false) then
+				if (getKeyState(Bindings["CAMERAROTATE"]) == true) then
+					self:rotate()
+				else
+					self.lastMouseX = nil
+					self.lastMouseY = nil
+				end
 			end
 			
 			self.camTargetX, self.camTargetY, self.camTargetZ = self.playerPos.x, self.playerPos.y, self.playerPos.z
@@ -84,31 +78,35 @@ end
 
 
 function Camera_C:scrollIn()
-	if (self.currentDistance > self.minDistance) then
-		self.currentDistance = self.currentDistance - self.scrollSpeed / 2
-	else
-		self.currentDistance = self.minDistance
-	end
-	
-	if (self.currentHeight > self.minHeight) then
-		self.currentHeight = self.currentHeight - self.scrollSpeed / 2
-	else
-		self.currentHeight = self.minHeight
+	if (GUIManager_C:getSingleton():isCursorOnGUIElement() == false) then
+		if (self.currentDistance > self.minDistance) then
+			self.currentDistance = self.currentDistance - self.scrollSpeed / 2
+		else
+			self.currentDistance = self.minDistance
+		end
+		
+		if (self.currentHeight > self.minHeight) then
+			self.currentHeight = self.currentHeight - self.scrollSpeed / 2
+		else
+			self.currentHeight = self.minHeight
+		end
 	end
 end
 
 
 function Camera_C:scrollOut()
-	if (self.currentDistance < self.maxDistance) then
-		self.currentDistance = self.currentDistance + self.scrollSpeed
-	else
-		self.currentDistance = self.maxDistance
-	end
-	
-	if (self.currentHeight < self.maxHeight) then
-		self.currentHeight = self.currentHeight + self.scrollSpeed
-	else
-		self.currentHeight = self.maxHeight
+	if (GUIManager_C:getSingleton():isCursorOnGUIElement() == false) then
+		if (self.currentDistance < self.maxDistance) then
+			self.currentDistance = self.currentDistance + self.scrollSpeed
+		else
+			self.currentDistance = self.maxDistance
+		end
+		
+		if (self.currentHeight < self.maxHeight) then
+			self.currentHeight = self.currentHeight + self.scrollSpeed
+		else
+			self.currentHeight = self.maxHeight
+		end
 	end
 end
 

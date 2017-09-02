@@ -54,7 +54,7 @@ end
 
 
 function dxSlider:init()
-
+	self:calcValues()
 end
 
 
@@ -108,9 +108,9 @@ function dxSlider:calcValues()
 			self.width = self.defaultWidth
 			self.height = self.defaultHeight
 		end
-		
-		self.mouseX, self.mouseY = ClickSystem_C:getSingleton():getPosition()
 	end
+	
+	self.mouseX, self.mouseY = ClickSystem_C:getSingleton():getPosition()
 end
 
 

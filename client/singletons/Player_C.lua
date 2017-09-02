@@ -17,10 +17,12 @@ function Player_C:constructor()
 	self.maxMana = 0
 	self.currentMana = 0
 	
-	self.rank = "Beginner"
+	self.class = "UNKNOWN"
+	self.rank = "UNKNOWN"
 	self.level = 1
 	self.currentXP = 0
 	self.maxXP = 0
+	self.money = 0
 	
 	self.oldEquippedSlots = {}
 	self.equippedSlots = {}
@@ -135,6 +137,14 @@ function Player_C:getServerData(playerTable)
 		if (playerTable.currentMana) then
 			self.currentMana = playerTable.currentMana
 		end
+		
+		if (playerTable.money) then
+			self.money = playerTable.money
+		end
+		
+		if (playerTable.class) then
+			self.class = playerTable.class
+		end
 	end
 end
 
@@ -205,6 +215,21 @@ end
 
 function Player_C:getInventory()
 	return self.inventory
+end
+
+
+function Player_C:getName()
+	return self.player:getName()
+end
+
+
+function Player_C:getMoney()
+	return self.money
+end
+
+
+function Player_C:getClass()
+	return self.class
 end
 
 

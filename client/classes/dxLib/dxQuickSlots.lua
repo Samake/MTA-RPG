@@ -51,6 +51,8 @@ function dxQuickSlots:init()
 	self.m_onClientClick = bind(self.onClientClick, self)
 	addEventHandler("onClientClick", root, self.m_onClientClick)
 	
+	self:calcValues()
+	
 	for i = 1, self.slotCount, 1 do
 		if (not self.slots[i]) then
 			self.slots[i] = {}
@@ -158,9 +160,9 @@ function dxQuickSlots:calcValues()
 			self.width = self.defaultWidth
 			self.height = self.defaultHeight
 		end
-		
-		self.mouseX, self.mouseY = ClickSystem_C:getSingleton():getPosition()
 	end
+	
+	self.mouseX, self.mouseY = ClickSystem_C:getSingleton():getPosition()
 end
 
 

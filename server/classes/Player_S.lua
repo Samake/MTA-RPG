@@ -36,6 +36,7 @@ function Player_S:constructor(playerSettings)
 	self.manaRegeneration = 0
 	
 	self.rank = "Beginner"
+	self.class = "Fighter"
 	self.level = 1
 	self.currentXP = 0
 	self.maxXP = 1000
@@ -246,6 +247,8 @@ function Player_S:syncPlayerData()
 		self.playerTable.currentLife = self.currentLife
 		self.playerTable.maxMana = self.maxMana
 		self.playerTable.currentMana = self.currentMana
+		self.playerTable.money = self.money
+		self.playerTable.class = self.class
 
 		triggerClientEvent(self.player, "SYNCPLAYERDATA", self.player, self.playerTable)
 	end

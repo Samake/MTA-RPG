@@ -49,7 +49,7 @@ end
 
 
 function dxProgessBar:init()
-
+	self:calcValues()
 end
 
 
@@ -100,9 +100,9 @@ function dxProgessBar:calcValues()
 			self.width = self.defaultWidth
 			self.height = self.defaultHeight
 		end
-		
-		self.mouseX, self.mouseY = ClickSystem_C:getSingleton():getPosition()
 	end
+	
+	self.mouseX, self.mouseY = ClickSystem_C:getSingleton():getPosition()
 	
 	if (self.currentValue < self.value) then
 		self.currentValue = self.currentValue + 0.005

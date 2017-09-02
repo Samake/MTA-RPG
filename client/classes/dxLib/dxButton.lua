@@ -59,9 +59,7 @@ end
 
 
 function dxButton:init()
-	if (self.clickFunction) then
-		
-	end
+	self:calcValues()
 end
 
 
@@ -137,9 +135,9 @@ function dxButton:calcValues()
 			self.width = self.defaultWidth
 			self.height = self.defaultHeight
 		end
-		
-		self.mouseX, self.mouseY = ClickSystem_C:getSingleton():getPosition()
 	end
+	
+	self.mouseX, self.mouseY = ClickSystem_C:getSingleton():getPosition()
 end
 
 

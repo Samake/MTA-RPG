@@ -89,6 +89,7 @@
 	<script src="client/classes/dxLib/dxQuickSlots.lua" type="client" cache="false"/>
 	<script src="client/classes/dxLib/dxProgessBar.lua" type="client" cache="false"/>
 	<script src="client/classes/dxLib/dxText.lua" type="client" cache="false"/>
+	<script src="client/classes/dxLib/dxLine.lua" type="client" cache="false"/>
 	
 	<script src="client/classes/GUIAnimations_C.lua" type="client" cache="false"/>
 	<script src="client/classes/Camera_C.lua" type="client" cache="false"/>
@@ -103,6 +104,10 @@
 	<script src="client/classes/GUIQuickSlots_C.lua" type="client" cache="false"/>
 	<script src="client/classes/GUIStatBars_C.lua" type="client" cache="false"/>
 	<script src="client/classes/GUIInventory_C.lua" type="client" cache="false"/>
+	<script src="client/classes/GUIInventorySlots_C.lua" type="client" cache="false"/>
+	<script src="client/classes/GUICharacterSlots_C.lua" type="client" cache="false"/>
+	<script src="client/classes/GUISlot_C.lua" type="client" cache="false"/>
+	
 	<script src="client/classes/NameTags_C.lua" type="client" cache="false"/>
 	<script src="client/classes/WorldText3D_C.lua" type="client" cache="false"/>
 	<script src="client/classes/Notification_C.lua" type="client" cache="false"/>
