@@ -36,7 +36,7 @@ function LootManager_S:addLoot(playerClass, money, x, y, z)
 				if (EventManager_S:getSingleton():isDoubleDropEvent() == true) then
 					dropChance = dropChance * 2
 				end
-				
+
 				if (chance < dropChance) then
 					local lootSettings = {}
 					lootSettings.id = self:getFreeID()
@@ -79,8 +79,8 @@ function LootManager_S:addMoneyLoot(playerClass, money, x, y, z)
 	if (playerClass) and (money) and (x) and (y) and (z) then
 		local moneySettings = {}
 		moneySettings.id = self:getFreeID()
-		moneySettings.x = x
-		moneySettings.y = y
+		moneySettings.x = x + (math.random(-1000, 1000) / 1000)
+		moneySettings.y = y + (math.random(-1000, 1000) / 1000)
 		moneySettings.z = z
 		moneySettings.money = money
 		moneySettings.playerClass = playerClass

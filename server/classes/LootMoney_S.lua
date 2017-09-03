@@ -79,6 +79,8 @@ function LootMoney_S:pickup(element)
 						NotificationManager_S:getSingleton():sendPlayerNotification(self.owner, "#EEEEEEYou got #EEDD44" .. self.money .. " $")
 						LootManager_S:getSingleton():deleteLoot(self.id)
 					end
+				else
+					NotificationManager_S:getSingleton():sendPlayerNotification(client, "#EE4444Not allowed to loot this!")
 				end
 			else
 				self.owner = client

@@ -96,18 +96,6 @@ function GUIInventory_C:update(deltaTime)
 end
 
 
-function GUIInventory_C:setAvailableSlot(id)
-	if (id) then
-		self.availableSlot = id
-	end
-end
-
-
-function GUIInventory_C:clear()
-	return self.availableSlot
-end
-
-
 function GUIInventory_C:clear()
 	for index, guiElement in pairs(self.guiElements) do
 		if (guiElement) then

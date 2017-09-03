@@ -77,26 +77,20 @@ function LootClothes_S:pickup(element)
 			if (self.owner) then
 				if (self.owner == client) then
 					if (self.playerClass) then
-						--id = 2
-						--name = "Head"
-						--description = ""
-						--stats = {stamina = 1, intelligence = 2, armor = 100, crit = 2}
-						--chance = 100
-						--quality = "normal"
-						--color = {220, 220, 90}
-						--costs
-						--class
-						--instance
-						
 						if (self.itemContainer) then
 							local color = RGBToHex(self.itemContainer.color.r, self.itemContainer.color.g, self.itemContainer.color.b)
+							local inventory = self.playerClass:getInventory()
 							
-							if (color) then
+							if (color) and (inventory) then
+								inventory:addItem(client, self.itemContainer)
+								
 								NotificationManager_S:getSingleton():sendPlayerNotification(self.owner, "#EEEEEEYou got " .. color .. self.itemContainer.name)
 								LootManager_S:getSingleton():deleteLoot(self.id)
 							end
 						end
 					end
+				else
+					NotificationManager_S:getSingleton():sendPlayerNotification(client, "#EE4444Not allowed to loot this!")
 				end
 			else
 				self.owner = client
@@ -105,8 +99,11 @@ function LootClothes_S:pickup(element)
 				if (self.playerClass) then
 					if (self.itemContainer) then
 						local color = RGBToHex(self.itemContainer.color.r, self.itemContainer.color.g, self.itemContainer.color.b)
+						local inventory = self.playerClass:getInventory()
 						
-						if (color) then
+						if (color) and (inventory) then
+							inventory:addItem(client, self.itemContainer)
+							
 							NotificationManager_S:getSingleton():sendPlayerNotification(self.owner, "#EEEEEEYou got " .. color .. self.itemContainer.name)
 							LootManager_S:getSingleton():deleteLoot(self.id)
 						end

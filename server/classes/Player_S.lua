@@ -490,6 +490,11 @@ function Player_S:getCritChance()
 end
 
 
+function Player_S:getInventory()
+	return self.inventory
+end
+
+
 function Player_S:clear()
 	AttackManager_S:getSingleton():deletePlayerAttacks(self.player)
 	
