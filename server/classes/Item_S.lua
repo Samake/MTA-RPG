@@ -3,6 +3,7 @@ Item_S = inherit(Class)
 function Item_S:constructor(itemProperties)
 	
 	self.id = itemProperties.id
+	self.slotID = itemProperties.slotID
 	self.player = itemProperties.player
 	self.name = itemProperties.name
 	self.description = itemProperties.id

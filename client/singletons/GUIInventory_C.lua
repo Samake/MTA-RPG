@@ -106,6 +106,50 @@ function GUIInventory_C:clear()
 end
 
 
+function GUIInventory_C:addItem(item)
+	if (item) then
+		local inventorySlots = self.guiElements[9]:getSlots()
+		
+		if (inventorySlots) then
+			for index, slot in pairs(inventorySlots) do
+				if (slot) then
+					if (item.slotID == slot.id) then
+						slot:setItem(item)
+						break
+					end
+				end
+			end
+		end
+		
+		local characterSlots = self.guiElements[8]:getSlots()
+		
+		if (characterSlots) then
+			for index, slot in pairs(characterSlots) do
+				if (slot) then
+					if (item.slotID == slot.id) then
+						slot:setItem(item)
+						break
+					end
+				end
+			end
+		end
+	end		
+end
+
+
+function GUIInventory_C:deleteItem(id)
+	if (id) then
+		if (inventorySlots) then
+			for index, slot in pairs(inventorySlots) do
+				if (id == index) then
+					slot:setItem(nil)
+				end
+			end
+		end
+	end
+end
+
+
 function GUIInventory_C:destructor()
 	self:clear()
 

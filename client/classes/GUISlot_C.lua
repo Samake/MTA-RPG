@@ -35,7 +35,7 @@ function GUISlot_C:constructor(id, x, y, w, h, parent, relative)
 	self.postGUI = true
 	self.subPixelPositioning = true
 	
-	self.itemContainer = {}
+	self.itemContainer = nil
 	
 	self:init()
 	
@@ -56,14 +56,19 @@ function GUISlot_C:update(deltaTime)
 	-- draw bg
 	dxDrawRectangle(self.finalX, self.finalY, self.finalWidth, self.finalHeight, tocolor(self.color.r, self.color.g, self.color.b, self.alpha), self.postGUI, self.subPixelPositioning)
 	
+	-- draw Content
+	if (self.itemContainer) then
+		if (self.itemContainer:getTexture()) then
+			dxDrawImage(self.finalX, self.finalY, self.finalWidth, self.finalHeight, self.itemContainer:getTexture(), 0, 0, 0, tocolor(220, 220, 220,self.alpha), self.postGUI)
+		end
+	end
+	
 	-- draw border
 	if (self:isCursorInside() == true) then
 		dxDrawLine(self.finalX, self.finalY, self.finalX + self.finalWidth, self.finalY, tocolor(self.hoverColor.r, self.hoverColor.g, self.hoverColor.b, self.alpha), self.borderSize, self.postGUI)
 		dxDrawLine(self.finalX + self.finalWidth, self.finalY, self.finalX + self.finalWidth, self.finalY + self.finalHeight, tocolor(self.hoverColor.r, self.hoverColor.g, self.hoverColor.b, self.alpha), self.borderSize, self.postGUI)
 		dxDrawLine(self.finalX + self.finalWidth, self.finalY + self.finalHeight, self.finalX, self.finalY + self.finalHeight, tocolor(self.hoverColor.r, self.hoverColor.g, self.hoverColor.b, self.alpha), self.borderSize, self.postGUI)
 		dxDrawLine(self.finalX, self.finalY + self.finalHeight, self.finalX, self.finalY, tocolor(self.hoverColor.r, self.hoverColor.g, self.hoverColor.b, self.alpha), self.borderSize, self.postGUI)
-	
-		GUIInventory_C:getSingleton():setAvailableSlot(self.id)
 	else
 		if (self.item) then
 			self.qualityColor = self.item.color
@@ -264,6 +269,16 @@ end
 
 function GUISlot_C:getSubPixelPositioning()
 	return self.subPixelPositioning
+end
+
+
+function GUISlot_C:setItem(itemContainer)
+	self.itemContainer = itemContainer
+end
+
+
+function GUISlot_C:getItem()
+	return self.itemContainer
 end
 
 

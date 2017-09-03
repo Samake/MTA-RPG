@@ -262,6 +262,11 @@ function GUICharacterSlots_C:getSubPixelPositioning()
 end
 
 
+function GUICharacterSlots_C:getSlots()
+	return self.slots
+end
+
+
 function GUICharacterSlots_C:clear()
 	for index, slot in pairs(self.slots) do
 		if (slot) then

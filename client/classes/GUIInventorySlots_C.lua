@@ -283,6 +283,11 @@ function GUIInventorySlots_C:getSubPixelPositioning()
 end
 
 
+function GUIInventorySlots_C:getSlots()
+	return self.slots
+end
+
+
 function GUIInventorySlots_C:clear()
 	self:destroySlots()
 end

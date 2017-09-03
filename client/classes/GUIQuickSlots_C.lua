@@ -88,7 +88,7 @@ function GUIQuickSlots_C:updateSlots()
 					local iconValues = string.split(slot.icon, "|")
 					
 					if (iconValues) then
-						if (iconValues[1]) and (iconValues[2]) and (iconValues[2]) then
+						if (iconValues[1]) and (iconValues[2]) and (iconValues[3]) then
 							if (Textures[iconValues[1]][iconValues[2]][tonumber(iconValues[3])]) then
 								if (Textures[iconValues[1]][iconValues[2]][tonumber(iconValues[3])].texture) then
 									self.guiSlots:setSlotIcon(index, Textures[iconValues[1]][iconValues[2]][tonumber(iconValues[3])].texture)
