@@ -40,6 +40,41 @@ end
 function GUICharacterSlots_C:init()
 	self:calcValues()
 	
+	if (not self.slots["head"]) then
+		self.slots["head"] = GUISlot_C:new("head", 0.425, 0.01, 0.15, 0.15, self, true)
+	end
+	
+	if (not self.slots["torso"]) then
+		self.slots["torso"] = GUISlot_C:new("torso", 0.425, 0.225, 0.15, 0.15, self, true)
+	end
+	
+	if (not self.slots["legs"]) then
+		self.slots["legs"] = GUISlot_C:new("legs", 0.425, 0.55, 0.15, 0.15, self, true)
+	end
+	
+	if (not self.slots["feet"]) then
+		self.slots["feet"] = GUISlot_C:new("feet", 0.425, 0.825, 0.15, 0.15, self, true)
+	end
+	
+	if (not self.slots["leftHand"]) then
+		self.slots["leftHand"] = GUISlot_C:new("leftHand", 0.15, 0.435, 0.15, 0.15, self, true)
+	end
+	
+	if (not self.slots["righthand"]) then
+		self.slots["righthand"] = GUISlot_C:new("righthand", 0.7, 0.435, 0.15, 0.15, self, true)
+	end
+	
+	if (not self.slots["leftRing"]) then
+		self.slots["leftRing"] = GUISlot_C:new("leftRing", 0.15, 0.325, 0.075, 0.075, self, true)
+	end
+	
+	if (not self.slots["rightRing"]) then
+		self.slots["rightRing"] = GUISlot_C:new("rightRing", 0.775, 0.325, 0.075, 0.075, self, true)
+	end
+	
+	if (not self.slots["chain"]) then
+		self.slots["chain"] = GUISlot_C:new("chain", 0.15, 0.01, 0.1, 0.1, self, true)
+	end
 end
 
 
@@ -48,7 +83,7 @@ function GUICharacterSlots_C:update(deltaTime)
 	self:calcValues()
 	self:drawBackground()
 	
-	for index, slot in ipairs(self.slots) do
+	for index, slot in pairs(self.slots) do
 		if (slot) then
 			slot:update(deltaTime)
 		end
@@ -65,6 +100,10 @@ function GUICharacterSlots_C:drawBackground()
 	dxDrawLine(self.x + self.width, self.y, self.x + self.width, self.y + self.height, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
 	dxDrawLine(self.x + self.width, self.y + self.height, self.x, self.y + self.height, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
 	dxDrawLine(self.x, self.y + self.height, self.x, self.y, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
+
+	if (Textures["GUI"]["Misc"][1]) then
+		dxDrawImage(self.x, self.y, self.width, self.height, Textures["GUI"]["Misc"][1].texture, 0, 0, 0, tocolor(35, 35, 35,self.alpha), self.postGUI)
+	end
 end
 
 

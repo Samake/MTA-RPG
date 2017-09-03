@@ -41,6 +41,9 @@ Textures["GUI"]["Cursor"][1] = {texture = nil, path = "res/textures/gui/crosshai
 Textures["GUI"]["Cursor"][2] = {texture = nil, path = "res/textures/gui/marker3D.png"}
 Textures["GUI"]["Cursor"][3] = {texture = nil, path = "res/textures/gui/pickUpCursor.png"}
 
+Textures["GUI"]["Misc"] = {}
+Textures["GUI"]["Misc"][1] = {texture = nil, path = "res/textures/gui/characterBG.png"}
+
 Textures["Effects"] = {}
 Textures["Effects"]["Rain"] = {}
 Textures["Effects"]["Rain"][1] = {texture = nil, path = "res/textures/effects/rain_pp.png"}

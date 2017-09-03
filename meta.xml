@@ -156,6 +156,7 @@
 	<file src="res/textures/gui/crosshair.png" type="client" cache="false"/>
 	<file src="res/textures/gui/marker3D.png" type="client" cache="false"/>
 	<file src="res/textures/gui/pickUpCursor.png" type="client" cache="false"/>
+	<file src="res/textures/gui/characterBG.png" type="client" cache="false"/>
 	
 	<file src="res/textures/effects/rain_pp.png" type="client" cache="false"/>
 	<file src="res/textures/effects/paperNormalMap.png" type="client" cache="false"/>
