@@ -3,6 +3,7 @@ Inventory_S = inherit(Class)
 function Inventory_S:constructor(player)
 	
 	self.player = player
+	self.slots = {}
 	
 	self:init()
 	
@@ -13,13 +14,25 @@ end
 
 
 function Inventory_S:init()
-	
+	for i = 1, Settings.inventorySize, 1 do
+		for j = 1, Settings.inventorySize, 1 do
+			local id = i .. ":" .. j
+			
+			if (not self.slots[id]) then
+				self.slots[id] = {}
+			end
+		end
+	end
 end
-
 
 
 function Inventory_S:update()
 
+end
+
+
+function Inventory_S:getSlots()
+	return self.slots
 end
 
 

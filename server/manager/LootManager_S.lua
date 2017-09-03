@@ -26,15 +26,31 @@ function LootManager_S:addLoot(playerClass, money, x, y, z)
 	if (playerClass) and (money) and (x) and (y) and (z) then
 		self:addMoneyLoot(playerClass, money, x, y, z)
 		
-		local lootSettings = {}
-		lootSettings.id = self:getFreeID()
-		lootSettings.x = x
-		lootSettings.y = y
-		lootSettings.z = z
-		lootSettings.playerClass = playerClass
+		local randomLoot = math.random(2, #LootTable)
 		
-		if (not self.lootClasses[lootSettings.id]) then
-			--create normal loot here then
+		if (LootTable[randomLoot]) then
+			if (LootTable[randomLoot].instance) then
+				local chance = math.random(0, 1000) / 10
+				local dropChance = LootTable[randomLoot].chance
+				
+				if (EventManager_S:getSingleton():isDoubleDropEvent() == true) then
+					dropChance = dropChance * 2
+				end
+				
+				if (chance < dropChance) then
+					local lootSettings = {}
+					lootSettings.id = self:getFreeID()
+					lootSettings.x = x + (math.random(-1000, 1000) / 1000)
+					lootSettings.y = y + (math.random(-1000, 1000) / 1000)
+					lootSettings.z = z
+					lootSettings.playerClass = playerClass
+					lootSettings.itemContainer = LootTable[randomLoot]
+					
+					if (not self.lootClasses[lootSettings.id]) then
+						self.lootClasses[lootSettings.id] = LootTable[randomLoot].instance:new(lootSettings)
+					end
+				end
+			end
 		end
 	end
 end
@@ -70,8 +86,8 @@ function LootManager_S:addMoneyLoot(playerClass, money, x, y, z)
 		moneySettings.playerClass = playerClass
 		
 		if (not self.lootClasses[moneySettings.id]) then
-			if (LootTable[1].class) then
-				self.lootClasses[moneySettings.id] = LootTable[1].class:new(moneySettings)
+			if (LootTable[1].instance) then
+				self.lootClasses[moneySettings.id] = LootTable[1].instance:new(moneySettings)
 			end
 		end
 	end

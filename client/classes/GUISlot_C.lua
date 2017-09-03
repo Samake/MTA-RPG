@@ -35,7 +35,7 @@ function GUISlot_C:constructor(id, x, y, w, h, parent, relative)
 	self.postGUI = true
 	self.subPixelPositioning = true
 	
-	self.item = nil
+	self.itemContainer = {}
 	
 	self:init()
 	
@@ -46,9 +46,16 @@ end
 
 
 function GUISlot_C:init()
+	self.m_PlaceItem = bind(self.placeItem, self)
+	addEvent("SLOTPLACEITEM", true)
+	addEventHandler("SLOTPLACEITEM", root, self.m_PlaceItem)
+	
+	self.m_TakeItem = bind(self.takeItem, self)
+	addEvent("SLOTTAKEITEM", true)
+	addEventHandler("SLOTTAKEITEM", root, self.m_TakeItem)
+	
 	self:calcValues()
 end
-
 
 
 function GUISlot_C:update(deltaTime)
@@ -63,6 +70,8 @@ function GUISlot_C:update(deltaTime)
 		dxDrawLine(self.finalX + self.finalWidth, self.finalY, self.finalX + self.finalWidth, self.finalY + self.finalHeight, tocolor(self.hoverColor.r, self.hoverColor.g, self.hoverColor.b, self.alpha), self.borderSize, self.postGUI)
 		dxDrawLine(self.finalX + self.finalWidth, self.finalY + self.finalHeight, self.finalX, self.finalY + self.finalHeight, tocolor(self.hoverColor.r, self.hoverColor.g, self.hoverColor.b, self.alpha), self.borderSize, self.postGUI)
 		dxDrawLine(self.finalX, self.finalY + self.finalHeight, self.finalX, self.finalY, tocolor(self.hoverColor.r, self.hoverColor.g, self.hoverColor.b, self.alpha), self.borderSize, self.postGUI)
+	
+		GUIInventory_C:getSingleton():setAvailableSlot(self.id)
 	else
 		if (self.item) then
 			self.qualityColor = self.item.color
@@ -266,8 +275,37 @@ function GUISlot_C:getSubPixelPositioning()
 end
 
 
-function GUISlot_C:clear()
+function GUISlot_C:placeItem(slotID, item)
+	if (slotID) and (item) then
+		if (slotID == self.id) then
+			if (not self.itemContainer.item) then
+				self.itemContainer.item = item
+				self.itemContainer.count = 1
+			else
+				if (self.itemContainer.item.id == item.id) then
+					if ((self.itemContainer.count + 1) <= Settings.inventoryStackSize) then
+						self.itemContainer.item = item
+						self.itemContainer.count = self.itemContainer.count + 1
+					end
+				end
+			end
+		end
+	end
+end
 
+
+function GUISlot_C:takeItem(slotID)
+	if (slotID) then
+		if (slotID == self.id) then
+			self.itemContainer = {}
+		end
+	end
+end
+
+
+function GUISlot_C:clear()
+	removeEventHandler("SLOTTAKEITEM", root, self.m_TakeItem)
+	removeEventHandler("SLOTPLACEITEM", root, self.m_PlaceItem)
 end
 
 

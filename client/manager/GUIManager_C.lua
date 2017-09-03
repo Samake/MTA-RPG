@@ -22,10 +22,6 @@ function GUIManager_C:init()
 	if (not self.guiIngame) then
 		self.guiIngame = GUIIngame_C:new()
 	end
-	
-	if (not self.guiInventory) then
-		self.guiInventory = GUIInventory_C:new()
-	end
 end
 
 
@@ -41,16 +37,13 @@ function GUIManager_C:update(deltaTime)
 			self.guiIngame:update(deltaTime)
 		end
 	elseif (self.isInventoryShown == true) then
-		if (self.guiInventory) then
-			self.guiInventory:update(deltaTime)
-		end
+		GUIInventory_C:getSingleton():update(self.delta)
 	end
 end
 
 
 function GUIManager_C:showGUI(bool)
 	self.isGUIShown = bool
-	--self:showInventory(not self.isGUIShown)
 end
 
 
@@ -61,7 +54,6 @@ end
 
 function GUIManager_C:showInventory(bool)
 	self.isInventoryShown = bool
-	--self:showGUI(not self.isInventoryShown)
 end
 
 
@@ -91,10 +83,7 @@ function GUIManager_C:clear()
 		self.guiWorld = nil
 	end
 	
-	if (self.guiInventory) then
-		self.guiInventory:delete()
-		self.guiInventory = nil
-	end
+	delete(GUIInventory_C:getSingleton())
 end
 
 

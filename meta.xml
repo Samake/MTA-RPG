@@ -54,6 +54,7 @@
 	<script src="server/classes/AttackPunch_S.lua" type="server"/>
 	<script src="server/classes/AttackKick_S.lua" type="server"/>
 	<script src="server/classes/LootMoney_S.lua" type="server"/>
+	<script src="server/classes/LootClothes_S.lua" type="server"/>
 	<script src="server/classes/Inventory_S.lua" type="server"/>
 	
 	<script src="server/settings/AttackSettings_S.lua" type="server"/>
@@ -71,6 +72,7 @@
 	<script src="client/singletons/MousePointer_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/Marker3D_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/Player_C.lua" type="client" cache="false"/>
+	<script src="client/singletons/GUIInventory_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/Debug_C.lua" type="client" cache="false"/>
 	
 	<script src="client/manager/XMLManager_C.lua" type="client" cache="false"/>
@@ -103,7 +105,6 @@
 	<script src="client/classes/GUIWorld_C.lua" type="client" cache="false"/>
 	<script src="client/classes/GUIQuickSlots_C.lua" type="client" cache="false"/>
 	<script src="client/classes/GUIStatBars_C.lua" type="client" cache="false"/>
-	<script src="client/classes/GUIInventory_C.lua" type="client" cache="false"/>
 	<script src="client/classes/GUIInventorySlots_C.lua" type="client" cache="false"/>
 	<script src="client/classes/GUICharacterSlots_C.lua" type="client" cache="false"/>
 	<script src="client/classes/GUISlot_C.lua" type="client" cache="false"/>

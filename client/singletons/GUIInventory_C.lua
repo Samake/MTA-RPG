@@ -1,4 +1,4 @@
-GUIInventory_C = inherit(Class)
+GUIInventory_C = inherit(Singleton)
 
 function GUIInventory_C:constructor()
 	
@@ -6,6 +6,8 @@ function GUIInventory_C:constructor()
 	
 	self.postGUI = true
 	self.inventory = nil
+	
+	self.availableSlot = nil
 	
 	self:init()
 	
@@ -20,6 +22,7 @@ function GUIInventory_C:init()
 	
 	if (self.guiElements[1]) then
 		self.guiElements[1]:setBackgroundColor(15, 15, 15)
+		self.guiElements[1]:setBorderColor(90, 220, 90)
 		self.guiElements[1]:setAlpha(Settings.guiAlpha)
 		self.guiElements[1]:setPostGUI(self.postGUI)
 		
@@ -46,7 +49,7 @@ function GUIInventory_C:init()
 		
 		self.guiElements[9] = GUIInventorySlots_C:new(0.525, 0.12, 0.45, 0.86, self.guiElements[1], true)
 		self.guiElements[9]:setBorderColor(90, 220, 90)
-		self.guiElements[9]:setGridSlots(8, 8)
+		self.guiElements[9]:setGridSlots(Settings.inventorySize, Settings.inventorySize)
 	end
 end
 
@@ -56,6 +59,8 @@ function GUIInventory_C:update(deltaTime)
 	self.inventory = Player_C:getSingleton():getInventory()
 	
 	if (self.inventory) then
+		self.availableSlot = nil
+		
 		if (self.guiElements[1]) then
 			if (self.guiElements[1]:isCursorInside() == true) then
 				GUIManager_C:getSingleton():setCursorOnGUIElement(true)
@@ -88,6 +93,18 @@ function GUIInventory_C:update(deltaTime)
 			end
 		end
 	end
+end
+
+
+function GUIInventory_C:setAvailableSlot(id)
+	if (id) then
+		self.availableSlot = id
+	end
+end
+
+
+function GUIInventory_C:clear()
+	return self.availableSlot
 end
 
 

@@ -5,9 +5,11 @@ function EventManager_S:constructor()
 	self.events = {}
 	self.events[1] = "DoubleXP"
 	self.events[2] = "DoubleMoney"
+	self.events[3] = "DoubleDrop"
 	
 	self.doubleXPEvent = true
 	self.doubleMoneyEvent = false
+	self.doubleDropEvent = false
 	
 	self.startTick = 0
 	self.currentTickTick = 0
@@ -108,6 +110,11 @@ function EventManager_S:startEvent(eventName, duration, flag)
 			if (not flag) then
 				NotificationManager_S:getSingleton():sendAllNotification("#44EE44Event #EEEEEE" .. eventName .. "#44EE44 event was started!")
 			end
+		elseif (eventName == "DoubleDrop") then
+			self.doubleDropEvent = true
+			if (not flag) then
+				NotificationManager_S:getSingleton():sendAllNotification("#44EE44Event #EEEEEE" .. eventName .. "#44EE44 event was started!")
+			end
 		end
 		
 		self.startTick = getTickCount()
@@ -133,6 +140,11 @@ function EventManager_S:stopEvent(eventName)
 				self.doubleMoneyEvent = false
 				NotificationManager_S:getSingleton():sendAllNotification("#EE4444Event #EEEEEE" .. eventName .. "#EE4444 was stopped!")
 			end
+		elseif (eventName == "DoubleDrop") then
+			if (self.doubleDropEvent == true) then
+				self.doubleDropEvent = false
+				NotificationManager_S:getSingleton():sendAllNotification("#EE4444Event #EEEEEE" .. eventName .. "#EE4444 was stopped!")
+			end
 		end
 		
 		self.currentEvent = nil
@@ -150,12 +162,18 @@ function EventManager_S:isDoubleMoneyEvent()
 end
 
 
+function EventManager_S:isDoubleDropEvent()
+	return self.doubleDropEvent
+end
+
+
 function EventManager_S:clear()
 	removeCommandHandler("startEvent", self.m_StartEventByCommand)
 	removeCommandHandler("stopEvent", self.m_StopEventByCommand)
 	
 	self.doubleXPEvent = false
 	self.doubleMoneyEvent = false
+	self.doubleDropEvent = false
 	self.currentEvent = nil
 end
 
