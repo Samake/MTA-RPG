@@ -49,6 +49,11 @@ function Item_C:getTexture()
 end
 
 
+function Item_C:getColor()
+	return {r = self.color.r, g = self.color.g, b = self.color.b}
+end
+
+
 function Item_C:clear()
 
 end

@@ -21,6 +21,7 @@ function LootClothes_S:constructor(lootSettings)
 	self.isLocked = true
 	self.isPickedUp = false
 	self.pickup = nil
+	self.aura = nil
 
 	self:init()
 	
@@ -123,15 +124,23 @@ end
 
 
 function LootClothes_S:createLootObject()
-	if (not self.pickUp) then
-		-- ToDo model by quality
+	if (not self.pickUp) and (self.owner)then
 		self.pickUp = createObject(1575, self.x, self.y, self.z - 0.48, 0, 0, self.rz, false)
 		
 		if (self.pickUp) then
 			self.pickUp:setData("ISLOOT", "true", true)
+			self.pickUp:setDimension(self.owner:getDimension())
 			
-			if (self.owner) then
-				self.pickUp:setDimension(self.owner:getDimension())
+			if (self.itemContainer) then
+				if (self.itemContainer.color) then
+					if (not self.aura) then
+						self.aura = createMarker(self.x, self.y, self.z - 0.48, "corona", 0.4, self.itemContainer.color.r, self.itemContainer.color.g, self.itemContainer.color.b, 90)
+					
+						if (self.aura) then
+							self.aura:setDimension(self.owner:getDimension())
+						end
+					end
+				end
 			end
 		end
 	end
@@ -142,6 +151,11 @@ function LootClothes_S:deleteLootObject()
 	if (self.pickUp) then
 		self.pickUp:destroy()
 		self.pickUp = nil
+	end
+	
+	if (self.aura) then
+		self.aura:destroy()
+		self.aura = nil
 	end
 end
 

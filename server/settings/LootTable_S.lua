@@ -1,7 +1,7 @@
 LootTable = {}
 
 -- money
-LootTable[1] = {id = 1, name = "Money", description = "", icon = nil, stats = nil, chance = 100, quality = nil, costs = 1, color = {r = 220, g = 220, b = 90}, class = nil, stackable = false, instance = LootMoney_S}
+LootTable[1] = {id = 1, name = "Money", description = "", icon = nil, stats = nil, chance = 100, quality = nil, costs = 1, color = {r = 90, g = 220, b = 90}, class = nil, stackable = false, instance = LootMoney_S}
 
 -- clothes
 LootTable[2] = {id = 2, name = "Normal Hat", description = "", icon = "Icons|Items|1", stats = {stamina = 1, intelligence = 2, armor = 100, crit = 2}, chance = 95, quality = "normal", costs = 15, color = {r = 90, g = 90, b = 90}, class = nil, stackable = false, instance = LootClothes_S}

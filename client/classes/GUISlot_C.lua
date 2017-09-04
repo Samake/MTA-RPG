@@ -61,6 +61,14 @@ function GUISlot_C:update(deltaTime)
 		if (self.itemContainer:getTexture()) then
 			dxDrawImage(self.finalX, self.finalY, self.finalWidth, self.finalHeight, self.itemContainer:getTexture(), 0, 0, 0, tocolor(220, 220, 220,self.alpha), self.postGUI)
 		end
+		
+		if (self.itemContainer:getColor()) then
+			self.qualityColor = self.itemContainer:getColor()
+		else
+			self.qualityColor = self.borderColor
+		end
+	else
+		self.qualityColor = self.borderColor
 	end
 	
 	-- draw border
@@ -70,12 +78,6 @@ function GUISlot_C:update(deltaTime)
 		dxDrawLine(self.finalX + self.finalWidth, self.finalY + self.finalHeight, self.finalX, self.finalY + self.finalHeight, tocolor(self.hoverColor.r, self.hoverColor.g, self.hoverColor.b, self.alpha), self.borderSize, self.postGUI)
 		dxDrawLine(self.finalX, self.finalY + self.finalHeight, self.finalX, self.finalY, tocolor(self.hoverColor.r, self.hoverColor.g, self.hoverColor.b, self.alpha), self.borderSize, self.postGUI)
 	else
-		if (self.item) then
-			self.qualityColor = self.item.color
-		else
-			self.qualityColor = self.borderColor
-		end
-		
 		dxDrawLine(self.finalX, self.finalY, self.finalX + self.finalWidth, self.finalY, tocolor(self.qualityColor.r, self.qualityColor.g, self.qualityColor.b, self.alpha), self.borderSize, self.postGUI)
 		dxDrawLine(self.finalX + self.finalWidth, self.finalY, self.finalX + self.finalWidth, self.finalY + self.finalHeight, tocolor(self.qualityColor.r, self.qualityColor.g, self.qualityColor.b, self.alpha), self.borderSize, self.postGUI)
 		dxDrawLine(self.finalX + self.finalWidth, self.finalY + self.finalHeight, self.finalX, self.finalY + self.finalHeight, tocolor(self.qualityColor.r, self.qualityColor.g, self.qualityColor.b, self.alpha), self.borderSize, self.postGUI)

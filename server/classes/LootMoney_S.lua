@@ -18,6 +18,7 @@ function LootMoney_S:constructor(moneySettings)
 	self.isLocked = true
 	self.isPickedUp = false
 	self.pickUp = nil
+	self.aura = nil
 	
 	self:init()
 	
@@ -104,14 +105,19 @@ end
 
 
 function LootMoney_S:createLootObject()
-	if (not self.pickUp) then
+	if (not self.pickUp) and (self.owner) then
 		self.pickUp = createObject(1212, self.x, self.y, self.z - 0.48, 0, 0, self.rz, false)
 		
 		if (self.pickUp) then
 			self.pickUp:setData("ISLOOT", "true", true)
+			self.pickUp:setDimension(self.owner:getDimension())
 			
-			if (self.owner) then
-				self.pickUp:setDimension(self.owner:getDimension())
+			if (not self.aura) then
+				self.aura = createMarker(self.x, self.y, self.z - 0.48, "corona", 0.25, 90, 220, 90, 90)
+				
+				if (self.aura) then
+					self.aura:setDimension(self.owner:getDimension())
+				end
 			end
 		end
 	end
@@ -122,6 +128,11 @@ function LootMoney_S:deleteLootObject()
 	if (self.pickUp) then
 		self.pickUp:destroy()
 		self.pickUp = nil
+	end
+	
+	if (self.aura) then
+		self.aura:destroy()
+		self.aura = nil
 	end
 end
 
