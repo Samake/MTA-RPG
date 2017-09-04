@@ -20,12 +20,13 @@ function Inventory_C:init()
 	
 	for i = 1, Settings.inventorySize, 1 do
 		for j = 1, Settings.inventorySize, 1 do
-			local id = i .. ":" .. j
 			
-			if (not self.slots[id]) then
-				self.slots[id] = {}
-				self.slots[id].item = nil
-				self.slots[id].count = 0
+			local slotID = i .. ":" .. j
+			
+			if (not self.slots[slotID]) then
+				self.slots[slotID] = {}
+				self.slots[slotID].item = nil
+				self.slots[slotID].count = 0
 			end
 		end
 	end

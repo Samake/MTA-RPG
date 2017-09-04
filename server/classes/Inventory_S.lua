@@ -15,11 +15,13 @@ end
 
 function Inventory_S:init()
 	for i = 1, Settings.inventorySize, 1 do
-		for j = 1, Settings.inventorySize, 1 do
-			if (not self.slots[id]) then
-				self.slots[i .. ":" .. j] = {}
-				self.slots[i .. ":" .. j].item = nil
-				self.slots[i .. ":" .. j].count = 0
+		for j = 1, Settings.inventorySize, 1 do		
+			local slotID = i .. ":" .. j
+			
+			if (not self.slots[slotID]) then
+				self.slots[slotID] = {}
+				self.slots[slotID].item = nil
+				self.slots[slotID].count = 0
 			end
 		end
 	end
@@ -29,35 +31,60 @@ end
 function Inventory_S:addItem(player, itemContainer)
 	if (player) and (itemContainer) then
 		if (player == self.player) then
-			for i = 1, Settings.inventorySize, 1 do
-				for j = 1, Settings.inventorySize, 1 do
-					if (self.slots[i .. ":" .. j]) then
-						itemContainer.player = player
-						
-						if (not self.slots[i .. ":" .. j].item) then
-							self.slots[i .. ":" .. j].item = Item_S:new(itemContainer)
+			if (self:addExistingItem(itemContainer) == false) then
+				local slotID = self:getFreeSlot()
+				
+				if (slotID) then
+					itemContainer.player = player
+					itemContainer.slotID = slotID
+					
+					self.slots[slotID].item = Item_S:new(itemContainer)
+					self.slots[slotID].count = 1
+				end
+			end
+	
+			self:syncSlots()
+		end
+	end
+end
 
-							if (self.slots[i .. ":" .. j].item) then
-								self.slots[i .. ":" .. j].count = 1
-								break
-							end
-						else
-							if (self.slots[i .. ":" .. j].item.id == itemContainer.id) then
-								if (itemContainer.stackable == true) then
-									if ((self.slots[i .. ":" .. j].count + 1) < Settings.inventoryStackSize) then
-										self.slots[i .. ":" .. j].count = self.slots[i .. ":" .. j].count + 1
-										break
-									end
-								end
+
+function Inventory_S:addExistingItem(itemContainer)
+	if (itemContainer) then
+		for index, slotItem in pairs(self.slots) do
+			if (slotItem) then
+				if (slotItem.item) and (slotItem.count) then
+					if (slotItem.item.id == itemContainer.id) then
+						if (itemContainer.stackable == true) then
+							if ((slotItem.count + 1) < Settings.inventoryStackSize) then
+								slotItem.count.count = slotItem.count.count + 1
+								return true
 							end
 						end
 					end
 				end
 			end
-			
-			self:syncSlots()
 		end
 	end
+	
+	return false
+end
+
+
+function Inventory_S:getFreeSlot()
+	for j = 1, Settings.inventorySize, 1 do
+		for i = 1, Settings.inventorySize, 1 do
+			local slotID = i .. ":" .. j
+			
+			if (self.slots[slotID]) then
+				if (not self.slots[slotID].item) then
+					return slotID
+				end
+			end
+		end
+	end
+	
+	return nil
 end
 
 
@@ -82,7 +109,7 @@ function Inventory_S:syncSlots()
 			if (slotItem) then
 				if (slotItem.item) and (slotItem.count) then
 					local itemProperties = {}
-					itemProperties.slotID = index
+					itemProperties.slotID = slotItem.item.slotID
 					itemProperties.id = slotItem.item.id
 					itemProperties.player = slotItem.item.player
 					itemProperties.name = slotItem.item.name

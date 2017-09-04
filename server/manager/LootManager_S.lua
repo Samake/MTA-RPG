@@ -66,7 +66,7 @@ function LootManager_S:getAllLootForPlayer()
 				if (lootPos) and (playerPos) then
 
 					if (getDistanceBetweenPoints2D(lootPos.x, lootPos.y, playerPos.x, playerPos.y) <= self.maxLootDistance) then
-						lootClass:pickup(lootClass:getObject())
+						lootClass:pickupItem(lootClass:getObject())
 					end
 				end
 			end

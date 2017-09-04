@@ -1,8 +1,8 @@
 GUISlot_C = inherit(Class)
 
-function GUISlot_C:constructor(id, x, y, w, h, parent, relative)
+function GUISlot_C:constructor(slotID, x, y, w, h, parent, relative)
 	
-	self.id = id
+	self.slotID = slotID
 	self.defaultX = x or 0
 	self.defaultY = y or 0
 	self.defaultWidth = w or 0
@@ -40,7 +40,7 @@ function GUISlot_C:constructor(id, x, y, w, h, parent, relative)
 	self:init()
 	
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("GUISlot_C " .. self.id .. " was loaded.")
+		sendMessage("GUISlot_C " .. self.slotID .. " was loaded.")
 	end
 end
 
@@ -291,6 +291,6 @@ function GUISlot_C:destructor()
 	self:clear()
 
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("GUISlot_C " .. self.id .. " was deleted.")
+		sendMessage("GUISlot_C " .. self.slotID .. " was deleted.")
 	end
 end

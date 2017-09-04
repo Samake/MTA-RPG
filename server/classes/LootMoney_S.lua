@@ -17,7 +17,7 @@ function LootMoney_S:constructor(moneySettings)
 	
 	self.isLocked = true
 	self.isPickedUp = false
-	self.pickUpMoney = nil
+	self.pickUp = nil
 	
 	self:init()
 	
@@ -36,9 +36,9 @@ function LootMoney_S:init()
 		end
 	end
 	
-	self.m_PickUpMoney = bind(self.pickUpMoney, self)
+	self.m_PickupItem = bind(self.pickupItem, self)
 	addEvent("PICKUPLOOT", true)
-	addEventHandler("PICKUPLOOT", root, self.m_PickUpMoney)
+	addEventHandler("PICKUPLOOT", root, self.m_PickupItem)
 	
 	self:createLootObject()
 	
@@ -69,7 +69,7 @@ function LootMoney_S:update()
 end
 
 
-function LootMoney_S:pickUpMoney(element)
+function LootMoney_S:pickupItem(element)
 	if (self.isPickedUp == false) then
 		if (client) and (isElement(client)) and (element) and (self.pickUp) then
 			if (element == self.pickUp) then
@@ -137,7 +137,7 @@ end
 
 
 function LootMoney_S:clear()
-	removeEventHandler("PICKUPLOOT", root, self.m_PickUpMoney)
+	removeEventHandler("PICKUPLOOT", root, self.m_PickupItem)
 	
 	self:deleteLootObject()
 end

@@ -121,7 +121,7 @@ function GUIInventorySlots_C:buildSlots()
 	
 	for i = 1, self.horizontalSlots, 1 do
 		for j = 1, self.verticalSlots, 1 do
-			local id = i .. ":" .. j
+			local slotID = i .. ":" .. j
 			local w
 			local h
 			
@@ -136,8 +136,8 @@ function GUIInventorySlots_C:buildSlots()
 			local x = 0 + w * (i - 1)
 			local y = 0 + h * (j - 1)
 			
-			if (not self.slots[id]) then
-				self.slots[id] = GUISlot_C:new(id, x, y, w, h, self, true)
+			if (not self.slots[slotID]) then
+				self.slots[slotID] = GUISlot_C:new(slotID, x, y, w, h, self, true)
 			end
 		end
 	end
@@ -280,11 +280,6 @@ end
 
 function GUIInventorySlots_C:getSubPixelPositioning()
 	return self.subPixelPositioning
-end
-
-
-function GUIInventorySlots_C:getSlots()
-	return self.slots
 end
 
 

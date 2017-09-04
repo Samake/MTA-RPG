@@ -6,7 +6,7 @@ function Item_C:constructor(itemProperties)
 	self.slotID = itemProperties.slotID
 	self.player = itemProperties.player
 	self.name = itemProperties.name
-	self.description = itemProperties.id
+	self.description = itemProperties.description
 	self.stats = itemProperties.stats
 	self.quality = itemProperties.quality
 	self.color = itemProperties.color
@@ -20,7 +20,7 @@ function Item_C:constructor(itemProperties)
 	self:init()
 	
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("Item_C " .. self.id .. " was loaded.")
+		sendMessage("Item_C " .. self.slotID .. " was loaded.")
 	end
 end
 
@@ -58,6 +58,6 @@ function Item_C:destructor()
 	self:clear()
 
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("Item_C " .. self.id .. " was deleted.")
+		sendMessage("Item_C " .. self.slotID .. " was deleted.")
 	end
 end
