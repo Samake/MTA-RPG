@@ -169,5 +169,7 @@
 	<file src="res/textures/icons/debug/emitterIcon.png" type="client" cache="false"/>
 	<file src="res/textures/icons/debug/lightBulb.png" type="client" cache="false"/>
 	
+	<file src="res/textures/icons/items/hatIcon.png" type="client" cache="false"/>
+	
 	<file src="res/sounds/ambient/ambient_01.mp3" type="client" cache="false"/>
 </meta>

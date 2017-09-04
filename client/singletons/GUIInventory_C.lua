@@ -143,6 +143,7 @@ function GUIInventory_C:deleteItem(id)
 			for index, slot in pairs(inventorySlots) do
 				if (id == index) then
 					slot:setItem(nil)
+					return
 				end
 			end
 		end

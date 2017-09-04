@@ -28,7 +28,7 @@ end
 function Attack_S:doSlotAction(slot)
 	if (client) and (isElement(client)) and (slot) then
 		if (self.slot == slot) and (client == self.player) then
-			outputChatBox(self.player:getName() .. " attacks with " .. self.name .. " on slot " .. self.slot .. "!")
+			--outputChatBox(self.player:getName() .. " attacks with " .. self.name .. " on slot " .. self.slot .. "!")
 		end
 	end
 end

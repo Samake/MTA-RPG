@@ -16,7 +16,8 @@ function LootMoney_S:constructor(moneySettings)
 	self.currentCount = 0
 	
 	self.isLocked = true
-	self.pickUp = nil
+	self.isPickedUp = false
+	self.pickUpMoney = nil
 	
 	self:init()
 	
@@ -35,9 +36,9 @@ function LootMoney_S:init()
 		end
 	end
 	
-	self.m_Pickup = bind(self.pickup, self)
+	self.m_PickUpMoney = bind(self.pickUpMoney, self)
 	addEvent("PICKUPLOOT", true)
-	addEventHandler("PICKUPLOOT", root, self.m_Pickup)
+	addEventHandler("PICKUPLOOT", root, self.m_PickUpMoney)
 	
 	self:createLootObject()
 	
@@ -68,29 +69,33 @@ function LootMoney_S:update()
 end
 
 
-function LootMoney_S:pickup(element)
-	if (client) and (isElement(client)) and (element) and (self.pickUp) then
-		if (element == self.pickUp) then
-			if (self.owner) then
-				if (self.owner == client) then
+function LootMoney_S:pickUpMoney(element)
+	if (self.isPickedUp == false) then
+		if (client) and (isElement(client)) and (element) and (self.pickUp) then
+			if (element == self.pickUp) then
+				if (self.owner) then
+					if (self.owner == client) then
+						if (self.playerClass) then
+							self.isPickedUp = true
+							self.playerClass:changeMoney(self.money)
+
+							NotificationManager_S:getSingleton():sendPlayerNotification(self.owner, "#EEEEEEYou got #EEDD44" .. self.money .. " $")
+							LootManager_S:getSingleton():deleteLoot(self.id)
+						end
+					else
+						NotificationManager_S:getSingleton():sendPlayerNotification(client, "#EE4444Not allowed to loot this!")
+					end
+				else
+					self.owner = client
+					self.playerClass = PlayerManager_S:getSingleton():getPlayerClass(self.owner)
+					
 					if (self.playerClass) then
+						self.isPickedUp = true
 						self.playerClass:changeMoney(self.money)
 
 						NotificationManager_S:getSingleton():sendPlayerNotification(self.owner, "#EEEEEEYou got #EEDD44" .. self.money .. " $")
 						LootManager_S:getSingleton():deleteLoot(self.id)
 					end
-				else
-					NotificationManager_S:getSingleton():sendPlayerNotification(client, "#EE4444Not allowed to loot this!")
-				end
-			else
-				self.owner = client
-				self.playerClass = PlayerManager_S:getSingleton():getPlayerClass(self.owner)
-				
-				if (self.playerClass) then
-					self.playerClass:changeMoney(self.money)
-
-					NotificationManager_S:getSingleton():sendPlayerNotification(self.owner, "#EEEEEEYou got #EEDD44" .. self.money .. " $")
-					LootManager_S:getSingleton():deleteLoot(self.id)
 				end
 			end
 		end
@@ -132,7 +137,7 @@ end
 
 
 function LootMoney_S:clear()
-	removeEventHandler("PICKUPLOOT", root, self.m_Pickup)
+	removeEventHandler("PICKUPLOOT", root, self.m_PickUpMoney)
 	
 	self:deleteLootObject()
 end

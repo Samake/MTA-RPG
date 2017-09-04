@@ -160,7 +160,7 @@ function Player_C:checkSlotChanges()
 			if (self.equippedSlots[index]) then
 				if (self.equippedSlots[index] ~= slot) then
 					triggerEvent("UPDATEQUICKSLOTS", root)
-					break
+					return
 				end
 			end
 		end

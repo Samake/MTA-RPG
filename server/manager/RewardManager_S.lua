@@ -37,7 +37,7 @@ function RewardManager_S:giveLootReward(attackerClass, money, level, x, y, z)
 			moneyReward = moneyReward * 2
 		end
 		
-		LootManager_S:getSingleton():addLoot(attackerClass.player, moneyReward, x, y, z)
+		LootManager_S:getSingleton():addLoot(attackerClass, moneyReward, x, y, z)
 	end
 end
 

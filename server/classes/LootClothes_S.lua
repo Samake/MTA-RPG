@@ -19,8 +19,9 @@ function LootClothes_S:constructor(lootSettings)
 	self.currentCount = 0
 	
 	self.isLocked = true
-	self.pickUp = nil
-	
+	self.isPickedUp = false
+	self.pickup = nil
+
 	self:init()
 	
 	if (Settings.showClassDebugInfo == true) then
@@ -36,11 +37,13 @@ function LootClothes_S:init()
 		if (not self.owner) then
 			LootManager_S:getSingleton():deleteLoot(self.id)
 		end
+	else
+		LootManager_S:getSingleton():deleteLoot(self.id)
 	end
 	
-	self.m_Pickup = bind(self.pickup, self)
+	self.m_PickupItem = bind(self.pickupItem, self)
 	addEvent("PICKUPLOOT", true)
-	addEventHandler("PICKUPLOOT", root, self.m_Pickup)
+	addEventHandler("PICKUPLOOT", root, self.m_PickupItem)
 	
 	self:createLootObject()
 	
@@ -71,41 +74,45 @@ function LootClothes_S:update()
 end
 
 
-function LootClothes_S:pickup(element)
-	if (client) and (isElement(client)) and (element) and (self.pickUp) then
-		if (element == self.pickUp) then
-			if (self.owner) then
-				if (self.owner == client) then
+function LootClothes_S:pickupItem(element)
+	if (self.isPickedUp == false) then
+		if (client) and (isElement(client)) and (element) and (self.pickUp) then
+			if (element == self.pickUp) then
+				if (self.owner) then
+					if (self.owner == client) then
+						if (self.playerClass) then
+							if (self.itemContainer) then
+								local color = RGBToHex(self.itemContainer.color.r, self.itemContainer.color.g, self.itemContainer.color.b)
+								local inventory = self.playerClass:getInventory()
+								
+								if (color) and (inventory) then
+									self.isPickedUp = true
+									inventory:addItem(self.owner, self.itemContainer)
+									
+									NotificationManager_S:getSingleton():sendPlayerNotification(self.owner, "#EEEEEEYou got " .. color .. self.itemContainer.name)
+									LootManager_S:getSingleton():deleteLoot(self.id)
+								end
+							end
+						end
+					else
+						NotificationManager_S:getSingleton():sendPlayerNotification(client, "#EE4444Not allowed to loot this!")
+					end
+				else
+					self.owner = client
+					self.playerClass = PlayerManager_S:getSingleton():getPlayerClass(self.owner)
+					
 					if (self.playerClass) then
 						if (self.itemContainer) then
 							local color = RGBToHex(self.itemContainer.color.r, self.itemContainer.color.g, self.itemContainer.color.b)
 							local inventory = self.playerClass:getInventory()
 							
 							if (color) and (inventory) then
-								inventory:addItem(client, self.itemContainer)
+								self.isPickedUp = true
+								inventory:addItem(self.owner, self.itemContainer)
 								
 								NotificationManager_S:getSingleton():sendPlayerNotification(self.owner, "#EEEEEEYou got " .. color .. self.itemContainer.name)
 								LootManager_S:getSingleton():deleteLoot(self.id)
 							end
-						end
-					end
-				else
-					NotificationManager_S:getSingleton():sendPlayerNotification(client, "#EE4444Not allowed to loot this!")
-				end
-			else
-				self.owner = client
-				self.playerClass = PlayerManager_S:getSingleton():getPlayerClass(self.owner)
-				
-				if (self.playerClass) then
-					if (self.itemContainer) then
-						local color = RGBToHex(self.itemContainer.color.r, self.itemContainer.color.g, self.itemContainer.color.b)
-						local inventory = self.playerClass:getInventory()
-						
-						if (color) and (inventory) then
-							inventory:addItem(client, self.itemContainer)
-							
-							NotificationManager_S:getSingleton():sendPlayerNotification(self.owner, "#EEEEEEYou got " .. color .. self.itemContainer.name)
-							LootManager_S:getSingleton():deleteLoot(self.id)
 						end
 					end
 				end
@@ -150,7 +157,7 @@ end
 
 
 function LootClothes_S:clear()
-	removeEventHandler("PICKUPLOOT", root, self.m_Pickup)
+	removeEventHandler("PICKUPLOOT", root, self.m_PickupItem)
 	
 	self:deleteLootObject()
 end

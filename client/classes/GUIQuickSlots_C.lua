@@ -78,13 +78,13 @@ end
 function GUIQuickSlots_C:updateSlots()
 	-- load slot values
 	self.playerSlots = Player_C:getSingleton():getPlayerSlots()
-	
+
 	if (self.playerSlots) then
 		for index, slot in pairs(self.playerSlots) do
 			if (slot) then
 				if (self.guiSlots) then
 					self.guiSlots:setSlotDelay(index, slot.delay)
-					
+
 					local iconValues = string.split(slot.icon, "|")
 					
 					if (iconValues) then

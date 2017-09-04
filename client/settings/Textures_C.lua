@@ -59,6 +59,9 @@ Textures["Icons"]["Debug"] = {}
 Textures["Icons"]["Debug"][1] = {texture = nil, path = "res/textures/icons/debug/emitterIcon.png"}
 Textures["Icons"]["Debug"][2] = {texture = nil, path = "res/textures/icons/debug/lightBulb.png"}
 
+Textures["Icons"]["Items"] = {}
+Textures["Icons"]["Items"][1] = {texture = nil, path = "res/textures/icons/items/hatIcon.png"}
+
 function Textures.init()
 	loadTextures()
 end

@@ -33,7 +33,6 @@ function Inventory_S:addItem(player, itemContainer)
 				for j = 1, Settings.inventorySize, 1 do
 					if (self.slots[i .. ":" .. j]) then
 						itemContainer.player = player
-						itemContainer.slotID = i .. ":" .. j
 						
 						if (not self.slots[i .. ":" .. j].item) then
 							self.slots[i .. ":" .. j].item = Item_S:new(itemContainer)
