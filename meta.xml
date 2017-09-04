@@ -54,6 +54,7 @@
 	<script src="server/classes/AttackPunch_S.lua" type="server"/>
 	<script src="server/classes/AttackKick_S.lua" type="server"/>
 	<script src="server/classes/LootMoney_S.lua" type="server"/>
+	<script src="server/classes/LootPotion_S.lua" type="server"/>
 	<script src="server/classes/LootClothes_S.lua" type="server"/>
 	<script src="server/classes/Inventory_S.lua" type="server"/>
 	<script src="server/classes/Item_S.lua" type="server"/>
@@ -75,6 +76,7 @@
 	<script src="client/singletons/Player_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/GUIInventory_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/Debug_C.lua" type="client" cache="false"/>
+	<script src="client/singletons/DragAndDrop_C.lua" type="client" cache="false"/>
 	
 	<script src="client/manager/XMLManager_C.lua" type="client" cache="false"/>
 	<script src="client/manager/CameraManager_C.lua" type="client" cache="false"/>
@@ -169,6 +171,8 @@
 	<file src="res/textures/icons/debug/emitterIcon.png" type="client" cache="false"/>
 	<file src="res/textures/icons/debug/lightBulb.png" type="client" cache="false"/>
 	
+	<file src="res/textures/icons/items/potionHeal.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/potionMana.png" type="client" cache="false"/>
 	<file src="res/textures/icons/items/hatIcon.png" type="client" cache="false"/>
 	
 	<file src="res/sounds/ambient/ambient_01.mp3" type="client" cache="false"/>

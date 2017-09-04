@@ -14,6 +14,7 @@ function Item_C:constructor(itemProperties)
 	self.class = itemProperties.class
 	self.icon = itemProperties.icon
 	self.stackable = itemProperties.stackable
+	self.count = itemProperties.count
 	
 	self.texture = nil
 	
@@ -51,6 +52,11 @@ end
 
 function Item_C:getColor()
 	return {r = self.color.r, g = self.color.g, b = self.color.b}
+end
+
+
+function Item_C:getCount()
+	return self.count
 end
 
 

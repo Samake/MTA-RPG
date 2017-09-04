@@ -26,12 +26,12 @@ function LootManager_S:addLoot(playerClass, money, x, y, z)
 	if (playerClass) and (money) and (x) and (y) and (z) then
 		self:addMoneyLoot(playerClass, money, x, y, z)
 		
-		local randomLoot = math.random(2, #LootTable)
+		local randomLoot = getRandomLoot()
 		
-		if (LootTable[randomLoot]) then
-			if (LootTable[randomLoot].instance) then
+		if (randomLoot) then
+			if (randomLoot.instance) then
 				local chance = math.random(0, 1000) / 10
-				local dropChance = LootTable[randomLoot].chance
+				local dropChance = randomLoot.chance
 				
 				if (EventManager_S:getSingleton():isDoubleDropEvent() == true) then
 					dropChance = dropChance * 2
@@ -44,10 +44,10 @@ function LootManager_S:addLoot(playerClass, money, x, y, z)
 					lootSettings.y = y + (math.random(-1000, 1000) / 1000)
 					lootSettings.z = z
 					lootSettings.playerClass = playerClass
-					lootSettings.itemContainer = LootTable[randomLoot]
+					lootSettings.itemContainer = randomLoot
 					
 					if (not self.lootClasses[lootSettings.id]) then
-						self.lootClasses[lootSettings.id] = LootTable[randomLoot].instance:new(lootSettings)
+						self.lootClasses[lootSettings.id] = randomLoot.instance:new(lootSettings)
 					end
 				end
 			end

@@ -21,10 +21,13 @@ function GUISlot_C:constructor(slotID, x, y, w, h, parent, relative)
 	self.finalHeight = self.defaultHeight
 	
 	self.color = {r = 25, g = 25, b = 25}
+	self.shadowColor = {r = 15, g = 15, b = 15}
 	self.borderColor = {r = 90, g = 90, b = 90}
 	self.qualityColor = {r = 255, g = 255, b = 255}
-	self.hoverColor = {r = 128, g = 128, b = 128}
+	self.hoverColor = {r = 200, g = 200, b = 90}
+	self.fontColor = {r = 200, g = 200, b = 90}
 	
+	self.shadowOffset = 1
 	self.borderSize = 2
 	
 	self.alpha = 255
@@ -36,6 +39,7 @@ function GUISlot_C:constructor(slotID, x, y, w, h, parent, relative)
 	self.subPixelPositioning = true
 	
 	self.itemContainer = nil
+	self.count = 0
 	
 	self:init()
 	
@@ -67,10 +71,22 @@ function GUISlot_C:update(deltaTime)
 		else
 			self.qualityColor = self.borderColor
 		end
+		
+		if (self.itemContainer:getCount()) then
+			self.count = self.itemContainer:getCount()
+		else
+			self.count = 0
+		end
 	else
+		self.count = 0
 		self.qualityColor = self.borderColor
 	end
 	
+	if (self.count > 0) then
+		dxDrawText(self.count, self.finalX + self.shadowOffset, self.finalY + (self.finalHeight * 0.7) + self.shadowOffset, self.finalX + (self.finalWidth * 0.95) + self.shadowOffset, self.finalY + self.finalHeight + self.shadowOffset, tocolor(self.shadowColor.r, self.shadowColor.g, self.shadowColor.b, self.alpha), 0.8, "default-bold", "right", "center", false, false, self.postGUI, false, self.subPixelPositioning)	
+		dxDrawText(self.count, self.finalX, self.finalY + (self.finalHeight * 0.7), self.finalX + (self.finalWidth * 0.95), self.finalY + self.finalHeight, tocolor(self.fontColor.r, self.fontColor.g, self.fontColor.b, self.alpha), 0.8, "default-bold", "right", "center", false, false, self.postGUI, true, self.subPixelPositioning)	
+	end
+		
 	-- draw border
 	if (self:isCursorInside() == true) then
 		dxDrawLine(self.finalX, self.finalY, self.finalX + self.finalWidth, self.finalY, tocolor(self.hoverColor.r, self.hoverColor.g, self.hoverColor.b, self.alpha), self.borderSize, self.postGUI)
@@ -78,10 +94,10 @@ function GUISlot_C:update(deltaTime)
 		dxDrawLine(self.finalX + self.finalWidth, self.finalY + self.finalHeight, self.finalX, self.finalY + self.finalHeight, tocolor(self.hoverColor.r, self.hoverColor.g, self.hoverColor.b, self.alpha), self.borderSize, self.postGUI)
 		dxDrawLine(self.finalX, self.finalY + self.finalHeight, self.finalX, self.finalY, tocolor(self.hoverColor.r, self.hoverColor.g, self.hoverColor.b, self.alpha), self.borderSize, self.postGUI)
 	else
-		dxDrawLine(self.finalX, self.finalY, self.finalX + self.finalWidth, self.finalY, tocolor(self.qualityColor.r, self.qualityColor.g, self.qualityColor.b, self.alpha), self.borderSize, self.postGUI)
-		dxDrawLine(self.finalX + self.finalWidth, self.finalY, self.finalX + self.finalWidth, self.finalY + self.finalHeight, tocolor(self.qualityColor.r, self.qualityColor.g, self.qualityColor.b, self.alpha), self.borderSize, self.postGUI)
-		dxDrawLine(self.finalX + self.finalWidth, self.finalY + self.finalHeight, self.finalX, self.finalY + self.finalHeight, tocolor(self.qualityColor.r, self.qualityColor.g, self.qualityColor.b, self.alpha), self.borderSize, self.postGUI)
-		dxDrawLine(self.finalX, self.finalY + self.finalHeight, self.finalX, self.finalY, tocolor(self.qualityColor.r, self.qualityColor.g, self.qualityColor.b, self.alpha), self.borderSize, self.postGUI)
+		dxDrawLine(self.finalX, self.finalY, self.finalX + self.finalWidth, self.finalY, tocolor(self.qualityColor.r, self.qualityColor.g, self.qualityColor.b, self.alpha * 0.5), self.borderSize, self.postGUI)
+		dxDrawLine(self.finalX + self.finalWidth, self.finalY, self.finalX + self.finalWidth, self.finalY + self.finalHeight, tocolor(self.qualityColor.r, self.qualityColor.g, self.qualityColor.b, self.alpha * 0.5), self.borderSize, self.postGUI)
+		dxDrawLine(self.finalX + self.finalWidth, self.finalY + self.finalHeight, self.finalX, self.finalY + self.finalHeight, tocolor(self.qualityColor.r, self.qualityColor.g, self.qualityColor.b, self.alpha * 0.5), self.borderSize, self.postGUI)
+		dxDrawLine(self.finalX, self.finalY + self.finalHeight, self.finalX, self.finalY, tocolor(self.qualityColor.r, self.qualityColor.g, self.qualityColor.b, self.alpha * 0.5), self.borderSize, self.postGUI)
 	end
 end
 

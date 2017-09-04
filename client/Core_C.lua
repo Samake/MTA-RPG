@@ -42,6 +42,7 @@ function Core_C:initComponents()
 	NotificationManager_C:new()
 	SoundManager_C:new()
 	LightManager_C:new()
+	DragAndDrop_C:new()
 	
 	if (Settings.debugEnabled == true) then
 		Debug_C:new()
@@ -77,6 +78,7 @@ function Core_C:update(deltaTime)
 	WeatherManager_C:getSingleton():update(self.delta)
 	NotificationManager_C:getSingleton():update(self.delta)
 	LightManager_C:getSingleton():update(self.delta)
+	DragAndDrop_C:getSingleton():update(self.delta)
 	
 	if (Settings.debugEnabled == true) then
 		Debug_C:getSingleton():update(self.delta)
@@ -106,6 +108,7 @@ function Core_C:clear()
 	delete(NotificationManager_C:getSingleton())
 	delete(SoundManager_C:getSingleton())
 	delete(LightManager_C:getSingleton())
+	delete(DragAndDrop_C:getSingleton())
 	
 	if (Settings.debugEnabled == true) then
 		delete(Debug_C:getSingleton())

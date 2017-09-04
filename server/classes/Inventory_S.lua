@@ -57,7 +57,7 @@ function Inventory_S:addExistingItem(itemContainer)
 					if (slotItem.item.id == itemContainer.id) then
 						if (itemContainer.stackable == true) then
 							if ((slotItem.count + 1) < Settings.inventoryStackSize) then
-								slotItem.count.count = slotItem.count.count + 1
+								slotItem.count = slotItem.count + 1
 								return true
 							end
 						end

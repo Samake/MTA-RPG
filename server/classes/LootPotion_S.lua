@@ -1,15 +1,18 @@
-LootMoney_S = inherit(Attack_S)
+LootPotion_S = inherit(Attack_S)
 
-function LootMoney_S:constructor(moneySettings)
+function LootPotion_S:constructor(lootSettings)
 	
-	self.settings = moneySettings
-	self.id = moneySettings.id
-	self.x = moneySettings.x
-	self.y = moneySettings.y
-	self.z = moneySettings.z
+	self.settings = lootSettings
+	self.id = lootSettings.id
+	self.x = lootSettings.x
+	self.y = lootSettings.y
+	self.z = lootSettings.z
 	self.rz = math.random(0,360)
-	self.money = moneySettings.money
-	self.playerClass = moneySettings.playerClass
+	self.money = lootSettings.money
+	self.playerClass = lootSettings.playerClass
+	
+	self.itemContainer = lootSettings.itemContainer
+	self.itemContainer.instance = nil
 	
 	self.owner = nil
 	
@@ -24,12 +27,12 @@ function LootMoney_S:constructor(moneySettings)
 	self:init()
 	
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("LootMoney_S " .. self.id .. " was loaded.")
+		sendMessage("LootPotion_S " .. self.id .. " was loaded.")
 	end
 end
 
 
-function LootMoney_S:init()
+function LootPotion_S:init()
 	if (self.playerClass) then
 		self.owner = self.playerClass.player
 		
@@ -48,7 +51,7 @@ function LootMoney_S:init()
 end
 
 
-function LootMoney_S:update()
+function LootPotion_S:update()
 	self.currentCount = getTickCount()
 	
 	if (self.currentCount > self.startCount + Settings.lootLockDelay) then
@@ -71,18 +74,20 @@ function LootMoney_S:update()
 end
 
 
-function LootMoney_S:pickupItem(element)
+function LootPotion_S:pickupItem(element)
 	if (self.isPickedUp == false) then
 		if (client) and (isElement(client)) and (element) and (self.pickUp) then
 			if (element == self.pickUp) then
 				if (self.owner) then
 					if (self.owner == client) then
 						if (self.playerClass) then
-							self.isPickedUp = true
-							self.playerClass:changeMoney(self.money)
+							if (self.itemContainer) then
+								self.isPickedUp = true
+								self.playerClass:changeMoney(self.money)
 
-							NotificationManager_S:getSingleton():sendPlayerNotification(self.owner, "#EEEEEEYou got #EEDD44" .. self.money .. " $")
-							LootManager_S:getSingleton():deleteLoot(self.id)
+								NotificationManager_S:getSingleton():sendPlayerNotification(self.owner, "#EEEEEEYou got #EEDD44" .. self.itemContainer.name)
+								LootManager_S:getSingleton():deleteLoot(self.id)
+							end
 						end
 					else
 						NotificationManager_S:getSingleton():sendPlayerNotification(client, "#EE4444Not allowed to loot this!")
@@ -92,11 +97,13 @@ function LootMoney_S:pickupItem(element)
 					self.playerClass = PlayerManager_S:getSingleton():getPlayerClass(self.owner)
 					
 					if (self.playerClass) then
-						self.isPickedUp = true
-						self.playerClass:changeMoney(self.money)
+						if (self.itemContainer) then
+							self.isPickedUp = true
+							self.playerClass:changeMoney(self.money)
 
-						NotificationManager_S:getSingleton():sendPlayerNotification(self.owner, "#EEEEEEYou got #EEDD44" .. self.money .. " $")
-						LootManager_S:getSingleton():deleteLoot(self.id)
+							NotificationManager_S:getSingleton():sendPlayerNotification(self.owner, "#EEEEEEYou got #EEDD44" .. self.itemContainer.name)
+							LootManager_S:getSingleton():deleteLoot(self.id)
+						end
 					end
 				end
 			end
@@ -105,19 +112,23 @@ function LootMoney_S:pickupItem(element)
 end
 
 
-function LootMoney_S:createLootObject()
+function LootPotion_S:createLootObject()
 	if (not self.pickUp) and (self.owner) then
-		self.pickUp = createObject(1212, self.x, self.y, self.z - 0.48, 0, 0, self.rz, false)
+		self.pickUp = createObject(1512, self.x, self.y, self.z - 0.48, 0, 0, self.rz, false)
 		
 		if (self.pickUp) then
 			self.pickUp:setData("ISLOOT", "true", true)
 			self.pickUp:setDimension(self.owner:getDimension())
 			
-			if (not self.aura) then
-				self.aura = createMarker(self.x, self.y, self.z - 0.48, "corona", 0.25, 90, 220, 90, 90)
-				
-				if (self.aura) then
-					self.aura:setDimension(self.owner:getDimension())
+			if (self.itemContainer) then
+				if (self.itemContainer.color) then
+					if (not self.aura) then
+						self.aura = createMarker(self.x, self.y, self.z - 0.48, "corona", 0.25, self.itemContainer.color.r, self.itemContainer.color.g, self.itemContainer.color.b, 90)
+					
+						if (self.aura) then
+							self.aura:setDimension(self.owner:getDimension())
+						end
+					end
 				end
 			end
 		end
@@ -125,7 +136,7 @@ function LootMoney_S:createLootObject()
 end
 
 
-function LootMoney_S:deleteLootObject()
+function LootPotion_S:deleteLootObject()
 	if (self.pickUp) then
 		self.pickUp:destroy()
 		self.pickUp = nil
@@ -138,27 +149,27 @@ function LootMoney_S:deleteLootObject()
 end
 
 
-function LootMoney_S:getObject()
+function LootPotion_S:getObject()
 	return self.pickUp
 end
 
 
-function LootMoney_S:getPosition()
+function LootPotion_S:getPosition()
 	return {x = self.x, y = self.y, z = self.z}
 end
 
 
-function LootMoney_S:clear()
+function LootPotion_S:clear()
 	removeEventHandler("PICKUPLOOT", root, self.m_PickupItem)
 	
 	self:deleteLootObject()
 end
 
 
-function LootMoney_S:destructor()
+function LootPotion_S:destructor()
 	self:clear()
 
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("LootMoney_S " .. self.id .. " was deletes.")
+		sendMessage("LootPotion_S " .. self.id .. " was deletes.")
 	end
 end

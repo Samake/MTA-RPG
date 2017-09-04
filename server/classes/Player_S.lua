@@ -100,12 +100,37 @@ function Player_S:init()
 		
 		self.healTick = getTickCount()
 	end
+	
+	-- !!!!!!!!only for testing!!!!!!!!
+	self.isTestLoot = false
+	self.startTick = getTickCount()
+	-- !!!!!!!!only for testing!!!!!!!!
 end
+
+-- !!!!!!!!only for testing!!!!!!!!
+function Player_S:addTestLoot()
+	if (self.inventory) then
+		for i = 1, 15, 1 do
+			self.inventory:addItem(self.player, getRandomLoot())
+		end
+		
+		self.isTestLoot = true
+	end
+end
+-- !!!!!!!!only for testing!!!!!!!!
 
 
 function Player_S:update()
 	if (self.player) and (isElement(self.player)) then
 		self.currentTick = getTickCount()
+		
+		-- !!!!!!!!only for testing!!!!!!!!
+		if (self.currentTick > self.startTick + 3000) then
+			if (self.isTestLoot == false) then
+				self:addTestLoot()
+			end
+		end
+		-- !!!!!!!!only for testing!!!!!!!!
 		
 		self:updateCoords()
 		self:updatePosition()
