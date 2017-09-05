@@ -60,6 +60,11 @@ function Item_C:getCount()
 end
 
 
+function Item_C:isStackable()
+	return self.stackable
+end
+
+
 function Item_C:clear()
 
 end

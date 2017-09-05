@@ -2,6 +2,8 @@ GUISlot_C = inherit(Class)
 
 function GUISlot_C:constructor(slotID, x, y, w, h, parent, relative)
 	
+	self.screenWidth, self.screenHeight = guiGetScreenSize()
+	
 	self.slotID = slotID
 	self.defaultX = x or 0
 	self.defaultY = y or 0
@@ -77,14 +79,16 @@ function GUISlot_C:update(deltaTime)
 		else
 			self.count = 0
 		end
+		
+		if (self.itemContainer:isStackable() == true) then
+			if (self.count > 0) then
+				dxDrawText(self.count, self.finalX + self.shadowOffset, self.finalY + (self.finalHeight * 0.7) + self.shadowOffset, self.finalX + (self.finalWidth * 0.95) + self.shadowOffset, self.finalY + self.finalHeight + self.shadowOffset, tocolor(self.shadowColor.r, self.shadowColor.g, self.shadowColor.b, self.alpha), 0.8, "default-bold", "right", "center", false, false, self.postGUI, false, self.subPixelPositioning)	
+				dxDrawText(self.count, self.finalX, self.finalY + (self.finalHeight * 0.7), self.finalX + (self.finalWidth * 0.95), self.finalY + self.finalHeight, tocolor(self.fontColor.r, self.fontColor.g, self.fontColor.b, self.alpha), 0.8, "default-bold", "right", "center", false, false, self.postGUI, true, self.subPixelPositioning)	
+			end
+		end
 	else
 		self.count = 0
 		self.qualityColor = self.borderColor
-	end
-	
-	if (self.count > 0) then
-		dxDrawText(self.count, self.finalX + self.shadowOffset, self.finalY + (self.finalHeight * 0.7) + self.shadowOffset, self.finalX + (self.finalWidth * 0.95) + self.shadowOffset, self.finalY + self.finalHeight + self.shadowOffset, tocolor(self.shadowColor.r, self.shadowColor.g, self.shadowColor.b, self.alpha), 0.8, "default-bold", "right", "center", false, false, self.postGUI, false, self.subPixelPositioning)	
-		dxDrawText(self.count, self.finalX, self.finalY + (self.finalHeight * 0.7), self.finalX + (self.finalWidth * 0.95), self.finalY + self.finalHeight, tocolor(self.fontColor.r, self.fontColor.g, self.fontColor.b, self.alpha), 0.8, "default-bold", "right", "center", false, false, self.postGUI, true, self.subPixelPositioning)	
 	end
 		
 	-- draw border
@@ -98,6 +102,14 @@ function GUISlot_C:update(deltaTime)
 		dxDrawLine(self.finalX + self.finalWidth, self.finalY, self.finalX + self.finalWidth, self.finalY + self.finalHeight, tocolor(self.qualityColor.r, self.qualityColor.g, self.qualityColor.b, self.alpha * 0.5), self.borderSize, self.postGUI)
 		dxDrawLine(self.finalX + self.finalWidth, self.finalY + self.finalHeight, self.finalX, self.finalY + self.finalHeight, tocolor(self.qualityColor.r, self.qualityColor.g, self.qualityColor.b, self.alpha * 0.5), self.borderSize, self.postGUI)
 		dxDrawLine(self.finalX, self.finalY + self.finalHeight, self.finalX, self.finalY, tocolor(self.qualityColor.r, self.qualityColor.g, self.qualityColor.b, self.alpha * 0.5), self.borderSize, self.postGUI)
+	end
+	
+	if (self:isCursorInside() == true) then
+		if (getKeyState("mouse1") == true) then
+			DragAndDrop_C:getSingleton():addStartSlot(self)
+		end
+		
+		DragAndDrop_C:getSingleton():addDestinationSlot(self)
 	end
 end
 
