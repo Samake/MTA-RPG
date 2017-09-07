@@ -37,12 +37,12 @@ function Inventory_C:syncSlots(slotItems)
 			if (slotItem) then
 				if (slotItem.slotID) then
 					if (self.slots[slotItem.slotID]) then
-						if (self.slots[slotItem.slotID].id == slotItem.id) then
+						if (self.slots[slotItem.slotID].itemID == slotItem.itemID) then
 							self.slots[slotItem.slotID].count = slotItems.count
 						else
 							self:deleteSlot(slotItem.slotID)
 			
-							self.slots[slotItem.slotID].item = Item_C:new(slotItem)
+							self.slots[slotItem.slotID] = Item_C:new(slotItem)
 						end
 					else
 						self.slots[slotItem.slotID] = Item_C:new(slotItem)

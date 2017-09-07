@@ -85,7 +85,7 @@ function Inventory_S:moveItem(startSlotID, destinationSlotID)
 				if (self.slots[startSlotID]) and (self.slots[destinationSlotID]) then
 					
 					local startTempItem = self.slots[startSlotID]
-					local destinationTempItem = self.slots[startSlotID].item
+					local destinationTempItem = self.slots[destinationSlotID]
 					
 					self.slots[startSlotID] = destinationTempItem
 					
