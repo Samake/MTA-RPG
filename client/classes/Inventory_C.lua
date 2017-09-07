@@ -24,9 +24,7 @@ function Inventory_C:init()
 			local slotID = i .. ":" .. j
 			
 			if (not self.slots[slotID]) then
-				self.slots[slotID] = {}
-				self.slots[slotID].item = nil
-				self.slots[slotID].count = 0
+				self.slots[slotID] = nil
 			end
 		end
 	end
@@ -39,27 +37,15 @@ function Inventory_C:syncSlots(slotItems)
 			if (slotItem) then
 				if (slotItem.slotID) then
 					if (self.slots[slotItem.slotID]) then
-						if (not self.slots[slotItem.slotID].item) then
-							self.slots[slotItem.slotID].item = Item_C:new(slotItem)
-							
-							if (self.slots[slotItem.slotID].item) then
-								self.slots[slotItem.slotID].count = slotItem.count
-							end
+						if (self.slots[slotItem.slotID].id == slotItem.id) then
+							self.slots[slotItem.slotID].count = slotItems.count
 						else
-							if (self.slots[slotItem.slotID].item.id == slotItem.id) then
-								self.slots[slotItem.slotID].count = slotItem.count
-							else
-								self:deleteSlot(slotItem.slotID)
-								
-								if (not self.slots[slotItem.slotID].item) then
-									self.slots[slotItem.slotID].item = Item_C:new(slotItem)
-									
-									if (self.slots[slotItem.slotID].item) then
-										self.slots[slotItem.slotID].count = slotItem.count
-									end
-								end
-							end
+							self:deleteSlot(slotItem.slotID)
+			
+							self.slots[slotItem.slotID].item = Item_C:new(slotItem)
 						end
+					else
+						self.slots[slotItem.slotID] = Item_C:new(slotItem)
 					end
 				end
 			end
@@ -71,10 +57,9 @@ end
 function Inventory_C:deleteSlot(slotID)
 	if (slotID) then
 		if (self.slots[slotID]) then
-			if (self.slots[slotID].item) then
-				self.slots[slotID].item:delete()
-				self.slots[slotID].item = nil
-				self.slots[slotID].count = 0
+			if (self.slots[slotID]) then
+				self.slots[slotID]:delete()
+				self.slots[slotID] = nil
 			end
 		end
 	end
@@ -91,11 +76,8 @@ function Inventory_C:clear()
 	
 	for index, slotItem in pairs(self.slots) do
 		if (slotItem) then
-			if (slotItem.item) then
-				slotItem.item:delete()
-				slotItem.item = nil
-				slotItem = nil
-			end
+			slotItem:delete()
+			slotItem = nil
 		end
 	end
 end

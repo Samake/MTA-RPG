@@ -3,6 +3,7 @@ Item_S = inherit(Class)
 function Item_S:constructor(itemProperties)
 	
 	self.id = itemProperties.id
+	self.itemID = itemProperties.itemID
 	self.slotID = itemProperties.slotID
 	self.player = itemProperties.player
 	self.name = itemProperties.name
@@ -14,11 +15,12 @@ function Item_S:constructor(itemProperties)
 	self.class = itemProperties.class
 	self.icon = itemProperties.icon
 	self.stackable = itemProperties.stackable
+	self.count = itemProperties.count
 	
 	self:init()
 	
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("Item_S " .. self.id .. " was loaded.")
+		sendMessage("Item_S " .. self.itemID .. ", with id " .. self.id .. " was loaded at slot " .. self.slotID .. "!")
 	end
 end
 
@@ -37,6 +39,6 @@ function Item_S:destructor()
 	self:clear()
 
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("Item_S " .. self.id .. " was deleted.")
+		sendMessage("Item_S " .. self.itemID .. ", with id " .. self.id .. " was deleted at slot " .. self.slotID .. "!")
 	end
 end

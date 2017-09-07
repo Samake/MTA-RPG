@@ -110,12 +110,10 @@ function GUIInventory_C:addItem(item)
 	if (item) then
 		local inventorySlots = self.guiElements[9]:getSlots()
 		
-		local z = 0
-		
+
 		if (inventorySlots) then
 			for index, slot in pairs(inventorySlots) do
 				if (slot) then
-					z = z + 1
 					if (item.slotID == index) then
 						slot:setItem(item)
 						break
@@ -140,11 +138,13 @@ function GUIInventory_C:addItem(item)
 end
 
 
-function GUIInventory_C:deleteItem(id)
-	if (id) then
+function GUIInventory_C:deleteItem(slotID)
+	if (slotID) then
+		local inventorySlots = self.guiElements[9]:getSlots()
+		
 		if (inventorySlots) then
 			for index, slot in pairs(inventorySlots) do
-				if (id == index) then
+				if (slotID == index) then
 					slot:setItem(nil)
 					return
 				end

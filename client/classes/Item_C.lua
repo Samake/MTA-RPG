@@ -3,6 +3,7 @@ Item_C = inherit(Class)
 function Item_C:constructor(itemProperties)
 	
 	self.id = itemProperties.id
+	self.itemID = itemProperties.itemID
 	self.slotID = itemProperties.slotID
 	self.player = itemProperties.player
 	self.name = itemProperties.name
@@ -21,7 +22,7 @@ function Item_C:constructor(itemProperties)
 	self:init()
 	
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("Item_C " .. self.slotID .. " was loaded.")
+		sendMessage("Item_C " .. self.itemID .. ", with id " .. self.id .. " was loaded at slot " .. self.slotID .. "!")
 	end
 end
 
@@ -74,6 +75,6 @@ function Item_C:destructor()
 	self:clear()
 
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("Item_C " .. self.slotID .. " was deleted.")
+		sendMessage("Item_C " .. self.itemID .. ", with id " .. self.id .. " was deleted at slot " .. self.slotID .. "!")
 	end
 end

@@ -70,6 +70,23 @@ function string.split(s, delimiter)
     return result;
 end
 
+
+function string.random(length)
+    local charset = {}
+	local randomString = ""
+
+	-- qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM1234567890
+	for i = 48,  57 do table.insert(charset, string.char(i)) end
+	for i = 65,  90 do table.insert(charset, string.char(i)) end
+	for i = 97, 122 do table.insert(charset, string.char(i)) end
+
+	for i = 1, length, 1 do
+		randomString = randomString .. charset[math.random(1, #charset)]
+	end
+
+	return randomString
+end
+
 ----------------------------------------------------------------
 -- Misc helper functions
 ----------------------------------------------------------------

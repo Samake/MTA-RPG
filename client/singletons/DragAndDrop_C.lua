@@ -149,6 +149,22 @@ function DragAndDrop_C:dropSlot()
 			if (self.destinationSlot.itemContainer) then
 				tempItemContainer = self.destinationSlot.itemContainer
 				self.destinationSlot.itemContainer = self.itemContainer
+				
+				if (tempItemContainer) and (self.destinationSlot.itemContainer) then
+					if (tempItemContainer.id == self.destinationSlot.itemContainer.id) then
+						self.destinationSlot.itemContainer.count = self.destinationSlot.itemContainer.count + tempItemContainer.count
+						tempItemContainer = nil
+						
+						local stackSettings = {}
+						stackSettings.startSlotID = self.startSlot.slotID
+						stackSettings.startSlotID = self.startSlot.slotID
+						stackSettings.startSlotID = self.startSlot.slotID
+						stackSettings.startSlotID = self.startSlot.slotID
+						
+						--triggerServerEvent("STACKITEM", root, self.destinationSlot.slotID, self.startSlot.slotID, self.destinationSlot.itemContainer.count)
+					end
+				end
+				
 				self.startSlot.itemContainer = tempItemContainer
 			else
 				self.destinationSlot.itemContainer = self.itemContainer
@@ -169,7 +185,6 @@ end
 
 function DragAndDrop_C:clear()
 
-	NotificationManager_C:getSingleton():addNotification("#EEEEEE Debug mode #EE4444 disabled #EEEEEE!")
 end
 
 

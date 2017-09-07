@@ -406,8 +406,8 @@ end
 function Player_S:levelUp()
 	self.level = self.level + 1
 	self.currentXP = math.abs(self.currentXP - self.maxXP)
-	
-	Text3DManager_S:sendText(self.player, "Level up!", self.x, self.y, self.z + 1.0, 220, 120, 180, 3)
+
+	NotificationManager_S:sendPlayerNotification(self.player, "#AAAAEE Level up! New level is #44EE44" .. self.level .. "#AAAAEE !")
 end
 
 
