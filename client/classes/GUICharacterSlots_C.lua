@@ -42,38 +42,47 @@ function GUICharacterSlots_C:init()
 	
 	if (not self.slots["head"]) then
 		self.slots["head"] = GUISlot_C:new("head", 0.425, 0.01, 0.15, 0.15, self, true)
+		self.slots["head"]:setCharacterSlot(true)
 	end
 	
 	if (not self.slots["torso"]) then
 		self.slots["torso"] = GUISlot_C:new("torso", 0.425, 0.225, 0.15, 0.15, self, true)
+		self.slots["torso"]:setCharacterSlot(true)
 	end
 	
 	if (not self.slots["legs"]) then
 		self.slots["legs"] = GUISlot_C:new("legs", 0.425, 0.55, 0.15, 0.15, self, true)
+		self.slots["legs"]:setCharacterSlot(true)
 	end
 	
 	if (not self.slots["feet"]) then
 		self.slots["feet"] = GUISlot_C:new("feet", 0.425, 0.825, 0.15, 0.15, self, true)
+		self.slots["feet"]:setCharacterSlot(true)
 	end
 	
 	if (not self.slots["leftHand"]) then
 		self.slots["leftHand"] = GUISlot_C:new("leftHand", 0.15, 0.435, 0.15, 0.15, self, true)
+		self.slots["leftHand"]:setCharacterSlot(true)
 	end
 	
 	if (not self.slots["righthand"]) then
 		self.slots["righthand"] = GUISlot_C:new("righthand", 0.7, 0.435, 0.15, 0.15, self, true)
+		self.slots["righthand"]:setCharacterSlot(true)
 	end
 	
 	if (not self.slots["leftRing"]) then
 		self.slots["leftRing"] = GUISlot_C:new("leftRing", 0.15, 0.325, 0.075, 0.075, self, true)
+		self.slots["leftRing"]:setCharacterSlot(true)
 	end
 	
 	if (not self.slots["rightRing"]) then
 		self.slots["rightRing"] = GUISlot_C:new("rightRing", 0.775, 0.325, 0.075, 0.075, self, true)
+		self.slots["rightRing"]:setCharacterSlot(true)
 	end
 	
 	if (not self.slots["chain"]) then
 		self.slots["chain"] = GUISlot_C:new("chain", 0.15, 0.01, 0.1, 0.1, self, true)
+		self.slots["chain"]:setCharacterSlot(true)
 	end
 end
 

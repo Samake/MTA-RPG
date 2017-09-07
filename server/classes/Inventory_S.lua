@@ -61,9 +61,9 @@ function Inventory_S:addExistingItem(itemContainer)
 			if (slotItem) then
 				if (slotItem.itemID == itemContainer.itemID) then
 					if (itemContainer.stackable == true) then
-						if ((slotItem.count + 1) < Settings.inventoryStackSize) then
+						if ((slotItem.count + 1) <= Settings.inventoryStackSize) then
 							slotItem.count = slotItem.count + 1
-							
+
 							self:syncSlots()
 							
 							return true
@@ -128,6 +128,7 @@ function Inventory_S:syncSlots()
 				local itemProperties = {}
 				itemProperties.id = slotItem.id
 				itemProperties.itemID = slotItem.itemID
+				slotItem.slotID = index
 				itemProperties.slotID = slotItem.slotID
 				itemProperties.id = slotItem.id
 				itemProperties.player = slotItem.player

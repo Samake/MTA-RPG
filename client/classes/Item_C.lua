@@ -17,6 +17,10 @@ function Item_C:constructor(itemProperties)
 	self.stackable = itemProperties.stackable
 	self.count = itemProperties.count
 	
+	if (self.stackable == true) then
+		outputChatBox(tostring(self.count))
+	end
+	
 	self.texture = nil
 	
 	self:init()

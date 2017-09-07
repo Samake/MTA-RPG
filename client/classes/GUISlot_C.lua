@@ -43,6 +43,8 @@ function GUISlot_C:constructor(slotID, x, y, w, h, parent, relative)
 	self.itemContainer = nil
 	self.count = 0
 	
+	self.characterSlot = false
+	
 	self:init()
 	
 	if (Settings.showClassDebugInfo == true) then
@@ -309,6 +311,15 @@ end
 
 function GUISlot_C:getItem()
 	return self.itemContainer
+end
+
+function GUISlot_C:setCharacterSlot(bool)
+	self.characterSlot = bool
+end
+
+
+function GUISlot_C:isCharacterSlot()
+	return self.characterSlot
 end
 
 

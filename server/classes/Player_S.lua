@@ -110,7 +110,7 @@ end
 -- !!!!!!!!only for testing!!!!!!!!
 function Player_S:addTestLoot()
 	if (self.inventory) then
-		for i = 1, 15, 1 do
+		for i = 1, 64, 1 do
 			self.inventory:addItem(self.player, getRandomLoot())
 		end
 		

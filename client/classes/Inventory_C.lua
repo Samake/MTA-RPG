@@ -37,13 +37,20 @@ function Inventory_C:syncSlots(slotItems)
 			if (slotItem) then
 				if (slotItem.slotID) then
 					if (self.slots[slotItem.slotID]) then
-						if (self.slots[slotItem.slotID].itemID == slotItem.itemID) then
-							self.slots[slotItem.slotID].count = slotItems.count
-						else
-							self:deleteSlot(slotItem.slotID)
-			
-							self.slots[slotItem.slotID] = Item_C:new(slotItem)
-						end
+						self.slots[slotItem.slotID].id = slotItem.id
+						self.slots[slotItem.slotID].itemID = slotItem.itemID
+						self.slots[slotItem.slotID].slotID = slotItem.slotID
+						self.slots[slotItem.slotID].player = slotItem.player
+						self.slots[slotItem.slotID].name = slotItem.name
+						self.slots[slotItem.slotID].description = slotItem.description
+						self.slots[slotItem.slotID].stats = slotItem.stats
+						self.slots[slotItem.slotID].quality = slotItem.quality
+						self.slots[slotItem.slotID].color = slotItem.color
+						self.slots[slotItem.slotID].costs = slotItem.costs
+						self.slots[slotItem.slotID].class = slotItem.class
+						self.slots[slotItem.slotID].icon = slotItem.icon
+						self.slots[slotItem.slotID].stackable = slotItem.stackable
+						self.slots[slotItem.slotID].count = slotItem.count
 					else
 						self.slots[slotItem.slotID] = Item_C:new(slotItem)
 					end
