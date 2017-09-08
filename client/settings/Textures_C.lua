@@ -64,6 +64,9 @@ Textures["Icons"]["Items"][1] = {texture = nil, path = "res/textures/icons/items
 Textures["Icons"]["Items"][2] = {texture = nil, path = "res/textures/icons/items/potionMana.png"}
 Textures["Icons"]["Items"][3] = {texture = nil, path = "res/textures/icons/items/hatIcon.png"}
 
+Textures["Icons"]["Misc"] = {}
+Textures["Icons"]["Misc"][1] = {texture = nil, path = "res/textures/icons/misc/forbidden.png"}
+
 function Textures.init()
 	loadTextures()
 end

@@ -27,6 +27,8 @@ function DragAndDrop_C:constructor()
 	self.mouseX = 0
 	self.mouseY = 0
 	
+	self.dropAllowed = true
+	
 	self:init()
 	
 	if (Settings.showManagerDebugInfo == true) then
@@ -59,7 +61,20 @@ function DragAndDrop_C:drawItem()
 			local x = self.mouseX - (self.finalWidth / 2)
 			local y = self.mouseY - (self.finalHeight / 2)
 				
-			dxDrawImage(x, y, self.finalWidth, self.finalHeight, self.itemContainer:getTexture(), 0, 0, 0, tocolor(220, 220, 220,self.alpha), self.postGUI)
+			dxDrawImage(x, y, self.finalWidth, self.finalHeight, self.itemContainer:getTexture(), 0, 0, 0, tocolor(220, 220, 220, self.alpha), self.postGUI)
+			
+			if (self.destinationSlot) then
+				if (self.destinationSlot:isCharacterSlot() == true) and (self.itemContainer.slot) then
+					if (self.itemContainer.slot ~= self.destinationSlot.slotID) and (Textures["Icons"]["Misc"][1]) then
+						dxDrawImage(x, y, self.finalWidth, self.finalHeight, Textures["Icons"]["Misc"][1].texture, 0, 0, 0, tocolor(220, 220, 220, self.alpha * 0.55), self.postGUI)
+						self.dropAllowed = false
+					else
+						self.dropAllowed = true
+					end
+				else
+					self.dropAllowed = true
+				end
+			end
 		end
 	end
 end
@@ -144,33 +159,38 @@ end
 function DragAndDrop_C:dropSlot()
 	if (self.itemContainer) then
 		if (self.destinationSlot) then
-			local tempItemContainer
-			
-			if (self.destinationSlot.itemContainer) then
-				tempItemContainer = self.destinationSlot.itemContainer
-				self.destinationSlot.itemContainer = self.itemContainer
+			if (self.dropAllowed == true) then
+				local tempItemContainer
 				
-				if (tempItemContainer) and (self.destinationSlot.itemContainer) then
-					if (tempItemContainer.id == self.destinationSlot.itemContainer.id) then
-						self.destinationSlot.itemContainer.count = self.destinationSlot.itemContainer.count + tempItemContainer.count
-						tempItemContainer = nil
-						
-						local stackSettings = {}
-						stackSettings.startSlotID = self.startSlot.slotID
-						stackSettings.startSlotID = self.startSlot.slotID
-						stackSettings.startSlotID = self.startSlot.slotID
-						stackSettings.startSlotID = self.startSlot.slotID
-						
-						--triggerServerEvent("STACKITEM", root, self.destinationSlot.slotID, self.startSlot.slotID, self.destinationSlot.itemContainer.count)
+				if (self.destinationSlot.itemContainer) then
+					tempItemContainer = self.destinationSlot.itemContainer
+					self.destinationSlot.itemContainer = self.itemContainer
+					
+					if (tempItemContainer) and (self.destinationSlot.itemContainer) then
+						if (tempItemContainer.id == self.destinationSlot.itemContainer.id) then
+							self.destinationSlot.itemContainer.count = self.destinationSlot.itemContainer.count + tempItemContainer.count
+							tempItemContainer = nil
+							
+							local stackSettings = {}
+							stackSettings.startSlotID = self.startSlot.slotID
+							stackSettings.startSlotID = self.startSlot.slotID
+							stackSettings.startSlotID = self.startSlot.slotID
+							stackSettings.startSlotID = self.startSlot.slotID
+							
+							--triggerServerEvent("STACKITEM", root, self.destinationSlot.slotID, self.startSlot.slotID, self.destinationSlot.itemContainer.count)
+						end
 					end
+					
+					self.startSlot.itemContainer = tempItemContainer
+
+				else
+					self.destinationSlot.itemContainer = self.itemContainer
 				end
 				
-				self.startSlot.itemContainer = tempItemContainer
+				triggerServerEvent("MOVEITEM", root, self.destinationSlot.slotID, self.startSlot.slotID)
 			else
-				self.destinationSlot.itemContainer = self.itemContainer
+				self.startSlot.itemContainer = self.itemContainer
 			end
-			
-			triggerServerEvent("MOVEITEM", root, self.destinationSlot.slotID, self.startSlot.slotID)
 		else
 			self.startSlot.itemContainer = self.itemContainer
 		end

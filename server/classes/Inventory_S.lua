@@ -138,6 +138,7 @@ function Inventory_S:syncSlots()
 				itemProperties.quality = slotItem.quality
 				itemProperties.color = slotItem.color
 				itemProperties.costs = slotItem.costs
+				itemProperties.slot = slotItem.slot
 				itemProperties.class = slotItem.class
 				itemProperties.icon = slotItem.icon
 				itemProperties.stackable = slotItem.stackable

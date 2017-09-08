@@ -12,6 +12,7 @@ function Item_C:constructor(itemProperties)
 	self.quality = itemProperties.quality
 	self.color = itemProperties.color
 	self.costs = itemProperties.costs
+	self.slot = itemProperties.slot
 	self.class = itemProperties.class
 	self.icon = itemProperties.icon
 	self.stackable = itemProperties.stackable
