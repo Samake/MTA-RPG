@@ -221,17 +221,21 @@ end
 
 
 function NPC_S:jobIdle()
-	if (self.model) and (isElement(self.model)) then
-		self.model:setAnimation()
-		self.state = "idle"
+	if (self.state ~= "idle") then
+		if (self.model) and (isElement(self.model)) then
+			self.model:setAnimation()
+			self.state = "idle"
+		end
 	end
 end
 
 
 function NPC_S:jobRunToEnemy()
-	if (self.model) and (isElement(self.model)) then
-		self.model:setAnimation(Animations["NPC"]["Run"].block, Animations["NPC"]["Run"].anim, -1, true, true, true, false, 250)
-		self.state = "runToEnemy"
+	if (self.state ~= "runToEnemy") then
+		if (self.model) and (isElement(self.model)) then
+			self.model:setAnimation(Animations["NPC"]["Run"].block, Animations["NPC"]["Run"].anim, -1, true, true, true, false, 250)
+			self.state = "runToEnemy"
+		end
 	end
 end
 

@@ -63,6 +63,9 @@ Textures["Icons"]["Items"] = {}
 Textures["Icons"]["Items"][1] = {texture = nil, path = "res/textures/icons/items/potionHeal.png"}
 Textures["Icons"]["Items"][2] = {texture = nil, path = "res/textures/icons/items/potionMana.png"}
 Textures["Icons"]["Items"][3] = {texture = nil, path = "res/textures/icons/items/hatIcon.png"}
+Textures["Icons"]["Items"][4] = {texture = nil, path = "res/textures/icons/items/torsoIcon.png"}
+Textures["Icons"]["Items"][5] = {texture = nil, path = "res/textures/icons/items/legsIcon.png"}
+Textures["Icons"]["Items"][6] = {texture = nil, path = "res/textures/icons/items/feetIcon.png"}
 
 Textures["Icons"]["Misc"] = {}
 Textures["Icons"]["Misc"][1] = {texture = nil, path = "res/textures/icons/misc/forbidden.png"}
