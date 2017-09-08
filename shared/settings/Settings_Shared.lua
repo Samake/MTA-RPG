@@ -2,7 +2,7 @@ Settings = {}
 
 -- [[ *** Resource Settings *** ]]
 Settings.resName = "MTA RPG Gamemode"
-Settings.resVersion = "0.0.5"
+Settings.resVersion = "0.0.7b"
 
 -- [[ *** Server Settings *** ]]
 Settings.fpsLimit = 60
@@ -41,4 +41,4 @@ Settings.lootLockDelay = 150000
 
 -- [[ *** Shader Settings *** ]]
 Settings.shadersEnabled = true
-Settings.shaderWorldDrawDistance = 500
+Settings.shaderWorldDrawDistance = 250
