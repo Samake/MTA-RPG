@@ -63,8 +63,8 @@ function dxProgessBar:update(deltaTime)
 	dxDrawRectangle(self.x + self.borderSize, self.y + self.borderSize, self.width - self.borderSize * 2, self.height - self.borderSize * 2, tocolor(self.backGroundColor.r, self.backGroundColor.g, self.backGroundColor.b, self.alpha), self.postGUI, self.subPixelPositioning)
 
 	-- draw progress bar
-	dxDrawRectangle(self.x + self.borderSize, self.y + self.borderSize, (self.width - self.borderSize * 2) * self.value, self.height - self.borderSize * 2, tocolor(self.color.r, self.color.g, self.color.b, self.alpha * 0.5), self.postGUI, self.subPixelPositioning)
-	dxDrawRectangle(self.x + self.borderSize, self.y + self.borderSize, (self.width - self.borderSize * 2) * self.currentValue, self.height - self.borderSize * 2, tocolor(self.color.r, self.color.g, self.color.b, self.alpha * 0.5), self.postGUI, self.subPixelPositioning)
+	--dxDrawRectangle(self.x + self.borderSize, self.y + self.borderSize, (self.width - self.borderSize * 2) * self.value, self.height - self.borderSize * 2, tocolor(self.color.r, self.color.g, self.color.b, self.alpha * 0.5), self.postGUI, self.subPixelPositioning)
+	dxDrawRectangle(self.x + self.borderSize, self.y + self.borderSize, (self.width - self.borderSize * 2) * self.currentValue, self.height - self.borderSize * 2, tocolor(self.color.r, self.color.g, self.color.b, self.alpha), self.postGUI, self.subPixelPositioning)
 	
 	-- draw text
 	dxDrawText(self.text, (self.x + self.borderSize) + self.shadowOffset, (self.y + self.borderSize) + self.shadowOffset, (self.x + self.width - self.borderSize * 2) + self.shadowOffset, (self.y + self.height - self.borderSize * 2) + self.shadowOffset, tocolor(self.shadowColor.r, self.shadowColor.g, self.shadowColor.b, self.alpha), self.scale, "default-bold", "center", "center", false, false, self.postGUI, true, self.subPixelPositioning)	
@@ -281,8 +281,14 @@ end
 
 function dxProgessBar:setValue(value)
 	if (value) then
-		if (value >= 0) and (self.value <= 1) then
-			self.value = value
+		self.value = value
+		
+		if (self.value > 1) then
+			self.value = 1
+		end
+		
+		if (self.value < 0) then
+			self.value = 0
 		end
 	end
 end

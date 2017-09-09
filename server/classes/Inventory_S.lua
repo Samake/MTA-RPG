@@ -81,26 +81,23 @@ end
 function Inventory_S:moveItem(startSlotID, destinationSlotID)
 	if (client) and (isElement(client)) then
 		if (client == self.player) then
-			if (startSlotID) and (destinationSlotID) and (count) then
-				if (self.slots[startSlotID]) and (self.slots[destinationSlotID]) then
-					
-					local startTempItem = self.slots[startSlotID]
-					local destinationTempItem = self.slots[destinationSlotID]
-					
-					self.slots[startSlotID] = destinationTempItem
-					
-					if (self.slots[startSlotID]) then
-						self.slots[startSlotID].slotID = startSlotID
-					end
-
-					self.slots[destinationSlotID] = startTempItem
-					
-					if (self.slots[destinationSlotID]) then
-						self.slots[destinationSlotID].slotID = destinationSlotID
-					end
-					
-					self:syncSlots()
+			if (startSlotID) and (destinationSlotID) then		
+				local startTempItem = self.slots[startSlotID]
+				local destinationTempItem = self.slots[destinationSlotID]
+				
+				self.slots[startSlotID] = destinationTempItem
+				
+				if (self.slots[startSlotID]) then
+					self.slots[startSlotID].slotID = startSlotID
 				end
+
+				self.slots[destinationSlotID] = startTempItem
+				
+				if (self.slots[destinationSlotID]) then
+					self.slots[destinationSlotID].slotID = destinationSlotID
+				end
+				
+				self:syncSlots()
 			end
 		end
 	end
@@ -192,6 +189,51 @@ end
 
 function Inventory_S:getSlots()
 	return self.slots
+end
+
+
+function Inventory_S:getSlotHead()
+	return self.slots["head"]
+end
+
+
+function Inventory_S:getSlotTorso()
+	return self.slots["torso"]
+end
+
+
+function Inventory_S:getSlotLegs()
+	return self.slots["legs"]
+end
+
+
+function Inventory_S:getSlotFeet()
+	return self.slots["feet"]
+end
+
+
+function Inventory_S:getSlotLeftHand()
+	return self.slots["leftHand"]
+end
+
+
+function Inventory_S:getSlotRighthand()
+	return self.slots["righthand"]
+end
+
+
+function Inventory_S:getSlotLeftRing()
+	return self.slots["leftRing"]
+end
+
+
+function Inventory_S:getSlotRightRing()
+	return self.slots["rightRing"]
+end
+
+
+function Inventory_S:getSlotChain()
+	return self.slots["chain"]
 end
 
 

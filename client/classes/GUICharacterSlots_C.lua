@@ -84,6 +84,30 @@ function GUICharacterSlots_C:init()
 		self.slots["chain"] = GUISlot_C:new("chain", 0.15, 0.01, 0.1, 0.1, self, true)
 		self.slots["chain"]:setCharacterSlot(true)
 	end
+	
+	if (not self.staminaText) then
+		self.staminaText = dxText:new("STA: 0 (+ 0%)", 0.025, 0.85, 0.5, 0.03, self, true)
+		self.staminaText:setScale(0.85)
+		self.staminaText:setAlignX("left")
+	end
+	
+	if (not self.intelligenceText) then
+		self.intelligenceText = dxText:new("INT: 0 (+ 0%)", 0.025, 0.88, 0.5, 0.03, self, true)
+		self.intelligenceText:setScale(0.85)
+		self.intelligenceText:setAlignX("left")
+	end
+	
+	if (not self.armorText) then
+		self.armorText = dxText:new("ARMOR: 0 (+ 0%)", 0.025, 0.91, 0.5, 0.03, self, true)
+		self.armorText:setScale(0.85)
+		self.armorText:setAlignX("left")
+	end
+	
+	if (not self.critText) then
+		self.critText = dxText:new("CRIT: 0 (+ 0%)", 0.025, 0.94, 0.5, 0.03, self, true)
+		self.critText:setScale(0.85)
+		self.critText:setAlignX("left")
+	end
 end
 
 
@@ -96,6 +120,50 @@ function GUICharacterSlots_C:update(deltaTime)
 		if (slot) then
 			slot:update(deltaTime)
 		end
+	end
+	
+	if (self.staminaText) then
+		if (Player_C:getSingleton():getStamina()) and (Player_C:getSingleton():getCurrentStamina()) then
+			local stamina = Player_C:getSingleton():getStamina()
+			local currentStamina = Player_C:getSingleton():getCurrentStamina()
+			local modifiedPercent = string.format("%.1f", ((100 / stamina) * currentStamina) - 100)
+			self.staminaText:setText("#EEEEEESTA: " .. currentStamina .. "#44EE44 (+ " .. modifiedPercent .. "%)")
+		end
+		
+		self.staminaText:update()
+	end
+	
+	if (self.intelligenceText) then
+		if (Player_C:getSingleton():getIntelligence()) and (Player_C:getSingleton():getCurrentIntelligence()) then
+			local intelligence = Player_C:getSingleton():getIntelligence()
+			local currentIntelligence = Player_C:getSingleton():getCurrentIntelligence()
+			local modifiedPercent = string.format("%.1f", ((100 / intelligence) * currentIntelligence) - 100)
+			self.intelligenceText:setText("#EEEEEEINT: " .. currentIntelligence .. "#44EE44 (+ " .. modifiedPercent .. "%)")
+		end
+		
+		self.intelligenceText:update()
+	end
+	
+	if (self.armorText) then
+		if (Player_C:getSingleton():getArmor()) and (Player_C:getSingleton():getCurrentArmor()) then
+			local armor = Player_C:getSingleton():getArmor()
+			local currentArmor = Player_C:getSingleton():getCurrentArmor()
+			local modifiedPercent = string.format("%.1f", ((100 / armor) * currentArmor) - 100)
+			self.armorText:setText("#EEEEEEARMOR: " .. currentArmor .. "#44EE44 (+ " .. modifiedPercent .. "%)")
+		end
+		
+		self.armorText:update()
+	end
+	
+	if (self.critText) then
+		if (Player_C:getSingleton():getCritChance()) and (Player_C:getSingleton():getCurrentCritChance()) then
+			local critChance = Player_C:getSingleton():getCritChance()
+			local currentCritChance = Player_C:getSingleton():getCurrentCritChance()
+			local modifiedPercent = string.format("%.1f", ((100 / critChance) * currentCritChance) - 100)
+			self.critText:setText("#EEEEEECRIT: " .. currentCritChance .. "#44EE44 (+ " .. modifiedPercent .. "%)")
+		end
+		
+		self.critText:update()
 	end
 end
 
@@ -282,6 +350,26 @@ function GUICharacterSlots_C:clear()
 			slot:delete()
 			slot = nil
 		end
+	end
+	
+	if (self.staminaText) then
+		self.staminaText:delete()
+		self.staminaText = nil
+	end
+	
+	if (self.intelligenceText) then
+		self.intelligenceText:delete()
+		self.intelligenceText = nil
+	end
+	
+	if (self.armorText) then
+		self.armorText:delete()
+		self.armorText = nil
+	end
+	
+	if (self.critText) then
+		self.critText:delete()
+		self.critText = nil
 	end
 end
 

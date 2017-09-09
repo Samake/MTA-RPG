@@ -49,11 +49,11 @@ end
 function GUIStatBars_C:update(deltaTime)
 	if (self.playerClass) then
 		if (self.xpBar) then
-			self.xpBar:update()
-			
-			local value = ((1 / self.playerClass:getMaxXP()) * math.floor(self.playerClass:getCurrentXP() + 0.5)) or 0
+			local value = ((1 / self.playerClass:getMaxXP()) * self.playerClass:getCurrentXP()) or 0
 			self.xpBar:setValue(value)
-			self.xpBar:setText(math.floor(self.playerClass:getCurrentXP() + 0.5) .. " / " .. self.playerClass:getMaxXP())
+			self.xpBar:setText(math.floor(self.playerClass:getCurrentXP() + 0.5) .. " / " .. math.floor(self.playerClass:getMaxXP() + 0.5))
+			
+			self.xpBar:update()
 			
 			if (self.xpBar:isCursorInside() == true) then
 				GUIManager_C:getSingleton():setCursorOnGUIElement(true)
@@ -61,23 +61,23 @@ function GUIStatBars_C:update(deltaTime)
 		end
 		
 		if (self.lifeBar) then
+			local value = ((1 / self.playerClass:getMaxLife()) * self.playerClass:getCurrentLife())or 0
+			self.lifeBar:setValue(value)
+			self.lifeBar:setText(math.floor(self.playerClass:getCurrentLife() + 0.5) .. " / " .. math.floor(self.playerClass:getMaxLife() + 0.5))
+			
 			self.lifeBar:update()
 			
-			local value = ((1 / self.playerClass:getMaxLife()) * math.floor(self.playerClass:getCurrentLife() + 0.5)) or 0
-			self.lifeBar:setValue(value)
-			self.lifeBar:setText(math.floor(self.playerClass:getCurrentLife() + 0.5) .. " / " .. self.playerClass:getMaxLife())
-
 			if (self.lifeBar:isCursorInside() == true) then
 				GUIManager_C:getSingleton():setCursorOnGUIElement(true)
 			end
 		end
 		
 		if (self.manaBar) then
-			self.manaBar:update()
-			
-			local value = ((1 / self.playerClass:getMaxMana()) * math.floor(self.playerClass:getCurrentMana() + 0.5)) or 0
+			local value = ((1 / self.playerClass:getMaxMana()) * self.playerClass:getCurrentMana()) or 0
 			self.manaBar:setValue(value)
-			self.manaBar:setText(math.floor(self.playerClass:getCurrentMana() + 0.5) .. " / " .. self.playerClass:getMaxMana())
+			self.manaBar:setText(math.floor(self.playerClass:getCurrentMana() + 0.5) .. " / " .. math.floor(self.playerClass:getMaxMana() + 0.5))
+			
+			self.manaBar:update()
 			
 			if (self.manaBar:isCursorInside() == true) then
 				GUIManager_C:getSingleton():setCursorOnGUIElement(true)

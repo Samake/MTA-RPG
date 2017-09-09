@@ -38,8 +38,24 @@ function Player_S:constructor(playerSettings)
 	self.rank = "Beginner"
 	self.class = "Fighter"
 	self.level = 1
-	self.currentXP = 0
+	self.currentXP = 1
 	self.maxXP = 1000
+	
+	self.baseStamina = 100
+	self.stamina = self.baseStamina
+	self.currentStamina = self.baseStamina
+	
+	self.baseIntelligence = 100
+	self.intelligence = self.baseIntelligence
+	self.currentIntelligence = self.baseIntelligence
+	
+	self.baseArmor = 100
+	self.armor = self.baseArmor
+	self.currentArmor = self.baseArmor
+	
+	self.baseCritChance = 5
+	self.critChance = self.baseCritChance
+	self.currentCritChance = self.baseCritChance
 	
 	self.money = 0
 	
@@ -134,6 +150,7 @@ function Player_S:update()
 		
 		self:updateCoords()
 		self:updatePosition()
+		self:updateItemStats()
 		self:updatePlayerStats()
 		
 		if (self.state == "run") then
@@ -157,6 +174,208 @@ function Player_S:update()
 end
 
 
+function Player_S:updateItemStats()
+	if (self.levelCaps.modifier) then
+		self.stamina = self.baseStamina * self.level * self.levelCaps.modifier
+		self.currentStamina = self.stamina
+		
+		self.intelligence = self.baseIntelligence * self.level * self.levelCaps.modifier
+		self.currentIntelligence = self.intelligence
+		
+		self.armor = self.baseArmor * self.level * self.levelCaps.modifier
+		self.currentArmor = self.armor
+		
+		self.critChance = self.baseCritChance
+		self.currentCritChance = self.critChance
+		
+		if (self.inventory:getSlotHead()) then
+			if (self.inventory:getSlotHead().stats) then
+				if (self.inventory:getSlotHead().stats.stamina) then
+					self.currentStamina = self.currentStamina + self.inventory:getSlotHead().stats.stamina * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotHead().stats.intelligence) then
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotHead().stats.intelligence * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotHead().stats.armor) then
+					self.currentArmor = self.currentArmor + self.inventory:getSlotHead().stats.armor * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotHead().stats.crit) then
+					self.currentCritChance = self.currentCritChance + self.inventory:getSlotHead().stats.crit
+				end
+			end
+		end
+		
+		if (self.inventory:getSlotTorso()) then
+			if (self.inventory:getSlotTorso().stats) then
+				if (self.inventory:getSlotTorso().stats.stamina) then
+					self.currentStamina = self.currentStamina + self.inventory:getSlotTorso().stats.stamina * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotTorso().stats.intelligence) then
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotTorso().stats.intelligence * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotTorso().stats.armor) then
+					self.currentArmor = self.currentArmor + self.inventory:getSlotTorso().stats.armor * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotTorso().stats.crit) then
+					self.currentCritChance = self.currentCritChance + self.inventory:getSlotTorso().stats.crit
+				end
+			end
+		end
+		
+		if (self.inventory:getSlotLegs()) then
+			if (self.inventory:getSlotLegs().stats) then
+				if (self.inventory:getSlotLegs().stats.stamina) then
+					self.currentStamina = self.currentStamina + self.inventory:getSlotLegs().stats.stamina * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotLegs().stats.intelligence) then
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotLegs().stats.intelligence * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotLegs().stats.armor) then
+					self.currentArmor = self.currentArmor + self.inventory:getSlotLegs().stats.armor * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotLegs().stats.crit) then
+					self.currentCritChance = self.currentCritChance + self.inventory:getSlotLegs().stats.crit
+				end
+			end
+		end
+		
+		if (self.inventory:getSlotFeet()) then
+			if (self.inventory:getSlotFeet().stats) then
+				if (self.inventory:getSlotFeet().stats.stamina) then
+					self.currentStamina = self.currentStamina + self.inventory:getSlotFeet().stats.stamina * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotFeet().stats.intelligence) then
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotFeet().stats.intelligence * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotFeet().stats.armor) then
+					self.currentArmor = self.currentArmor + self.inventory:getSlotFeet().stats.armor * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotFeet().stats.crit) then
+					self.currentCritChance = self.currentCritChance + self.inventory:getSlotFeet().stats.crit
+				end
+			end
+		end
+		
+		if (self.inventory:getSlotLeftHand()) then
+			if (self.inventory:getSlotLeftHand().stats) then
+				if (self.inventory:getSlotLeftHand().stats.stamina) then
+					self.currentStamina = self.currentStamina + self.inventory:getSlotLeftHand().stats.stamina * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotLeftHand().stats.intelligence) then
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotLeftHand().stats.intelligence * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotLeftHand().stats.armor) then
+					self.currentArmor = self.currentArmor + self.inventory:getSlotLeftHand().stats.armor * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotLeftHand().stats.crit) then
+					self.currentCritChance = self.currentCritChance + self.inventory:getSlotLeftHand().stats.crit
+				end
+			end
+		end
+		
+		if (self.inventory:getSlotRighthand()) then
+			if (self.inventory:getSlotRighthand().stats) then
+				if (self.inventory:getSlotRighthand().stats.stamina) then
+					self.currentStamina = self.currentStamina + self.inventory:getSlotRighthand().stats.stamina * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotRighthand().stats.intelligence) then
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotRighthand().stats.intelligence * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotRighthand().stats.armor) then
+					self.currentArmor = self.currentArmor + self.inventory:getSlotRighthand().stats.armor * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotRighthand().stats.crit) then
+					self.currentCritChance = self.currentCritChance + self.inventory:getSlotRighthand().stats.crit
+				end
+			end
+		end
+		
+		if (self.inventory:getSlotLeftRing()) then
+			if (self.inventory:getSlotLeftRing().stats) then
+				if (self.inventory:getSlotLeftRing().stats.stamina) then
+					self.currentStamina = self.currentStamina + self.inventory:getSlotLeftRing().stats.stamina * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotLeftRing().stats.intelligence) then
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotLeftRing().stats.intelligence * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotLeftRing().stats.armor) then
+					self.currentArmor = self.currentArmor + self.inventory:getSlotLeftRing().stats.armor * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotLeftRing().stats.crit) then
+					self.currentCritChance = self.currentCritChance + self.inventory:getSlotLeftRing().stats.crit
+				end
+			end
+		end
+		
+		if (self.inventory:getSlotRightRing()) then
+			if (self.inventory:getSlotRightRing().stats) then
+				if (self.inventory:getSlotRightRing().stats.stamina) then
+					self.currentStamina = self.currentStamina + self.inventory:getSlotRightRing().stats.stamina * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotRightRing().stats.intelligence) then
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotRightRing().stats.intelligence * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotRightRing().stats.armor) then
+					self.currentArmor = self.currentArmor + self.inventory:getSlotRightRing().stats.armor * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotRightRing().stats.crit) then
+					self.currentCritChance = self.currentCritChance + self.inventory:getSlotRightRing().stats.crit
+				end
+			end
+		end
+		
+		if (self.inventory:getSlotChain()) then
+			if (self.inventory:getSlotChain().stats) then
+				if (self.inventory:getSlotChain().stats.stamina) then
+					self.currentStamina = self.currentStamina + self.inventory:getSlotChain().stats.stamina * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotChain().stats.intelligence) then
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotChain().stats.intelligence * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotChain().stats.armor) then
+					self.currentArmor = self.currentArmor + self.inventory:getSlotChain().stats.armor * self.level * self.levelCaps.modifier
+				end
+				
+				if (self.inventory:getSlotChain().stats.crit) then
+					self.currentCritChance = self.currentCritChance + self.inventory:getSlotChain().stats.crit
+				end
+			end
+		end
+		
+		self.currentStamina = math.floor(self.currentStamina + 0.5)
+		self.currentIntelligence = math.floor(self.currentIntelligence + 0.5)
+		self.currentArmor = math.floor(self.currentArmor + 0.5)
+		self.currentCritChance = math.floor(self.currentCritChance + 0.5)
+	end
+end
+
+
 function Player_S:updatePlayerStats()
 	local delay
 	
@@ -171,9 +390,8 @@ function Player_S:updatePlayerStats()
 	end
 	
 	self.maxXP = self.levelCaps.xp
-	self.maxLife = 1000 * self.levelCaps.modifier
-	self.maxMana = 100 * self.levelCaps.modifier
-	
+	self.maxLife = math.floor(((1000 + (10 * self.currentStamina * self.levelCaps.modifier)) * self.levelCaps.modifier) + 0.5)
+	self.maxMana = math.floor(((100 + (self.currentIntelligence * self.levelCaps.modifier)) * self.levelCaps.modifier) + 0.5)
 	
 	if (self.currentTick > self.healTick + delay) then
 		self.lifeRegeneration = (self.maxLife / 400) * Settings.selfHealFactor
@@ -193,16 +411,20 @@ function Player_S:updatePlayerStats()
 			self:changeLife(lifeValue)
 			
 			if (self.isSitting == true) then
-				Text3DManager_S:sendText(self.player, "+" .. lifeValue .. " Life" , self.x, self.y, self.z + 0.5, 220, 90, 90, 0.4)
+				Text3DManager_S:sendText(self.player, "+" .. string.format("%.1f", lifeValue), self.x, self.y, self.z + 0.5, 220, 90, 90, 0.4)
 			end
+		elseif (self.currentLife > self.maxLife) then
+			self.currentLife = self.maxLife
 		end
 		
 		if (self.currentMana < self.maxMana) then
 			self:changeMana(manaValue)
 			
 			if (self.isSitting == true) then
-				Text3DManager_S:sendText(self.player, "+" .. manaValue .. " Mana" , self.x, self.y, self.z + 0.5, 90, 90, 220, 0.4)
+				Text3DManager_S:sendText(self.player, "+" .. string.format("%.1f", manaValue), self.x, self.y, self.z + 0.5, 90, 90, 220, 0.4)
 			end
+		elseif (self.currentMana > self.maxMana) then
+			self.currentMana = self.maxMana
 		end
 		
 		self.healTick = getTickCount()
@@ -274,6 +496,14 @@ function Player_S:syncPlayerData()
 		self.playerTable.currentMana = self.currentMana
 		self.playerTable.money = self.money
 		self.playerTable.class = self.class
+		self.playerTable.stamina = self.stamina
+		self.playerTable.currentStamina = self.currentStamina
+		self.playerTable.intelligence = self.intelligence
+		self.playerTable.currentIntelligence = self.currentIntelligence
+		self.playerTable.armor = self.armor
+		self.playerTable.currentArmor = self.currentArmor
+		self.playerTable.critChance = self.critChance
+		self.playerTable.currentCritChance = self.currentCritChance
 
 		triggerClientEvent(self.player, "SYNCPLAYERDATA", self.player, self.playerTable)
 	end
@@ -487,14 +717,14 @@ end
 
 function Player_S:setCritChance(value)
 	if (value) then
-		self.critChance =  value
+		self.currentCritChance =  value
 		
-		if (self.critChance > 100) then
-			self.critChance = 100
+		if (self.currentCritChance > 100) then
+			self.currentCritChance = 100
 		end
 		
-		if (self.critChance < 0) then
-			self.critChance = 0
+		if (self.currentCritChance < 0) then
+			self.currentCritChance = 0
 		end
 	end
 end
@@ -511,7 +741,7 @@ end
 
 
 function Player_S:getCritChance()
-	return self.critChance
+	return self.currentCritChance
 end
 
 

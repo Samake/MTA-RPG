@@ -171,11 +171,9 @@ function DragAndDrop_C:dropSlot()
 							self.destinationSlot.itemContainer.count = self.destinationSlot.itemContainer.count + tempItemContainer.count
 							tempItemContainer = nil
 							
-							local stackSettings = {}
-							stackSettings.startSlotID = self.startSlot.slotID
-							stackSettings.startSlotID = self.startSlot.slotID
-							stackSettings.startSlotID = self.startSlot.slotID
-							stackSettings.startSlotID = self.startSlot.slotID
+							--local stackSettings = {}
+							--stackSettings.startSlotID = self.startSlot.slotID
+		
 							
 							--triggerServerEvent("STACKITEM", root, self.destinationSlot.slotID, self.startSlot.slotID, self.destinationSlot.itemContainer.count)
 						end
@@ -187,7 +185,7 @@ function DragAndDrop_C:dropSlot()
 					self.destinationSlot.itemContainer = self.itemContainer
 				end
 				
-				triggerServerEvent("MOVEITEM", root, self.destinationSlot.slotID, self.startSlot.slotID)
+				triggerServerEvent("MOVEITEM", root, self.startSlot.slotID, self.destinationSlot.slotID)
 			else
 				self.startSlot.itemContainer = self.itemContainer
 			end

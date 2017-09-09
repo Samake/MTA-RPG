@@ -24,6 +24,18 @@ function Player_C:constructor()
 	self.maxXP = 0
 	self.money = 0
 	
+	self.stamina = 0
+	self.currentStamina = 0
+	
+	self.intelligence = 0
+	self.currentIntelligence = 0
+	
+	self.armor = 0
+	self.currentArmor = 0
+	
+	self.critChance = 0
+	self.currentCritChance = 0
+	
 	self.oldEquippedSlots = {}
 	self.equippedSlots = {}
 	
@@ -145,6 +157,38 @@ function Player_C:getServerData(playerTable)
 		if (playerTable.class) then
 			self.class = playerTable.class
 		end
+		
+		if (playerTable.stamina) then
+			self.stamina = playerTable.stamina
+		end
+		
+		if (playerTable.currentStamina) then
+			self.currentStamina = playerTable.currentStamina
+		end
+		
+		if (playerTable.intelligence) then
+			self.intelligence = playerTable.intelligence
+		end
+		
+		if (playerTable.currentIntelligence) then
+			self.currentIntelligence = playerTable.currentIntelligence
+		end
+		
+		if (playerTable.armor) then
+			self.armor = playerTable.armor
+		end
+		
+		if (playerTable.currentArmor) then
+			self.currentArmor = playerTable.currentArmor
+		end
+		
+		if (playerTable.critChance) then
+			self.critChance = playerTable.critChance
+		end
+		
+		if (playerTable.currentCritChance) then
+			self.currentCritChance = playerTable.currentCritChance
+		end
 	end
 end
 
@@ -230,6 +274,46 @@ end
 
 function Player_C:getClass()
 	return self.class
+end
+
+
+function Player_C:getStamina()
+	return self.stamina
+end
+
+
+function Player_C:getCurrentStamina()
+	return self.currentStamina
+end
+
+
+function Player_C:getIntelligence()
+	return self.intelligence
+end
+
+
+function Player_C:getCurrentIntelligence()
+	return self.currentIntelligence
+end
+
+
+function Player_C:getArmor()
+	return self.armor
+end
+
+
+function Player_C:getCurrentArmor()
+	return self.currentArmor
+end
+
+
+function Player_C:getCritChance()
+	return self.critChance
+end
+
+
+function Player_C:getCurrentCritChance()
+	return self.currentCritChance
 end
 
 
