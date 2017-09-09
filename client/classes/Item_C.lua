@@ -47,6 +47,71 @@ function Item_C:init()
 end
 
 
+function Item_C:getID()
+	return self.id
+end
+
+
+function Item_C:getItemID()
+	return self.itemID
+end
+
+
+function Item_C:getSlotID()
+	return self.slotID
+end
+
+
+function Item_C:getPlayer()
+	return self.player
+end
+
+
+function Item_C:getName()
+	return self.name
+end
+
+
+function Item_C:getDescription()
+	return self.description
+end
+
+
+function Item_C:getStats()
+	return self.stats
+end
+
+
+function Item_C:getQuality()
+	return self.quality
+end
+
+
+function Item_C:getColor()
+	return {r = self.color.r, g = self.color.g, b = self.color.b}
+end
+
+
+function Item_C:getCosts()
+	return self.costs
+end
+
+
+function Item_C:getClass()
+	return self.class
+end
+
+
+function Item_C:getIcon()
+	return self.icon
+end
+
+
+function Item_C:getSlot()
+	return self.slot
+end
+
+
 function Item_C:getTexture()
 	return self.texture
 end

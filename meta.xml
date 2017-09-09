@@ -77,6 +77,7 @@
 	<script src="client/singletons/GUIInventory_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/Debug_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/DragAndDrop_C.lua" type="client" cache="false"/>
+	<script src="client/singletons/GUISlotDetails_C.lua" type="client" cache="false"/>
 	
 	<script src="client/manager/XMLManager_C.lua" type="client" cache="false"/>
 	<script src="client/manager/CameraManager_C.lua" type="client" cache="false"/>

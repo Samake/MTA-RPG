@@ -9,15 +9,15 @@ function dxWindow:constructor(x, y, w, h, parent, relative)
 	self.defaultWidth = w or 0
 	self.defaultHeight = h or 0
 	self.parent = parent or nil
-	self.isRelative = relative or true
+	self.isRelative = relative or false
 	
 	self.x = 0
 	self.y = 0
 	self.width = 0
 	self.height = 0
 	
-	self.color = {r = 0, g = 0, b = 0}
-	self.borderColor = {r = 0, g = 0, b = 0}
+	self.color = {r = 15, g = 15, b = 15}
+	self.borderColor = {r = 45, g = 45, b = 45}
 	
 	self.borderSize = 2
 	

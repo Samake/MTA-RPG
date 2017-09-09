@@ -32,7 +32,7 @@ function GUISlot_C:constructor(slotID, x, y, w, h, parent, relative)
 	self.shadowOffset = 1
 	self.borderSize = 2
 	
-	self.alpha = 255
+	self.alpha = Settings.guiAlpha
 	
 	self.mouseX = 0
 	self.mouseY = 0
@@ -44,6 +44,11 @@ function GUISlot_C:constructor(slotID, x, y, w, h, parent, relative)
 	self.count = 0
 	
 	self.characterSlot = false
+	self.showDetails = false
+	self.isDetailsStarted = false
+	
+	self.startTick = 0
+	self.currentTick = 0
 	
 	self:init()
 	
@@ -60,6 +65,8 @@ end
 
 function GUISlot_C:update(deltaTime)
 	self:calcValues()
+	
+	self.currentTick = getTickCount()
 	
 	-- draw bg
 	dxDrawRectangle(self.finalX, self.finalY, self.finalWidth, self.finalHeight, tocolor(self.color.r, self.color.g, self.color.b, self.alpha), self.postGUI, self.subPixelPositioning)
@@ -109,9 +116,29 @@ function GUISlot_C:update(deltaTime)
 	if (self:isCursorInside() == true) then
 		if (getKeyState("mouse1") == true) then
 			DragAndDrop_C:getSingleton():addStartSlot(self)
+			self.showDetails = false
+			self.isDetailsStarted = false
+		else
+			if (self.isDetailsStarted == false) then
+				self.startTick = getTickCount()
+				self.isDetailsStarted = true
+			else
+				if (self.currentTick > self.startTick + 350) then
+					self.showDetails = true
+				end
+			end
 		end
 		
 		DragAndDrop_C:getSingleton():addDestinationSlot(self)
+	else
+		self.showDetails = false
+		self.isDetailsStarted = false
+	end
+	
+	if (self.showDetails == true) then
+		self:enableDetails()
+	elseif (self.showDetails == false) then
+		self:disableDetails()
 	end
 end
 
@@ -163,6 +190,34 @@ function GUISlot_C:isCursorInside()
 	end
 
 	return false
+end
+
+
+function GUISlot_C:enableDetails()
+	if (self.itemContainer) then
+		if (not self.details) then
+			local w = self.finalWidth * 3
+			local h = self.finalHeight * 4
+			local x = (self.finalX + self.finalWidth / 2) - w / 2
+			local y = self.finalY + self.finalHeight / 2
+			
+			GUISlotDetails_C:getSingleton():setSlotID(self.slotID)
+			GUISlotDetails_C:getSingleton():setPosition(x, y)
+			GUISlotDetails_C:getSingleton():setSize(w, h)
+			GUISlotDetails_C:getSingleton():setAlpha(self.alpha)
+			GUISlotDetails_C:getSingleton():setPostGUI(self.postGUI)
+			GUISlotDetails_C:getSingleton():setItem(self.itemContainer)
+		end
+	end
+end
+
+
+function GUISlot_C:disableDetails()
+	if (GUISlotDetails_C:getSingleton():getSlotID()) then
+		if (GUISlotDetails_C:getSingleton():getSlotID() == self.slotID) then
+			GUISlotDetails_C:getSingleton():setSlotID(nil)
+		end
+	end
 end
 
 
@@ -324,7 +379,7 @@ end
 
 
 function GUISlot_C:clear()
-
+	self:disableDetails()
 end
 
 

@@ -43,6 +43,7 @@ function Core_C:initComponents()
 	SoundManager_C:new()
 	LightManager_C:new()
 	DragAndDrop_C:new()
+	GUISlotDetails_C:new()
 	
 	if (Settings.debugEnabled == true) then
 		Debug_C:new()
@@ -79,6 +80,7 @@ function Core_C:update(deltaTime)
 	NotificationManager_C:getSingleton():update(self.delta)
 	LightManager_C:getSingleton():update(self.delta)
 	DragAndDrop_C:getSingleton():update(self.delta)
+	GUISlotDetails_C:getSingleton():update(self.delta)
 	
 	if (Settings.debugEnabled == true) then
 		Debug_C:getSingleton():update(self.delta)
@@ -109,6 +111,7 @@ function Core_C:clear()
 	delete(SoundManager_C:getSingleton())
 	delete(LightManager_C:getSingleton())
 	delete(DragAndDrop_C:getSingleton())
+	delete(GUISlotDetails_C:getSingleton())
 	
 	if (Settings.debugEnabled == true) then
 		delete(Debug_C:getSingleton())
