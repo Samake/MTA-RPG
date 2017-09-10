@@ -67,8 +67,6 @@ function RainManager_C:update(deltaTime)
 		end
 		
 		dxSetRenderTarget()
-		
-		dxDrawImage(0, 0, self.screenWidth, self.screenHeight, self.renderTarget)
 	end
 end
 
@@ -103,9 +101,9 @@ function RainManager_C:clear()
 		end
 	end
 	
-	
 	if (self.renderTarget) then
 		self.renderTarget:destroy()
+		self.renderTarget = nil
 	end
 end
 

@@ -167,16 +167,13 @@ function ShaderManager_C:update(deltaTime)
 		if (self.waterShader) then
 			self.waterShader:update(deltaTime)
 		end
+		
 	end
 end
 
 
 function ShaderManager_C:getScreenSource()
-	if (self.screenSource) then
-		return self.screenSource
-	end
-	
-	return nil
+	return self.screenSource
 end
 
 

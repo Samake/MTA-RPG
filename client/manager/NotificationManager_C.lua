@@ -28,22 +28,32 @@ function NotificationManager_C:init()
 	self.m_AddNotification = bind(self.addNotification, self)
 	addEvent("SENDNOTIFICATION", true)
 	addEventHandler("SENDNOTIFICATION", root, self.m_AddNotification)
+	
+	if (not self.renderTarget) then
+		self.renderTarget = dxCreateRenderTarget(self.screenWidth, self.screenHeight, true)
+	end
 end
 
 
 function NotificationManager_C:update(delta)
-	for i = 1, self.maxNotifications do
-		if (self.notificationClasses[i]) then
-			self.notificationClasses[i].alphaModifier = self.notificationClasses[i].alphaModifier * 1.01
-			self.notificationClasses[i].alpha = self.notificationClasses[i].alpha - self.notificationClasses[i].alphaModifier
-			self.notificationClasses[i].y = (self.y + (self.notificationHeight * i)) + (self.notificationHeight * 0.05)
+	if (self.renderTarget) then
+		for i = 1, self.maxNotifications do
+			if (self.notificationClasses[i]) then
+				self.notificationClasses[i].alphaModifier = self.notificationClasses[i].alphaModifier * 1.01
+				self.notificationClasses[i].alpha = self.notificationClasses[i].alpha - self.notificationClasses[i].alphaModifier
+				self.notificationClasses[i].y = (self.y + (self.notificationHeight * i)) + (self.notificationHeight * 0.05)
+			end
 		end
-	end
 		
-	for index, notificationClass in pairs(self.notificationClasses) do
-		if (notificationClass) then
-			notificationClass:update()
+		dxSetRenderTarget(self.renderTarget, true)
+		
+		for index, notificationClass in pairs(self.notificationClasses) do
+			if (notificationClass) then
+				notificationClass:update()
+			end
 		end
+		
+		dxSetRenderTarget()
 	end
 end
 
@@ -94,6 +104,11 @@ function NotificationManager_C:deleteNotification(id)
 end
 
 
+function NotificationManager_C:getRenderTarget()
+	return self.renderTarget
+end
+
+
 function NotificationManager_C:clear()
 	removeEventHandler("SENDNOTIFICATION", root, self.m_AddNotification)
 	
@@ -102,6 +117,11 @@ function NotificationManager_C:clear()
 			notificationClass:delete()
 			notificationClass = nil
 		end
+	end
+	
+	if (self.renderTarget) then
+		self.renderTarget:destroy()
+		self.renderTarget = nil
 	end
 end
 

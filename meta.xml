@@ -78,6 +78,7 @@
 	<script src="client/singletons/Debug_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/DragAndDrop_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/GUISlotDetails_C.lua" type="client" cache="false"/>
+	<script src="client/singletons/Renderer_C.lua" type="client" cache="false"/>
 	
 	<script src="client/manager/XMLManager_C.lua" type="client" cache="false"/>
 	<script src="client/manager/CameraManager_C.lua" type="client" cache="false"/>
@@ -132,6 +133,7 @@
 	<file src="res/shader/shader_null.hlsl" type="client" cache="false"/>
 	<file src="res/shader/shader_texReplace.hlsl" type="client" cache="false"/>
 	<file src="res/shader/shader_projected_texture.hlsl" type="client" cache="false"/>
+	<file src="res/shader/shader_cartoon.hlsl" type="client" cache="false"/>
 	
 	<!-- textures -->
 	<file src="res/textures/skins/head/head_1.png" type="client" cache="false"/>

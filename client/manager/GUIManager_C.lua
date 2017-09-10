@@ -2,6 +2,8 @@ GUIManager_C = inherit(Singleton)
 
 function GUIManager_C:constructor()
 
+	self.screenWidth, self.screenHeight = guiGetScreenSize()
+	
 	self.isGUIShown = true
 	self.isInventoryShown = false
 	self.isCursorOnAnyGUI = false
@@ -15,6 +17,11 @@ end
 
 
 function GUIManager_C:init()
+	
+	if (not self.renderTarget) then
+		self.renderTarget = dxCreateRenderTarget(self.screenWidth, self.screenHeight, true)
+	end
+	
 	if (not self.guiWorld) then
 		self.guiWorld = GUIWorld_C:new()
 	end
@@ -26,20 +33,26 @@ end
 
 
 function GUIManager_C:update(deltaTime)
-	self.isCursorOnAnyGUI = false
-	
-	if (self.isGUIShown == true) then
-		if (self.guiWorld) then
-			self.guiWorld:update(deltaTime)
+	if (self.renderTarget) then
+		self.isCursorOnAnyGUI = false
+		
+		dxSetRenderTarget(self.renderTarget, true)
+		
+		if (self.isGUIShown == true) then
+			if (self.guiWorld) then
+				self.guiWorld:update(deltaTime)
+			end
+			
+			if (self.guiIngame) then
+				self.guiIngame:update(deltaTime)
+			end
+			
+			GUISlotDetails_C:getSingleton():setItem(nil)
+		elseif (self.isInventoryShown == true) then
+			GUIInventory_C:getSingleton():update(self.delta)
 		end
 		
-		if (self.guiIngame) then
-			self.guiIngame:update(deltaTime)
-		end
-		
-		GUISlotDetails_C:getSingleton():setItem(nil)
-	elseif (self.isInventoryShown == true) then
-		GUIInventory_C:getSingleton():update(self.delta)
+		dxSetRenderTarget()
 	end
 end
 
@@ -74,6 +87,11 @@ function GUIManager_C:isCursorOnGUIElement()
 end
 
 
+function GUIManager_C:getRenderedGUI()
+	return self.renderTarget
+end
+
+
 function GUIManager_C:clear()
 	if (self.guiIngame) then
 		self.guiIngame:delete()
@@ -83,6 +101,11 @@ function GUIManager_C:clear()
 	if (self.guiWorld) then
 		self.guiWorld:delete()
 		self.guiWorld = nil
+	end
+	
+	if (self.renderTarget) then
+		self.renderTarget:destroy()
+		self.renderTarget = nil
 	end
 	
 	delete(GUIInventory_C:getSingleton())
