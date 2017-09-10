@@ -59,7 +59,7 @@ function GUISlotDetails_C:init()
 		self.guiElements[5]:setColor(65, 65, 65)
 		
 		self.guiElements[6] = dxTextArea:new("Description", 0.05, 0.25, 0.9, 0.55, self.guiElements[1], true)
-		self.guiElements[6]:setFontColor(220, 220, 220)
+		self.guiElements[6]:setFontColor(180, 220, 180)
 		self.guiElements[6]:setScale(0.8)
 		
 		self.guiElements[7] = dxLine:new(0.05, 0.675, 0.9, 0, self.guiElements[1], true)
@@ -155,7 +155,7 @@ function GUISlotDetails_C:update(deltaTime)
 		end
 		
 		if (self.guiElements[6]) then
-			self.guiElements[6]:setText("#9999EE" .. self:formatText(self.itemContainer:getDescription()))
+			self.guiElements[6]:setText("#9999EE" .. self.itemContainer:getDescription())
 		end
 		
 		if (self.guiElements[8]) then	
@@ -210,15 +210,6 @@ function GUISlotDetails_C:calcValues()
 			self.y = self.screenHeight - self.height
 		end
 	end
-end
-
-
-function GUISlotDetails_C:formatText(text)
-	if (text) then
-		return text
-	end
-	
-	return ""
 end
 
 

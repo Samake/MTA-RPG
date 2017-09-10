@@ -127,7 +127,7 @@ function GUICharacterSlots_C:update(deltaTime)
 			local stamina = Player_C:getSingleton():getStamina()
 			local currentStamina = Player_C:getSingleton():getCurrentStamina()
 			local modifiedPercent = string.format("%.1f", ((100 / stamina) * currentStamina) - 100)
-			self.staminaText:setText("#EEEEEESTA: " .. currentStamina .. "#44EE44 (+" .. modifiedPercent .. "%)")
+			self.staminaText:setText("#EEEEEESTA: #EEEE44" .. currentStamina .. "#44EE44 (+" .. modifiedPercent .. "%)")
 		end
 		
 		self.staminaText:update()
@@ -138,7 +138,7 @@ function GUICharacterSlots_C:update(deltaTime)
 			local intelligence = Player_C:getSingleton():getIntelligence()
 			local currentIntelligence = Player_C:getSingleton():getCurrentIntelligence()
 			local modifiedPercent = string.format("%.1f", ((100 / intelligence) * currentIntelligence) - 100)
-			self.intelligenceText:setText("#EEEEEEINT: " .. currentIntelligence .. "#44EE44 (+" .. modifiedPercent .. "%)")
+			self.intelligenceText:setText("#EEEEEEINT: #EEEE44" .. currentIntelligence .. "#44EE44 (+" .. modifiedPercent .. "%)")
 		end
 		
 		self.intelligenceText:update()
@@ -149,7 +149,7 @@ function GUICharacterSlots_C:update(deltaTime)
 			local armor = Player_C:getSingleton():getArmor()
 			local currentArmor = Player_C:getSingleton():getCurrentArmor()
 			local modifiedPercent = string.format("%.1f", math.floor((currentArmor - armor) + 0.5))
-			self.armorText:setText("#EEEEEEARMOR: " .. currentArmor .. "#44EE44 (+" .. modifiedPercent .. ")")
+			self.armorText:setText("#EEEEEEARMOR: #EEEE44" .. currentArmor .. "#44EE44 (+" .. modifiedPercent .. ")")
 		end
 		
 		self.armorText:update()
@@ -160,7 +160,7 @@ function GUICharacterSlots_C:update(deltaTime)
 			local critChance = Player_C:getSingleton():getCritChance()
 			local currentCritChance = Player_C:getSingleton():getCurrentCritChance()
 			local modifiedPercent = string.format("%.1f", math.floor((currentCritChance - critChance) + 0.5))
-			self.critText:setText("#EEEEEECRIT: " .. currentCritChance .. "#44EE44 (+" .. modifiedPercent .. ")")
+			self.critText:setText("#EEEEEECRIT: #EEEE44" .. currentCritChance .. "#44EE44 (+" .. modifiedPercent .. ")")
 		end
 		
 		self.critText:update()

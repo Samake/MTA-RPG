@@ -50,8 +50,8 @@ end
 function dxTextArea:update(deltaTime)
 	self:calcValues()
 
-	dxDrawText(removeHEXColorCode(self.text), self.x + self.shadowOffset, self.y + self.shadowOffset, self.x + self.width + self.shadowOffset, self.y + self.height + self.shadowOffset, tocolor(self.shadowColor.r, self.shadowColor.g, self.shadowColor.b, self.alpha), self.scale, self.font, self.alignX, self.alignY, true, true, self.postGUI, false, self.subPixelPositioning)	
-	dxDrawText(self.text, self.x, self.y, self.x + self.width, self.y + self.height, tocolor(self.fontColor.r, self.fontColor.g, self.fontColor.b, self.alpha), self.scale, self.font, self.alignX, self.alignY, true, true, self.postGUI, true, self.subPixelPositioning)	
+	dxDrawText(removeHEXColorCode(self.text), self.x + self.shadowOffset, self.y + self.shadowOffset, self.x + self.width + self.shadowOffset, self.y + self.height + self.shadowOffset, tocolor(self.shadowColor.r, self.shadowColor.g, self.shadowColor.b, self.alpha), self.scale, self.font, self.alignX, self.alignY, false, true, self.postGUI, false, self.subPixelPositioning)	
+	dxDrawText(removeHEXColorCode(self.text), self.x, self.y, self.x + self.width, self.y + self.height, tocolor(self.fontColor.r, self.fontColor.g, self.fontColor.b, self.alpha), self.scale, self.font, self.alignX, self.alignY, false, true, self.postGUI, false, self.subPixelPositioning)	
 end
 
 
