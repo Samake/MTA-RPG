@@ -196,8 +196,8 @@ end
 function GUISlot_C:enableDetails()
 	if (self.itemContainer) then
 		if (not self.details) then
-			local w = self.finalWidth * 3
-			local h = self.finalHeight * 4
+			local w = self.screenWidth * 0.125
+			local h = self.screenHeight * 0.35
 			local x = (self.finalX + self.finalWidth / 2) - w / 2
 			local y = self.finalY + self.finalHeight / 2
 			

@@ -36,6 +36,8 @@ function GUIManager_C:update(deltaTime)
 		if (self.guiIngame) then
 			self.guiIngame:update(deltaTime)
 		end
+		
+		GUISlotDetails_C:getSingleton():setItem(nil)
 	elseif (self.isInventoryShown == true) then
 		GUIInventory_C:getSingleton():update(self.delta)
 	end

@@ -7,7 +7,7 @@ function Item_S:constructor(itemProperties)
 	self.slotID = itemProperties.slotID
 	self.player = itemProperties.player
 	self.name = itemProperties.name
-	self.description = itemProperties.id
+	self.description = itemProperties.description
 	self.stats = itemProperties.stats
 	self.quality = itemProperties.quality
 	self.color = itemProperties.color

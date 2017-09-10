@@ -44,6 +44,54 @@ function GUISlotDetails_C:init()
 		self.guiElements[1]:setAlpha(Settings.guiAlpha)
 		
 		self.guiElements[2] = dxText:new("Name", 0, 0.025, 1, 0.05, self.guiElements[1], true)
+		self.guiElements[2]:setScale(0.9)
+		self.guiElements[2]:setFontColor(220, 180, 45)
+		
+		self.guiElements[3] = dxText:new("Quality: - ", 0, 0.075, 1, 0.05, self.guiElements[1], true)
+		self.guiElements[3]:setFontColor(220, 220, 220)
+		self.guiElements[3]:setScale(0.75)
+		
+		self.guiElements[4] = dxText:new("Armor", 0, 0.16, 1, 0.05, self.guiElements[1], true)
+		self.guiElements[4]:setScale(0.85)
+		self.guiElements[4]:setFontColor(220, 220, 220)
+		
+		self.guiElements[5] = dxLine:new(0.05, 0.225, 0.9, 0, self.guiElements[1], true)
+		self.guiElements[5]:setColor(65, 65, 65)
+		
+		self.guiElements[6] = dxTextArea:new("Description", 0.05, 0.25, 0.9, 0.55, self.guiElements[1], true)
+		self.guiElements[6]:setFontColor(220, 220, 220)
+		self.guiElements[6]:setScale(0.8)
+		
+		self.guiElements[7] = dxLine:new(0.05, 0.675, 0.9, 0, self.guiElements[1], true)
+		self.guiElements[7]:setColor(65, 65, 65)
+		
+		self.guiElements[8] = dxText:new("STA: 0", 0.1, 0.7, 0.4, 0.05, self.guiElements[1], true)
+		self.guiElements[8]:setAlignX("left")
+		self.guiElements[8]:setScale(0.85)
+		self.guiElements[8]:setFontColor(220, 220, 220)
+		
+		self.guiElements[9] = dxText:new("INT: 0", 0.5, 0.7, 0.4, 0.05, self.guiElements[1], true)
+		self.guiElements[9]:setAlignX("left")
+		self.guiElements[9]:setScale(0.85)
+		self.guiElements[9]:setFontColor(220, 220, 220)
+		
+		self.guiElements[10] = dxText:new("CRIT: 0", 0.1, 0.75, 0.4, 0.05, self.guiElements[1], true)
+		self.guiElements[10]:setAlignX("left")
+		self.guiElements[10]:setScale(0.85)
+		self.guiElements[10]:setFontColor(220, 220, 220)
+		
+		self.guiElements[11] = dxLine:new(0.05, 0.825, 0.9, 0, self.guiElements[1], true)
+		self.guiElements[11]:setColor(65, 65, 65)
+		
+		self.guiElements[12] = dxText:new("Buy: 0 $", 0.1, 0.875, 0.4, 0.05, self.guiElements[1], true)
+		self.guiElements[12]:setAlignX("left")
+		self.guiElements[12]:setScale(0.85)
+		self.guiElements[12]:setFontColor(220, 220, 220)
+		
+		self.guiElements[13] = dxText:new("Sell: 0 $", 0.5, 0.875, 0.4, 0.05, self.guiElements[1], true)
+		self.guiElements[13]:setAlignX("left")
+		self.guiElements[13]:setScale(0.85)
+		self.guiElements[13]:setFontColor(220, 220, 220)
 	end
 end
 
@@ -53,6 +101,33 @@ function GUISlotDetails_C:update(deltaTime)
 		self:calcValues()
 		
 		self.qualityColor = self.itemContainer:getColor()
+		self.stats = self.itemContainer:getStats()
+		
+		if (self.stats) then
+			if (self.stats.armor) then
+				self.armor = self.stats.armor
+			else
+				self.armor = 0
+			end
+			
+			if (self.stats.stamina) then
+				self.stamina = self.stats.stamina
+			else
+				self.stamina = 0
+			end
+			
+			if (self.stats.intelligence) then
+				self.intelligence = self.stats.intelligence
+			else
+				self.intelligence = 0
+			end
+			
+			if (self.stats.crit) then
+				self.crit = self.stats.crit
+			else
+				self.crit = 0
+			end
+		end
 		
 		if (self.guiElements[1]) then
 			self.guiElements[1]:setPosition(self.x, self.y)
@@ -61,7 +136,58 @@ function GUISlotDetails_C:update(deltaTime)
 		
 		if (self.guiElements[2]) then
 			self.guiElements[2]:setText(self.itemContainer:getName())
-			self.guiElements[2]:setFontColor(self.qualityColor.r, self.qualityColor.g, self.qualityColor.b)
+		end
+		
+		if (self.guiElements[3]) then
+			self.guiElements[3]:setText("#9999EEQuality: " .. RGBToHex(self.qualityColor.r, self.qualityColor.g, self.qualityColor.b) .. self.itemContainer:getQuality())
+			
+			if (self.itemContainer:getItemID() < 10) then
+				self.guiElements[3]:setText("")
+			end
+		end
+		
+		if (self.guiElements[4]) then	
+			self.guiElements[4]:setText("#EEEEEEArmor: #44EE44" .. self.armor)
+			
+			if (self.itemContainer:getItemID() < 10) then
+				self.guiElements[4]:setText("")
+			end
+		end
+		
+		if (self.guiElements[6]) then
+			self.guiElements[6]:setText("#9999EE" .. self:formatText(self.itemContainer:getDescription()))
+		end
+		
+		if (self.guiElements[8]) then	
+			self.guiElements[8]:setText("#EEEEEESTA: #44EE44" .. self.stamina)
+			
+			if (self.itemContainer:getItemID() < 10) then
+				self.guiElements[8]:setText("")
+			end
+		end
+		
+		if (self.guiElements[9]) then	
+			self.guiElements[9]:setText("#EEEEEEINT: #44EE44" .. self.intelligence)
+			
+			if (self.itemContainer:getItemID() < 10) then
+				self.guiElements[9]:setText("")
+			end
+		end
+		
+		if (self.guiElements[10]) then	
+			self.guiElements[10]:setText("#EEEEEECRIT: #44EE44" .. self.crit)
+			
+			if (self.itemContainer:getItemID() < 10) then
+				self.guiElements[10]:setText("")
+			end
+		end
+		
+		if (self.guiElements[12]) then	
+			self.guiElements[12]:setText("#EEEEEEBuy: #EEEE44" .. self.itemContainer:getCosts() .. " $")
+		end
+		
+		if (self.guiElements[13]) then	
+			self.guiElements[13]:setText("#EEEEEESell: #EEEE44" .. math.floor((self.itemContainer:getCosts() / 2) + 0.5) .. " $")
 		end
 		
 		for index, guiElement in ipairs(self.guiElements) do
@@ -79,7 +205,20 @@ function GUISlotDetails_C:calcValues()
 		self.y = 0
 		self.width = 0
 		self.height = 0
+	else
+		if (self.y + self.height > self.screenHeight) then
+			self.y = self.screenHeight - self.height
+		end
 	end
+end
+
+
+function GUISlotDetails_C:formatText(text)
+	if (text) then
+		return text
+	end
+	
+	return ""
 end
 
 

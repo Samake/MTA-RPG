@@ -96,6 +96,7 @@
 	<script src="client/classes/dxLib/dxProgessBar.lua" type="client" cache="false"/>
 	<script src="client/classes/dxLib/dxText.lua" type="client" cache="false"/>
 	<script src="client/classes/dxLib/dxLine.lua" type="client" cache="false"/>
+	<script src="client/classes/dxLib/dxTextArea.lua" type="client" cache="false"/>
 	
 	<script src="client/classes/GUIAnimations_C.lua" type="client" cache="false"/>
 	<script src="client/classes/Camera_C.lua" type="client" cache="false"/>

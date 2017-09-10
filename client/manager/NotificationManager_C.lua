@@ -14,7 +14,7 @@ function NotificationManager_C:constructor()
 	self.maxNotifications = 10
 	
 	self.notificationHeight = self.height / self.maxNotifications
-	self.alphaModifier = 0.25
+	self.alphaModifier = 0.2
 
 	self:init()
 	
@@ -34,7 +34,8 @@ end
 function NotificationManager_C:update(delta)
 	for i = 1, self.maxNotifications do
 		if (self.notificationClasses[i]) then
-			self.notificationClasses[i].alpha = self.notificationClasses[i].alpha - self.alphaModifier
+			self.notificationClasses[i].alphaModifier = self.notificationClasses[i].alphaModifier * 1.01
+			self.notificationClasses[i].alpha = self.notificationClasses[i].alpha - self.notificationClasses[i].alphaModifier
 			self.notificationClasses[i].y = (self.y + (self.notificationHeight * i)) + (self.notificationHeight * 0.05)
 		end
 	end
@@ -70,6 +71,7 @@ function NotificationManager_C:addNotification(text)
 		notificationSettings.width = self.width
 		notificationSettings.height = self.notificationHeight * 0.9
 		notificationSettings.alpha = Settings.guiAlpha
+		notificationSettings.alphaModifier = self.alphaModifier
 		notificationSettings.x = self.x
 		notificationSettings.y = self.y + (self.notificationHeight * 0.05)
 		

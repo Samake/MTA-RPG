@@ -11,6 +11,7 @@ function Notification_C:constructor(notificationSettings)
 	self.width = notificationSettings.width
 	self.height = notificationSettings.height
 	self.alpha = notificationSettings.alpha
+	self.alphaModifier = notificationSettings.alphaModifier
 	
 	self.shadowOffset = 1
 	self.scale = 1
@@ -66,7 +67,7 @@ function Notification_C:update(deltaTime)
 	dxDrawText(removeHEXColorCode(self.text), self.x + self.shadowOffset, self.y + self.shadowOffset, self.x + self.currentWidth + self.shadowOffset, self.y + self.height + self.shadowOffset, tocolor(0, 0, 0, self.alpha), self.currentScale, self.font, self.alignX, self.alignY, self.clip, self.wordBreak, self.postGUI, false, self.subPixelPositioning, self.rotation, self.rotationCenterX, self.rotationCenterY)
 	dxDrawText(self.text, self.x, self.y, self.x + self.currentWidth, self.y + self.height, tocolor(255, 255, 255, self.alpha), self.currentScale, self.font, self.alignX, self.alignY, self.clip, self.wordBreak, self.postGUI, self.colorCoded, self.subPixelPositioning, self.rotation, self.rotationCenterX, self.rotationCenterY)
 
-	if (self.alpha <= 0) then
+	if (self.alpha <= 5) then
 		self.alpha = 0
 		NotificationManager_C:getSingleton():deleteNotification(self.id)
 	end
