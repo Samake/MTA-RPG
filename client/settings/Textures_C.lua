@@ -67,6 +67,27 @@ Textures["Icons"]["Items"][4] = {texture = nil, path = "res/textures/icons/items
 Textures["Icons"]["Items"][5] = {texture = nil, path = "res/textures/icons/items/legsIcon.png"}
 Textures["Icons"]["Items"][6] = {texture = nil, path = "res/textures/icons/items/feetIcon.png"}
 
+Textures["Icons"]["Items"][7] = {texture = nil, path = "res/textures/icons/items/torsoIconStamina.png"}
+Textures["Icons"]["Items"][8] = {texture = nil, path = "res/textures/icons/items/torsoIconIntelligence.png"}
+Textures["Icons"]["Items"][9] = {texture = nil, path = "res/textures/icons/items/torsoIconCrit.png"}
+Textures["Icons"]["Items"][10] = {texture = nil, path = "res/textures/icons/items/torsoIconArmor.png"}
+Textures["Icons"]["Items"][11] = {texture = nil, path = "res/textures/icons/items/torsoIconMixery.png"}
+Textures["Icons"]["Items"][12] = {texture = nil, path = "res/textures/icons/items/legsIconStamina.png"}
+Textures["Icons"]["Items"][13] = {texture = nil, path = "res/textures/icons/items/legsIconIntelligence.png"}
+Textures["Icons"]["Items"][14] = {texture = nil, path = "res/textures/icons/items/legsIconCrit.png"}
+Textures["Icons"]["Items"][15] = {texture = nil, path = "res/textures/icons/items/legsIconArmor.png"}
+Textures["Icons"]["Items"][16] = {texture = nil, path = "res/textures/icons/items/legsIconMixery.png"}
+Textures["Icons"]["Items"][17] = {texture = nil, path = "res/textures/icons/items/hatIconStamina.png"}
+Textures["Icons"]["Items"][18] = {texture = nil, path = "res/textures/icons/items/hatIconIntelligence.png"}
+Textures["Icons"]["Items"][19] = {texture = nil, path = "res/textures/icons/items/hatIconCrit.png"}
+Textures["Icons"]["Items"][20] = {texture = nil, path = "res/textures/icons/items/hatIconArmor.png"}
+Textures["Icons"]["Items"][21] = {texture = nil, path = "res/textures/icons/items/hatIconMixery.png"}
+Textures["Icons"]["Items"][22] = {texture = nil, path = "res/textures/icons/items/feetIconStamina.png"}
+Textures["Icons"]["Items"][23] = {texture = nil, path = "res/textures/icons/items/feetIconIntelligence.png"}
+Textures["Icons"]["Items"][24] = {texture = nil, path = "res/textures/icons/items/feetIconCrit.png"}
+Textures["Icons"]["Items"][25] = {texture = nil, path = "res/textures/icons/items/feetIconArmor.png"}
+Textures["Icons"]["Items"][26] = {texture = nil, path = "res/textures/icons/items/feetIconMixery.png"}
+
 Textures["Icons"]["Misc"] = {}
 Textures["Icons"]["Misc"][1] = {texture = nil, path = "res/textures/icons/misc/forbidden.png"}
 

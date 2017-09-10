@@ -168,8 +168,8 @@ function DragAndDrop_C:dropSlot()
 					
 					if (tempItemContainer) and (self.destinationSlot.itemContainer) then
 						if (tempItemContainer.id == self.destinationSlot.itemContainer.id) then
-							self.destinationSlot.itemContainer.count = self.destinationSlot.itemContainer.count + tempItemContainer.count
-							tempItemContainer = nil
+							--self.destinationSlot.itemContainer.count = self.destinationSlot.itemContainer.count + tempItemContainer.count
+							--tempItemContainer = nil
 							
 							--local stackSettings = {}
 							--stackSettings.startSlotID = self.startSlot.slotID

@@ -8,6 +8,7 @@ function GUIInventory_C:constructor()
 	self.inventory = nil
 	
 	self.availableSlot = nil
+	self.columnScale = 1.25
 	
 	self:init()
 	
@@ -30,18 +31,23 @@ function GUIInventory_C:init()
 		self.guiElements[2]:setColor(90, 220, 90)
 		
 		self.guiElements[3] = dxText:new("Name", 0.025, 0, 0.19, 0.1, self.guiElements[1], true)
+		self.guiElements[3]:setScale(self.columnScale)
 		self.guiElements[3]:setAlignX("left")
 		
 		self.guiElements[4] = dxText:new("Lvl", 0.215, 0, 0.19, 0.1, self.guiElements[1], true)
+		self.guiElements[4]:setScale(self.columnScale)
 		self.guiElements[4]:setAlignX("left")
 		
 		self.guiElements[5] = dxText:new("Rank", 0.405, 0, 0.19, 0.1, self.guiElements[1], true)
+		self.guiElements[5]:setScale(self.columnScale)
 		self.guiElements[5]:setAlignX("left")
 		
 		self.guiElements[6] = dxText:new("Class", 0.595, 0, 0.19, 0.1, self.guiElements[1], true)
+		self.guiElements[6]:setScale(self.columnScale)
 		self.guiElements[6]:setAlignX("left")
 		
 		self.guiElements[7] = dxText:new("Money", 0.785, 0, 0.19, 0.1, self.guiElements[1], true)
+		self.guiElements[7]:setScale(self.columnScale)
 		self.guiElements[7]:setAlignX("left")
 		
 		self.guiElements[8] = GUICharacterSlots_C:new(0.025, 0.12, 0.45, 0.86, self.guiElements[1], true)

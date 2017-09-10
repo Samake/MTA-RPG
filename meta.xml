@@ -180,6 +180,27 @@
 	<file src="res/textures/icons/items/legsIcon.png" type="client" cache="false"/>
 	<file src="res/textures/icons/items/feetIcon.png" type="client" cache="false"/>
 	
+	<file src="res/textures/icons/items/torsoIconStamina.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/torsoIconIntelligence.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/torsoIconCrit.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/torsoIconArmor.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/torsoIconMixery.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/legsIconStamina.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/legsIconIntelligence.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/legsIconCrit.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/legsIconArmor.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/legsIconMixery.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/hatIconStamina.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/hatIconIntelligence.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/hatIconCrit.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/hatIconArmor.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/hatIconMixery.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/feetIconStamina.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/feetIconIntelligence.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/feetIconCrit.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/feetIconArmor.png" type="client" cache="false"/>
+	<file src="res/textures/icons/items/feetIconMixery.png" type="client" cache="false"/>
+	
 	<file src="res/textures/icons/misc/forbidden.png" type="client" cache="false"/>
 	
 	<file src="res/sounds/ambient/ambient_01.mp3" type="client" cache="false"/>

@@ -22,7 +22,7 @@ function GUISlot_C:constructor(slotID, x, y, w, h, parent, relative)
 	self.finalWidth = self.defaultWidth
 	self.finalHeight = self.defaultHeight
 	
-	self.color = {r = 25, g = 25, b = 25}
+	self.color = {r = 15, g = 15, b = 25}
 	self.shadowColor = {r = 15, g = 15, b = 15}
 	self.borderColor = {r = 90, g = 90, b = 90}
 	self.qualityColor = {r = 255, g = 255, b = 255}
@@ -196,8 +196,8 @@ end
 function GUISlot_C:enableDetails()
 	if (self.itemContainer) then
 		if (not self.details) then
-			local w = self.screenWidth * 0.125
-			local h = self.screenHeight * 0.35
+			local w = self.screenWidth * 0.14
+			local h = self.screenHeight * 0.4
 			local x = (self.finalX + self.finalWidth / 2) - w / 2
 			local y = self.finalY + self.finalHeight / 2
 			

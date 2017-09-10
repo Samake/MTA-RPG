@@ -11,7 +11,7 @@ function GUISlotDetails_C:constructor()
 	
 	self.color = {r = 25, g = 25, b = 25}
 	self.shadowColor = {r = 15, g = 15, b = 15}
-	self.borderColor = {r = 90, g = 90, b = 90}
+	self.borderColor = {r = 65, g = 65, b = 65}
 	self.fontColor = {r = 200, g = 200, b = 90}
 	
 	self.shadowOffset = 1
@@ -41,6 +41,7 @@ function GUISlotDetails_C:init()
 	self.guiElements[1] = dxWindow:new(0, 0, 0, 0, self, false)
 	
 	if (self.guiElements[1]) then
+		self.guiElements[1]:setBorderColor(self.borderColor.r, self.borderColor.g, self.borderColor.b)
 		self.guiElements[1]:setAlpha(Settings.guiAlpha)
 		
 		self.guiElements[2] = dxText:new("Name", 0, 0.025, 1, 0.05, self.guiElements[1], true)
@@ -56,14 +57,14 @@ function GUISlotDetails_C:init()
 		self.guiElements[4]:setFontColor(220, 220, 220)
 		
 		self.guiElements[5] = dxLine:new(0.05, 0.225, 0.9, 0, self.guiElements[1], true)
-		self.guiElements[5]:setColor(65, 65, 65)
+		self.guiElements[5]:setColor(self.borderColor.r, self.borderColor.g, self.borderColor.b)
 		
 		self.guiElements[6] = dxTextArea:new("Description", 0.05, 0.25, 0.9, 0.55, self.guiElements[1], true)
 		self.guiElements[6]:setFontColor(180, 220, 180)
 		self.guiElements[6]:setScale(0.8)
 		
 		self.guiElements[7] = dxLine:new(0.05, 0.675, 0.9, 0, self.guiElements[1], true)
-		self.guiElements[7]:setColor(65, 65, 65)
+		self.guiElements[7]:setColor(self.borderColor.r, self.borderColor.g, self.borderColor.b)
 		
 		self.guiElements[8] = dxText:new("STA: 0", 0.1, 0.7, 0.4, 0.05, self.guiElements[1], true)
 		self.guiElements[8]:setAlignX("left")
@@ -81,7 +82,7 @@ function GUISlotDetails_C:init()
 		self.guiElements[10]:setFontColor(220, 220, 220)
 		
 		self.guiElements[11] = dxLine:new(0.05, 0.825, 0.9, 0, self.guiElements[1], true)
-		self.guiElements[11]:setColor(65, 65, 65)
+		self.guiElements[11]:setColor(self.borderColor.r, self.borderColor.g, self.borderColor.b)
 		
 		self.guiElements[12] = dxText:new("Buy: 0 $", 0.1, 0.875, 0.4, 0.05, self.guiElements[1], true)
 		self.guiElements[12]:setAlignX("left")
