@@ -3,11 +3,10 @@ Renderer_C = inherit(Singleton)
 function Renderer_C:constructor(id)
 	self.screenWidth, self.screenHeight = guiGetScreenSize()
 	
-	self.bitDepth = 128
-	self.outlineStrength = 0.125
-	self.saturation = 1.2
-	self.brightness = 1.15
-	self.contrast = 1.025
+	self.outlineStrength = 0.15
+	self.saturation = 1.5
+	self.brightness = 1.1
+	self.contrast = 0.8
 	
 	self:init()
 	
@@ -53,7 +52,6 @@ function Renderer_C:update(deltaTime)
 				
 				self.outlineShader:setValue("screenSource", self.screenSource)
 				self.outlineShader:setValue("screenSize", {self.screenWidth, self.screenHeight})
-				self.outlineShader:setValue("bitDepth", self.bitDepth)
 				self.outlineShader:setValue("outlineStrength", self.outlineStrength)
 				
 				dxDrawImage(0, 0, self.screenWidth, self.screenHeight, self.outlineShader)
@@ -68,7 +66,7 @@ function Renderer_C:update(deltaTime)
 				
 				dxSetRenderTarget()
 
-				self.finalShader:setValue("screenSource", self.renderTargetOutline)
+				self.finalShader:setValue("outlineSource", self.renderTargetOutline)
 				self.finalShader:setValue("bloomSource", self.renderTargetBloom)
 				self.finalShader:setValue("saturation", self.saturation)
 				self.finalShader:setValue("brightness", self.brightness)
