@@ -4,10 +4,10 @@ function Renderer_C:constructor(id)
 	self.screenWidth, self.screenHeight = guiGetScreenSize()
 	
 	self.bitDepth = 128
-	self.outlineStrength = 0.15
-	self.saturation = 1.25
-	self.brightness = 1.25
-	self.contrast = 1.05
+	self.outlineStrength = 0.125
+	self.saturation = 1.2
+	self.brightness = 1.15
+	self.contrast = 1.025
 	
 	self:init()
 	
@@ -18,14 +18,30 @@ end
 
 
 function Renderer_C:init()
-	if (not self.shader) then
-		self.shader = dxCreateShader("res/shader/shader_cartoon.hlsl")
+	if (not self.outlineShader) then
+		self.outlineShader = dxCreateShader("res/shader/shader_outline.hlsl")
+	end
+	
+	if (not self.bloomShader) then
+		self.bloomShader = dxCreateShader("res/shader/shader_bloom.hlsl")
+	end
+	
+	if (not self.finalShader) then
+		self.finalShader = dxCreateShader("res/shader/shader_final_pp.hlsl")
+	end
+	
+	if (not self.renderTargetOutline) then
+		self.renderTargetOutline = dxCreateRenderTarget(self.screenWidth, self.screenHeight, true)
+	end
+	
+	if (not self.renderTargetBloom) then
+		self.renderTargetBloom = dxCreateRenderTarget(self.screenWidth, self.screenHeight, true)
 	end
 end
 
 
 function Renderer_C:update(deltaTime)
-	if (self.shader) then
+	if (self.outlineShader) and (self.bloomShader) and (self.finalShader) and (self.renderTargetOutline) and (self.renderTargetBloom) then
 		self.screenSource = ShaderManager_C:getSingleton():getScreenSource()
 		self.renderedGUI = GUIManager_C:getSingleton():getRenderedGUI()
 		self.rainResult = RainManager_C:getSingleton():getRenderTarget()
@@ -33,15 +49,32 @@ function Renderer_C:update(deltaTime)
 		
 		if (self.screenSource) and (self.renderedGUI) then
 			if (Settings.shadersEnabled == true) then
-				self.shader:setValue("screenSource", self.screenSource)
-				self.shader:setValue("screenSize", {self.screenWidth, self.screenHeight})
-				self.shader:setValue("bitDepth", self.bitDepth)
-				self.shader:setValue("outlineStrength", self.outlineStrength)
-				self.shader:setValue("saturation", self.saturation)
-				self.shader:setValue("brightness", self.brightness)
-				self.shader:setValue("contrast", self.contrast)
+				dxSetRenderTarget(self.renderTargetOutline, true)
+				
+				self.outlineShader:setValue("screenSource", self.screenSource)
+				self.outlineShader:setValue("screenSize", {self.screenWidth, self.screenHeight})
+				self.outlineShader:setValue("bitDepth", self.bitDepth)
+				self.outlineShader:setValue("outlineStrength", self.outlineStrength)
+				
+				dxDrawImage(0, 0, self.screenWidth, self.screenHeight, self.outlineShader)
+				
+				dxSetRenderTarget()
+				
+				dxSetRenderTarget(self.renderTargetBloom, true)
+				
+				self.bloomShader:setValue("screenSource", self.screenSource)
+				
+				dxDrawImage(0, 0, self.screenWidth, self.screenHeight, self.bloomShader)
+				
+				dxSetRenderTarget()
 
-				dxDrawImage(0, 0, self.screenWidth, self.screenHeight, self.shader)
+				self.finalShader:setValue("screenSource", self.renderTargetOutline)
+				self.finalShader:setValue("bloomSource", self.renderTargetBloom)
+				self.finalShader:setValue("saturation", self.saturation)
+				self.finalShader:setValue("brightness", self.brightness)
+				self.finalShader:setValue("contrast", self.contrast)
+
+				dxDrawImage(0, 0, self.screenWidth, self.screenHeight, self.finalShader)
 			end
 			
 			if (self.rainResult) then
@@ -52,16 +85,38 @@ function Renderer_C:update(deltaTime)
 				dxDrawImage(0, 0, self.screenWidth, self.screenHeight, self.notificationsResult)
 			end
 			
-			dxDrawImage(0, 0, self.screenWidth, self.screenHeight, self.renderedGUI)
+			if (self.renderedGUI) then
+				dxDrawImage(0, 0, self.screenWidth, self.screenHeight, self.renderedGUI)
+			end
 		end
 	end
 end
 
 
 function Renderer_C:clear()
-	if (self.shader) then
-		self.shader:destroy()
-		self.shader = nil
+	if (self.outlineShader) then
+		self.outlineShader:destroy()
+		self.outlineShader = nil
+	end
+	
+	if (self.bloomShader) then
+		self.bloomShader:destroy()
+		self.bloomShader = nil
+	end
+	
+	if (self.finalShader) then
+		self.finalShader:destroy()
+		self.finalShader = nil
+	end
+	
+	if (self.renderTargetOutline) then
+		self.renderTargetOutline:destroy()
+		self.renderTargetOutline = nil
+	end
+	
+	if (self.renderTargetBloom) then
+		self.renderTargetBloom:destroy()
+		self.renderTargetBloom = nil
 	end
 end
 
