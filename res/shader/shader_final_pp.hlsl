@@ -37,8 +37,8 @@ float4 PixelShaderFunction(float2 texCoords : TEXCOORD0) : COLOR0 {
 	finalColor.rgb *= brightness;
 	
 	// add vignette to screen
-	float dist = distance(texCoords, float2(0.5, 0.5)) * 0.7;    
-	finalColor.rgb *= smoothstep(0.6, 0.2, dist); 
+	float dist = distance(texCoords, float2(0.5f, 0.5f)) * 0.7f;    
+	finalColor.rgb *= smoothstep(0.6f, 0.2f, dist); 
 	
 	return finalColor;
 }

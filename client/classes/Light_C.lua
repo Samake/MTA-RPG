@@ -43,7 +43,7 @@ end
 
 
 function Light_C:clear()
-	
+
 end
 
 

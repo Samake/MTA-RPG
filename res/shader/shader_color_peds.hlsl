@@ -2,9 +2,12 @@
 #include "mta-helper.hlsl"
 #include "light-helper.hlsl"
 
-int maxLights = 14;
 float2 distFade = float2(0, 1);
-float diffusor = 0.0;
+float shadowModifier = 0.8f;
+
+float3 sunPos = float3(-5000.0f, -5000.0f, 12000.0f);
+float4 sunColor = float4(1.0f, 0.92f, 0.86f, 1.0f);
+float4 ambientColor = float4(0.4f, 0.38f, 0.32f, 1.0f);
 
 texture skinTexture;
 sampler TextureSampler = sampler_state
@@ -44,7 +47,11 @@ VertexShaderOutput VertexShaderFunction(VertexShaderInput input)
 	output.TexCoord = input.TexCoord;
 	
 	output.WorldNormal = MTACalcWorldNormal(input.Normal);
-    output.Diffuse = 1.25 * saturate(MTACalcGTACompleteDiffuse(output.WorldNormal, input.Diffuse)) + diffusor;
+	
+	float3 lightDirection = normalize(gCameraPosition - sunPos);
+	float lightIntensity = dot(output.WorldNormal, -lightDirection) + shadowModifier;
+	
+    output.Diffuse = float4(sunColor.rgb * lightIntensity, 1.0f);
 	
 	float DistanceFromCamera = distance(gCameraPosition, output.WorldPosition);
 	output.DistFade = MTAUnlerp(distFade[0], distFade[1], DistanceFromCamera);
@@ -58,10 +65,10 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 
 	float4 textureColor = tex2D(TextureSampler, input.TexCoord);
 
-	float4 dynamicLightsColor = getLights(input.WorldNormal, input.WorldPosition, maxLights);
-	float4 finalLightColor = (input.Diffuse + (dynamicLightsColor * saturate(input.DistFade) * input.Diffuse)) - diffusor;
+	float4 dynamicLightsColor = getLights(input.WorldNormal, input.WorldPosition);
+	float4 finalLightColor = (input.Diffuse + (dynamicLightsColor * saturate(input.DistFade) * input.Diffuse));
 	
-	float4 finalColor = float4((textureColor.rgb * finalLightColor.rgb), textureColor.a);
+	float4 finalColor = float4((ambientColor.rgb * textureColor.rgb * finalLightColor.rgb * textureColor.a), textureColor.a);
 	
 	return finalColor;
 }

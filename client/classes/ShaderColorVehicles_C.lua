@@ -5,6 +5,7 @@ function ShaderColorVehicles_C:constructor(id, shaderBind)
 	self.id = id
 	self.textures = shaderBind.textures
 	self.color = {shaderBind.color.r / 255, shaderBind.color.g / 255, shaderBind.color.b / 255}
+	self.shadowModifier = 0.0
 	
 	self:init()
 	
@@ -47,6 +48,9 @@ end
 
 function ShaderColorVehicles_C:update()
 	if (self.shader) then
+		self.shadowModifier = Renderer_C:getSingleton():getShadowModifier() or 0.0
+		self.shader:setValue("shadowModifier", self.shadowModifier)
+		
 		for index, light in pairs(LightManager_C:getSingleton():getLights()) do
 			if (light) then
 				local lightEnableStr = "pointLight" .. index .. "Enable"

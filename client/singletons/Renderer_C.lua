@@ -3,7 +3,8 @@ Renderer_C = inherit(Singleton)
 function Renderer_C:constructor(id)
 	self.screenWidth, self.screenHeight = guiGetScreenSize()
 	
-	self.outlineStrength = 0.15
+	self.outlineStrength = 0.35
+	self.shadowModifier = 0.8
 	self.saturation = 1.5
 	self.brightness = 1.1
 	self.contrast = 0.8
@@ -116,6 +117,11 @@ function Renderer_C:clear()
 		self.renderTargetBloom:destroy()
 		self.renderTargetBloom = nil
 	end
+end
+
+
+function Renderer_C:getShadowModifier()
+	return self.shadowModifier
 end
 
 

@@ -7,6 +7,8 @@ function ShaderPeds_C:constructor()
 	self.legShaders = {}
 	self.feetShaders = {}
 	
+	self.shadowModifier = 0.0
+	
 	self:init()
 	
 	if (Settings.showClassDebugInfo == true) then
@@ -151,6 +153,8 @@ end
 
 
 function ShaderPeds_C:update()
+	self.shadowModifier = Renderer_C:getSingleton():getShadowModifier() or 0.0
+	
 	for index, light in pairs(LightManager_C:getSingleton():getLights()) do
 		if (light) then
 			local lightEnableStr = "pointLight" .. index .. "Enable"
@@ -164,6 +168,7 @@ function ShaderPeds_C:update()
 					headShader:setValue(lightPositionStr, {light.x, light.y, light.z})
 					headShader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
 					headShader:setValue(lightAttenuationStr, light.radius)
+					headShader:setValue("shadowModifier", self.shadowModifier)
 				end
 			end
 			
@@ -173,6 +178,7 @@ function ShaderPeds_C:update()
 					torsoShader:setValue(lightPositionStr, {light.x, light.y, light.z})
 					torsoShader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
 					torsoShader:setValue(lightAttenuationStr, light.radius)
+					torsoShader:setValue("shadowModifier", self.shadowModifier)
 				end
 			end
 
@@ -182,6 +188,7 @@ function ShaderPeds_C:update()
 					legShader:setValue(lightPositionStr, {light.x, light.y, light.z})
 					legShader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
 					legShader:setValue(lightAttenuationStr, light.radius)
+					legShader:setValue("shadowModifier", self.shadowModifier)
 				end
 			end
 
@@ -191,6 +198,7 @@ function ShaderPeds_C:update()
 					feetShader:setValue(lightPositionStr, {light.x, light.y, light.z})
 					feetShader:setValue(lightDiffuseStr, {(light.currentColor.r) / 255, (light.currentColor.g) / 255, (light.currentColor.b) / 255, 1.0})
 					feetShader:setValue(lightAttenuationStr, light.radius)
+					feetShader:setValue("shadowModifier", self.shadowModifier)
 				end
 			end
 		end
