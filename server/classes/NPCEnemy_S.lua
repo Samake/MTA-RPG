@@ -332,7 +332,7 @@ function NPCEnemy_S:isPedAlive()
 end
 
 
-function NPC_S:isEnemy()
+function NPCEnemy_S:isEnemy()
 	return self.isPedEnemy
 end
 
