@@ -42,6 +42,7 @@ function Core_S:initComponents()
 	NotificationManager_S:new()
 	SoundManager_S:new()
 	LightManager_S:new()
+	QuestManager_S:new()
 end
 
 
@@ -57,6 +58,7 @@ function Core_S:update()
 		EventManager_S:getSingleton():update()
 		LootManager_S:getSingleton():update()
 		LightManager_S:getSingleton():update()
+		QuestManager_S:getSingleton():update()
 		
 		debug.sethook(_, h1, h2, h3) 
 	end
@@ -93,6 +95,7 @@ function Core_S:clear()
 	delete(NotificationManager_S:getSingleton())
 	delete(SoundManager_S:getSingleton())
 	delete(LightManager_S:getSingleton())
+	delete(QuestManager_S:getSingleton())
 	delete(TriggerManager_S:getSingleton())
 end
 

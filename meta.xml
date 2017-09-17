@@ -46,9 +46,11 @@
 	<script src="server/manager/NotificationManager_S.lua" type="server"/>
 	<script src="server/manager/SoundManager_S.lua" type="server"/>
 	<script src="server/manager/LightManager_S.lua" type="server"/>
+	<script src="server/manager/QuestManager_S.lua" type="server"/>
 	
 	<script src="server/classes/Player_S.lua" type="server"/>
 	<script src="server/classes/NPC_S.lua" type="server"/>
+	<script src="server/classes/NPCEnemy_S.lua" type="server"/>
 	<script src="server/classes/Light_S.lua" type="server"/>
 	<script src="server/classes/Attack_S.lua" type="server"/>
 	<script src="server/classes/AttackPunch_S.lua" type="server"/>
@@ -58,6 +60,7 @@
 	<script src="server/classes/LootClothes_S.lua" type="server"/>
 	<script src="server/classes/Inventory_S.lua" type="server"/>
 	<script src="server/classes/Item_S.lua" type="server"/>
+	<script src="server/classes/Quest_C.lua" type="server"/>
 	
 	<script src="server/settings/AttackSettings_S.lua" type="server"/>
 	<script src="server/settings/LootTable_S.lua" type="server"/>

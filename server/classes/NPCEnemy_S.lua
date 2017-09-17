@@ -1,6 +1,6 @@
-NPC_S = inherit(Class)
+NPCEnemy_S = inherit(NPC_S)
 
-function NPC_S:constructor(npcSettings)
+function NPCEnemy_S:constructor(npcSettings)
 	
 	self.id = npcSettings.id
 	self.model = nil
@@ -50,18 +50,18 @@ function NPC_S:constructor(npcSettings)
 	self.xpReward = 100
 	self.moneyReward = 1
 	
-	self.isPedEnemy = false
+	self.isPedEnemy = true
 
 	self:init()
 	self:triggerShaderSettings()
 	
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("NPC_S " .. self.id .. " was loaded.")
+		sendMessage("NPCEnemy_S " .. self.id .. " was loaded.")
 	end
 end
 
 
-function NPC_S:init()
+function NPCEnemy_S:init()
 	self.actionCol = createColSphere (self.x, self.y, self.z, self.actionRadius)
 	
 	if (self.model) and (self.actionCol) then
@@ -87,7 +87,7 @@ function NPC_S:init()
 end
 
 
-function NPC_S:triggerShaderSettings()
+function NPCEnemy_S:triggerShaderSettings()
 	self.npcSkins = {}
 	self.npcSkins[tostring(self.id)] = {}
 	self.npcSkins[tostring(self.id)].model = self.model
@@ -100,7 +100,7 @@ function NPC_S:triggerShaderSettings()
 end
 
 
-function NPC_S:update()
+function NPCEnemy_S:update()
 	if (self.model) and (isElement(self.model)) then
 		if (self.isAlive == true) then
 			self:updateCoords()
@@ -133,7 +133,7 @@ function NPC_S:update()
 end
 
 
-function NPC_S:updateCoords()
+function NPCEnemy_S:updateCoords()
 	self.modelPos = self.model:getPosition()
 	
 	if (self.modelPos) then
@@ -152,7 +152,7 @@ function NPC_S:updateCoords()
 end
 
 
-function NPC_S:updateElemenData()
+function NPCEnemy_S:updateElemenData()
 	self.model:setData("NPC:LEVEL", self.level, true)
 	self.model:setData("NPC:NAME", self.name, true)
 	
@@ -161,7 +161,7 @@ function NPC_S:updateElemenData()
 end
 
 
-function NPC_S:updatePosition()
+function NPCEnemy_S:updatePosition()
 	if (self.targetX) and (self.targetY) and (self.targetZ) then
 		if (self.distance <= self.tolerance) then
 			self:jobIdle()
@@ -172,7 +172,7 @@ function NPC_S:updatePosition()
 end
 
 
-function NPC_S:updateEnemyValues()
+function NPCEnemy_S:updateEnemyValues()
 	if (self.enemy) and (isElement(self.enemy)) then
 		local enemyPos = self.enemy:getPosition()
 		
@@ -188,7 +188,7 @@ function NPC_S:updateEnemyValues()
 end
 
 
-function NPC_S:correctPosition()
+function NPCEnemy_S:correctPosition()
 	if (self.model) and (isElement(self.model)) then
 		if (self.distance <= self.minDistance) then
 			self.minDistance = self.distance
@@ -200,7 +200,7 @@ function NPC_S:correctPosition()
 end
 
 
-function NPC_S:setTargetPosition()
+function NPCEnemy_S:setTargetPosition()
 	if (self.enemy) and (isElement(self.enemy)) then
 	
 		local enemyPos = self.enemy:getPosition()
@@ -222,7 +222,7 @@ function NPC_S:setTargetPosition()
 end
 
 
-function NPC_S:jobIdle()
+function NPCEnemy_S:jobIdle()
 	if (self.state ~= "idle") then
 		if (self.model) and (isElement(self.model)) then
 			self.model:setAnimation()
@@ -232,7 +232,7 @@ function NPC_S:jobIdle()
 end
 
 
-function NPC_S:jobRunToEnemy()
+function NPCEnemy_S:jobRunToEnemy()
 	if (self.state ~= "runToEnemy") then
 		if (self.model) and (isElement(self.model)) then
 			self.model:setAnimation(Animations["NPC"]["Run"].block, Animations["NPC"]["Run"].anim, -1, true, true, true, false, 250)
@@ -242,7 +242,7 @@ function NPC_S:jobRunToEnemy()
 end
 
 
-function NPC_S:onColShapeHit(element, dimension)
+function NPCEnemy_S:onColShapeHit(element, dimension)
 	if (isElement(element)) and (not self.enemy) then
 		if (element:getType() == "player") then
 			self.enemy = element
@@ -252,7 +252,7 @@ function NPC_S:onColShapeHit(element, dimension)
 end	
 
 
-function NPC_S:onColShapeLeave(element, dimension)
+function NPCEnemy_S:onColShapeLeave(element, dimension)
 	if (isElement(element)) and (self.enemy) then
 		if (element:getType() == "player") then
 			if (self.enemy == element) then
@@ -263,7 +263,7 @@ function NPC_S:onColShapeLeave(element, dimension)
 end
 
 
-function NPC_S:onPedWasted()
+function NPCEnemy_S:onPedWasted()
 	if (self.isAlive == true) then
 		self.isAlive = false
 		self.deadCount = getTickCount()
@@ -276,7 +276,7 @@ function NPC_S:onPedWasted()
 end
 
 
-function NPC_S:changeLife(value)
+function NPCEnemy_S:changeLife(value)
 	if (value) then
 		self.currentLife = self.currentLife + value
 		
@@ -291,7 +291,7 @@ function NPC_S:changeLife(value)
 end
 
 
-function NPC_S:setLife(value)
+function NPCEnemy_S:setLife(value)
 	if (value) then
 		self.currentLife = value
 		
@@ -306,12 +306,12 @@ function NPC_S:setLife(value)
 end
 
 
-function NPC_S:getLife()
+function NPCEnemy_S:getLife()
 	return self.currentLife
 end
 
 
-function NPC_S:setAttacker(class)
+function NPCEnemy_S:setAttacker(class)
 	if (class) then
 		self.attackerClass = class
 		
@@ -322,12 +322,12 @@ function NPC_S:setAttacker(class)
 end
 
 
-function NPC_S:getAttacker()
+function NPCEnemy_S:getAttacker()
 	return self.attacker
 end
 
 
-function NPC_S:isPedAlive()
+function NPCEnemy_S:isPedAlive()
 	return self.isAlive
 end
 
@@ -337,7 +337,7 @@ function NPC_S:isEnemy()
 end
 
 
-function NPC_S:clear()
+function NPCEnemy_S:clear()
 	self:jobIdle()
 	
 	if (self.actionCol) then
@@ -356,10 +356,10 @@ function NPC_S:clear()
 end
 
 
-function NPC_S:destructor()
+function NPCEnemy_S:destructor()
 	self:clear()
 
 	if (Settings.showClassDebugInfo == true) then
-		sendMessage("NPC_S " .. self.id .. " was deleted.")
+		sendMessage("NPCEnemy_S " .. self.id .. " was deleted.")
 	end
 end

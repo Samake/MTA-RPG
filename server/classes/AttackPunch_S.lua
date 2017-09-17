@@ -70,7 +70,7 @@ function AttackPunch_S:doSlotAction(slot)
 									if (enemy) and (isElement(enemy)) then
 										local npcClass = NPCManager_S:getSingleton():getNPCClass(enemy)
 										
-										if (npcClass) and (npcClass:isPedAlive() == true) then
+										if (npcClass) and (npcClass:isPedAlive() == true) and (npcClass:isEnemy() == true) then
 											if (not npcClass:getAttacker()) then
 												npcClass:setAttacker(self.playerClass)
 											end

@@ -53,7 +53,7 @@ function NPCManager_S:addNPC(x, y, z)
 			npcSettings.id = tostring(npcSettings.model)
 			
 			if (not self.npcClasses[npcSettings.id]) then
-				self.npcClasses[npcSettings.id] = NPC_S:new(npcSettings)
+				self.npcClasses[npcSettings.id] = NPCEnemy_S:new(npcSettings)
 			end
 		end
 	end
