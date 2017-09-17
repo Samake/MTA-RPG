@@ -28,9 +28,9 @@ function Player_S:constructor(playerSettings)
 	self.feetID = 1
 	
 	self.maxLife = 1000
-	self.currentLife = 1000
+	self.currentLife = 999999
 	self.maxMana = 100
-	self.currentMana = 100
+	self.currentMana = 999999
 	
 	self.lifeRegeneration = 0
 	self.manaRegeneration = 0
@@ -176,10 +176,10 @@ end
 
 function Player_S:updateItemStats()
 	if (self.levelCaps.modifier) then
-		self.stamina = self.baseStamina * self.level * self.levelCaps.modifier
+		self.stamina = self.baseStamina * self.levelCaps.modifier
 		self.currentStamina = self.stamina
 		
-		self.intelligence = self.baseIntelligence * self.level * self.levelCaps.modifier
+		self.intelligence = self.baseIntelligence * self.levelCaps.modifier
 		self.currentIntelligence = self.intelligence
 		
 		self.armor = self.baseArmor * self.level * self.levelCaps.modifier
@@ -191,15 +191,15 @@ function Player_S:updateItemStats()
 		if (self.inventory:getSlotHead()) then
 			if (self.inventory:getSlotHead().stats) then
 				if (self.inventory:getSlotHead().stats.stamina) then
-					self.currentStamina = self.currentStamina + self.inventory:getSlotHead().stats.stamina * self.level * self.levelCaps.modifier
+					self.currentStamina = self.currentStamina + self.inventory:getSlotHead().stats.stamina * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotHead().stats.intelligence) then
-					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotHead().stats.intelligence * self.level * self.levelCaps.modifier
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotHead().stats.intelligence * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotHead().stats.armor) then
-					self.currentArmor = self.currentArmor + self.inventory:getSlotHead().stats.armor * self.level * self.levelCaps.modifier
+					self.currentArmor = self.currentArmor + self.inventory:getSlotHead().stats.armor * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotHead().stats.crit) then
@@ -211,15 +211,15 @@ function Player_S:updateItemStats()
 		if (self.inventory:getSlotTorso()) then
 			if (self.inventory:getSlotTorso().stats) then
 				if (self.inventory:getSlotTorso().stats.stamina) then
-					self.currentStamina = self.currentStamina + self.inventory:getSlotTorso().stats.stamina * self.level * self.levelCaps.modifier
+					self.currentStamina = self.currentStamina + self.inventory:getSlotTorso().stats.stamina * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotTorso().stats.intelligence) then
-					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotTorso().stats.intelligence * self.level * self.levelCaps.modifier
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotTorso().stats.intelligence * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotTorso().stats.armor) then
-					self.currentArmor = self.currentArmor + self.inventory:getSlotTorso().stats.armor * self.level * self.levelCaps.modifier
+					self.currentArmor = self.currentArmor + self.inventory:getSlotTorso().stats.armor * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotTorso().stats.crit) then
@@ -231,15 +231,15 @@ function Player_S:updateItemStats()
 		if (self.inventory:getSlotLegs()) then
 			if (self.inventory:getSlotLegs().stats) then
 				if (self.inventory:getSlotLegs().stats.stamina) then
-					self.currentStamina = self.currentStamina + self.inventory:getSlotLegs().stats.stamina * self.level * self.levelCaps.modifier
+					self.currentStamina = self.currentStamina + self.inventory:getSlotLegs().stats.stamina * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotLegs().stats.intelligence) then
-					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotLegs().stats.intelligence * self.level * self.levelCaps.modifier
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotLegs().stats.intelligence * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotLegs().stats.armor) then
-					self.currentArmor = self.currentArmor + self.inventory:getSlotLegs().stats.armor * self.level * self.levelCaps.modifier
+					self.currentArmor = self.currentArmor + self.inventory:getSlotLegs().stats.armor * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotLegs().stats.crit) then
@@ -251,15 +251,15 @@ function Player_S:updateItemStats()
 		if (self.inventory:getSlotFeet()) then
 			if (self.inventory:getSlotFeet().stats) then
 				if (self.inventory:getSlotFeet().stats.stamina) then
-					self.currentStamina = self.currentStamina + self.inventory:getSlotFeet().stats.stamina * self.level * self.levelCaps.modifier
+					self.currentStamina = self.currentStamina + self.inventory:getSlotFeet().stats.stamina * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotFeet().stats.intelligence) then
-					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotFeet().stats.intelligence * self.level * self.levelCaps.modifier
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotFeet().stats.intelligence * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotFeet().stats.armor) then
-					self.currentArmor = self.currentArmor + self.inventory:getSlotFeet().stats.armor * self.level * self.levelCaps.modifier
+					self.currentArmor = self.currentArmor + self.inventory:getSlotFeet().stats.armor * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotFeet().stats.crit) then
@@ -271,15 +271,15 @@ function Player_S:updateItemStats()
 		if (self.inventory:getSlotLeftHand()) then
 			if (self.inventory:getSlotLeftHand().stats) then
 				if (self.inventory:getSlotLeftHand().stats.stamina) then
-					self.currentStamina = self.currentStamina + self.inventory:getSlotLeftHand().stats.stamina * self.level * self.levelCaps.modifier
+					self.currentStamina = self.currentStamina + self.inventory:getSlotLeftHand().stats.stamina * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotLeftHand().stats.intelligence) then
-					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotLeftHand().stats.intelligence * self.level * self.levelCaps.modifier
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotLeftHand().stats.intelligence * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotLeftHand().stats.armor) then
-					self.currentArmor = self.currentArmor + self.inventory:getSlotLeftHand().stats.armor * self.level * self.levelCaps.modifier
+					self.currentArmor = self.currentArmor + self.inventory:getSlotLeftHand().stats.armor * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotLeftHand().stats.crit) then
@@ -291,15 +291,15 @@ function Player_S:updateItemStats()
 		if (self.inventory:getSlotRighthand()) then
 			if (self.inventory:getSlotRighthand().stats) then
 				if (self.inventory:getSlotRighthand().stats.stamina) then
-					self.currentStamina = self.currentStamina + self.inventory:getSlotRighthand().stats.stamina * self.level * self.levelCaps.modifier
+					self.currentStamina = self.currentStamina + self.inventory:getSlotRighthand().stats.stamina * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotRighthand().stats.intelligence) then
-					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotRighthand().stats.intelligence * self.level * self.levelCaps.modifier
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotRighthand().stats.intelligence * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotRighthand().stats.armor) then
-					self.currentArmor = self.currentArmor + self.inventory:getSlotRighthand().stats.armor * self.level * self.levelCaps.modifier
+					self.currentArmor = self.currentArmor + self.inventory:getSlotRighthand().stats.armor * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotRighthand().stats.crit) then
@@ -311,15 +311,15 @@ function Player_S:updateItemStats()
 		if (self.inventory:getSlotLeftRing()) then
 			if (self.inventory:getSlotLeftRing().stats) then
 				if (self.inventory:getSlotLeftRing().stats.stamina) then
-					self.currentStamina = self.currentStamina + self.inventory:getSlotLeftRing().stats.stamina * self.level * self.levelCaps.modifier
+					self.currentStamina = self.currentStamina + self.inventory:getSlotLeftRing().stats.stamina * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotLeftRing().stats.intelligence) then
-					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotLeftRing().stats.intelligence * self.level * self.levelCaps.modifier
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotLeftRing().stats.intelligence * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotLeftRing().stats.armor) then
-					self.currentArmor = self.currentArmor + self.inventory:getSlotLeftRing().stats.armor * self.level * self.levelCaps.modifier
+					self.currentArmor = self.currentArmor + self.inventory:getSlotLeftRing().stats.armor * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotLeftRing().stats.crit) then
@@ -331,15 +331,15 @@ function Player_S:updateItemStats()
 		if (self.inventory:getSlotRightRing()) then
 			if (self.inventory:getSlotRightRing().stats) then
 				if (self.inventory:getSlotRightRing().stats.stamina) then
-					self.currentStamina = self.currentStamina + self.inventory:getSlotRightRing().stats.stamina * self.level * self.levelCaps.modifier
+					self.currentStamina = self.currentStamina + self.inventory:getSlotRightRing().stats.stamina * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotRightRing().stats.intelligence) then
-					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotRightRing().stats.intelligence * self.level * self.levelCaps.modifier
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotRightRing().stats.intelligence * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotRightRing().stats.armor) then
-					self.currentArmor = self.currentArmor + self.inventory:getSlotRightRing().stats.armor * self.level * self.levelCaps.modifier
+					self.currentArmor = self.currentArmor + self.inventory:getSlotRightRing().stats.armor * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotRightRing().stats.crit) then
@@ -351,15 +351,15 @@ function Player_S:updateItemStats()
 		if (self.inventory:getSlotChain()) then
 			if (self.inventory:getSlotChain().stats) then
 				if (self.inventory:getSlotChain().stats.stamina) then
-					self.currentStamina = self.currentStamina + self.inventory:getSlotChain().stats.stamina * self.level * self.levelCaps.modifier
+					self.currentStamina = self.currentStamina + self.inventory:getSlotChain().stats.stamina * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotChain().stats.intelligence) then
-					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotChain().stats.intelligence * self.level * self.levelCaps.modifier
+					self.currentIntelligence = self.currentIntelligence + self.inventory:getSlotChain().stats.intelligence * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotChain().stats.armor) then
-					self.currentArmor = self.currentArmor + self.inventory:getSlotChain().stats.armor * self.level * self.levelCaps.modifier
+					self.currentArmor = self.currentArmor + self.inventory:getSlotChain().stats.armor * self.levelCaps.modifier
 				end
 				
 				if (self.inventory:getSlotChain().stats.crit) then
@@ -390,8 +390,8 @@ function Player_S:updatePlayerStats()
 	end
 	
 	self.maxXP = self.levelCaps.xp
-	self.maxLife = math.floor(((1000 + (10 * self.currentStamina * self.levelCaps.modifier)) * self.levelCaps.modifier) + 0.5)
-	self.maxMana = math.floor(((100 + (self.currentIntelligence * self.levelCaps.modifier)) * self.levelCaps.modifier) + 0.5)
+	self.maxLife = math.floor((1000 + (10 * self.currentStamina * self.levelCaps.modifier)) + 0.5)
+	self.maxMana = math.floor((100 + (self.currentIntelligence * self.levelCaps.modifier)) + 0.5)
 	
 	if (self.currentTick > self.healTick + delay) then
 		self.lifeRegeneration = (self.maxLife / 400) * Settings.selfHealFactor

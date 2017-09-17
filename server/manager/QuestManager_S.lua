@@ -15,6 +15,11 @@ function QuestManager_S:init()
 end
 
 
+function QuestManager_S:update()
+
+end
+
+
 function QuestManager_S:clear()
 
 end
