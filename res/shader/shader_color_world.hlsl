@@ -8,7 +8,8 @@ float shadowModifier = 0.8f;
 
 float3 sunPos = float3(-5000.0f, -5000.0f, 12000.0f);
 float4 sunColor = float4(1.0f, 0.92f, 0.86f, 1.0f);
-float4 ambientColor = float4(0.4f, 0.38f, 0.32f, 1.0f);
+float4 ambientColor = float4(0.4f, 0.4f, 0.4f, 1.0f);
+
 
 sampler TextureSampler = sampler_state
 {
@@ -64,11 +65,21 @@ float4 PixelShaderFunction(VertexShaderOutput input) : COLOR0
 {	
 
 	float4 textureColor = tex2D(TextureSampler, input.TexCoord);
+	
+	// REDUCE COLORS
+	float4 reducedColor = textureColor;
+	reducedColor.rgb /= reducedColor.a;
+	reducedColor.rgb *= 16;
+	reducedColor.rgb = floor(reducedColor.rgb);
+	reducedColor.rgb /= 16;
+	reducedColor.rgb *= reducedColor.a;
+	
+	float3 mixedColor = lerp(reducedColor.rgb, inColor, 0.95f);
 
 	float4 dynamicLightsColor = getLights(input.WorldNormal, input.WorldPosition);
 	float4 finalLightColor = (input.Diffuse + (dynamicLightsColor * saturate(input.DistFade) * input.Diffuse));
 
-	float4 finalColor = float4((ambientColor.rgb * inColor * finalLightColor.rgb * textureColor.a), textureColor.a);
+	float4 finalColor = float4((ambientColor.rgb * mixedColor * finalLightColor.rgb * reducedColor.a), reducedColor.a);
 	
 	return finalColor;
 }

@@ -11,6 +11,8 @@ function GUIInventorySlots_C:constructor(x, y, w, h, parent, relative)
 	self.parent = parent or nil
 	self.isRelative = relative or true
 	
+	self.player = getLocalPlayer()
+	
 	self.x = self.defaultX
 	self.y = self.defaultY
 	self.width = self.defaultWidth
@@ -285,6 +287,7 @@ end
 
 function GUIInventorySlots_C:clear()
 	self:destroySlots()
+	
 end
 
 

@@ -97,6 +97,8 @@ function Inventory_S:moveItem(startSlotID, destinationSlotID)
 					self.slots[destinationSlotID].slotID = destinationSlotID
 				end
 				
+				triggerEvent("UPDATEPLAYERCLOTHES", root, self.player)
+				
 				self:syncSlots()
 			end
 		end

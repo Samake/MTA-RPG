@@ -17,7 +17,7 @@ end
 
 function ShaderColorWorld_C:init()
 	if (not self.shader) then
-		self.shader = dxCreateShader("res/shader/shader_color_world.hlsl", 0, Settings.shaderWorldDrawDistance, false, "world,object")
+		self.shader = dxCreateShader("res/shader/shader_color_world.hlsl", 0, Settings.shaderWorldDrawDistance, false, "world,object,other")
 		
 		if (self.shader) then
 			for index, texture in pairs(self.textures) do

@@ -123,7 +123,7 @@ function LootPotion_S:createLootObject()
 			if (self.itemContainer) then
 				if (self.itemContainer.color) then
 					if (not self.aura) then
-						self.aura = createMarker(self.x, self.y, self.z - 0.48, "corona", 0.25, self.itemContainer.color.r, self.itemContainer.color.g, self.itemContainer.color.b, 90)
+						self.aura = createMarker(self.x, self.y, self.z - 0.48, "corona", 0.25, self.itemContainer.color.r, self.itemContainer.color.g, self.itemContainer.color.b, 45)
 					
 						if (self.aura) then
 							self.aura:setDimension(self.owner:getDimension())

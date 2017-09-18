@@ -43,8 +43,9 @@ function Core_C:initComponents()
 	LightManager_C:new()
 	DragAndDrop_C:new()
 	GUISlotDetails_C:new()
-	Renderer_C:new()
+	PlayerPreview_C:new()
 	Marker3D_C:new()
+	Renderer_C:new()
 	
 	if (Settings.debugEnabled == true) then
 		Debug_C:new()
@@ -81,8 +82,9 @@ function Core_C:update(deltaTime)
 	LightManager_C:getSingleton():update(self.delta)
 	DragAndDrop_C:getSingleton():update(self.delta)
 	GUISlotDetails_C:getSingleton():update(self.delta)
-	Renderer_C:getSingleton():update(self.delta)
 	Marker3D_C:getSingleton():update(self.delta)
+	PlayerPreview_C:getSingleton():update(self.delta)
+	Renderer_C:getSingleton():update(self.delta)
 	
 	if (Settings.debugEnabled == true) then
 		Debug_C:getSingleton():update(self.delta)
@@ -113,8 +115,9 @@ function Core_C:clear()
 	delete(LightManager_C:getSingleton())
 	delete(DragAndDrop_C:getSingleton())
 	delete(GUISlotDetails_C:getSingleton())
-	delete(Renderer_C:getSingleton())
 	delete(Marker3D_C:getSingleton())
+	delete(PlayerPreview_C:getSingleton())
+	delete(Renderer_C:getSingleton())
 	
 	if (Settings.debugEnabled == true) then
 		delete(Debug_C:getSingleton())

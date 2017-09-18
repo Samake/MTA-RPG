@@ -37,6 +37,7 @@ function GUIManager_C:update(deltaTime)
 		self.isCursorOnAnyGUI = false
 		
 		dxSetRenderTarget(self.renderTarget, true)
+		dxSetBlendMode("modulate_add")
 		
 		if (self.isGUIShown == true) then
 			if (self.guiWorld) then
@@ -52,6 +53,7 @@ function GUIManager_C:update(deltaTime)
 			GUIInventory_C:getSingleton():update(self.delta)
 		end
 		
+		dxSetBlendMode("blend") 
 		dxSetRenderTarget()
 	end
 end

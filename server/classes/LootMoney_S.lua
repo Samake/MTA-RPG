@@ -114,7 +114,7 @@ function LootMoney_S:createLootObject()
 			self.pickUp:setDimension(self.owner:getDimension())
 			
 			if (not self.aura) then
-				self.aura = createMarker(self.x, self.y, self.z - 0.48, "corona", 0.25, 90, 220, 90, 90)
+				self.aura = createMarker(self.x, self.y, self.z - 0.48, "corona", 0.25, 90, 220, 90, 45)
 				
 				if (self.aura) then
 					self.aura:setDimension(self.owner:getDimension())

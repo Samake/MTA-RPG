@@ -4,7 +4,7 @@ function GUIInventory_C:constructor()
 	
 	self.guiElements = {}
 	
-	self.postGUI = true
+	self.postGUI = false
 	self.inventory = nil
 	
 	self.availableSlot = nil

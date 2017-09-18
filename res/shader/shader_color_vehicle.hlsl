@@ -8,7 +8,8 @@ float shadowModifier = 0.8f;
 
 float3 sunPos = float3(-5000.0f, -5000.0f, 12000.0f);
 float4 sunColor = float4(1.0f, 0.92f, 0.86f, 1.0f);
-float4 ambientColor = float4(0.4f, 0.38f, 0.32f, 1.0f);
+float4 ambientColor = float4(0.4f, 0.4f, 0.4f, 1.0f);
+
 
 sampler TextureSampler = sampler_state
 {

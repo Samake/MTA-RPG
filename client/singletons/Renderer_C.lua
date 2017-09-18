@@ -1,9 +1,9 @@
 Renderer_C = inherit(Singleton)
 
-function Renderer_C:constructor(id)
+function Renderer_C:constructor()
 	self.screenWidth, self.screenHeight = guiGetScreenSize()
 	
-	self.outlineStrength = 0.35
+	self.outlineStrength = 0.2
 	self.shadowModifier = 0.8
 	self.saturation = 1.5
 	self.brightness = 1.1
@@ -87,6 +87,10 @@ function Renderer_C:update(deltaTime)
 			if (self.renderedGUI) then
 				dxDrawImage(0, 0, self.screenWidth, self.screenHeight, self.renderedGUI)
 			end
+			
+			--if (PlayerPreview_C:getSingleton():getResult()) then
+			--	dxDrawImage(0, 0, 200, 200, PlayerPreview_C:getSingleton():getResult())
+			--end
 		end
 	end
 end

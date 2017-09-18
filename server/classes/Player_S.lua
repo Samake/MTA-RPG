@@ -23,14 +23,11 @@ function Player_S:constructor(playerSettings)
 	self.tolerance = 1.0
 	
 	self.headID = 1
-	self.torsoID = 1
-	self.legID = 1
-	self.feetID = 1
 	
 	self.maxLife = 1000
-	self.currentLife = 999999
+	self.currentLife = 99999999999
 	self.maxMana = 100
-	self.currentMana = 999999
+	self.currentMana = 99999999999
 	
 	self.lifeRegeneration = 0
 	self.manaRegeneration = 0
@@ -73,7 +70,12 @@ function Player_S:constructor(playerSettings)
 	
 	self.currentTick = 0
 	self.healTick = 0
-
+	
+	self.headClothes = nil
+	self.torsoClothes = nil
+	self.legClothes = nil
+	self.feetClothes = nil
+	
 	self:init()
 	
 	if (Settings.showClassDebugInfo == true) then
@@ -94,6 +96,11 @@ function Player_S:init()
 	self.m_TogglePlayerSit = bind(self.togglePlayerSit, self)
 	addEvent("PLAYERSITDOWN", true)
 	addEventHandler("PLAYERSITDOWN", root, self.m_TogglePlayerSit)
+	
+	self.m_UpdatePlayerClothesAndEquipment = bind(self.updatePlayerClothesAndEquipment, self)
+	addEvent("UPDATEPLAYERCLOTHES", true)
+	addEventHandler("UPDATEPLAYERCLOTHES", root, self.m_UpdatePlayerClothesAndEquipment)
+	
 	
 	-- only temp will be deleted later
 	if (self.player) then
@@ -432,6 +439,79 @@ function Player_S:updatePlayerStats()
 end
 
 
+function Player_S:updatePlayerClothesAndEquipment(player)
+	if (player) and (player == self.player) then
+		if (self.headClothes) then
+			if (self.inventory:getSlotHead()) then
+				if (self.inventory:getSlotHead().clothes) then
+					if (self.headClothes.index ~= self.inventory:getSlotHead().clothes.index) 
+						or (self.headClothes.texture ~= self.inventory:getSlotHead().clothes.texture)
+						or (self.headClothes.model ~= self.inventory:getSlotHead().clothes.model)
+					then
+						self.player:addClothes(self.inventory:getSlotHead().clothes.texture, self.inventory:getSlotHead().clothes.model, 16)
+						self.headClothes = self.inventory:getSlotHead().clothes
+					end
+				end
+			else
+				self.player:removeClothes(16)
+				self.headClothes = nil
+			end
+		else
+			if (self.inventory:getSlotHead()) then
+				if (self.inventory:getSlotHead().clothes) then
+					self.player:addClothes(self.inventory:getSlotHead().clothes.texture, self.inventory:getSlotHead().clothes.model, 16)
+					self.headClothes = self.inventory:getSlotHead().clothes
+				end
+			end
+		end
+		
+		if (self.torsoClothes) then
+			if (self.inventory:getSlotTorso()) then
+				if (self.inventory:getSlotTorso().clothes) then
+					if (self.torsoClothes.index ~= self.inventory:getSlotTorso().clothes.index) 
+						or (self.torsoClothes.texture ~= self.inventory:getSlotTorso().clothes.texture)
+						or (self.torsoClothes.model ~= self.inventory:getSlotTorso().clothes.model)
+					then
+						self.player:addClothes(self.inventory:getSlotTorso().clothes.texture, self.inventory:getSlotTorso().clothes.model, 0)
+						self.torsoClothes = self.inventory:getSlotTorso().clothes
+					end
+				end
+			else
+				self.player:removeClothes(0)
+				self.torsoClothes = nil
+			end
+		else
+			if (self.inventory:getSlotTorso()) then
+				if (self.inventory:getSlotTorso().clothes) then
+					self.player:addClothes(self.inventory:getSlotTorso().clothes.texture, self.inventory:getSlotTorso().clothes.model, 0)
+					self.torsoClothes = self.inventory:getSlotTorso().clothes
+				end
+			end
+		end
+		
+		if (self.legClothes) then
+			if (self.inventory:getSlotLegs()) then
+
+			end
+		else
+			if (self.inventory:getSlotLegs()) then
+
+			end
+		end
+		
+		if (self.feetClothes) then
+			if (self.inventory:getSlotFeet()) then
+
+			end
+		else
+			if (self.inventory:getSlotFeet()) then
+
+			end
+		end
+	end
+end
+
+
 function Player_S:updateCoords()
 	self.playerPos = self.player:getPosition()
 	
@@ -756,6 +836,7 @@ function Player_S:clear()
 	removeEventHandler("SETPLAYERTARGET", root, self.m_SetTargetPosition)
 	removeEventHandler("CONNECTPLAYER", root, self.m_ConnectPlayer)
 	removeEventHandler("PLAYERSITDOWN", root, self.m_TogglePlayerSit)
+	removeEventHandler("UPDATEPLAYERCLOTHES", root, self.m_UpdatePlayerClothesAndEquipment)
 	
 	if (self.inventory) then
 		self.inventory:delete()

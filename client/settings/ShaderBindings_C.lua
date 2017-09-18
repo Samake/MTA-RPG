@@ -9,14 +9,16 @@ ShaderBindings["white"] = {}
 ShaderBindings["white"].color = {r = 255, g = 255, b = 255}
 ShaderBindings["white"].textures = {"ws_white_wall1", "dam_genrail", "sw_fleishberg01", "sw_smlite", "sw_container", "ws_finalbuild", "sprunk_temp", "sjmmetrail", "ufo_pics2", "cj_painting20",
 									"cj_painting6", "cj_painting22", "shitydoor1_256", "comptdoor3", "sanpedpawn1a", "sjmlashop5", "lasclean6", "lasclean5", "lasclean4", "snpedpost1a",
-									"vehiclelights128", "vehiclegrunge256", "monsterb92body256a", "downtsign12_la", "bow_abattoir_floor_clean", "homies_1", "cluckbell02_law", "des_door1"}
+									"vehiclelights128", "vehiclegrunge256", "monsterb92body256a", "downtsign12_la", "bow_abattoir_floor_clean", "homies_1", "cluckbell02_law", "des_door1",
+									"ws_roadpost"}
 
 ShaderBindings["black"] = {}
 ShaderBindings["black"].color = {r = 0, g = 0, b = 0}
 ShaderBindings["black"].textures = {	"trail_wheel", "telewireslong", "sw_wheelt", "sw_wheel1", "upt_fence_mesh", "gen_bin_bag", "cj_sign6", "cj_dump", "upt_fence_mesh", "tafficlights", 
 										"mpcj_black_metal", "mpcj_galvanisedn", "mpcj_hi_fi", "mpcj_speaker2", "mpcj_speaker4", "mpcj_speaker_6", "mpkbsofa333c", "nt_phone2", "nt_phone1", 
 										"leather_seat_256", "gen_meshfencing", "grille1_la", "antenna1", "wire2", "weelecbox", "cj_sub_doors", "vehicletyres128", "vehiclesteering128",
-										"sanchez92tyre64", "monsterb92tyre64", "caddy92interior128", "bandito92interior128", "grille2_la", "telewires_law", "wshbrsh1las", "weathered wood2 64hv"}
+										"sanchez92tyre64", "monsterb92tyre64", "caddy92interior128", "bandito92interior128", "grille2_la", "telewires_law", "wshbrsh1las", "weathered wood2 64hv",
+										"sparrow92texpage128"}
 
 ShaderBindings["lightgrey"] = {}
 ShaderBindings["lightgrey"].color = {r = 165, g = 165, b = 165}
@@ -30,7 +32,7 @@ ShaderBindings["lightgrey"].textures = {"stonewall3_la", "sw_brick04", "sw_olddr
 										"sl_pornshopla1", "newall1-1128", "sanpedton3", "pierplanks_128", "bballbck_kb", "comptwall37", "sjmhoodaad", "sjmlababit", "sjmlawood2", "comptwall30",
 										"examintp_las", "examwall2_lae", "roof06l256", "petrolpumpbase_256", "snpdwargrn1", "lasrmd2_sjm", "lasrmd3_sjm", "ws_roof_lod", "sanpednhusd1",
 										"sanpednhus2", "vgsclubwall08_128", "lanlodbuild07", "eastwin02_lae2", "alleydoor1", "bonyrd_skin2", "seawall_lod", "ws_tunnelwall1", "vgs_shopwall01_128",
-										"des_redrock1", "des_dam_walllod", "des_wigwam", "des_dam_conc", "trail_side1"}
+										"des_redrock1", "des_dam_walllod", "des_wigwam", "des_dam_conc", "trail_side1", "sparrow92body128", "ws_freeway2"}
 
 ShaderBindings["grey"] = {}
 ShaderBindings["grey"].color = {r = 128, g = 128, b = 128}
@@ -45,7 +47,8 @@ ShaderBindings["grey"].textures = {	"sw_slate01", "cj_lamppost1", "block2_high",
 									"compmedhoos5_lod", "compthous4lod", "sjmhoodlawn4", "lasjmhoodcrb", "sjmhoodlawn42", "sjmpostback", "sjmlahus26", "lasjmrail1", "hoteldetails2", "downtwin21b",
 									"downtwin21", "examwall1_lae", "sl_pavebutt1", "gb_truckdepot29", "was_engbloxlod", "sjmlaelod1", "sjmpostbar3", "sjmlaeloda4", "sanairtex1", "newall1-1", 
 									"ammu_airvent", "snpdhus4", "easykerb", "ws_tunnelwall2", "rocktbrn128", "des_adobewall2", "des_adobewall3", "des_redrockmidlod", "des_redrock2", "des_dam_conclod",
-									"des_wigwamdoor", "dish_panel_a", "trail_door", "trail_wall2"}
+									"des_wigwamdoor", "dish_panel_a", "trail_door", "trail_wall2", "ws_stonewall", "ws_altz_wall6big", "sparrow92texpage64", "sf_pave6", "hc_whitewall1", "hc_windos2",
+									"hc_windos1"}
 										
 ShaderBindings["darkgrey1"] = {}
 ShaderBindings["darkgrey1"].color = {r = 75, g = 75, b = 75}
@@ -57,13 +60,14 @@ ShaderBindings["darkgrey1"].textures = {"sw_watower01", "cs_rockdetail2", "sw_ro
 										"buffalo92wheel32", "banditospring32", "comptwall6", "projec01lod", "sjmlaelodg4", "sjmlaeloda9", "compmedhoos1_lod", "compmedhoos3_lod", "lasjmslumgrnd",
 										"awniningsides1", "crencoudet1", "shingles2", "ws_railing1", "gen_chrome", "concretenewgery256", "tarmacplain_lod", "ahoodgardr", "bbback", "lasjmfence1",
 										"cj_corrigated", "bow_loadingbay_door", "meetwalv2", "kb_canopybse64", "clukpost1_lae2", "aroofbit9", "aroofbit8", "aroofbit1", "des_rails1", "des_roadedge1",
-										"des_roadedge2", "ws_greymetal", "ws_tunnelwall2smoked", "des_redrockmid", "des_redrockbot", "corr_roof1"}	
+										"des_roadedge2", "ws_greymetal", "ws_tunnelwall2smoked", "des_redrockmid", "des_redrockbot", "corr_roof1", "ws_carpark1", "ws_carpark2", "rocktq128_grass4blend",
+										"rock_country128blnd", "rock_country128", "hilcouwall2"}	
 
 ShaderBindings["darkgrey2"] = {}
 ShaderBindings["darkgrey2"].color = {r = 45, g = 45, b = 45}
 ShaderBindings["darkgrey2"].textures = {"tar_1line256hv", "roadnew4_256", "dt_road_stoplinea", "crossing_law", "ws_carparknew1", "ws_carparknew2", "plaintarmac1", "sl_laefreeway1", "sjmlaeloda992",
 										"snpedtest1", "ws_traintrax1", "metpat64shadow", "dt_road", "alleygroundb256", "craproad1_lae", "walljunkdet1", "carlot1", "cos_hiwaymid_256", "banshee92interior128",
-										"banshee92wheel32", "hiwaymidlle_256", "sjmcargr", "tar_1linefreewy", "tar_lineslipway"}
+										"banshee92wheel32", "hiwaymidlle_256", "sjmcargr", "tar_1linefreewy", "tar_lineslipway", "sparrow92tail64", "ws_freeway3", "sf_road5", "sf_junction5"}
 
 ShaderBindings["lightgreen"] = {}
 ShaderBindings["lightgreen"].color = {r = 15, g = 220, b = 15}
@@ -73,13 +77,13 @@ ShaderBindings["green"] = {}
 ShaderBindings["green"].color = {r = 0, g = 128, b = 0}
 ShaderBindings["green"].textures = {"sw_grass01", "sw_grass01a", "desgreengrass", "des_dirt1grass", "sw_stonesgrass", "grassbrn2rockbrng", "desgreengrassmix", "bow_church_grass_alt", "yardgrass1",
 									"desgrassbrn", "grasspatch_64hv", "dryhedge_128", "grassdry_128hv", "sjmlahus28", "sjmscorclawn", "golf_heavygrass", "grass_128hv", "grass_dirt_64hv", "labreplace",
-									"fastfood1_lae"}
+									"fastfood1_lae", "dt_road2grasstype4", "grasstype4"}
 
 ShaderBindings["darkgreen"] = {}
 ShaderBindings["darkgreen"].color = {r = 0, g = 75, b = 0}
 ShaderBindings["darkgreen"].textures = {"kb_ivy2_256", "newtreeleaves128", "newtreed256", "sw_roadsign", "weeelm", "elmdead", "elm_treegrn4", "sm_agave_1", "sm_des_bush1", "plantb256", "dead_agave",
 										"plantb256", "roadsback01_la", "kbtree4_test", "dead_fuzzy", "deadpalm01", "ws_garagedoor2_green", "kbplanter_plants1", "roadsignbackground128", "comptsign4_lae",
-										"planta256", "sm_minipalm1", "greenwall2", "hedgealphad1", "hedge", "newtreeleavesb128", "sm_des_bush2", "sm_des_bush3", "sm_josh_leaf", "trunk3"}
+										"planta256", "sm_minipalm1", "greenwall2", "hedgealphad1", "hedge", "newtreeleavesb128", "sm_des_bush2", "sm_des_bush3", "sm_josh_leaf", "trunk3", "pinelo128"}
 
 ShaderBindings["lightbrown"] = {}
 ShaderBindings["lightbrown"].color = {r = 145, g = 95, b = 0}
@@ -99,11 +103,11 @@ ShaderBindings["darkbrown"].textures = {"browfence", "sw_barnfloor1", "boardwalk
 										"slated", "cj_slatedwood", "cj_crates", "sw_pal", "fence1lod", "banding3c_64hv", "bzelka1", "cj_slatedwood", "kbtree3_test", "sm_bark_light", "des_logwall",
 										"des_woodrails", "des_trellis", "gen_quallity_hifi_side", "mpcj_darkwood", "mpcj_deer1", "comptwall14", "comptwall7", "drkbrownmetal", "cj_greenwood",
 										"tancolum1", "ws_peeling2", "ryder_mud", "comptwall2", "chipboard_256128", "board64_law", "vegaspalm01_128", "bark04s64", "sanpedmot3", "iron", "trunk5",
-										"sl_blustainplanks", "sjmlawood", "veg_bevtreebase", "wood02", "sm_josh_bark", "drvin_metal", "des_woodfence1", "des_adobedoor1", "trail_wall3"}
+										"sl_blustainplanks", "sjmlawood", "veg_bevtreebase", "wood02", "sm_josh_bark", "drvin_metal", "des_woodfence1", "des_adobedoor1", "trail_wall3", "oak2b"}
 
 ShaderBindings["lightred"] = {}
 ShaderBindings["lightred"].color = {r = 220, g = 110, b = 110}
-ShaderBindings["lightred"].textures = {"sw_container2", "sjmlahus23", "redresdoor", "newcut2_las"}
+ShaderBindings["lightred"].textures = {"sw_container2", "sjmlahus23", "redresdoor", "newcut2_las", "ws_tantiles1btm"}
 
 ShaderBindings["red"] = {}
 ShaderBindings["red"].color = {r = 255, g = 0, b = 0}
@@ -123,7 +127,8 @@ ShaderBindings["lightblue"].textures = {"sw_barnwind01", "gallery01_law", "sw_co
 										"bincowin", "lastripmall1", "snpdwingrat1", "whiwind1", "siliconvalleywins4", "lasclean1", "alleydoor6", "doornvent256128", "glassblock_law", "window1164hv",
 										"hydrowin1_lae", "vehiclegeneric256", "inwindow1shdw", "santall4", "villagreen128256", "sanpedmot1", "ws_boxhouse_wins3", "lasjmslumwin1", "pierwin05_law",
 										"pierwin01_law", "examwind1_lae", "examintp2_las", "sw_wind16", "corporate3green_128", "sanpedocka1", "cj_7_11_win", "lasjmbrsig4", "lasjmliq3", "sanpednhusd4",
-										"sw_wind12", "snpedflatt2", "snpdhus3", "bdupshoose_lod", "sw_door09", "des_hooswinwee1", "drvin_door1", "drvin_wind2", "des_whitewin1", "trail_win2", "trail_win"}
+										"sw_wind12", "snpedflatt2", "snpdhus3", "bdupshoose_lod", "sw_door09", "des_hooswinwee1", "drvin_door1", "drvin_wind2", "des_whitewin1", "trail_win2", "trail_win",
+										"ws_airportdoors1", "ws_carshowwin1"}
 
 ShaderBindings["blue"] = {}
 ShaderBindings["blue"].color = {r = 0, g = 0, b = 255}
@@ -143,7 +148,7 @@ ShaderBindings["lightorange"].textures = {"lasjmscum2a", "lasjmliq2"}
 
 ShaderBindings["orange"] = {}
 ShaderBindings["orange"].color = {r = 255, g = 155, b = 55}
-ShaderBindings["orange"].textures = {"mpman_tigr_rug", "sjmhoodlawn9s", "comptsign2_lae", "bincoslae2_128", "cokopops_1lod", "labombshop"}
+ShaderBindings["orange"].textures = {"mpman_tigr_rug", "sjmhoodlawn9s", "comptsign2_lae", "bincoslae2_128", "cokopops_1lod", "labombshop", "ws_roadwarnings"}
 
 ShaderBindings["lightyellow"] = {}
 ShaderBindings["lightyellow"].color = {r = 255, g = 255, b = 90}
@@ -151,7 +156,7 @@ ShaderBindings["lightyellow"].textures = {"forestfloorbranch256"}
 
 ShaderBindings["yellow"] = {}
 ShaderBindings["yellow"].color = {r = 220, g = 220, b = 25}
-ShaderBindings["yellow"].textures = {"trafficlight_64", "ham_radio", "sanpedpawn1", "sanpedpawn1d", "yellow2_128"}
+ShaderBindings["yellow"].textures = {"trafficlight_64", "ham_radio", "sanpedpawn1", "sanpedpawn1d", "yellow2_128", "drugs1"}
 
 ShaderBindings["darkyellow"] = {}
 ShaderBindings["darkyellow"].color = {r = 155, g = 128, b = 0}
@@ -160,14 +165,14 @@ ShaderBindings["darkyellow"].textures = {"des_ranchwall1", "des_ranchwall2", "ye
 ShaderBindings["sand"] = {}
 ShaderBindings["sand"].color = {r = 200, g = 165, b = 110}
 ShaderBindings["sand"].textures = {	"sw_farmroad01", "sw_dirt01", "des_dirt1", "dirttracksgrass256", "desertgryard256", "sw_wallbrick_06", "tar_1line256hvtodirt", "backalley1_lae", "grass_path_128hv",
-									"yardgrass2", "scumtiles3_lae", "greyground256", "adeta", "closedblank1_256", "compcouwall1", "des_grass2dirt1", "des_dirt1lod"}
+									"yardgrass2", "scumtiles3_lae", "greyground256", "adeta", "closedblank1_256", "compcouwall1", "des_grass2dirt1", "des_dirt1lod", "concretenewb256"}
 
 ShaderBindings["beige"] = {}
 ShaderBindings["beige"].color = {r = 190, g = 180, b = 110}
 ShaderBindings["beige"].textures = {"sw_crops", "hospunder_law", "sw_wallbrick_04", "sw_wallbrick_03", "sw_wall_05", "pav_brngrass", "bballboard128", "compfence1_lae", "comptwall16", "comptroof1",
 									"comptroof3", "stoneclad1", "dockwall1", "asanpdshpsh1", "comptwall10", "lostonclad1", "browntin1", "newall7", "wallbrown64hv", "comptwall23", "vengardoor01_law",
 									"downtwin29", "sl_plazatile02", "newall8-1", "roof11l256", "wallgreyred128", "sanpshop5z", "sanpedcorn1", "des_dirttrackl", "des_dirttrack1r", "des_dirttrack1",
-									"des_yelrock", "drvin_ground1"}
+									"des_yelrock", "drvin_ground1", "crazy paving"}
 
 ShaderBindings["turkis"] = {}
 ShaderBindings["turkis"].color = {r = 45, g = 125, b = 145}

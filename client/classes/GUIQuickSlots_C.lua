@@ -3,6 +3,7 @@ GUIQuickSlots_C = inherit(Class)
 function GUIQuickSlots_C:constructor(id)
 
 	self.playerSlots = nil
+	self.postGUI = false
 	
 	self:init()
 	
@@ -31,7 +32,7 @@ function GUIQuickSlots_C:init()
 	-- load quickslots
 	if (not self.guiSlots) then
 		self.guiSlots = dxQuickSlots:new(0.25, 0.92, 0.5, 0.08, nil, true)
-		self.guiSlots:setPostGUI(true)
+		self.guiSlots:setPostGUI(self.postGUI)
 		self.guiSlots:setAlpha(Settings.guiAlpha)
 	end
 	

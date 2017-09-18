@@ -13,6 +13,7 @@ function Item_S:constructor(itemProperties)
 	self.color = itemProperties.color
 	self.costs = itemProperties.costs
 	self.slot = itemProperties.slot
+	self.clothes = itemProperties.clothes
 	self.class = itemProperties.class
 	self.icon = itemProperties.icon
 	self.stackable = itemProperties.stackable
