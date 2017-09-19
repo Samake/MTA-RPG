@@ -2,7 +2,9 @@ GUICharacterSlots_C = inherit(Class)
 
 function GUICharacterSlots_C:constructor(x, y, w, h, parent, relative)
 	
-	self.slots = {}
+	self.screenWidth, self.screenHeight = guiGetScreenSize()
+	
+	self.guiElements = {}
 	
 	self.defaultX = x or 0
 	self.defaultY = y or 0
@@ -23,9 +25,6 @@ function GUICharacterSlots_C:constructor(x, y, w, h, parent, relative)
 	
 	self.alpha = 255
 	
-	self.mouseX = 0
-	self.mouseY = 0
-	
 	self.postGUI = true
 	self.subPixelPositioning = true
 	
@@ -40,74 +39,52 @@ end
 function GUICharacterSlots_C:init()
 	self:calcValues()
 	
-	if (not self.slots["head"]) then
-		self.slots["head"] = GUISlot_C:new("head", 0.425, 0.01, 0.15, 0.15, self, true)
-		self.slots["head"]:setCharacterSlot(true)
-	end
+	self.guiElements[1] = GUISlot_C:new("head", 0.425, 0.01, 0.15, 0.15, self, true)
+	self.guiElements[1]:setCharacterSlot(true)
+
+	self.guiElements[2] = GUISlot_C:new("torso", 0.425, 0.225, 0.15, 0.15, self, true)
+	self.guiElements[2]:setCharacterSlot(true)
+
+	self.guiElements[3] = GUISlot_C:new("legs", 0.425, 0.55, 0.15, 0.15, self, true)
+	self.guiElements[3]:setCharacterSlot(true)
+
+	self.guiElements[4] = GUISlot_C:new("feet", 0.425, 0.825, 0.15, 0.15, self, true)
+	self.guiElements[4]:setCharacterSlot(true)
 	
-	if (not self.slots["torso"]) then
-		self.slots["torso"] = GUISlot_C:new("torso", 0.425, 0.225, 0.15, 0.15, self, true)
-		self.slots["torso"]:setCharacterSlot(true)
-	end
+	self.guiElements[5] = GUISlot_C:new("leftHand", 0.15, 0.5, 0.15, 0.15, self, true)
+	self.guiElements[5]:setCharacterSlot(true)
+
+	self.guiElements[6] = GUISlot_C:new("righthand", 0.7, 0.5, 0.15, 0.15, self, true)
+	self.guiElements[6]:setCharacterSlot(true)
 	
-	if (not self.slots["legs"]) then
-		self.slots["legs"] = GUISlot_C:new("legs", 0.425, 0.55, 0.15, 0.15, self, true)
-		self.slots["legs"]:setCharacterSlot(true)
-	end
+	self.guiElements[7] = GUISlot_C:new("leftRing", 0.15, 0.405, 0.075, 0.075, self, true)
+	self.guiElements[7]:setCharacterSlot(true)
 	
-	if (not self.slots["feet"]) then
-		self.slots["feet"] = GUISlot_C:new("feet", 0.425, 0.825, 0.15, 0.15, self, true)
-		self.slots["feet"]:setCharacterSlot(true)
-	end
+	self.guiElements[8] = GUISlot_C:new("rightRing", 0.775, 0.405, 0.075, 0.075, self, true)
+	self.guiElements[8]:setCharacterSlot(true)
 	
-	if (not self.slots["leftHand"]) then
-		self.slots["leftHand"] = GUISlot_C:new("leftHand", 0.15, 0.435, 0.15, 0.15, self, true)
-		self.slots["leftHand"]:setCharacterSlot(true)
-	end
+	self.guiElements[9] = GUISlot_C:new("chain", 0.15, 0.01, 0.1, 0.1, self, true)
+	self.guiElements[9]:setCharacterSlot(true)
+
+	self.guiElements[10] = dxText:new("STA: 0 (+ 0%)", 0.025, 0.85, 0.5, 0.03, self, true)
+	self.guiElements[10]:setScale(0.85)
+	self.guiElements[10]:setAlignX("left")
+
+	self.guiElements[11] = dxText:new("INT: 0 (+ 0%)", 0.025, 0.88, 0.5, 0.03, self, true)
+	self.guiElements[11]:setScale(0.85)
+	self.guiElements[11]:setAlignX("left")
 	
-	if (not self.slots["righthand"]) then
-		self.slots["righthand"] = GUISlot_C:new("righthand", 0.7, 0.435, 0.15, 0.15, self, true)
-		self.slots["righthand"]:setCharacterSlot(true)
-	end
+	self.guiElements[12] = dxText:new("ARMOR: 0 (+ 0%)", 0.025, 0.91, 0.5, 0.03, self, true)
+	self.guiElements[12]:setScale(0.85)
+	self.guiElements[12]:setAlignX("left")
 	
-	if (not self.slots["leftRing"]) then
-		self.slots["leftRing"] = GUISlot_C:new("leftRing", 0.15, 0.325, 0.075, 0.075, self, true)
-		self.slots["leftRing"]:setCharacterSlot(true)
-	end
+	self.guiElements[13] = dxText:new("CRIT: 0 (+ 0%)", 0.025, 0.94, 0.5, 0.03, self, true)
+	self.guiElements[13]:setScale(0.85)
+	self.guiElements[13]:setAlignX("left")
 	
-	if (not self.slots["rightRing"]) then
-		self.slots["rightRing"] = GUISlot_C:new("rightRing", 0.775, 0.325, 0.075, 0.075, self, true)
-		self.slots["rightRing"]:setCharacterSlot(true)
-	end
-	
-	if (not self.slots["chain"]) then
-		self.slots["chain"] = GUISlot_C:new("chain", 0.15, 0.01, 0.1, 0.1, self, true)
-		self.slots["chain"]:setCharacterSlot(true)
-	end
-	
-	if (not self.staminaText) then
-		self.staminaText = dxText:new("STA: 0 (+ 0%)", 0.025, 0.85, 0.5, 0.03, self, true)
-		self.staminaText:setScale(0.85)
-		self.staminaText:setAlignX("left")
-	end
-	
-	if (not self.intelligenceText) then
-		self.intelligenceText = dxText:new("INT: 0 (+ 0%)", 0.025, 0.88, 0.5, 0.03, self, true)
-		self.intelligenceText:setScale(0.85)
-		self.intelligenceText:setAlignX("left")
-	end
-	
-	if (not self.armorText) then
-		self.armorText = dxText:new("ARMOR: 0 (+ 0%)", 0.025, 0.91, 0.5, 0.03, self, true)
-		self.armorText:setScale(0.85)
-		self.armorText:setAlignX("left")
-	end
-	
-	if (not self.critText) then
-		self.critText = dxText:new("CRIT: 0 (+ 0%)", 0.025, 0.94, 0.5, 0.03, self, true)
-		self.critText:setScale(0.85)
-		self.critText:setAlignX("left")
-	end
+	self.guiElements[14] = dxImageSection:new(nil, 0.69, 0.01, 0.3, 0.3, self, true)
+	self.guiElements[14]:setImageSize(self.screenWidth, self.screenHeight)
+	self.guiElements[14]:setImageSection(0.35, 0.25, 0.3, 0.5)
 end
 
 
@@ -116,54 +93,50 @@ function GUICharacterSlots_C:update(deltaTime)
 	self:calcValues()
 	self:drawBackground()
 	
-	for index, slot in pairs(self.slots) do
-		if (slot) then
-			slot:update(deltaTime)
+	for index, guiElement in pairs(self.guiElements) do
+		if (guiElement) then
+			guiElement:update(deltaTime)
 		end
 	end
 	
-	if (self.staminaText) then
+	if (self.guiElements[10]) then
 		if (Player_C:getSingleton():getStamina()) and (Player_C:getSingleton():getCurrentStamina()) then
 			local stamina = Player_C:getSingleton():getStamina()
 			local currentStamina = Player_C:getSingleton():getCurrentStamina()
 			local modifiedPercent = string.format("%.1f", ((100 / stamina) * currentStamina) - 100)
-			self.staminaText:setText("#EEEEEESTA: #EEEE44" .. currentStamina .. "#44EE44 (+" .. modifiedPercent .. "%)")
+			self.guiElements[10]:setText("#EEEEEESTA: #EEEE44" .. currentStamina .. "#44EE44 (+" .. modifiedPercent .. "%)")
 		end
-		
-		self.staminaText:update()
 	end
 	
-	if (self.intelligenceText) then
+	if (self.guiElements[11]) then
 		if (Player_C:getSingleton():getIntelligence()) and (Player_C:getSingleton():getCurrentIntelligence()) then
 			local intelligence = Player_C:getSingleton():getIntelligence()
 			local currentIntelligence = Player_C:getSingleton():getCurrentIntelligence()
 			local modifiedPercent = string.format("%.1f", ((100 / intelligence) * currentIntelligence) - 100)
-			self.intelligenceText:setText("#EEEEEEINT: #EEEE44" .. currentIntelligence .. "#44EE44 (+" .. modifiedPercent .. "%)")
+			self.guiElements[11]:setText("#EEEEEEINT: #EEEE44" .. currentIntelligence .. "#44EE44 (+" .. modifiedPercent .. "%)")
 		end
-		
-		self.intelligenceText:update()
 	end
 	
-	if (self.armorText) then
+	if (self.guiElements[12]) then
 		if (Player_C:getSingleton():getArmor()) and (Player_C:getSingleton():getCurrentArmor()) then
 			local armor = Player_C:getSingleton():getArmor()
 			local currentArmor = Player_C:getSingleton():getCurrentArmor()
 			local modifiedPercent = string.format("%.1f", math.floor((currentArmor - armor) + 0.5))
-			self.armorText:setText("#EEEEEEARMOR: #EEEE44" .. currentArmor .. "#44EE44 (+" .. modifiedPercent .. ")")
+			self.guiElements[12]:setText("#EEEEEEARMOR: #EEEE44" .. currentArmor .. "#44EE44 (+" .. modifiedPercent .. ")")
 		end
-		
-		self.armorText:update()
 	end
 	
-	if (self.critText) then
+	if (self.guiElements[13]) then
 		if (Player_C:getSingleton():getCritChance()) and (Player_C:getSingleton():getCurrentCritChance()) then
 			local critChance = Player_C:getSingleton():getCritChance()
 			local currentCritChance = Player_C:getSingleton():getCurrentCritChance()
 			local modifiedPercent = string.format("%.1f", math.floor((currentCritChance - critChance) + 0.5))
-			self.critText:setText("#EEEEEECRIT: #EEEE44" .. currentCritChance .. "#44EE44 (+" .. modifiedPercent .. ")")
+			self.guiElements[13]:setText("#EEEEEECRIT: #EEEE44" .. currentCritChance .. "#44EE44 (+" .. modifiedPercent .. ")")
 		end
-		
-		self.critText:update()
+	end
+	
+	if (Renderer_C:getSingleton():getFinalScreenResult()) and (self.guiElements[14]) then
+		self.guiElements[14]:setTexture(Renderer_C:getSingleton():getFinalScreenResult())
 	end
 end
 
@@ -213,19 +186,6 @@ function GUICharacterSlots_C:calcValues()
 			self.height = self.defaultHeight
 		end
 	end
-	
-	self.mouseX, self.mouseY = ClickSystem_C:getSingleton():getPosition()
-end
-
-
-function GUICharacterSlots_C:isCursorInside()
-	if (self.mouseX > self.x) and (self.mouseX < self.x + self.width) then
-		if (self.mouseY > self.y) and (self.mouseY < self.y + self.height) then
-			return true
-		end
-	end
-
-	return false
 end
 
 
@@ -340,36 +300,16 @@ end
 
 
 function GUICharacterSlots_C:getSlots()
-	return self.slots
+	return self.guiElements
 end
 
 
 function GUICharacterSlots_C:clear()
-	for index, slot in pairs(self.slots) do
+	for index, slot in pairs(self.guiElements) do
 		if (slot) then
 			slot:delete()
 			slot = nil
 		end
-	end
-	
-	if (self.staminaText) then
-		self.staminaText:delete()
-		self.staminaText = nil
-	end
-	
-	if (self.intelligenceText) then
-		self.intelligenceText:delete()
-		self.intelligenceText = nil
-	end
-	
-	if (self.armorText) then
-		self.armorText:delete()
-		self.armorText = nil
-	end
-	
-	if (self.critText) then
-		self.critText:delete()
-		self.critText = nil
 	end
 end
 

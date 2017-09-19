@@ -73,23 +73,23 @@ function GUIInventory_C:update(deltaTime)
 			end
 		end
 		
-		if (Player_C:getSingleton():getName()) then
+		if (Player_C:getSingleton():getName()) and (self.guiElements[3]) then
 			self.guiElements[3]:setText("#EEEEEE Name: #44EE44" .. Player_C:getSingleton():getName())
 		end
 		
-		if (Player_C:getSingleton():getLevel()) then
+		if (Player_C:getSingleton():getLevel()) and (self.guiElements[4]) then
 			self.guiElements[4]:setText("#EEEEEE Lvl: #44EE44" .. Player_C:getSingleton():getLevel())
 		end
 		
-		if (Player_C:getSingleton():getRank()) then
+		if (Player_C:getSingleton():getRank()) and (self.guiElements[5]) then
 			self.guiElements[5]:setText("#EEEEEE Rank: #44EE44" .. Player_C:getSingleton():getRank())
 		end
 		
-		if (Player_C:getSingleton():getClass()) then
+		if (Player_C:getSingleton():getClass()) and (self.guiElements[6]) then
 			self.guiElements[6]:setText("#EEEEEE Class: #44EE44" .. Player_C:getSingleton():getClass())
 		end
 		
-		if (Player_C:getSingleton():getMoney()) then
+		if (Player_C:getSingleton():getMoney()) and (self.guiElements[7]) then
 			self.guiElements[7]:setText("#EEEEEE Money: #EEEE44" .. Player_C:getSingleton():getMoney() .. " $")
 		end
 

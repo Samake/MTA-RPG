@@ -1,4 +1,4 @@
-Camera_C = inherit(Class)
+Camera_C = inherit(Singleton)
 
 function Camera_C:constructor()
 
@@ -35,6 +35,8 @@ function Camera_C:constructor()
 	self.scrollSpeed = Settings.zoomSpeed
 	self.rotateSpeed = Settings.rotateSpeed
 	
+	self.isLockedOnPlayerFront = false
+	
 	self:init()
 	
 	if (Settings.showClassDebugInfo == true) then
@@ -59,17 +61,22 @@ function Camera_C:update(deltaTime)
 		
 		if (self.playerPos) and (self.playerRot) then
 			
-			if (GUIManager_C:getSingleton():isCursorOnGUIElement() == false) then
-				if (getKeyState(Bindings["CAMERAROTATE"]) == true) then
-					self:rotate()
-				else
-					self.lastMouseX = nil
-					self.lastMouseY = nil
+			if (self.isLockedOnPlayerFront == false) then
+				if (GUIManager_C:getSingleton():isCursorOnGUIElement() == false) then
+					if (getKeyState(Bindings["CAMERAROTATE"]) == true) then
+						self:rotate()
+					else
+						self.lastMouseX = nil
+						self.lastMouseY = nil
+					end
 				end
+				
+				self.camTargetX, self.camTargetY, self.camTargetZ = self.playerPos.x, self.playerPos.y, self.playerPos.z
+				self.camX, self.camY, self.camZ = getAttachedPosition(self.playerPos.x, self.playerPos.y, self.playerPos.z, 0, 0, 0, self.currentDistance, self.angle, self.currentHeight)
+			else
+				self.camTargetX, self.camTargetY, self.camTargetZ = self.playerPos.x, self.playerPos.y, self.playerPos.z
+				self.camX, self.camY, self.camZ = getAttachedPosition(self.playerPos.x, self.playerPos.y, self.playerPos.z, self.playerRot.x, self.playerRot.y, self.playerRot.z, 2.75, 0, 0)
 			end
-			
-			self.camTargetX, self.camTargetY, self.camTargetZ = self.playerPos.x, self.playerPos.y, self.playerPos.z
-			self.camX, self.camY, self.camZ = getAttachedPosition(self.playerPos.x, self.playerPos.y, self.playerPos.z, 0, 0, 0, self.currentDistance, self.angle, self.currentHeight)
 			
 			setCameraMatrix(self.camX, self.camY, self.camZ, self.camTargetX, self.camTargetY, self.camTargetZ, self.roll, self.fov)
 		end
@@ -126,6 +133,11 @@ function Camera_C:rotate()
 		self.lastMouseX = self.mouseX
 		self.lastMouseY = self.mouseY
 	end
+end
+
+
+function Camera_C:setLockedOnPlayerFront(bool)
+	self.isLockedOnPlayerFront = bool
 end
 
 

@@ -29,6 +29,9 @@ function GUIManager_C:init()
 	if (not self.guiIngame) then
 		self.guiIngame = GUIIngame_C:new()
 	end
+	
+	DragAndDrop_C:new()
+	GUISlotDetails_C:new()
 end
 
 
@@ -49,9 +52,15 @@ function GUIManager_C:update(deltaTime)
 			end
 			
 			GUISlotDetails_C:getSingleton():setItem(nil)
+			Camera_C:getSingleton():setLockedOnPlayerFront(false)
 		elseif (self.isInventoryShown == true) then
 			GUIInventory_C:getSingleton():update(self.delta)
+			Camera_C:getSingleton():setLockedOnPlayerFront(true)
+			
+			DragAndDrop_C:getSingleton():update(self.delta)
+			GUISlotDetails_C:getSingleton():update(self.delta)
 		end
+	
 		
 		dxSetBlendMode("blend") 
 		dxSetRenderTarget()
@@ -95,6 +104,9 @@ end
 
 
 function GUIManager_C:clear()
+	delete(DragAndDrop_C:getSingleton())
+	delete(GUISlotDetails_C:getSingleton())
+	
 	if (self.guiIngame) then
 		self.guiIngame:delete()
 		self.guiIngame = nil

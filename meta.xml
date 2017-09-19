@@ -16,18 +16,7 @@
 	<include resource="shader_tex_names"/>
 	
 	<!-- ################################ Scripts ################################ -->
-	
-	<!-- external -->
-	<script src="client/external/objectPreview/c_main.lua" type="client" cache="false"/>
-	<script src="client/external/objectPreview/c_exported_functions.lua" type="client" cache="false"/>
-	<script src="client/external/objectPreview/c_helper_functions.lua" type="client" cache="false"/>
-	<file src="client/external/objectPreview/fx/fx_pre_vehicle.fx" type="client" cache="false"/>
-	<file src="client/external/objectPreview/fx/fx_pre_ped.fx" type="client" cache="false"/>
-	<file src="client/external/objectPreview/fx/fx_pre_object.fx" type="client" cache="false"/>
-	<file src="client/external/objectPreview/fx/fx_pre_vehicle_noMRT.fx" type="client" cache="false"/>
-	<file src="client/external/objectPreview/fx/fx_pre_ped_noMRT.fx" type="client" cache="false"/>
-	<file src="client/external/objectPreview/fx/fx_pre_object_noMRT.fx" type="client" cache="false"/>
-	
+
 	<!-- shared -->
 	<script src="shared/settings/Settings_Shared.lua" type="shared" cache="false"/>
 	
@@ -83,6 +72,7 @@
 	
 	<script src="client/Core_C.lua" type="client" cache="false"/>
 	
+	<script src="client/singletons/Camera_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/ClickSystem_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/MousePointer_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/Marker3D_C.lua" type="client" cache="false"/>
@@ -91,11 +81,9 @@
 	<script src="client/singletons/Debug_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/DragAndDrop_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/GUISlotDetails_C.lua" type="client" cache="false"/>
-	<script src="client/singletons/PlayerPreview_C.lua" type="client" cache="false"/>
 	<script src="client/singletons/Renderer_C.lua" type="client" cache="false"/>
 	
 	<script src="client/manager/XMLManager_C.lua" type="client" cache="false"/>
-	<script src="client/manager/CameraManager_C.lua" type="client" cache="false"/>
 	<script src="client/manager/ShaderManager_C.lua" type="client" cache="false"/>
 	<script src="client/manager/GUIManager_C.lua" type="client" cache="false"/>
 	<script src="client/manager/WeatherManager_C.lua" type="client" cache="false"/>
@@ -112,9 +100,10 @@
 	<script src="client/classes/dxLib/dxText.lua" type="client" cache="false"/>
 	<script src="client/classes/dxLib/dxLine.lua" type="client" cache="false"/>
 	<script src="client/classes/dxLib/dxTextArea.lua" type="client" cache="false"/>
+	<script src="client/classes/dxLib/dxImage.lua" type="client" cache="false"/>
+	<script src="client/classes/dxLib/dxImageSection.lua" type="client" cache="false"/>
 	
 	<script src="client/classes/GUIAnimations_C.lua" type="client" cache="false"/>
-	<script src="client/classes/Camera_C.lua" type="client" cache="false"/>
 	<script src="client/classes/ShaderNull_C.lua" type="client" cache="false"/>
 	<script src="client/classes/ShaderColorWorld_C.lua" type="client" cache="false"/>
 	<script src="client/classes/ShaderColorVehicles_C.lua" type="client" cache="false"/>

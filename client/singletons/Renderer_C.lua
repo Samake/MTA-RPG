@@ -129,6 +129,11 @@ function Renderer_C:getShadowModifier()
 end
 
 
+function Renderer_C:getFinalScreenResult()
+	return self.finalShader
+end
+
+
 function Renderer_C:destructor()
 	self:clear()
 	
