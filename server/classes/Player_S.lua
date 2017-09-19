@@ -491,21 +491,49 @@ function Player_S:updatePlayerClothesAndEquipment(player)
 		
 		if (self.legClothes) then
 			if (self.inventory:getSlotLegs()) then
-
+				if (self.inventory:getSlotLegs().clothes) then
+					if (self.legClothes.index ~= self.inventory:getSlotLegs().clothes.index) 
+						or (self.legClothes.texture ~= self.inventory:getSlotLegs().clothes.texture)
+						or (self.legClothes.model ~= self.inventory:getSlotLegs().clothes.model)
+					then
+						self.player:addClothes(self.inventory:getSlotLegs().clothes.texture, self.inventory:getSlotLegs().clothes.model, 2)
+						self.legClothes = self.inventory:getSlotLegs().clothes
+					end
+				end
+			else
+				self.player:removeClothes(2)
+				self.legClothes = nil
 			end
 		else
 			if (self.inventory:getSlotLegs()) then
-
+				if (self.inventory:getSlotLegs().clothes) then
+					self.player:addClothes(self.inventory:getSlotLegs().clothes.texture, self.inventory:getSlotLegs().clothes.model, 2)
+					self.legClothes = self.inventory:getSlotLegs().clothes
+				end
 			end
 		end
 		
 		if (self.feetClothes) then
 			if (self.inventory:getSlotFeet()) then
-
+				if (self.inventory:getSlotFeet().clothes) then
+					if (self.feetClothes.index ~= self.inventory:getSlotFeet().clothes.index) 
+						or (self.feetClothes.texture ~= self.inventory:getSlotFeet().clothes.texture)
+						or (self.feetClothes.model ~= self.inventory:getSlotFeet().clothes.model)
+					then
+						self.player:addClothes(self.inventory:getSlotFeet().clothes.texture, self.inventory:getSlotFeet().clothes.model, 3)
+						self.feetClothes = self.inventory:getSlotFeet().clothes
+					end
+				end
+			else
+				self.player:removeClothes(3)
+				self.feetClothes = nil
 			end
 		else
 			if (self.inventory:getSlotFeet()) then
-
+				if (self.inventory:getSlotFeet().clothes) then
+					self.player:addClothes(self.inventory:getSlotFeet().clothes.texture, self.inventory:getSlotFeet().clothes.model, 3)
+					self.feetClothes = self.inventory:getSlotFeet().clothes
+				end
 			end
 		end
 	end

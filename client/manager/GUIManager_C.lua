@@ -53,9 +53,11 @@ function GUIManager_C:update(deltaTime)
 			
 			GUISlotDetails_C:getSingleton():setItem(nil)
 			Camera_C:getSingleton():setLockedOnPlayerFront(false)
+			Renderer_C:getSingleton():fadeScreen(false)
 		elseif (self.isInventoryShown == true) then
 			GUIInventory_C:getSingleton():update(self.delta)
 			Camera_C:getSingleton():setLockedOnPlayerFront(true)
+			Renderer_C:getSingleton():fadeScreen(true)
 			
 			DragAndDrop_C:getSingleton():update(self.delta)
 			GUISlotDetails_C:getSingleton():update(self.delta)

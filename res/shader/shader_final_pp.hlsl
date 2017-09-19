@@ -1,19 +1,12 @@
-texture outlineSource;
-texture bloomSource;
+texture screenResult;
 
 float saturation = 1.0f;
 float contrast = 1.0f;
 float brightness = 1.0f;
 
 
-sampler OutlineSampler = sampler_state {
-    Texture = <outlineSource>;
-    AddressU = Mirror;
-    AddressV = Mirror;
-};
-
-sampler BloomSampler = sampler_state {
-    Texture = <bloomSource>;
+sampler FinalSampler = sampler_state {
+    Texture = <screenResult>;
     AddressU = Mirror;
     AddressV = Mirror;
 };
@@ -21,11 +14,7 @@ sampler BloomSampler = sampler_state {
 
 float4 PixelShaderFunction(float2 texCoords : TEXCOORD0) : COLOR0 {	
 
-	float4 outlineColor = tex2D(OutlineSampler, texCoords);
-	float4 bloomColor = tex2D(BloomSampler, texCoords);
-	
-	// add screen and outline
-	float4 finalColor = bloomColor * outlineColor;
+	float4 finalColor = tex2D(FinalSampler, texCoords);
 	
 	// calc contrast, brightness and saturation
 	float3 luminanceWeights = float3(0.299f, 0.587f, 0.114f);

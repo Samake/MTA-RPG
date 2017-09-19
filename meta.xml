@@ -138,7 +138,9 @@
 	<file src="res/shader/shader_projected_texture.hlsl" type="client" cache="false"/>
 	<file src="res/shader/shader_outline.hlsl" type="client" cache="false"/>
 	<file src="res/shader/shader_bloom.hlsl" type="client" cache="false"/>
+	<file src="res/shader/shader_mix_pp.hlsl" type="client" cache="false"/>
 	<file src="res/shader/shader_final_pp.hlsl" type="client" cache="false"/>
+	
 	<!-- textures -->
 	<file src="res/textures/skins/head/head_1.png" type="client" cache="false"/>
 	<file src="res/textures/skins/head/head_2.png" type="client" cache="false"/>
@@ -181,11 +183,7 @@
 	
 	<file src="res/textures/icons/items/potionHeal.png" type="client" cache="false"/>
 	<file src="res/textures/icons/items/potionMana.png" type="client" cache="false"/>
-	<file src="res/textures/icons/items/hatIcon.png" type="client" cache="false"/>
-	<file src="res/textures/icons/items/torsoIcon.png" type="client" cache="false"/>
-	<file src="res/textures/icons/items/legsIcon.png" type="client" cache="false"/>
-	<file src="res/textures/icons/items/feetIcon.png" type="client" cache="false"/>
-	
+
 	<file src="res/textures/icons/items/torsoIconStamina.png" type="client" cache="false"/>
 	<file src="res/textures/icons/items/torsoIconIntelligence.png" type="client" cache="false"/>
 	<file src="res/textures/icons/items/torsoIconCrit.png" type="client" cache="false"/>

@@ -135,8 +135,8 @@ function GUICharacterSlots_C:update(deltaTime)
 		end
 	end
 	
-	if (Renderer_C:getSingleton():getFinalScreenResult()) and (self.guiElements[14]) then
-		self.guiElements[14]:setTexture(Renderer_C:getSingleton():getFinalScreenResult())
+	if (Renderer_C:getSingleton():getMixedScreenResult()) and (self.guiElements[14]) then
+		self.guiElements[14]:setTexture(Renderer_C:getSingleton():getMixedScreenResult())
 	end
 end
 
