@@ -156,7 +156,7 @@ function GUISlot_C:calcValues()
 			self.width = self.defaultWidth
 			self.height = self.defaultHeight
 		end
-		
+
 		self.alpha = self.parent.alpha
 		self.postGUI = self.parent.postGUI
 	else

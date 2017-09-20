@@ -20,6 +20,7 @@ function GUICharacterSlots_C:constructor(x, y, w, h, parent, relative)
 	
 	self.color = {r = 15, g = 15, b = 15}
 	self.borderColor = {r = 45, g = 45, b = 45}
+	self.backGroundColor = {r = 55, g = 55, b = 65}
 	
 	self.borderSize = 2
 	
@@ -39,52 +40,70 @@ end
 function GUICharacterSlots_C:init()
 	self:calcValues()
 	
-	self.guiElements[1] = GUISlot_C:new("head", 0.425, 0.01, 0.15, 0.15, self, true)
-	self.guiElements[1]:setCharacterSlot(true)
-
-	self.guiElements[2] = GUISlot_C:new("torso", 0.425, 0.225, 0.15, 0.15, self, true)
+	self.guiElements[1] = dxImageSection:new(nil, 0.0, 0.0, 1.0, 1.0, self, true)
+	self.guiElements[1]:setImageSize(self.screenWidth, self.screenHeight)
+	self.guiElements[1]:setImageSection(0.3, 0.2, 0.4, 0.6)
+	
+	self.guiElements[2] = GUISlot_C:new("head", 0.425, 0.08, 0.15, 0.15, self, true)
 	self.guiElements[2]:setCharacterSlot(true)
-
-	self.guiElements[3] = GUISlot_C:new("legs", 0.425, 0.55, 0.15, 0.15, self, true)
+	self.guiElements[2]:setBackgroundColor(self.backGroundColor.r, self.backGroundColor.g, self.backGroundColor.b)
+	self.guiElements[2]:setBorderColor(10, 10, 10)
+	
+	self.guiElements[3] = GUISlot_C:new("torso", 0.425, 0.325, 0.15, 0.15, self, true)
 	self.guiElements[3]:setCharacterSlot(true)
-
-	self.guiElements[4] = GUISlot_C:new("feet", 0.425, 0.825, 0.15, 0.15, self, true)
+	self.guiElements[3]:setBackgroundColor(self.backGroundColor.r, self.backGroundColor.g, self.backGroundColor.b)
+	self.guiElements[3]:setBorderColor(10, 10, 10)
+	
+	self.guiElements[4] = GUISlot_C:new("legs", 0.425, 0.6, 0.15, 0.15, self, true)
 	self.guiElements[4]:setCharacterSlot(true)
+	self.guiElements[4]:setBackgroundColor(self.backGroundColor.r, self.backGroundColor.g, self.backGroundColor.b)
+	self.guiElements[4]:setBorderColor(10, 10, 10)
 	
-	self.guiElements[5] = GUISlot_C:new("leftHand", 0.15, 0.5, 0.15, 0.15, self, true)
+	self.guiElements[5] = GUISlot_C:new("feet", 0.425, 0.845, 0.15, 0.15, self, true)
 	self.guiElements[5]:setCharacterSlot(true)
-
-	self.guiElements[6] = GUISlot_C:new("righthand", 0.7, 0.5, 0.15, 0.15, self, true)
+	self.guiElements[5]:setBackgroundColor(self.backGroundColor.r, self.backGroundColor.g, self.backGroundColor.b)
+	self.guiElements[5]:setBorderColor(10, 10, 10)
+	
+	self.guiElements[6] = GUISlot_C:new("leftHand", 0.18, 0.5, 0.15, 0.15, self, true)
 	self.guiElements[6]:setCharacterSlot(true)
+	self.guiElements[6]:setBackgroundColor(self.backGroundColor.r, self.backGroundColor.g, self.backGroundColor.b)
+	self.guiElements[6]:setBorderColor(10, 10, 10)
 	
-	self.guiElements[7] = GUISlot_C:new("leftRing", 0.15, 0.405, 0.075, 0.075, self, true)
+	self.guiElements[7] = GUISlot_C:new("righthand", 0.67, 0.5, 0.15, 0.15, self, true)
 	self.guiElements[7]:setCharacterSlot(true)
+	self.guiElements[7]:setBackgroundColor(self.backGroundColor.r, self.backGroundColor.g, self.backGroundColor.b)
+	self.guiElements[7]:setBorderColor(10, 10, 10)
 	
-	self.guiElements[8] = GUISlot_C:new("rightRing", 0.775, 0.405, 0.075, 0.075, self, true)
+	self.guiElements[8] = GUISlot_C:new("leftRing", 0.18, 0.405, 0.075, 0.075, self, true)
 	self.guiElements[8]:setCharacterSlot(true)
+	self.guiElements[8]:setBackgroundColor(self.backGroundColor.r, self.backGroundColor.g, self.backGroundColor.b)
+	self.guiElements[8]:setBorderColor(10, 10, 10)
 	
-	self.guiElements[9] = GUISlot_C:new("chain", 0.15, 0.01, 0.1, 0.1, self, true)
+	self.guiElements[9] = GUISlot_C:new("rightRing", 0.745, 0.405, 0.075, 0.075, self, true)
 	self.guiElements[9]:setCharacterSlot(true)
-
-	self.guiElements[10] = dxText:new("STA: 0 (+ 0%)", 0.025, 0.85, 0.5, 0.03, self, true)
-	self.guiElements[10]:setScale(0.85)
-	self.guiElements[10]:setAlignX("left")
-
-	self.guiElements[11] = dxText:new("INT: 0 (+ 0%)", 0.025, 0.88, 0.5, 0.03, self, true)
+	self.guiElements[9]:setBackgroundColor(self.backGroundColor.r, self.backGroundColor.g, self.backGroundColor.b)
+	self.guiElements[9]:setBorderColor(10, 10, 10)
+	
+	self.guiElements[10] = GUISlot_C:new("chain", 0.15, 0.08, 0.1, 0.1, self, true)
+	self.guiElements[10]:setCharacterSlot(true)
+	self.guiElements[10]:setBackgroundColor(self.backGroundColor.r, self.backGroundColor.g, self.backGroundColor.b)
+	self.guiElements[10]:setBorderColor(10, 10, 10)
+	
+	self.guiElements[11] = dxText:new("STA: 0 (+ 0%)", 0.025, 0.85, 0.5, 0.03, self, true)
 	self.guiElements[11]:setScale(0.85)
 	self.guiElements[11]:setAlignX("left")
-	
-	self.guiElements[12] = dxText:new("ARMOR: 0 (+ 0%)", 0.025, 0.91, 0.5, 0.03, self, true)
+
+	self.guiElements[12] = dxText:new("INT: 0 (+ 0%)", 0.025, 0.88, 0.5, 0.03, self, true)
 	self.guiElements[12]:setScale(0.85)
 	self.guiElements[12]:setAlignX("left")
 	
-	self.guiElements[13] = dxText:new("CRIT: 0 (+ 0%)", 0.025, 0.94, 0.5, 0.03, self, true)
+	self.guiElements[13] = dxText:new("ARMOR: 0 (+ 0%)", 0.025, 0.91, 0.5, 0.03, self, true)
 	self.guiElements[13]:setScale(0.85)
 	self.guiElements[13]:setAlignX("left")
 	
-	self.guiElements[14] = dxImageSection:new(nil, 0.69, 0.01, 0.3, 0.3, self, true)
-	self.guiElements[14]:setImageSize(self.screenWidth, self.screenHeight)
-	self.guiElements[14]:setImageSection(0.35, 0.25, 0.3, 0.5)
+	self.guiElements[14] = dxText:new("CRIT: 0 (+ 0%)", 0.025, 0.94, 0.5, 0.03, self, true)
+	self.guiElements[14]:setScale(0.85)
+	self.guiElements[14]:setAlignX("left")
 end
 
 
@@ -93,50 +112,46 @@ function GUICharacterSlots_C:update(deltaTime)
 	self:calcValues()
 	self:drawBackground()
 	
-	for index, guiElement in pairs(self.guiElements) do
-		if (guiElement) then
-			guiElement:update(deltaTime)
-		end
-	end
-	
-	if (self.guiElements[10]) then
+	if (self.guiElements[11]) then
 		if (Player_C:getSingleton():getStamina()) and (Player_C:getSingleton():getCurrentStamina()) then
 			local stamina = Player_C:getSingleton():getStamina()
 			local currentStamina = Player_C:getSingleton():getCurrentStamina()
 			local modifiedPercent = string.format("%.1f", ((100 / stamina) * currentStamina) - 100)
-			self.guiElements[10]:setText("#EEEEEESTA: #EEEE44" .. currentStamina .. "#44EE44 (+" .. modifiedPercent .. "%)")
-		end
-	end
-	
-	if (self.guiElements[11]) then
-		if (Player_C:getSingleton():getIntelligence()) and (Player_C:getSingleton():getCurrentIntelligence()) then
-			local intelligence = Player_C:getSingleton():getIntelligence()
-			local currentIntelligence = Player_C:getSingleton():getCurrentIntelligence()
-			local modifiedPercent = string.format("%.1f", ((100 / intelligence) * currentIntelligence) - 100)
-			self.guiElements[11]:setText("#EEEEEEINT: #EEEE44" .. currentIntelligence .. "#44EE44 (+" .. modifiedPercent .. "%)")
+			self.guiElements[11]:setText("#EEEEEESTA: #EEEE44" .. currentStamina .. "#44EE44 (+" .. modifiedPercent .. "%)")
 		end
 	end
 	
 	if (self.guiElements[12]) then
-		if (Player_C:getSingleton():getArmor()) and (Player_C:getSingleton():getCurrentArmor()) then
-			local armor = Player_C:getSingleton():getArmor()
-			local currentArmor = Player_C:getSingleton():getCurrentArmor()
-			local modifiedPercent = string.format("%.1f", math.floor((currentArmor - armor) + 0.5))
-			self.guiElements[12]:setText("#EEEEEEARMOR: #EEEE44" .. currentArmor .. "#44EE44 (+" .. modifiedPercent .. ")")
+		if (Player_C:getSingleton():getIntelligence()) and (Player_C:getSingleton():getCurrentIntelligence()) then
+			local intelligence = Player_C:getSingleton():getIntelligence()
+			local currentIntelligence = Player_C:getSingleton():getCurrentIntelligence()
+			local modifiedPercent = string.format("%.1f", ((100 / intelligence) * currentIntelligence) - 100)
+			self.guiElements[12]:setText("#EEEEEEINT: #EEEE44" .. currentIntelligence .. "#44EE44 (+" .. modifiedPercent .. "%)")
 		end
 	end
 	
 	if (self.guiElements[13]) then
+		if (Player_C:getSingleton():getArmor()) and (Player_C:getSingleton():getCurrentArmor()) then
+			local armor = Player_C:getSingleton():getArmor()
+			local currentArmor = Player_C:getSingleton():getCurrentArmor()
+			local modifiedPercent = string.format("%.1f", math.floor((currentArmor - armor) + 0.5))
+			self.guiElements[13]:setText("#EEEEEEARMOR: #EEEE44" .. currentArmor .. "#44EE44 (+" .. modifiedPercent .. ")")
+		end
+	end
+	
+	if (self.guiElements[14]) then
 		if (Player_C:getSingleton():getCritChance()) and (Player_C:getSingleton():getCurrentCritChance()) then
 			local critChance = Player_C:getSingleton():getCritChance()
 			local currentCritChance = Player_C:getSingleton():getCurrentCritChance()
 			local modifiedPercent = string.format("%.1f", math.floor((currentCritChance - critChance) + 0.5))
-			self.guiElements[13]:setText("#EEEEEECRIT: #EEEE44" .. currentCritChance .. "#44EE44 (+" .. modifiedPercent .. ")")
+			self.guiElements[14]:setText("#EEEEEECRIT: #EEEE44" .. currentCritChance .. "#44EE44 (+" .. modifiedPercent .. ")")
 		end
 	end
 	
-	if (Renderer_C:getSingleton():getMixedScreenResult()) and (self.guiElements[14]) then
-		self.guiElements[14]:setTexture(Renderer_C:getSingleton():getMixedScreenResult())
+	for index, guiElement in pairs(self.guiElements) do
+		if (guiElement) then
+			guiElement:update(deltaTime)
+		end
 	end
 end
 
@@ -151,8 +166,8 @@ function GUICharacterSlots_C:drawBackground()
 	dxDrawLine(self.x + self.width, self.y + self.height, self.x, self.y + self.height, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
 	dxDrawLine(self.x, self.y + self.height, self.x, self.y, tocolor(self.borderColor.r, self.borderColor.g, self.borderColor.b, self.alpha), self.borderSize, self.postGUI)
 
-	if (Textures["GUI"]["Misc"][1]) then
-		dxDrawImage(self.x, self.y, self.width, self.height, Textures["GUI"]["Misc"][1].texture, 0, 0, 0, tocolor(35, 35, 35,self.alpha), self.postGUI)
+	if (Renderer_C:getSingleton():getPlayerCutScreenResult()) and (self.guiElements[1]) then
+		self.guiElements[1]:setTexture(Renderer_C:getSingleton():getPlayerCutScreenResult())
 	end
 end
 

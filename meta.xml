@@ -137,7 +137,9 @@
 	<file src="res/shader/shader_texReplace.hlsl" type="client" cache="false"/>
 	<file src="res/shader/shader_projected_texture.hlsl" type="client" cache="false"/>
 	<file src="res/shader/shader_outline.hlsl" type="client" cache="false"/>
+	<file src="res/shader/shader_player_cut.hlsl" type="client" cache="false"/>
 	<file src="res/shader/shader_bloom.hlsl" type="client" cache="false"/>
+	<file src="res/shader/shader_blur.hlsl" type="client" cache="false"/>
 	<file src="res/shader/shader_mix_pp.hlsl" type="client" cache="false"/>
 	<file src="res/shader/shader_final_pp.hlsl" type="client" cache="false"/>
 	

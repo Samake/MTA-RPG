@@ -75,7 +75,7 @@ function Camera_C:update(deltaTime)
 				self.camX, self.camY, self.camZ = getAttachedPosition(self.playerPos.x, self.playerPos.y, self.playerPos.z, 0, 0, 0, self.currentDistance, self.angle, self.currentHeight)
 			else
 				self.camTargetX, self.camTargetY, self.camTargetZ = self.playerPos.x, self.playerPos.y, self.playerPos.z
-				self.camX, self.camY, self.camZ = getAttachedPosition(self.playerPos.x, self.playerPos.y, self.playerPos.z, self.playerRot.x, self.playerRot.y, self.playerRot.z, 2.75, 0, 0)
+				self.camX, self.camY, self.camZ = getAttachedPosition(self.playerPos.x, self.playerPos.y, self.playerPos.z, self.playerRot.x, self.playerRot.y, self.playerRot.z, 2.2, 0, 0)
 			end
 			
 			setCameraMatrix(self.camX, self.camY, self.camZ, self.camTargetX, self.camTargetY, self.camTargetZ, self.roll, self.fov)
