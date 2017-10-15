@@ -103,6 +103,7 @@
 	<script src="client/classes/dxLib/dxImage.lua" type="client" cache="false"/>
 	<script src="client/classes/dxLib/dxImageSection.lua" type="client" cache="false"/>
 	
+	<script src="client/classes/AnimatedTexture_C.lua" type="client" cache="false"/>
 	<script src="client/classes/GUIAnimations_C.lua" type="client" cache="false"/>
 	<script src="client/classes/ShaderNull_C.lua" type="client" cache="false"/>
 	<script src="client/classes/ShaderColorWorld_C.lua" type="client" cache="false"/>
@@ -176,6 +177,10 @@
 	
 	<file src="res/textures/effects/rain_pp.png" type="client" cache="false"/>
 	<file src="res/textures/effects/paperNormalMap.png" type="client" cache="false"/>
+	<file src="res/textures/effects/effectMagic_01.png" type="client" cache="false"/>
+	<file src="res/textures/effects/effectMagic_02.png" type="client" cache="false"/>
+	<file src="res/textures/effects/effectMagic_03.png" type="client" cache="false"/>
+	<file src="res/textures/effects/effectMagic_04.png" type="client" cache="false"/>
 	
 	<file src="res/textures/icons/attacks/attackPunchIcon.png" type="client" cache="false"/>
 	<file src="res/textures/icons/attacks/attackKickIcon.png" type="client" cache="false"/>

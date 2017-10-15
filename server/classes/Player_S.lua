@@ -105,6 +105,9 @@ function Player_S:init()
 	addEvent("onPlayerSpawn", true)
 	addEventHandler("onPlayerSpawn", root, self.m_OnPlayerSpawn)
 	
+	self.m_OnPlayerWasted = bind(self.onPlayerWasted, self)
+	addEvent("onPlayerWasted", true)
+	addEventHandler("onPlayerWasted", root, self.m_OnPlayerWasted)
 	
 	-- only temp will be deleted later
 	if (self.player) then
@@ -148,6 +151,11 @@ end
 
 
 function Player_S:onPlayerSpawn()
+	self.player:setCameraTarget(self.player)
+end
+
+
+function Player_S:onPlayerWasted()
 
 end
 
@@ -875,6 +883,7 @@ function Player_S:clear()
 	removeEventHandler("PLAYERSITDOWN", root, self.m_TogglePlayerSit)
 	removeEventHandler("UPDATEPLAYERCLOTHES", root, self.m_UpdatePlayerClothesAndEquipment)
 	removeEventHandler("onPlayerSpawn", root, self.m_OnPlayerSpawn)
+	removeEventHandler("onPlayerWasted", root, self.m_OnPlayerWasted)
 	
 	if (self.inventory) then
 		self.inventory:delete()

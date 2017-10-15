@@ -49,6 +49,11 @@ Textures["Effects"]["Rain"] = {}
 Textures["Effects"]["Rain"][1] = {texture = nil, path = "res/textures/effects/rain_pp.png"}
 Textures["Effects"]["Shader"] = {}
 Textures["Effects"]["Shader"][1] = {texture = nil, path = "res/textures/effects/paperNormalMap.png"}
+Textures["Effects"]["Animated"] = {}
+Textures["Effects"]["Animated"][1] = {texture = nil, path = "res/textures/effects/effectMagic_01.png", size = 128, columns = 5, rows = 6}
+Textures["Effects"]["Animated"][2] = {texture = nil, path = "res/textures/effects/effectMagic_02.png", size = 128, columns = 8, rows = 8}
+Textures["Effects"]["Animated"][3] = {texture = nil, path = "res/textures/effects/effectMagic_03.png", size = 128, columns = 5, rows = 6}
+Textures["Effects"]["Animated"][4] = {texture = nil, path = "res/textures/effects/effectMagic_04.png", size = 128, columns = 4, rows = 4}
 
 Textures["Icons"] = {}
 Textures["Icons"]["Attacks"] = {}
