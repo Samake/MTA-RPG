@@ -18,6 +18,14 @@ function PlayerManager_S:init()
 	addEvent("REQUESTPLAYERSKINS", true)
 	addEventHandler("REQUESTPLAYERSKINS", root, self.m_RequestPlayerSkin)
 	
+	self.m_OnPlayerJoin = bind(self.onPlayerJoin, self)
+	addEvent("onPlayerJoin", true)
+	addEventHandler("onPlayerJoin", root, self.m_OnPlayerJoin)
+	
+	self.m_OnPlayerJoin = bind(self.onPlayerQuit, self)
+	addEvent("onPlayerQuit", true)
+	addEventHandler("onPlayerQuit", root, self.m_OnPlayerJoin)
+	
 	for index, player in pairs(getElementsByType("player")) do
 		if (player) then
 			self:addPlayer(player)
@@ -91,8 +99,20 @@ function PlayerManager_S:requestPlayerSkin()
 end
 
 
+function PlayerManager_S:onPlayerJoin()
+	self:addPlayer(source)
+end
+
+
+function PlayerManager_S:onPlayerQuit()
+	self:deletePlayer(source)
+end
+
+
 function PlayerManager_S:clear()
 	removeEventHandler("REQUESTPLAYERSKINS", root, self.m_RequestPlayerSkin)
+	removeEventHandler("onPlayerJoin", root, self.m_OnPlayerJoin)
+	removeEventHandler("onPlayerQuit", root, self.m_OnPlayerJoin)
 	
 	for index, playerClass in pairs(self.playerClasses) do
 		if (playerClass) then

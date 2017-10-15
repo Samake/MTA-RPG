@@ -2,7 +2,7 @@ Settings = {}
 
 -- [[ *** Resource Settings *** ]]
 Settings.resName = "MTA RPG Gamemode"
-Settings.resVersion = "0.0.7b"
+Settings.resVersion = "0.0.8"
 
 -- [[ *** Server Settings *** ]]
 Settings.fpsLimit = 60

@@ -101,6 +101,10 @@ function Player_S:init()
 	addEvent("UPDATEPLAYERCLOTHES", true)
 	addEventHandler("UPDATEPLAYERCLOTHES", root, self.m_UpdatePlayerClothesAndEquipment)
 	
+	self.m_OnPlayerSpawn = bind(self.onPlayerSpawn, self)
+	addEvent("onPlayerSpawn", true)
+	addEventHandler("onPlayerSpawn", root, self.m_OnPlayerSpawn)
+	
 	
 	-- only temp will be deleted later
 	if (self.player) then
@@ -141,6 +145,11 @@ function Player_S:addTestLoot()
 	end
 end
 -- !!!!!!!!only for testing!!!!!!!!
+
+
+function Player_S:onPlayerSpawn()
+
+end
 
 
 function Player_S:update()
@@ -865,6 +874,7 @@ function Player_S:clear()
 	removeEventHandler("CONNECTPLAYER", root, self.m_ConnectPlayer)
 	removeEventHandler("PLAYERSITDOWN", root, self.m_TogglePlayerSit)
 	removeEventHandler("UPDATEPLAYERCLOTHES", root, self.m_UpdatePlayerClothesAndEquipment)
+	removeEventHandler("onPlayerSpawn", root, self.m_OnPlayerSpawn)
 	
 	if (self.inventory) then
 		self.inventory:delete()
