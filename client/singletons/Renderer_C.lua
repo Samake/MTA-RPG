@@ -337,6 +337,6 @@ function Renderer_C:destructor()
 	self:clear()
 	
 	if (Settings.showManagerDebugInfo == true) then
-		sendMessage("Renderer_C " .. self.id .. " was deleted.")
+		sendMessage("Renderer_C was deleted.")
 	end
 end

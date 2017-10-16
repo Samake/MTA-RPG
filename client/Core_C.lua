@@ -42,6 +42,7 @@ function Core_C:initComponents()
 	SoundManager_C:new()
 	LightManager_C:new()
 	Marker3D_C:new()
+	DecalManager_C:new()
 	Renderer_C:new()
 	
 	if (Settings.debugEnabled == true) then
@@ -77,6 +78,7 @@ function Core_C:update(deltaTime)
 	WeatherManager_C:getSingleton():update(self.delta)
 	NotificationManager_C:getSingleton():update(self.delta)
 	LightManager_C:getSingleton():update(self.delta)
+	DecalManager_C:getSingleton():update(self.delta)
 	Marker3D_C:getSingleton():update(self.delta)
 	Renderer_C:getSingleton():update(self.delta)
 	
@@ -107,6 +109,7 @@ function Core_C:clear()
 	delete(NotificationManager_C:getSingleton())
 	delete(SoundManager_C:getSingleton())
 	delete(LightManager_C:getSingleton())
+	delete(DecalManager_C:getSingleton())
 	delete(Marker3D_C:getSingleton())
 	delete(Renderer_C:getSingleton())
 	

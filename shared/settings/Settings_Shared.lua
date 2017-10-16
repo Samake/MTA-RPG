@@ -11,8 +11,8 @@ Settings.serverUpdateInterval = 50
 -- [[ *** Debug Settings *** ]]
 Settings.debugEnabled = true
 Settings.advancedDebugMessages = false
-Settings.showCoreDebugInfo = false
-Settings.showManagerDebugInfo = false
+Settings.showCoreDebugInfo = true
+Settings.showManagerDebugInfo = true
 Settings.showClassDebugInfo = false
 
 -- [[ *** GUI Settings *** ]]

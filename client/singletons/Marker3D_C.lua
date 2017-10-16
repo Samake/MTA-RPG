@@ -12,7 +12,7 @@ function Marker3D_C:constructor()
 	self.rz = 0
 	
 	self.colorR = 255
-	self.ColorG = 255
+	self.colorG = 255
 	self.colorB = 255
 	
 	self.alpha = 0

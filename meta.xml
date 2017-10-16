@@ -91,7 +91,8 @@
 	<script src="client/manager/NotificationManager_C.lua" type="client" cache="false"/>
 	<script src="client/manager/SoundManager_C.lua" type="client" cache="false"/>
 	<script src="client/manager/LightManager_C.lua" type="client" cache="false"/>
-
+	<script src="client/manager/DecalManager_C.lua" type="client" cache="false"/>
+	
 	<script src="client/classes/dxLib/dxWindow.lua" type="client" cache="false"/>
 	<script src="client/classes/dxLib/dxSlider.lua" type="client" cache="false"/>
 	<script src="client/classes/dxLib/dxButton.lua" type="client" cache="false"/>
@@ -124,6 +125,7 @@
 	<script src="client/classes/Light_C.lua" type="client" cache="false"/>
 	<script src="client/classes/Inventory_C.lua" type="client" cache="false"/>
 	<script src="client/classes/Item_C.lua" type="client" cache="false"/>
+	<script src="client/classes/Decal_C.lua" type="client" cache="false"/>
 	
 	<!-- ################################ Resources ################################ -->
 	

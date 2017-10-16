@@ -43,7 +43,6 @@ function AttackPunch_S:doSlotAction(slot)
 
 			if (self.player) and (isElement(self.player))then
 				self.playerClass = PlayerManager_S:getSingleton():getPlayerClass(self.player)
-				local npcClass = NPCManager_S:getSingleton():getNPCClass(enemy)
 				
 				if (self.playerClass) then
 					if (self.costs < self.playerClass:getMana()) then
@@ -64,6 +63,8 @@ function AttackPunch_S:doSlotAction(slot)
 							end
 							
 							self.playerClass:changeMana(-self.costs)
+							
+							self:addEffect(x, y, z)
 							
 							if (self.actionCol) then
 								for index, enemy in pairs(self.actionCol:getElementsWithin("ped")) do
@@ -98,6 +99,27 @@ function AttackPunch_S:doSlotAction(slot)
 				end
 			end
 		end
+	end
+end
+
+
+function AttackPunch_S:addEffect(x, y, z)
+	if (x) and (y) and (z) then
+		local decalProperties = {}
+		decalProperties.texture = {"Icons", "Attacks", 1}
+		decalProperties.x = x
+		decalProperties.y = y
+		decalProperties.z = z
+		decalProperties.rx = 0
+		decalProperties.ry = 0
+		decalProperties.rz = 0
+		decalProperties.r = 255
+		decalProperties.g = 255
+		decalProperties.b = 255
+		decalProperties.alpha = 255
+		decalProperties.scale = 5
+		
+		triggerClientEvent(root, "ADDDECALCLIENT", root, decalProperties)
 	end
 end
 
