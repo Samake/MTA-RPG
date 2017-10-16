@@ -7,6 +7,7 @@ function AnimatedTexture_C:constructor(textureProperties)
 	self.size = textureProperties.size
 	self.columns = textureProperties.columns
 	self.rows = textureProperties.rows
+	self.looped = textureProperties.looped
 	
 	self.currentColumn = 0
 	self.currentRow = 0
@@ -28,15 +29,33 @@ end
 
 function AnimatedTexture_C:update(delta)
 	if (self.texture) and (self.renderTarget) then
-		self.currentColumn = self.currentColumn + 1
+			if (self.looped == true) then
+			self.currentColumn = self.currentColumn + 1
+			
+			if (self.currentColumn > self.columns - 1) then
+				self.currentColumn = 0
+				
+				self.currentRow = self.currentRow + 1
+				
+				if (self.currentRow > self.rows - 1) then
+					self.currentRow = 0
+				end
+			end
+		else
+			self.currentColumn = self.currentColumn + 1
 		
-		if (self.currentColumn > self.columns - 1) then
-			self.currentColumn = 0
-			
-			self.currentRow = self.currentRow + 1
-			
-			if (self.currentRow > self.rows - 1) then
-				self.currentRow = 0
+			if (self.currentColumn > self.columns - 1) then
+				if (self.currentRow <= self.rows - 1) then
+					self.currentColumn = 0
+				end
+				
+				self.currentRow = self.currentRow + 1
+				
+				if (self.currentRow > self.rows - 1) then
+					if (self.currentColumn <= self.columns - 1) then
+						self.currentRow = 0
+					end
+				end
 			end
 		end
 		

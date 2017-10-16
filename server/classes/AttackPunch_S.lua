@@ -106,7 +106,7 @@ end
 function AttackPunch_S:addEffect(x, y, z)
 	if (x) and (y) and (z) then
 		local decalProperties = {}
-		decalProperties.texture = {"Icons", "Attacks", 1}
+		decalProperties.textureID = {"Effects", "Animated", math.random(1, 4)}
 		decalProperties.x = x
 		decalProperties.y = y
 		decalProperties.z = z
@@ -118,6 +118,7 @@ function AttackPunch_S:addEffect(x, y, z)
 		decalProperties.b = 255
 		decalProperties.alpha = 255
 		decalProperties.scale = 5
+		decalProperties.lifetime = 1000
 		
 		triggerClientEvent(root, "ADDDECALCLIENT", root, decalProperties)
 	end

@@ -25,12 +25,7 @@ end
 function DecalManager_C:addDecal(decalProperties)
 	if (decalProperties) then
 		decalProperties.id = self:getFreeID()
-		local texture = Textures[decalProperties.texture[1]][decalProperties.texture[2]][decalProperties.texture[3]].texture
-		
-		if (texture) then
-			decalProperties.texture = texture
-		end
-		
+
 		if (not self.decalClasses[decalProperties.id]) then
 			self.decalClasses[decalProperties.id] = Decal_C:new(decalProperties)
 		end
